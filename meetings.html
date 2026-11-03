@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en-AU" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self' https://lendrody28-spec.github.io; base-uri 'self'; form-action 'self'; object-src 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Find an AA or NA meeting – HomeCircle</title>
+<meta name="description" content="Search AA and NA meetings in Australia by suburb, postcode and day. Free, no sign-in.">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="assets/logo-192.png">
+<link rel="stylesheet" href="assets/site.css">
+<script src="assets/site.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head"><div class="wrap">
+  <a class="brand" href="index.html"><img src="assets/logo-96.png" alt="" width="46" height="46"><span><b>HomeCircle</b><small>Support for your recovery journey</small></span></a>
+  <button class="btn ghost menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav" hidden>Menu</button>
+  <nav class="nav" id="site-nav" aria-label="Main"><ul><li><a href="index.html">Home</a></li><li><a href="library.html">Library</a></li><li><a href="twelve-steps.html">12 Steps</a></li><li><a href="meditations.html">Meditations &amp; breathing</a></li><li><a href="meetings.html" aria-current="page">Meetings</a></li><li><a href="help.html">Help</a></li><li><a href="support.html">Support</a></li></ul></nav>
+</div></header>
+<main id="main"><div class="wrap">
+<h1>Find a meeting</h1>
+<p class="lede">AA and NA meetings across Australia, from the same public list the HomeCircle app uses. Search by suburb or postcode, and pick a day.</p>
+<form class="card" id="finder" role="search" hidden>
+  <div class="form-row">
+    <div class="wide"><label for="f-q">Suburb, postcode or meeting name</label><input type="search" id="f-q" name="q" autocomplete="off" placeholder="For example Bethania or 4205"></div>
+    <div><label for="f-state">State</label><select id="f-state"><option value="">All of Australia</option><option value="QLD">QLD</option><option value="NSW">NSW</option><option value="VIC">VIC</option><option value="WA">WA</option><option value="SA">SA</option><option value="TAS">TAS</option><option value="ACT">ACT</option><option value="NT">NT</option><option value="online">Online meetings</option></select></div>
+    <div><label for="f-day">Day</label><select id="f-day"><option value="">Any day</option><option value="today">Today</option><option value="0">Sunday</option><option value="1">Monday</option><option value="2">Tuesday</option><option value="3">Wednesday</option><option value="4">Thursday</option><option value="5">Friday</option><option value="6">Saturday</option></select></div>
+    <div><label for="f-fellowship">Fellowship</label><select id="f-fellowship"><option value="">AA and NA</option><option value="AA">AA</option><option value="NA">NA</option></select></div>
+    <div><label for="f-format">Format</label><select id="f-format"><option value="">Any</option><option value="in_person">In person</option><option value="online">Online</option><option value="hybrid">Hybrid</option></select></div>
+  </div>
+  <div class="btn-row"><button class="btn" type="submit">Search</button><button class="btn ghost" type="button" id="f-near">Near me</button></div>
+  <p class="small">Near me asks your browser for your location only when you press it. It's used on this page to sort by distance and is never sent to HomeCircle or anyone else.</p>
+</form>
+<div class="card" id="finder-nojs"><p>The meeting finder needs JavaScript. You can use the official lists instead.</p></div>
+<p class="status" id="f-status" role="status" aria-live="polite"></p>
+<div class="results" id="results"></div>
+<div class="btn-row"><button class="btn ghost" type="button" id="f-more" hidden>Show more</button></div>
+<div class="grid g2 mt">
+  <div class="card sage"><h2 class="mt0">About the list</h2><p id="feed-info">AA and NA meetings from public listings.</p><p>Listings come from public sources: AA Australia's Meeting Guide feed and NA Australia's BMLT meeting list. Times can change, so check with the group if you're unsure. Each meeting links to its official listing.</p><p class="small">Times show in the meeting's own time zone.</p></div>
+  <div class="card"><h2 class="mt0">Official meeting lists</h2><ul><li><a href="https://meetings.aa.org.au/">AA meetings list (AA Australia)</a></li><li><a href="https://www.na.org.au/multi/">NA Australia meetings</a></li><li><a href="https://www.gamblinghelponline.org.au/">Gambling Help Online</a> and <a href="https://www.gaaustralia.org.au/">Gamblers Anonymous</a></li></ul><p class="small">HomeCircle is independent and isn&#x27;t affiliated with or endorsed by Alcoholics Anonymous, Narcotics Anonymous, Gamblers Anonymous or Porn Addicts Anonymous. At meetings, please respect each group's own guidelines, and don't record or share what people say.</p></div>
+</div>
+<p class="note small">Don&#x27;t share your full name, address, phone, bank details or passwords with anyone in HomeCircle or at meetings. Real friends and sponsors won&#x27;t ask for money or private details. If someone does, tell your sponsor or a trusted person.</p>
+<script src="assets/meetings.js" defer></script>
+</div></main>
+<footer class="site-foot"><div class="wrap cols">
+  <div>
+    <h2>HomeCircle</h2>
+    <p>Support for your recovery journey. Free, with no accounts, no sign-in, no cookies, no ads, no trackers and no analytics.</p>
+    <p>For any health concern, talk to your GP or a doctor. HomeCircle is support, not medical care. HomeCircle is not a medical device and doesn&#x27;t give medical advice. In an emergency call <a href="tel:000">000</a>.</p>
+    <p>HomeCircle is independent and isn&#x27;t affiliated with or endorsed by Alcoholics Anonymous, Narcotics Anonymous, Gamblers Anonymous or Porn Addicts Anonymous.</p>
+    <p>© 2026 LJ Endrody (Luke Endrody, ABN 53 687 374 897). Australian-owned, Brisbane, Queensland.</p>
+  </div>
+  <div><h2>Explore</h2><ul><li><a href="index.html">Home</a></li><li><a href="library.html">Library</a></li><li><a href="twelve-steps.html">12 Steps</a></li><li><a href="meditations.html">Meditations &amp; breathing</a></li><li><a href="meetings.html">Meetings</a></li><li><a href="help.html">Help</a></li><li><a href="support.html">Support</a></li></ul></div>
+  <div><h2>About</h2><ul>
+    <li><a href="https://lendrody28-spec.github.io/homecircle/privacy.html">App Privacy Policy</a></li>
+    <li>Terms of Use (coming soon)</li>
+    <li><a href="support.html#website">About this website</a></li>
+    <li><a href="mailto:lendrody28@gmail.com">lendrody28@gmail.com</a> (not a crisis line)</li>
+  </ul></div>
+</div></footer>
+<a class="help-fab" id="help-fab" href="help.html#now" aria-label="Get help now: opens Call 000 and Lifeline 13 11 14" aria-controls="help-dialog">Get help now</a>
+<dialog class="help" id="help-dialog" aria-labelledby="help-title">
+  <div class="help-in">
+    <button class="close-x" type="button" data-close aria-label="Close">×</button>
+    <h2 id="help-title">Get help now</h2>
+    <p>If you or someone else is in danger, call 000. Lifeline is there 24 hours.</p>
+    <ul class="help-lines"><li><a class="first" href="tel:000">Call 000<small>Emergency. If a life is in danger.</small></a></li><li><a class="second" href="tel:131114">Call Lifeline 13 11 14<small>24 hours, crisis support.</small></a></li><li><a class="" href="tel:1800858858">Call Gambling Helpline 1800 858 858<small>Gambling Help Online and its helpline. Not run by Gamblers Anonymous.</small></a></li><li><a class="" href="tel:1800250015">Call 1800 250 015<small>National Alcohol and Other Drug Hotline. Connects you to your state&#x27;s service. Hours vary by state.</small></a></li></ul>
+    <p class="small">These are independent services. HomeCircle is not affiliated with them. <a href="help.html">More helplines on the Help page</a>.</p>
+    <button class="btn ghost" type="button" data-close>Close</button>
+  </div>
+</dialog>
+</body>
+</html>

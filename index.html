@@ -1,67 +1,85 @@
 <!DOCTYPE html>
-<html lang="en-AU">
+<html lang="en-AU" class="no-js">
 <head>
-<title>HomeCircle – Find your circle. Stay in the rooms.</title>
-<meta name="description" content="HomeCircle is a free recovery companion app for AA and NA: find nearby meetings, keep a private journal and get encouragement from Kai.">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-  :root { --cream:#FBF6E8; --teal:#0D6968; --emerald:#1A8F86; --ink:#2B2B2B; --muted:#5E625F; --card:#FFFFFF; --line:#E8DFC8; }
-  * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
-  body { margin:0; background:var(--cream); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; line-height:1.6; font-size:17px; }
-  .wrap { max-width:760px; margin:0 auto; padding:28px 20px 48px; }
-  header.site { display:flex; align-items:center; gap:12px; margin-bottom:24px; flex-wrap:wrap; }
-  .logo { width:40px; height:40px; border-radius:50%; border:4px solid var(--teal); box-shadow: inset 0 0 0 4px var(--cream), inset 0 0 0 9px var(--emerald); flex:none; }
-  .brand { font-size:22px; font-weight:700; color:var(--teal); text-decoration:none; }
-  nav.top { margin-left:auto; display:flex; gap:16px; font-size:15px; }
-  h1 { color:var(--teal); font-size:30px; line-height:1.25; margin:8px 0 6px; }
-  h2 { color:var(--teal); font-size:21px; margin:30px 0 8px; }
-  h3 { color:var(--teal); font-size:18px; margin:20px 0 6px; }
-  a { color:var(--emerald); text-underline-offset:2px; }
-  a:hover { color:var(--teal); }
-  p, li { margin:0 0 10px; }
-  ul { padding-left:22px; }
-  .meta { color:var(--muted); font-size:15px; margin-bottom:18px; }
-  .card { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:18px 20px; margin:18px 0; }
-  .alert { background:#FFF4E5; border:1px solid #F2C98B; border-radius:16px; padding:16px 20px; margin:18px 0; }
-  .btn { display:inline-block; background:var(--teal); color:#fff; padding:12px 20px; border-radius:999px; text-decoration:none; font-weight:600; margin:6px 8px 6px 0; }
-  .btn.alt { background:transparent; color:var(--teal); border:2px solid var(--teal); }
-  .btn:hover { color:#fff; background:var(--emerald); }
-  .btn.alt:hover { background:var(--teal); color:#fff; }
-  footer { margin-top:40px; padding-top:16px; border-top:1px solid var(--line); color:var(--muted); font-size:14px; }
-  footer a, footer span { margin-right:14px; }
-  @media (max-width:480px) { h1 { font-size:26px; } body { font-size:16px; } nav.top { margin-left:0; width:100%; } }
-</style>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self' https://lendrody28-spec.github.io; base-uri 'self'; form-action 'self'; object-src 'none'">
+<meta name="referrer" content="no-referrer">
+<title>HomeCircle – Support for your recovery journey</title>
+<meta name="description" content="HomeCircle is a free Australian recovery support app and website: find AA and NA meetings, breathing and meditation guides, the 12 Steps and helplines. No accounts.">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="assets/logo-192.png">
+<link rel="stylesheet" href="assets/site.css">
+<script src="assets/site.js" defer></script>
 </head>
-<body><div class="wrap">
-<header class="site">
-  <span class="logo" aria-hidden="true"></span>
-  <a class="brand" href="index.html">HomeCircle</a>
-  <nav class="top"><a href="index.html">Home</a><a href="https://lendrody28-spec.github.io/homecircle/privacy.html">Privacy</a><a href="support.html">Support</a></nav>
-</header>
-<main>
-  <h1>Find your circle. Stay in the rooms.</h1>
-  <p class="meta">HomeCircle for iPhone · Free on the App Store</p>
-  <p>HomeCircle is a free recovery companion app for people in AA and NA. Find nearby meetings, keep a private journal on your phone, and get gentle encouragement from Kai, the Recovery Coach, whenever you need it.</p>
-  <div class="alert"><strong>Need help right now?</strong> HomeCircle is not an emergency service or a medical device, and doesn't give medical advice. In an emergency call <a href="tel:000">000</a>. For crisis support call Lifeline on <a href="tel:131114">13 11 14</a>.</div>
-  <div class="card">
-    <ul>
-      <li><strong>Meetings near you</strong> – AA and NA meetings from public listings, shown by distance in km.</li>
-      <li><strong>Your community</strong> – write posts, follow others and send support signals. In this version they stay on your phone and aren't shared with other phones.</li>
-      <li><strong>Private journal</strong> – stays on your device and is never uploaded.</li>
-      <li><strong>Kai, the Recovery Coach</strong> – built-in templates on your phone for reflection and encouragement. It isn't AI and nothing you type leaves your phone.</li>
-      <li><strong>No accounts, no ads, no tracking, no selling your data.</strong></li>
-    </ul>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head"><div class="wrap">
+  <a class="brand" href="index.html"><img src="assets/logo-96.png" alt="" width="46" height="46"><span><b>HomeCircle</b><small>Support for your recovery journey</small></span></a>
+  <button class="btn ghost menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav" hidden>Menu</button>
+  <nav class="nav" id="site-nav" aria-label="Main"><ul><li><a href="index.html" aria-current="page">Home</a></li><li><a href="library.html">Library</a></li><li><a href="twelve-steps.html">12 Steps</a></li><li><a href="meditations.html">Meditations &amp; breathing</a></li><li><a href="meetings.html">Meetings</a></li><li><a href="help.html">Help</a></li><li><a href="support.html">Support</a></li></ul></nav>
+</div></header>
+<main id="main"><div class="wrap">
+
+<section class="hero">
+  <div>
+    <p class="eyebrow">Free · Australian · No sign-in</p>
+    <h1><span class="grad-text">Support for your recovery journey</span></h1>
+    <p class="lede">HomeCircle is a free Australian recovery support app, and this website brings its no-account tools to your computer: find AA and NA meetings, breathe along with a guide, and read plain-language guides and the 12 Steps.</p>
+    <div class="btn-row"><a class="btn" href="meetings.html">Find a meeting</a><a class="btn ghost" href="meditations.html">Breathe now</a><a class="btn ghost" href="library.html">Open the Library</a></div>
+    <p class="small">Everything here is free. No accounts, no cookies, no ads, no trackers and no analytics.</p>
   </div>
-  <p>
-    <a class="btn" href="https://apps.apple.com/au/app/homecircle/id6819366068">Get HomeCircle free on the App Store</a>
-    <a class="btn alt" href="support.html">Support</a>
-    <a class="btn alt" href="https://lendrody28-spec.github.io/homecircle/privacy.html">Privacy Policy</a>
-  </p>
-</main>
-<footer>
-  <p><a href="index.html">Home</a><a href="https://lendrody28-spec.github.io/homecircle/privacy.html">Privacy Policy</a><span>Terms of Use (coming soon)</span><a href="support.html">Support</a></p>
-  <p>© 2026 LJ Endrody (Luke Endrody, ABN 53 687 374 897). Australian-owned, Brisbane, Queensland. HomeCircle is independent and isn't affiliated with or endorsed by Alcoholics Anonymous, Narcotics Anonymous, Gamblers Anonymous or Porn Addicts Anonymous.</p>
-</footer>
-</div></body></html>
+  <div class="hero-art"><img src="assets/logo-192.png" alt="HomeCircle logo: three people with arms raised inside a circle" width="260" height="260"><p>You're not alone.</p></div>
+</section>
+<div class="notice"><strong>Need help right now?</strong> HomeCircle is not a medical device and doesn&#x27;t give medical advice. In an emergency call <a href="tel:000">000</a>. For crisis support call Lifeline on <a href="tel:131114">13 11 14</a>.</div>
+<h2>What you can do here</h2>
+<div class="grid g4"><a class="card tile" href="meetings.html"><img src="assets/art/ArtGroundSee.jpg" alt="A person sitting in a room, looking around at a plant, a picture, a lamp and a cup." width="1024" height="768" loading="lazy"><div class="tbody"><span class="tag">Meetings</span><h3>Find a meeting</h3><p>AA and NA meetings across Australia. Search by suburb, postcode and day.</p></div></a><a class="card tile" href="meditations.html"><img src="assets/art/ArtBreathIn.jpg" alt="A person sitting upright, breathing in slowly through the nose." width="1024" height="768" loading="lazy"><div class="tbody"><span class="tag">Breathing</span><h3>Breathe now</h3><p>An animated breathing guide: box, 4-7-8 or a slow out-breath.</p></div></a><a class="card tile" href="library.html"><img src="assets/art/ArtOneThing.jpg" alt="A person at a kitchen sink, slowly washing one mug." width="1024" height="768" loading="lazy"><div class="tbody"><span class="tag">Library</span><h3>Library</h3><p>Guides, breathing, meditation, body and fellowships.</p></div></a><a class="card tile" href="twelve-steps.html"><img src="assets/art/ArtDayPlan.jpg" alt="A person writing in a notebook at a small table, with a sun and moon above showing one day." width="1024" height="768" loading="lazy"><div class="tbody"><span class="tag">12 Steps</span><h3>The 12 Steps</h3><p>Plain-language notes on what each step is about, with the official wording on aa.org.</p></div></a></div>
+<section aria-labelledby="ev-h">
+<h2 id="ev-h">Upcoming events</h2>
+<p>Conventions, rallies, round-ups, unity days and service events from the fellowships' own event pages, soonest first. Each one links to its official page.</p>
+<p class="note small">HomeCircle is independent and isn't affiliated with or endorsed by Alcoholics Anonymous or Narcotics Anonymous. We only list events posted on their official pages and don't run or check them. Dates and details can change, so always check the official page.</p>
+<ul class="events" id="events-list" data-src="events.json" data-limit="8"><li class="event" data-end="2026-11-07"><div class="date"><b>7</b>Nov 2026</div><div><h3><a href="https://www.na.org.au/multi/events/logan-area-trivia-night/" rel="noopener">Logan Area Trivia Night</a></h3><p>7 Nov 2026 · Bethania, QLD · NA</p><p>Listed by Narcotics Anonymous Australia. Check the official page for times and details.</p></div></li><li class="event" data-end="2026-11-11"><div class="date"><b>11</b>Nov 2026</div><div><h3><a href="https://members.aa.org.au/event/bacchus-marsh-50-year-anniversary/" rel="noopener">Bacchus Marsh 50 Year Anniversary</a></h3><p>11 Nov 2026 · Bacchus Marsh, VIC · AA</p><p>Listed by Alcoholics Anonymous Australia. Check the official page for times and details.</p></div></li><li class="event" data-end="2026-11-11"><div class="date"><b>11</b>Nov 2026</div><div><h3><a href="https://members.aa.org.au/event/eden-aa-group-50th-anniversary-meeting/" rel="noopener">Eden AA group 50th Anniversary meeting</a></h3><p>11 Nov 2026 · Eden, NSW · AA</p><p>Listed by Alcoholics Anonymous Australia. Check the official page for times and details.</p></div></li><li class="event" data-end="2026-11-15"><div class="date"><b>13</b>Nov 2026</div><div><h3><a href="https://www.na.org.au/multi/events/retreat-to-the-pines-tuross-head-3/" rel="noopener">Retreat to the Pines, Tuross Head</a></h3><p>13 Nov 2026 to 15 Nov 2026 · Tuross Head, NSW · NA</p><p>Listed by Moruya NA. Check the official page for times and details.</p></div></li><li class="event" data-end="2026-11-14"><div class="date"><b>14</b>Nov 2026</div><div><h3><a href="https://members.aa.org.au/event/love-service-workshop-with-debbie-and-kent-d/" rel="noopener">Love &amp; Service Workshop</a></h3><p>14 Nov 2026 · Wantirna South, VIC · AA</p><p>Listed by AA Area C Southern Region. Check the official page for times and details.</p></div></li><li class="event" data-end="2026-11-14"><div class="date"><b>14</b>Nov 2026</div><div><h3><a href="https://www.na.org.au/multi/events/central-coast-unity-day-3/" rel="noopener">Central Coast Unity Day</a></h3><p>14 Nov 2026 · Green Point, NSW · NA</p><p>Listed by Narcotics Anonymous Australia. Check the official page for times and details.</p></div></li><li class="event" data-end="2026-11-15"><div class="date"><b>14</b>Nov 2026</div><div><h3><a href="https://www.na.org.au/multi/events/australian-regional-service-committee-arsc-meeting-november-2026-north-adelaide/" rel="noopener">Australian Regional Service Committee (ARSC) meeting</a></h3><p>14 Nov 2026 to 15 Nov 2026 · North Adelaide, SA · NA</p><p>Listed by Narcotics Anonymous Australia. Check the official page for times and details.</p></div></li><li class="event" data-end="2026-11-22"><div class="date"><b>20</b>Nov 2026</div><div><h3><a href="https://members.aa.org.au/event/i-am-a-miracle-sobriety-sisters-aa-womens-retreat-2026/" rel="noopener">“I Am a Miracle” Sobriety Sisters AA Women’s Retreat 2026</a></h3><p>20 Nov 2026 to 22 Nov 2026 · Mapleton, QLD · AA</p><p>Listed by Sobriety Sisters Committee. Check the official page for times and details.</p></div></li><li class="event" data-end="2026-11-22" hidden data-more><div class="date"><b>20</b>Nov 2026</div><div><h3><a href="https://www.na.org.au/multi/events/sydney-combined-area-womens-retreat/" rel="noopener">Sydney Combined Area Women’s Retreat</a></h3><p>20 Nov 2026 to 22 Nov 2026 · Royal National Park, NSW · NA</p><p>Listed by NA Women Sydney Combined Area. Check the official page for times and details.</p></div></li><li class="event" data-end="2026-11-21" hidden data-more><div class="date"><b>21</b>Nov 2026</div><div><h3><a href="https://members.aa.org.au/event/south-australian-12-step-conference/" rel="noopener">South Australian 12 Step Conference</a></h3><p>21 Nov 2026 · Belair, SA · AA</p><p>Listed by Alcoholics Anonymous Australia. Check the official page for times and details.</p></div></li><li class="event" data-end="2026-11-21" hidden data-more><div class="date"><b>21</b>Nov 2026</div><div><h3><a href="https://www.na.org.au/multi/events/many-voices-one-message/" rel="noopener">Many Voices One Message: Blue Mountains &amp; Central West Unity Day</a></h3><p>21 Nov 2026 · Lawson, NSW · NA</p><p>Listed by NA Blue Mountains &amp; Central West Area. Check the official page for times and details.</p></div></li><li class="event" data-end="2026-11-21" hidden data-more><div class="date"><b>21</b>Nov 2026</div><div><h3><a href="https://www.na.org.au/multi/events/eastern-unity-day/" rel="noopener">Eastern Unity Day 2026</a></h3><p>21 Nov 2026 · Belgrave, VIC · NA</p><p>Listed by Narcotics Anonymous Australia. Check the official page for times and details.</p></div></li><li class="event" data-end="2026-11-22" hidden data-more><div class="date"><b>22</b>Nov 2026</div><div><h3><a href="https://www.na.org.au/multi/events/nanasa-november-local-service-conference/" rel="noopener">Northern Australia Service Area Local Service Conference</a></h3><p>22 Nov 2026 · Northern Australia Area, QLD · NA</p><p>Listed by NA Northern Australia Service Area. Check the official page for times and details.</p></div></li><li class="event" data-end="2026-11-26" hidden data-more><div class="date"><b>26</b>Nov 2026</div><div><h3><a href="https://www.na.org.au/multi/events/springvale-serenity-7th-anniversary/" rel="noopener">Springvale Serenity 7th Anniversary</a></h3><p>26 Nov 2026 · Springvale, VIC · NA</p><p>Listed by Narcotics Anonymous Australia. Check the official page for times and details.</p></div></li><li class="event" data-end="2026-11-29" hidden data-more><div class="date"><b>27</b>Nov 2026</div><div><h3><a href="https://members.aa.org.au/event/port-hughes-rally/" rel="noopener">Port Hughes Rally</a></h3><p>27 Nov 2026 to 29 Nov 2026 · Port Hughes, SA · AA</p><p>Listed by AA Para District. Check the official page for times and details.</p></div></li><li class="event" data-end="2026-11-29" hidden data-more><div class="date"><b>27</b>Nov 2026</div><div><h3><a href="https://members.aa.org.au/event/aa-rally/" rel="noopener">AA Rally: Cool on Down at Coolendel</a></h3><p>27 Nov 2026 to 29 Nov 2026 · Buangla, NSW · AA</p><p>Listed by Alcoholics Anonymous Australia. Check the official page for times and details.</p></div></li><li class="event" data-end="2026-12-05" hidden data-more><div class="date"><b>5</b>Dec 2026</div><div><h3><a href="https://www.na.org.au/multi/events/dinosaur-day/" rel="noopener">Dinosaur Day, Mornington Peninsula</a></h3><p>5 Dec 2026 · Rosebud, VIC · NA</p><p>Listed by NA Peninsula Area. Check the official page for times and details.</p></div></li><li class="event" data-end="2026-12-12" hidden data-more><div class="date"><b>12</b>Dec 2026</div><div><h3><a href="https://www.na.org.au/multi/events/northern-area-unity-day-sydney/" rel="noopener">Northern Area Unity Day, Sydney</a></h3><p>12 Dec 2026 · Cromer, NSW · NA</p><p>Listed by NA Northern Area. Check the official page for times and details.</p></div></li><li class="event" data-end="2027-01-01" hidden data-more><div class="date"><b>31</b>Dec 2026</div><div><h3><a href="https://www.na.org.au/multi/events/sydney-southern-area-new-years-eve-party/" rel="noopener">Sydney Southern Area New Year’s Eve Party</a></h3><p>31 Dec 2026 to 1 Jan 2027 · Sydney Park, NSW · NA</p><p>Listed by NA Sydney Southern Area. Check the official page for times and details.</p></div></li><li class="event" data-end="2027-01-31" hidden data-more><div class="date"><b>27</b>Jan 2027</div><div><h3><a href="https://members.aa.org.au/event/friends-of-bill-cruise-from-brisbane-to-airlie-beach/" rel="noopener">Friends Of Bill Cruise from Brisbane to Airlie Beach</a></h3><p>27 Jan 2027 to 31 Jan 2027 · Brisbane, QLD · AA</p><p>Listed by AA Ipswich District. Check the official page for times and details.</p></div></li><li class="event" data-end="2027-02-07" hidden data-more><div class="date"><b>5</b>Feb 2027</div><div><h3><a href="https://members.aa.org.au/event/wollongong-aa-rally-sobriety-by-the-sea-2027/" rel="noopener">Wollongong AA Rally: Sobriety by the Sea 2027</a></h3><p>5 Feb 2027 to 7 Feb 2027 · Fairy Meadow, NSW · AA</p><p>Listed by Illawarra &amp; South Coast Central Service Office. Check the official page for times and details.</p></div></li><li class="event" data-end="2027-02-28" hidden data-more><div class="date"><b>26</b>Feb 2027</div><div><h3><a href="https://members.aa.org.au/event/2027-newcastle-districts-rally/" rel="noopener">2027 Newcastle &amp; Districts Rally</a></h3><p>26 Feb 2027 to 28 Feb 2027 · Rathmines, NSW · AA</p><p>Listed by AA Districts Newcastle and Lower Hunter. Check the official page for times and details.</p></div></li><li class="event" data-end="2027-02-28" hidden data-more><div class="date"><b>26</b>Feb 2027</div><div><h3><a href="https://www.na.org.au/multi/events/portsea-spiritual-retreat-3/" rel="noopener">Portsea Spiritual Retreat 2027</a></h3><p>26 Feb 2027 to 28 Feb 2027 · Portsea, VIC · NA</p><p>Listed by Narcotics Anonymous Australia. Check the official page for times and details.</p></div></li><li class="event" data-end="2027-03-14" hidden data-more><div class="date"><b>12</b>Mar 2027</div><div><h3><a href="https://members.aa.org.au/event/aa-macarthur-recovery-retreat/" rel="noopener">AA Macarthur Recovery Retreat</a></h3><p>12 Mar 2027 to 14 Mar 2027 · Wedderburn, NSW · AA</p><p>Listed by AA Macarthur District. Check the official page for times and details.</p></div></li><li class="event" data-end="2027-03-29" hidden data-more><div class="date"><b>27</b>Mar 2027</div><div><h3><a href="https://members.aa.org.au/event/aa-national-convention-2027/" rel="noopener">AA National Convention 2027</a></h3><p>27 Mar 2027 to 29 Mar 2027 · Geelong, VIC · AA</p><p>Listed by Host Planning Committee for the AA National Convention 2027. Check the official page for times and details.</p></div></li><li class="event" data-end="2027-05-03" hidden data-more><div class="date"><b>30</b>Apr 2027</div><div><h3><a href="https://members.aa.org.au/event/north-eastern-area-a-roundup-cairns/" rel="noopener">North Eastern Area A Roundup (Cairns)</a></h3><p>30 Apr 2027 to 3 May 2027 · Cairns, QLD · AA</p><p>Listed by AA North Eastern Region Area A. Check the official page for times and details.</p></div></li><li class="event" data-end="2027-05-16" hidden data-more><div class="date"><b>14</b>May 2027</div><div><h3><a href="https://www.na.org.au/multi/events/sydney-combined-areas-narcotics-anonymous-convention/" rel="noopener">Sydney Combined Areas Narcotics Anonymous Convention 2027</a></h3><p>14 May 2027 to 16 May 2027 · Marrickville, NSW · NA</p><p>Listed by NA Sydney Combined Areas. Check the official page for times and details.</p></div></li><li class="event" data-end="2027-05-30" hidden data-more><div class="date"><b>28</b>May 2027</div><div><h3><a href="https://members.aa.org.au/event/voices-of-recovery-womens-retreat-may-2027-newcastle-nsw/" rel="noopener">Voices of Recovery Women’s Retreat</a></h3><p>28 May 2027 to 30 May 2027 · Rathmines, NSW · AA</p><p>Listed by Alcoholics Anonymous Australia. Check the official page for times and details.</p></div></li><li class="event" data-end="2027-05-30" hidden data-more><div class="date"><b>28</b>May 2027</div><div><h3><a href="https://www.na.org.au/multi/events/camp-serenity-7/" rel="noopener">Camp Serenity 2027</a></h3><p>28 May 2027 to 30 May 2027 · Natural Bridge, QLD · NA</p><p>Listed by Narcotics Anonymous Australia. Check the official page for times and details.</p></div></li><li class="event" data-end="2027-06-12" hidden data-more><div class="date"><b>12</b>Jun 2027</div><div><h3><a href="https://members.aa.org.au/event/north-eastern-region-area-c-founders-day-celebration/" rel="noopener">North Eastern Region Area ‘C’ Founder’s Day Celebration</a></h3><p>12 Jun 2027 · North Eastern Region Area C, QLD · AA</p><p>Listed by AA Area ‘C’ North Eastern Region. Check the official page for times and details.</p></div></li><li class="event" data-end="2027-08-29" hidden data-more><div class="date"><b>27</b>Aug 2027</div><div><h3><a href="https://members.aa.org.au/event/adelaide-mens-weekend/" rel="noopener">Adelaide Mens Weekend</a></h3><p>27 Aug 2027 to 29 Aug 2027 · Belair, SA · AA</p><p>Listed by Alcoholics Anonymous Australia. Check the official page for times and details.</p></div></li><li class="event" data-end="2027-10-04" hidden data-more><div class="date"><b>1</b>Oct 2027</div><div><h3><a href="https://members.aa.org.au/event/toowoomba-annual-rally-save-the-date/" rel="noopener">Toowoomba Annual Rally (save the date)</a></h3><p>1 Oct 2027 to 4 Oct 2027 · Toowoomba, QLD · AA</p><p>Listed by Alcoholics Anonymous Australia. Check the official page for times and details.</p></div></li><li class="event" data-end="2027-10-09" hidden data-more><div class="date"><b>9</b>Oct 2027</div><div><h3><a href="https://www.na.org.au/multi/events/goulburn-womens-na-unity-day/" rel="noopener">Goulburn Women’s NA Unity Day (hold the date)</a></h3><p>9 Oct 2027 · Goulburn, NSW · NA</p><p>Listed by Goulburn Women’s NA. Check the official page for times and details.</p></div></li></ul>
+<div class="card sage" id="events-empty" hidden><h3>No upcoming events listed right now</h3><p>Check the fellowships' own event pages: <a href="https://members.aa.org.au/events/">AA Australia events</a> and <a href="https://www.na.org.au/multi/events/">NA Australia upcoming events</a>.</p></div>
+<div class="btn-row"><button class="btn ghost" id="events-more" type="button">Show all 33 events</button><a class="btn ghost" href="https://members.aa.org.au/events/">All AA Australia events</a><a class="btn ghost" href="https://www.na.org.au/multi/events/">All NA Australia events</a></div>
+<p class="small">Event list checked on 3 Nov 2026.</p>
+</section>
+<h2>The HomeCircle app</h2>
+<div class="grid g2">
+  <div class="card"><h3>In the iPhone app</h3><ul>
+    <li><strong>Meetings near you</strong>, with a map.</li>
+    <li><strong>A private journal and sober date</strong> that stay on your phone.</li>
+    <li><strong>Kai, the Recovery Coach</strong>: built-in templates on your phone for reflection and encouragement. It isn't AI and nothing you type leaves your phone. Kai isn't on the website yet.</li>
+    <li><strong>The same Library</strong>, breathing and meditation guides.</li>
+  </ul><div class="btn-row"><a class="btn" href="https://apps.apple.com/au/app/homecircle/id6819366068">Get HomeCircle free on the App Store</a></div></div>
+  <div class="card sage"><h3>Support, not medical care</h3><p>For any health concern, talk to your GP or a doctor. HomeCircle is support, not medical care.</p><p>HomeCircle is independent and isn&#x27;t affiliated with or endorsed by Alcoholics Anonymous, Narcotics Anonymous, Gamblers Anonymous or Porn Addicts Anonymous.</p><p>HomeCircle never reproduces the Big Book or NA literature. We link to the free official pages instead.</p></div>
+</div>
+</div></main>
+<footer class="site-foot"><div class="wrap cols">
+  <div>
+    <h2>HomeCircle</h2>
+    <p>Support for your recovery journey. Free, with no accounts, no sign-in, no cookies, no ads, no trackers and no analytics.</p>
+    <p>For any health concern, talk to your GP or a doctor. HomeCircle is support, not medical care. HomeCircle is not a medical device and doesn&#x27;t give medical advice. In an emergency call <a href="tel:000">000</a>.</p>
+    <p>HomeCircle is independent and isn&#x27;t affiliated with or endorsed by Alcoholics Anonymous, Narcotics Anonymous, Gamblers Anonymous or Porn Addicts Anonymous.</p>
+    <p>© 2026 LJ Endrody (Luke Endrody, ABN 53 687 374 897). Australian-owned, Brisbane, Queensland.</p>
+  </div>
+  <div><h2>Explore</h2><ul><li><a href="index.html">Home</a></li><li><a href="library.html">Library</a></li><li><a href="twelve-steps.html">12 Steps</a></li><li><a href="meditations.html">Meditations &amp; breathing</a></li><li><a href="meetings.html">Meetings</a></li><li><a href="help.html">Help</a></li><li><a href="support.html">Support</a></li></ul></div>
+  <div><h2>About</h2><ul>
+    <li><a href="https://lendrody28-spec.github.io/homecircle/privacy.html">App Privacy Policy</a></li>
+    <li>Terms of Use (coming soon)</li>
+    <li><a href="support.html#website">About this website</a></li>
+    <li><a href="mailto:lendrody28@gmail.com">lendrody28@gmail.com</a> (not a crisis line)</li>
+  </ul></div>
+</div></footer>
+<a class="help-fab" id="help-fab" href="help.html#now" aria-label="Get help now: opens Call 000 and Lifeline 13 11 14" aria-controls="help-dialog">Get help now</a>
+<dialog class="help" id="help-dialog" aria-labelledby="help-title">
+  <div class="help-in">
+    <button class="close-x" type="button" data-close aria-label="Close">×</button>
+    <h2 id="help-title">Get help now</h2>
+    <p>If you or someone else is in danger, call 000. Lifeline is there 24 hours.</p>
+    <ul class="help-lines"><li><a class="first" href="tel:000">Call 000<small>Emergency. If a life is in danger.</small></a></li><li><a class="second" href="tel:131114">Call Lifeline 13 11 14<small>24 hours, crisis support.</small></a></li><li><a class="" href="tel:1800858858">Call Gambling Helpline 1800 858 858<small>Gambling Help Online and its helpline. Not run by Gamblers Anonymous.</small></a></li><li><a class="" href="tel:1800250015">Call 1800 250 015<small>National Alcohol and Other Drug Hotline. Connects you to your state&#x27;s service. Hours vary by state.</small></a></li></ul>
+    <p class="small">These are independent services. HomeCircle is not affiliated with them. <a href="help.html">More helplines on the Help page</a>.</p>
+    <button class="btn ghost" type="button" data-close>Close</button>
+  </div>
+</dialog>
+</body>
+</html>
