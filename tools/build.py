@@ -659,8 +659,7 @@ def build_support():
 <h3>Spotted a wrong meeting or event?</h3><p>Meetings and events come from AA and NA's own public listings. Please tell the group or the fellowship, and email us too so we know.</p>
 <h2>The iPhone app</h2>
 {src}
-<h2>Privacy and terms</h2><p>Read the <a href="{PRIVACY}">App Privacy Policy</a> and <a href="{TERMS}">Terms of Use</a>. {E(BROWSER_ONLY)}</p>
-<h2>Contact us</h2><p>Email: <a href="mailto:{L["supportEmail"]}">{L["supportEmail"]}</a> (not a crisis line).</p>"""
+<h2>Privacy and terms</h2><p>Read the <a href="{PRIVACY}">App Privacy Policy</a> and <a href="{TERMS}">Terms of Use</a>. {E(BROWSER_ONLY)}</p>"""
     page("support.html", "support.html", "Support – HomeCircle", "Get help with HomeCircle: contact, FAQs about the website and app, and crisis support.", body)
 
 
