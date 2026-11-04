@@ -24,6 +24,8 @@ WEB_EDITS = {
     "Use it when the other counts are hidden by your health notes, or whenever you prefer it.": "Use it if breath holds aren't right for you, or whenever you prefer it.",
     "Kai leads a short sit with the wave of an urge.": "A short guided sit with the wave of an urge.",
     "Use the official site, or find a meeting in the app.": "Use the official site, or find a meeting with the HomeCircle meeting finder.",
+    "Use AA Australia's website, or find a meeting in the app.": "Use AA Australia's website, or find a meeting with the HomeCircle meeting finder.",
+    "Use NA Australia's website, or find a meeting in the app.": "Use NA Australia's website, or find a meeting with the HomeCircle meeting finder.",
 }
 def web(t):
     t = WEB_EDITS.get(t, t)
@@ -31,8 +33,12 @@ def web(t):
 
 PAGES = [("index.html", "Home"), ("library.html", "Library"), ("twelve-steps.html", "12 Steps"),
          ("meditations.html", "Meditations & breathing"), ("meetings.html", "Meetings"),
-         ("help.html", "Help"), ("support.html", "Support")]
+         ("help.html", "Help"), ("your-circle.html", "Your circle"), ("support.html", "Support")]
 PRIVACY = L["privacyURL"]
+TERMS = L["termsURL"]
+H = C["helplines"]
+HL = {v["id"]: v for v in H["lines"].values()}
+BROWSER_ONLY = "Site features that save anything (your day count, journal, health notes and Kai chat) keep it only in this browser's local storage. Nothing is sent to HomeCircle."
 SLUG = {
     "breath-box": "box-breathing", "breath-478": "4-7-8-breathing", "breath-46": "slow-out-breath",
     "guide-urge": "urge-surfing", "guide-halt": "halt", "guide-24h": "24-hour-plan", "guide-54321": "grounding-5-4-3-2-1",
@@ -46,12 +52,11 @@ def item_href(i, r=""):
     return f"{r}library/{SLUG[i]}.html"
 STAGES_HREF, BOOKS_HREF = "library/body-and-recovery-stages.html", "library/recovery-books.html"
 
-HELP_PANEL = [
-    ("000", "Call 000", "Emergency. If a life is in danger.", "first"),
-    ("131114", "Call Lifeline 13 11 14", "24 hours, crisis support.", "second"),
-    ("1800858858", "Call Gambling Helpline 1800 858 858", "Gambling Help Online and its helpline. Not run by Gamblers Anonymous.", ""),
-    ("1800250015", "Call 1800 250 015", "National Alcohol and Other Drug Hotline. Connects you to your state's service. Hours vary by state.", ""),
-]
+HEART = '<svg class="heart" aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M12 21.2l-1.4-1.3C5.4 15.3 2 12.2 2 8.4 2 5.3 4.4 3 7.4 3c1.7 0 3.4.8 4.6 2.1C13.2 3.8 14.9 3 16.6 3 19.6 3 22 5.3 22 8.4c0 3.8-3.4 6.9-8.6 11.5L12 21.2z"/></svg>'
+
+def tel(line, label=None):
+    """A call button for one HelpDirectory line, exactly as the app shows it."""
+    return f'<a class="btn ghost" href="tel:{line["dial"]}">{E(label or "Call " + line["displayNumber"])}</a>'
 
 def head(title, desc, r):
     return f"""<!DOCTYPE html>
@@ -67,6 +72,9 @@ def head(title, desc, r):
 <link rel="apple-touch-icon" href="{r}assets/logo-192.png">
 <link rel="stylesheet" href="{r}assets/site.css">
 <script src="{r}assets/site.js" defer></script>
+<script src="{r}assets/kai-data.js" defer></script>
+<script src="{r}assets/kai-engine.js" defer></script>
+<script src="{r}assets/kai.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>"""
@@ -78,38 +86,77 @@ def header(active, r):
   <a class="brand" href="{r}index.html"><img src="{r}assets/logo-96.png" alt="" width="46" height="46"><span><b>HomeCircle</b><small>Support for your recovery journey</small></span></a>
   <button class="btn ghost menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav" hidden>Menu</button>
   <nav class="nav" id="site-nav" aria-label="Main"><ul>{lis}</ul></nav>
-</div></header>"""
+</div></header>
+<a class="help-pill" id="help-pill" href="{r}help.html#now" aria-label="{E(C["crisis"]["accessibilityLabel"])}" aria-describedby="help-pill-hint" aria-controls="help-dialog">{HEART}<span aria-hidden="true">Help</span></a>
+<span class="sr-only" id="help-pill-hint">{E(C["crisis"]["accessibilityHint"])}</span>"""
+
+def kai_panel(r):
+    return f"""
+<div class="kai" id="kai" data-root="{r}" hidden>
+  <section class="kai-panel" id="kai-panel" role="dialog" aria-labelledby="kai-title" hidden>
+    <div class="kai-head">
+      <img src="{r}assets/kai.png" alt="" width="44" height="44">
+      <div><h2 id="kai-title">Kai</h2><p>Recovery Buddy</p></div>
+      <button class="btn ghost kai-small" type="button" id="kai-clear">Clear</button>
+      <button class="btn ghost kai-small" type="button" id="kai-min" aria-label="Minimise Kai">Minimise</button>
+    </div>
+    <div class="kai-confirm card" id="kai-confirm" role="alertdialog" aria-labelledby="kai-confirm-h" hidden>
+      <p id="kai-confirm-h"><strong>Clear this chat?</strong> This removes the messages in this browser. The Help button in the top corner still calls 000 or Lifeline 13 11 14, and the Help page lists every line.</p>
+      <div class="btn-row"><button class="btn danger" type="button" data-yes>Clear chat</button><button class="btn ghost" type="button" data-no>Cancel</button></div>
+    </div>
+    <div class="kai-crisis" id="kai-crisis" hidden><a class="btn danger" href="tel:000">Call 000</a><a class="btn" href="tel:131114">Call Lifeline 13 11 14</a></div>
+    <div class="kai-scroll">
+      <p class="kai-note"><strong>Kai isn't AI, and isn't a person, counsellor, doctor or sponsor.</strong> Replies are written in this browser from saved rules. No network and no AI service: nothing you type leaves your browser.</p>
+      <p class="kai-note">Kai is a recovery buddy, not a counsellor. HomeCircle doesn't give medical advice. In an emergency call <a href="tel:000">000</a>, or Lifeline on <a href="tel:131114">13 11 14</a>.</p>
+      <p class="kai-empty" id="kai-empty">Kai is here. Pick a chip, or write a line.</p>
+      <div class="kai-log" id="kai-log"></div>
+      <div class="kai-after" id="kai-after"></div>
+    </div>
+    <p class="sr-only" id="kai-live" aria-live="polite"></p>
+    <div class="kai-chips" id="kai-chips" role="group" aria-label="Quick replies"></div>
+    <form class="kai-form" id="kai-form" autocomplete="off">
+      <label class="sr-only" for="kai-input">Message Kai</label>
+      <textarea id="kai-input" rows="1" maxlength="500" placeholder="Write a line"></textarea>
+      <button class="btn" type="submit">Send</button>
+    </form>
+    <p class="kai-foot">The chat is kept only in this browser until you clear it. <button class="linkish" type="button" id="kai-move">Move Kai to the left</button></p>
+  </section>
+  <button class="kai-bubble" id="kai-bubble" type="button" aria-expanded="false" aria-controls="kai-panel" aria-label="Kai, Recovery Buddy. Not AI and not a person."><img src="{r}assets/kai.png" alt="" width="64" height="64" draggable="false"></button>
+</div>"""
 
 def footer(r):
-    lines = "".join(f'<li><a class="{c}" href="tel:{d}">{E(t)}<small>{E(s)}</small></a></li>' for d, t, s, c in HELP_PANEL)
+    s_ = C["crisis"]
+    em, ll = HL["000"], HL["lifeline"]
     return f"""
 <footer class="site-foot"><div class="wrap cols">
   <div>
     <h2>HomeCircle</h2>
     <p>Support for your recovery journey. Free, with no accounts, no sign-in, no cookies, no ads, no trackers and no analytics.</p>
-    <p>{E(L["gpLine"])} {E(L["notMedicalDevice"])} In an emergency call <a href="tel:000">000</a>.</p>
+    <p>{E(L["gpLine"])} {E(L["notMedicalDevice"])} In an emergency call <a href="tel:000">000</a>. Lifeline <a href="tel:131114">13 11 14</a>.</p>
     <p>{E(L["notAffiliated"])}</p>
-    <p>© 2026 LJ Endrody (Luke Endrody, ABN 53 687 374 897). Australian-owned, Brisbane, Queensland.</p>
+    <p>© 2026 {E(L["owner"])} (sole trader), {E(L["ownerPlace"])}. ABN 53 687 374 897.</p>
   </div>
   <div><h2>Explore</h2><ul>{"".join(f'<li><a href="{r}{h}">{E(t)}</a></li>' for h, t in PAGES)}</ul></div>
   <div><h2>About</h2><ul>
-    <li><a href="{PRIVACY}">App Privacy Policy</a></li>
-    <li>Terms of Use (coming soon)</li>
+    <li><a href="{PRIVACY}">Privacy Policy</a></li>
+    <li><a href="{TERMS}">Terms of Use</a></li>
     <li><a href="{r}support.html#website">About this website</a></li>
     <li><a href="mailto:{L["supportEmail"]}">{L["supportEmail"]}</a> (not a crisis line)</li>
-  </ul></div>
+  </ul><p class="small">{E(BROWSER_ONLY)}</p></div>
 </div></footer>
-<a class="help-fab" id="help-fab" href="{r}help.html#now" aria-label="Get help now: opens Call 000 and Lifeline 13 11 14" aria-controls="help-dialog">Get help now</a>
 <dialog class="help" id="help-dialog" aria-labelledby="help-title">
   <div class="help-in">
     <button class="close-x" type="button" data-close aria-label="Close">×</button>
-    <h2 id="help-title">{E(C["crisis"]["sheetTitle"])}</h2>
-    <p>{E(C["crisis"]["sheetIntro"])}</p>
-    <ul class="help-lines">{lines}</ul>
-    <p class="small">These are independent services. HomeCircle is not affiliated with them. <a href="{r}help.html">More helplines on the Help page</a>.</p>
-    <button class="btn ghost" type="button" data-close>Close</button>
+    <h2 id="help-title">{E(s_["sheetTitle"])}</h2>
+    <ul class="help-lines">
+      <li><a class="first" href="tel:{em["dial"]}">Call 000<small>{E(em["detail"])}</small></a></li>
+      <li><a class="second" href="tel:{ll["dial"]}">Call Lifeline {E(ll["displayNumber"])}<small>{E(ll["detail"])}</small></a></li>
+    </ul>
+    <p>{E(s_["sheetIntro"])}</p>
+    <a class="btn ghost wide" href="{r}help.html">More helplines on the Help page</a>
+    <button class="btn ghost wide plain" type="button" data-close>Close</button>
   </div>
-</dialog>
+</dialog>{kai_panel(r)}
 </body>
 </html>
 """
@@ -124,10 +171,10 @@ def art_img(key, r, cls="", eager=False):
     a = ARTS[key]
     return f'<img src="{r}assets/art/{a["asset"]}.jpg" alt="{E(a["label"])}" width="1024" height="768"{"" if eager else " loading=\"lazy\""}{f" class=\"{cls}\"" if cls else ""}>'
 
-def tile(href, title, summary, tag, artkey, r, mins=None):
+def tile(href, title, summary, tag, artkey, r, mins=None, hold=False):
     pic = art_img(artkey, r) if artkey else f'<div class="icon-tile" aria-hidden="true">{E(title)}</div>'
     m = f" · {mins} min" if mins and mins > 1 else ""
-    return f'<a class="card tile" href="{href}">{pic}<div class="tbody"><span class="tag">{E(tag)}{m}</span><h3>{E(title)}</h3><p>{E(summary)}</p></div></a>'
+    return f'<a class="card tile" href="{href}"{" data-breath-hold" if hold else ""}>{pic}<div class="tbody"><span class="tag">{E(tag)}{m}</span><h3>{E(title)}</h3><p>{E(summary)}</p></div></a>'
 
 def src_list(links, heading="Sources"):
     lis = "".join(f'<li><a href="{E(l["url"])}" rel="noopener">{E(l["title"])}</a></li>' for l in links)
@@ -171,34 +218,39 @@ def build_home():
         ("library.html", "Library", "Guides, breathing, meditation, body and fellowships.", "Library", "oneThing"),
         ("twelve-steps.html", "The 12 Steps", C["twelveStepsCopy"]["summary"], "12 Steps", "dayPlan"),
     ]
+    feats2 = [
+        ("your-circle.html", "Your circle", "A day counter and a private journal, kept only in this browser.", "Your circle", "oneThing"),
+        ("help.html", "Helplines", "000, Lifeline and every helpline in the app, plus lines in your state.", "Help", "handOnChest"),
+    ]
     tiles = "".join(tile(h, t, s, tg, a, r) for h, t, s, tg, a in feats)
     body = f"""
 <section class="hero">
   <div>
     <p class="eyebrow">Free · Australian · No sign-in</p>
     <h1><span class="grad-text">Support for your recovery journey</span></h1>
-    <p class="lede">HomeCircle is a free Australian recovery support app, and this website brings its no-account tools to your computer: find AA and NA meetings, breathe along with a guide, and read plain-language guides and the 12 Steps.</p>
+    <p class="lede">HomeCircle is a free Australian recovery support app, and this website brings its no-account tools to your browser: find AA and NA meetings and add a reminder, breathe along with a guide, read plain-language guides and the 12 Steps, keep a day count and journal in your browser, and chat with Kai.</p>
     <div class="btn-row"><a class="btn" href="meetings.html">Find a meeting</a><a class="btn ghost" href="meditations.html">Breathe now</a><a class="btn ghost" href="library.html">Open the Library</a></div>
-    <p class="small">Everything here is free. No accounts, no cookies, no ads, no trackers and no analytics.</p>
+    <p class="small">Everything here is free. No accounts, no cookies, no ads, no trackers and no analytics. Anything you save stays in this browser.</p>
   </div>
   <div class="hero-art"><img src="assets/logo-192.png" alt="HomeCircle logo: three people with arms raised inside a circle" width="260" height="260"><p>You're not alone.</p></div>
 </section>
 <div class="notice"><strong>Need help right now?</strong> {E(L["notMedicalDevice"])} In an emergency call <a href="tel:000">000</a>. For crisis support call Lifeline on <a href="tel:131114">13 11 14</a>.</div>
 <h2>What you can do here</h2>
 <div class="grid g4">{tiles}</div>
-<div class="grid g3 mt"></div>
+<div class="grid g2 mt">{"".join(tile(h, t, s, tg, a, r) for h, t, s, tg, a in feats2)}</div>
+<div class="card sage mt kai-intro"><img src="assets/kai.png" alt="" width="72" height="72"><div><h2 class="mt0">Meet Kai, your recovery buddy</h2><p>Kai is the round button in the corner of every page. Tell Kai how you're feeling and it can suggest a breathing practice, a short meditation or a walk, or point you to a meeting or a helpline. Replies are written in this browser from saved rules. No network and no AI service. Kai isn't AI, and isn't a person, counsellor, doctor or sponsor. Nothing you type leaves your browser.</p></div></div>
 {events_html()}
 <h2>The HomeCircle app</h2>
 <div class="grid g2">
   <div class="card"><h3>In the iPhone app</h3><ul>
     <li><strong>Meetings near you</strong>, with a map.</li>
     <li><strong>A private journal and sober date</strong> that stay on your phone.</li>
-    <li><strong>Kai, the Recovery Coach</strong>: built-in templates on your phone for reflection and encouragement. It isn't AI and nothing you type leaves your phone. Kai isn't on the website yet.</li>
+    <li><strong>Kai, your recovery buddy</strong>: built-in templates on your phone for reflection and encouragement. It isn't AI and nothing you type leaves your phone.</li>
+    <li><strong>Meeting reminders</strong> 2 hours before a meeting starts.</li>
     <li><strong>The same Library</strong>, breathing and meditation guides.</li>
   </ul><div class="btn-row"><a class="btn" href="https://apps.apple.com/au/app/homecircle/id6819366068">Get HomeCircle free on the App Store</a></div></div>
   <div class="card sage"><h3>Support, not medical care</h3><p>{E(L["gpLine"])}</p><p>{E(L["notAffiliated"])}</p><p>HomeCircle never reproduces the Big Book or NA literature. We link to the free official pages instead.</p></div>
 </div>"""
-    body = body.replace('<div class="grid g3 mt"></div>\n', "")
     page("index.html", "index.html", "HomeCircle – Support for your recovery journey",
          "HomeCircle is a free Australian recovery support app and website: find AA and NA meetings, breathing and meditation guides, the 12 Steps and helplines. No accounts.", body)
 
@@ -222,14 +274,24 @@ def build_library():
             tiles.append(tile("twelve-steps.html", C["twelveStepsCopy"]["title"], C["twelveStepsCopy"]["summary"], "Fellowship", "dayPlan", r))
             tiles.append(tile(BOOKS_HREF, C["booksCopy"]["title"], C["booksCopy"]["summary"], "Fellowship", None, r))
         for i in items:
-            tiles.append(tile(item_href(i["id"]), i["title"], web(i["summary"]), i["tag"], HERO.get(i["id"]), r, i["minutes"]))
+            tiles.append(tile(item_href(i["id"]), i["title"], web(i["summary"]), i["tag"], HERO.get(i["id"]), r, i["minutes"], i.get("breathHold")))
         out.append(f'<section data-cat="{k}" aria-labelledby="h-{k}"><h2 id="h-{k}">{t}</h2><div class="grid g4">{"".join(tiles)}</div></section>')
     body = f"""<h1>Library</h1>
 <p class="lede">Resources and tools to support your growth: guides, breathing, meditation, body and fellowships. The same Library as the HomeCircle app, free to use here.</p>
 {chips}
+{HOLDS_NOTE}
 {"".join(out)}
 <p class="note small">{E(L["gpLine"])} {E(L["notAffiliated"])}</p>"""
     page("library.html", "library.html", "Library – HomeCircle", "Free recovery guides, breathing, meditation, body and fellowship pages from the HomeCircle app.", body)
+
+HOLDS_NOTE = '<p class="note small" data-holds-hidden-note hidden>Breath holds are hidden in this browser, so box breathing and 4-7-8 breathing are left out. <a href="your-circle.html#health">Change this in Health safety</a>.</p>'
+
+def holds_toggle(r):
+    return f"""<div class="card sage holds" id="holds"><h2 class="mt0">Breath holds</h2>
+<p>{E(L["breathHold"])}</p>
+<label class="check"><input type="checkbox" data-health="hideHolds"> Hide breath holds in this browser</label>
+<p class="small" data-holds-status aria-live="polite"></p>
+<p class="small">This choice is kept only in this browser (local storage). More health notes are on <a href="{r}your-circle.html#health">Your circle</a>.</p></div>"""
 
 # ---------- breathing widget ----------
 def breath_widget(ids, r, default):
@@ -287,7 +349,11 @@ def build_item(i):
         main.append(f'<div class="card sage" id="bodyscan-optin" hidden><h2 class="mt0">Body scan is off until you choose it</h2><p>It walks attention through the body. Skip it if that doesn\'t feel right. Nothing is saved.</p><button class="btn" type="button">Show the body scan</button></div><div id="bodyscan-content"><h2 tabindex="-1">About this practice</h2>{paras}')
     else:
         main.append(f'<div>{paras}</div>')
-    if i["kind"] == "breathing":
+    if i["kind"] == "breathing" and i.get("breathHold"):
+        main.append(f'<div class="card sage" data-holds-hidden-note hidden><h2 class="mt0">Breath holds are hidden in this browser</h2><p>You chose to hide breath holds, or saved a health note that rules them out. Try the <a href="{item_href("breath-46", r)}">slow out-breath</a> instead, which has no hold.</p><div class="btn-row"><button class="btn ghost" type="button" data-show-holds>Show this practice anyway</button><a class="btn ghost" href="{r}your-circle.html#health">Health safety</a></div></div>')
+        main.append(f'<div data-breath-hold><h2>Breathe along</h2>{breath_widget([i["id"]], r, i["id"])}</div>')
+        main.append(holds_toggle(r))
+    elif i["kind"] == "breathing":
         main.append(f'<h2>Breathe along</h2>{breath_widget([i["id"]], r, i["id"])}')
     elif i["steps"]:
         main.append(player(i, r))
@@ -349,9 +415,10 @@ def build_steps():
     cards = "".join(f'<div class="card"><p class="num">Step {s["number"]}</p><h3>{E(s["theme"])}</h3><p>{E(s["note"])}</p><p class="reflect">{E(s["reflection"])}</p></div>' for s in C["twelveSteps"])
     body = f"""<div class="layout"><div>
 <h1>{E(T["title"])}</h1><p class="lede">{E(T["intro"])}</p>
+<div class="note"><strong>In HomeCircle's own plain-language words.</strong> These notes are HomeCircle's own summaries, not the official wording of AA or NA. For AA's own wording of the Twelve Steps, see <a href="{E(T["officialURL"])}" rel="noopener">aa.org</a>.</div>
 <div class="btn-row"><a class="btn" href="{E(T["officialURL"])}" rel="noopener">{E(T["officialLinkTitle"])}</a><a class="btn ghost" href="{BOOKS_HREF}">Free recovery books</a></div>
 <div class="twelve">{cards}</div>
-<div class="card mt"><h2 class="mt0">Where this comes from</h2><p>The 12 Steps were first written down by Alcoholics Anonymous in the 1930s. Narcotics Anonymous and other fellowships adapted them. The notes on this page are HomeCircle's own plain-language summaries, not the official text.</p>{src_list([{"title": "The Twelve Steps (opens aa.org)", "url": T["officialURL"]}])}</div>
+<div class="card mt"><h2 class="mt0">Where this comes from</h2><p>The 12 Steps were first written down by Alcoholics Anonymous in the 1930s. Narcotics Anonymous and other fellowships adapted them. The notes on this page are HomeCircle's own plain-language summaries, not the official wording of AA or NA.</p>{src_list([{"title": "The Twelve Steps (opens aa.org)", "url": T["officialURL"]}])}</div>
 <p class="small">{E(T["independence"])}</p>
 </div><aside><figure class="figure">{art_img("dayPlan", r, eager=True)}</figure><div class="card sage"><h3>Find a meeting</h3><p>Many people work the Steps with a sponsor they meet at meetings.</p><p><a href="meetings.html">Search AA and NA meetings</a></p></div></aside></div>"""
     page("twelve-steps.html", "twelve-steps.html", "The 12 Steps – HomeCircle", T["summary"], body)
@@ -360,7 +427,7 @@ def build_meditations():
     r = ""
     br = ["breath-46", "breath-box", "breath-478"]
     meds = [i for i in C["items"] if i["category"] == "meditation"]
-    tiles_b = "".join(tile(item_href(i), ITEMS[i]["title"], ITEMS[i]["summary"], "Breathing", HERO.get(i), r, ITEMS[i]["minutes"]) for i in br)
+    tiles_b = "".join(tile(item_href(i), ITEMS[i]["title"], ITEMS[i]["summary"], "Breathing", HERO.get(i), r, ITEMS[i]["minutes"], ITEMS[i]["breathHold"]) for i in br)
     tiles_m = "".join(tile(item_href(i["id"]), i["title"], web(i["summary"]), "Meditation", HERO.get(i["id"]), r, i["minutes"]) for i in meds)
     body = f"""<h1>Meditations and breathing</h1>
 <p class="lede">Breathe along with the circle: it grows as you breathe in and shrinks as you breathe out. Then try a short guided meditation.</p>
@@ -368,7 +435,8 @@ def build_meditations():
 <div class="notice"><strong>Breath holds.</strong> {E(L["breathHold"])} The slow out-breath has no hold.</div>
 <h2>Breathing guide</h2>
 {breath_widget(br, r, "breath-46")}
-<h2>Breathing practices</h2><div class="grid g3">{tiles_b}</div>
+{holds_toggle(r)}
+<h2>Breathing practices</h2>{HOLDS_NOTE}<div class="grid g3">{tiles_b}</div>
 <h2>Meditations</h2><p>Each meditation is a few short steps. Eyes can stay open. Stop if you feel unwell.</p><div class="grid g3">{tiles_m}</div>
 <p class="note small">{E(L["trauma"])} {E(L["gpLine"])}</p>"""
     page("meditations.html", "meditations.html", "Meditations and breathing – HomeCircle", "A free animated breathing guide (box, 4-7-8, slow out-breath) and short guided meditations.", body)
@@ -389,56 +457,87 @@ def build_meetings():
   <div class="btn-row"><button class="btn" type="submit">Search</button><button class="btn ghost" type="button" id="f-near">Near me</button></div>
   <p class="small">Near me asks your browser for your location only when you press it. It's used on this page to sort by distance and is never sent to HomeCircle or anyone else.</p>
 </form>
-<div class="card" id="finder-nojs"><p>The meeting finder needs JavaScript. You can use the official lists instead.</p></div>
+<div class="card" id="finder-nojs"><p>The meeting finder needs JavaScript. You can use AA's and NA's own meeting lists instead.</p></div>
 <p class="status" id="f-status" role="status" aria-live="polite"></p>
 <div class="results" id="results"></div>
 <div class="btn-row"><button class="btn ghost" type="button" id="f-more" hidden>Show more</button></div>
 <div class="grid g2 mt">
   <div class="card sage"><h2 class="mt0">About the list</h2><p id="feed-info">AA and NA meetings from public listings.</p><p>Listings come from public sources: AA Australia's Meeting Guide feed and NA Australia's BMLT meeting list. Times can change, so check with the group if you're unsure. Each meeting links to its official listing.</p><p class="small">Times show in the meeting's own time zone.</p></div>
-  <div class="card"><h2 class="mt0">Official meeting lists</h2><ul><li><a href="https://meetings.aa.org.au/">AA meetings list (AA Australia)</a></li><li><a href="https://www.na.org.au/multi/">NA Australia meetings</a></li><li><a href="https://www.gamblinghelponline.org.au/">Gambling Help Online</a> and <a href="https://www.gaaustralia.org.au/">Gamblers Anonymous</a></li></ul><p class="small">{E(L["notAffiliated"])} At meetings, please respect each group's own guidelines, and don't record or share what people say.</p></div>
+  <div class="card"><h2 class="mt0">AA and NA meeting lists</h2><ul><li><a href="https://meetings.aa.org.au/">AA meetings list (AA Australia)</a></li><li><a href="https://www.na.org.au/multi/">NA Australia meetings</a></li><li><a href="https://www.gamblinghelponline.org.au/">Gambling Help Online</a> and <a href="https://www.gaaustralia.org.au/">Gamblers Anonymous</a></li></ul><p class="small">{E(L["notAffiliated"])} At meetings, please respect each group's own guidelines, and don't record or share what people say.</p></div>
 </div>
+<div class="card sage mt"><h2 class="mt0">Meeting reminders</h2><p>Choose <strong>Add reminder</strong> on a meeting, then <strong>Just this one</strong> or <strong>Every week</strong>. This downloads a calendar file (.ics) for your calendar app. Its alert is set for 2 hours before the meeting starts. HomeCircle sends no notifications, and nothing is sent to us.</p></div>
 <p class="note small">{E(L["privateDetails"])}</p>
 <script src="assets/meetings.js" defer></script>"""
     page("meetings.html", "meetings.html", "Find an AA or NA meeting – HomeCircle", "Search AA and NA meetings in Australia by suburb, postcode and day. Free, no sign-in.", body)
 
+STATE_LINES = [  # helplines-verification-2026-11-04.md, section 4 (checked 4 Nov 2026)
+    ("Queensland", [("Adis 24/7 Alcohol and Drug Support", "1800177833", "1800 177 833", "24/7. For Queenslanders and their family and friends.", "https://adis.health.qld.gov.au/")]),
+    ("New South Wales", [("Alcohol and Drug Information Service (ADIS) NSW", "1800250015", "1800 250 015", "24/7. Sydney metro: 02 8382 1000. For NSW residents and their families.", "https://yourroom.health.nsw.gov.au/getting-help/Pages/adis.aspx")]),
+    ("Victoria", [("DirectLine", "1800888236", "1800 888 236", "24/7 phone and online counselling. For Victorians, family members and others.", "https://www.directline.org.au/")]),
+    ("South Australia", [("Alcohol and Drug Information Service (ADIS), DASSA", "1300131340", "1300 131 340", "Every day 8.30am to 10pm, not 24/7. Local call fee for SA callers. For the public, family and friends.", "https://www.sahealth.sa.gov.au/wps/wcm/connect/public+content/sa+health+internet/services/mental+health+and+drug+and+alcohol+services/drug+and+alcohol+services/dassa+services/alcohol+and+drug+information+service+adis")]),
+    ("Western Australia", [("Alcohol and Drug Support Line", "0894425000", "(08) 9442 5000", "24/7. Country callers: 1800 198 024. For anyone worried about their own or someone else's alcohol or drug use.", "https://www.mhc.wa.gov.au/getting-help/helplines", ("1800198024", "1800 198 024")),
+                           ("Parent and Family Drug Support Line", "0894425050", "(08) 9442 5050", "24/7. Country callers: 1800 653 203. For anyone worried about someone else's use.", "https://www.mhc.wa.gov.au/getting-help/helplines", ("1800653203", "1800 653 203"))]),
+    ("Tasmania", [("Alcohol and Drug Information Service", "1800811994", "1800 811 994", "24 hours. For people who use drugs, and family members.", "https://www.health.tas.gov.au/health-topics/alcohol-and-drugs/learn-about-alcohol-and-drugs/alcohol-and-drug-treatment-and-support")]),
+    ("Northern Territory", [("Alcohol and Drug Information Service (ADIS)", "1800131350", "1800 131 350", "Listed on the NT Government's 24-hour helplines page. For anyone in the NT with alcohol or drug concerns.", "https://nt.gov.au/wellbeing/mental-health/24-hour-mental-health-hotlines")]),
+    ("Australian Capital Territory", [("Alcohol and Drug Service Intake, Canberra Health Services", "0251249977", "(02) 5124 9977", "Intake, weekdays 8am to 5pm (closes 3.30pm Wednesdays). Not a crisis line. After hours, call the National Alcohol and Other Drug Hotline on 1800 250 015.", "https://www.canberrahealthservices.act.gov.au/services-and-clinics/services/central-health-intake-chi")]),
+]
+
+def line_card(line):
+    note = f'<p class="small teal">{E(line["note"])}</p>' if line.get("note") else ""
+    txt = f'<a class="btn ghost" href="sms:{line["textDial"]}">Text {E(line["textDisplay"])}</a>' if line.get("textDial") else ""
+    return f'<div class="card"><h3>{E(line["name"])}</h3><p>{E(line["detail"])}</p>{note}<div class="btn-row">{tel(line)}{txt}</div></div>'
+
 def build_help():
-    from_app = [
-        ("Lifeline", "131114", "13 11 14", "24 hours. Call 13 11 14", None),
-        ("Beyond Blue", "1300224636", "1300 22 4636", "24 hours. Call 1300 22 4636", None),
-        (L["nationalName"], "1800250015", L["nationalNumber"], "Call 1800 250 015", L["nationalNote"]),
-        (L["adisName"], "1800177833", L["adisNumber"], "Call 1800 177 833", L["adisNote"]),
-        ("Gambling Helpline", "1800858858", "1800 858 858", "Call 1800 858 858", None),
-        ("AA Australia", "1300222222", "1300 222 222", "Call 1300 222 222", None),
-        ("NA Australia", "1300652820", "1300 652 820", "Call 1300 652 820", None),
-    ]
-    lines = "".join(f'<div class="card"><h3>{E(n)}</h3><p>{E(d)}</p>{f"<p class=\"small\">{E(note)}</p>" if note else ""}<a class="btn ghost" href="tel:{dial}">Call {E(disp)}</a></div>' for n, dial, disp, d, note in from_app)
-    conduct = "Be kind. At meetings you find through HomeCircle, please respect that group's own guidelines, and don't record or share what people say. HomeCircle is support, not medical care."
+    lines = "".join(line_card(HL[i]) for i in H["primary"])
+    al, fds, gam, ga = HL["al-anon"], HL["fds"], H["gamAnon"], H["ga"]
+    def ga_contact(c):
+        if c.get("phoneDial"):
+            return f'<li><a href="tel:{c["phoneDial"]}">{E(c["label"])}: Call {E(c["phoneDisplay"])}</a></li>'
+        return f'<li><a href="mailto:{E(c["email"])}">{E(c["label"])}: Email {E(c["email"])}</a></li>'
+    ga_list = "".join(ga_contact(c) for c in ga["contacts"])
+    def state_line(n, dial, disp, detail, url, *country):
+        extra = f'<a class="btn ghost" href="tel:{country[0][0]}">Call {E(country[0][1])} (country)</a>' if country else ""
+        return f'<div class="state-line"><h4>{E(n)}</h4><p>{E(detail)}</p><div class="btn-row"><a class="btn ghost" href="tel:{dial}">Call {E(disp)}</a>{extra}<a class="btn ghost" href="{E(url)}" rel="noopener">Open site</a></div></div>'
+    states = "".join(f'<details class="card state"><summary><h3>{E(st)}</h3></summary>{"".join(state_line(*l) for l in ls)}</details>' for st, ls in STATE_LINES)
     body = f"""<div id="now" class="btn-row"><a class="btn danger" href="tel:000">Call 000</a><a class="btn" href="tel:131114">Call Lifeline 13 11 14</a></div>
 <h1>Get help</h1>
 <p class="lede">We're here to support you. Help is always available. You're not alone.</p>
 <p><strong>{E(L["notMedicalDevice"])}</strong></p>
-<div class="notice"><strong>Call 000 immediately</strong> if a life is in danger. Call 000 or go to your nearest emergency department.</div>
+<div class="notice"><strong>Call 000 immediately</strong> if a life is in danger. {E(HL["000"]["detail"])}</div>
 <h2>Helplines</h2>
 <div class="grid g3">{lines}</div>
 <p class="small">These are independent services. HomeCircle is not affiliated with them.</p>
+<h2 id="family">Family &amp; Partners</h2>
+<div class="note">This is not medical advice. For any major concern, see a local doctor or GP. If a life is in danger, call 000.</div>
+<p>For partners, family members, and couples. These lines are beside someone in recovery.</p>
+<div class="grid g2">
+<div class="card"><h3>{E(al["name"])}</h3><p>For families and friends of someone with a drinking problem.</p><div class="btn-row">{tel(al)}<a class="btn ghost" href="https://al-anon.org.au/">Open site</a></div></div>
+<div class="card"><h3>Alateen</h3><p>Part of Al-Anon Australia, for ages about 13 to 18. Same Australian line. HomeCircle itself is an 18+ app.</p><div class="btn-row">{tel(al)}<a class="btn ghost" href="https://al-anon.org.au/">Open site</a></div></div>
+<div class="card"><h3>{E(fds["name"])}</h3><p>{E(fds.get("note") or "")}</p><p class="small">{E(fds["detail"])}</p><div class="btn-row">{tel(fds)}<a class="btn ghost" href="{E(H["familyDrugSupportURL"])}">Open site</a><a class="btn ghost" href="https://www.fds.org.au/fds-meetings-events/support-meetings" rel="noopener">Find a family meeting</a></div><p class="small">FDS lists no support meetings in WA, Tasmania or the NT. In WA, the Parent and Family Drug Support Line is listed under Western Australia below.</p></div>
+<div class="card"><h3>{E(gam["name"])}</h3><p>{E(gam["body"])}</p><div class="btn-row"><a class="btn ghost" href="mailto:{E(gam["email"])}">Email {E(gam["email"])}</a><a class="btn ghost" href="{E(gam["url"])}">Open site</a></div></div>
+</div>
+<h2 id="ga">{E(ga["title"])}</h2>
+<div class="card"><p>{E(ga["intro"])}</p><ul class="plain-list">{ga_list}</ul><a class="btn ghost" href="{E(ga["siteURL"])}">Open site</a></div>
+<h2 id="states">Support by state and territory</h2>
+<p>Alcohol and drug lines run by each state and territory. Keep 000 and Lifeline first: these lines are for advice and support, not emergencies. Checked against each service's own website on 4 November 2026.</p>
+<div class="grid g2 states">{states}</div>
+<div class="grid g2 mt">
+<div class="card"><h3>SMART Recovery Australia</h3><p>Free weekly groups, online and in person, for any addictive behaviour, including alcohol, drugs and gambling. Run by a trained facilitator. Not a 12-step program, and not a support line.</p><a class="btn ghost" href="https://smartrecoveryaustralia.com.au/smart-recovery-meetings" rel="noopener">Find a SMART Recovery meeting</a></div>
+<div class="card"><h3>Gambling help in every state</h3><p>Every state and territory gambling service uses the National Gambling Helpline for 24/7 phone help.</p>{tel(HL["gambling"])}</div>
+</div>
+<p class="small">These are independent services. HomeCircle is not affiliated with them. Hours and numbers can change, so check the service's own website.</p>
 <h2>Self-help kit</h2>
 <p>Tools to support you in the moment.</p>
 <div class="grid g4">{tile(item_href("guide-urge"), "Urge plan", ITEMS["guide-urge"]["summary"], "Guide", "urgeWave", "")}{tile(item_href("guide-halt"), "HALT", ITEMS["guide-halt"]["summary"], "Guide", "haltPause", "")}{tile(item_href("guide-24h"), "24-hour plan", ITEMS["guide-24h"]["summary"], "Guide", "dayPlan", "")}{tile("meditations.html", "Breathe now", "An animated breathing guide.", "Breathing", "breatheOut", "")}</div>
 <div class="grid g2 mt">
 <div class="card"><h2 class="mt0">Keep your details private</h2><p>{E(L["privateDetails"])}</p></div>
-<div class="card"><h2 class="mt0">Code of conduct</h2><p>{E(conduct)}</p></div>
+<div class="card"><h2 class="mt0">Code of conduct</h2><p>{E(L["rulesBody"])}</p></div>
 </div>
-<h2 id="family">Family &amp; Partners</h2>
-<div class="note">This is not medical advice. For any major concern, see a local doctor or GP. If a life is in danger, call 000.</div>
-<p>For partners, family members, and couples. These lines are beside someone in recovery.</p>
-<div class="grid g2">
-<div class="card"><h3>Al-Anon Family Groups Australia</h3><p>For families and friends of someone with a drinking problem.</p><div class="btn-row"><a class="btn ghost" href="tel:1300252666">Call 1300 252 666</a><a class="btn ghost" href="https://al-anon.org.au/">Open site</a></div></div>
-<div class="card"><h3>Alateen</h3><p>Part of Al-Anon Australia, for ages about 13 to 18. Same Australian line. HomeCircle itself is an 18+ app.</p><div class="btn-row"><a class="btn ghost" href="tel:1300252666">Call 1300 252 666</a><a class="btn ghost" href="https://al-anon.org.au/">Open site</a></div></div>
-</div>
+<div class="emergency-card mt"><h2 class="mt0">Call 000 immediately</h2><p>{E(HL["000"]["detail"])}</p><a class="btn" href="tel:000">Call 000</a></div>
 <h2>More information</h2>
 <p><a href="https://adf.org.au/">Alcohol and Drug Foundation</a> · <a href="https://www.healthdirect.gov.au/alcohol">Alcohol on Healthdirect</a> · <a href="https://www.gamblinghelponline.org.au/">Gambling Help Online</a></p>
 <p class="small">{E(L["gpLine"])}</p>"""
-    page("help.html", "help.html", "Get help – HomeCircle", "Helplines for Australia: 000, Lifeline 13 11 14, Beyond Blue, alcohol and drug lines, Gambling Helpline, and family support.", body)
+    page("help.html", "help.html", "Get help – HomeCircle", "Helplines for Australia: 000, Lifeline 13 11 14, Beyond Blue, Suicide Call Back Service, 13YARN, QLife, alcohol and drug lines by state, gambling help, and family support.", body)
 
 def build_support():
     src = (ROOT / "tools" / "support-app-faq.html").read_text()
@@ -446,18 +545,85 @@ def build_support():
 <p class="lede">Help with the HomeCircle website and app, and how to contact us.</p>
 <div class="notice"><strong>In crisis or need help now?</strong> HomeCircle is not an emergency service. Call <a href="tel:000">000</a> in an emergency, or Lifeline on <a href="tel:131114">13 11 14</a>. <a href="help.html">More helplines</a>.</div>
 <h2>Contact us</h2>
-<div class="card"><p>Email: <a href="mailto:{L["supportEmail"]}">{L["supportEmail"]}</a></p><p>Please include whether you're using the website or the app, your device, and a short description of the issue. We aim to reply within 2 business days. This email is not a crisis line.</p></div>
+<div class="card"><p>Email: <a href="mailto:{L["supportEmail"]}">{L["supportEmail"]}</a></p><p>Please include whether you're using the website or the app, your device, and a short description of the issue. We aim to reply within 24 hours. This is a goal, not a guarantee. This email is not a crisis line.</p></div>
 <h2 id="website">About this website</h2>
 <h3>Do I need an account?</h3><p>No. The website has no accounts and no sign-in, and everything on it is free.</p>
-<h3>Does the website collect my data?</h3><p>No. There are no cookies, no ads, no trackers, no analytics and no third-party scripts or fonts. The site doesn't save anything about you, and the breathing guide and meditations don't record anything.</p>
+<h3>Does the website collect my data?</h3><p>No. There are no cookies, no ads, no trackers, no analytics and no third-party scripts or fonts. Nothing you type or save is sent to HomeCircle.</p>
+<h3>What does the website save, and where?</h3><p>Only what you choose to save: your day count, journal notes, health safety answers, the breath-hold setting, Kai's chat and where you put Kai on the screen. These are kept only in this browser's local storage, on this device. They aren't sent to us, and they aren't shared with the app or your other devices. Private browsing, clearing your browser data or using another browser removes them or starts fresh. You can delete everything on <a href="your-circle.html#delete">Your circle</a>.</p>
 <h3>How does the meeting finder work?</h3><p>Your browser downloads the same public meeting list the app uses, from GitHub Pages, and searches it on your computer. What you type isn't sent anywhere. <strong>Near me</strong> only asks for your location when you press it, and your location stays on the page. The site and the list are hosted on GitHub Pages, which, like any web host, receives normal web requests.</p>
-<h3>Is Kai on the website?</h3><p>Not yet. Kai, the Recovery Coach, is a feature of the iPhone app.</p>
+<h3>Is Kai on the website?</h3><p>Yes. Kai, your recovery buddy, is the round button in the corner of every page. Kai isn't AI, and isn't a person, counsellor, doctor or sponsor. Replies are put together in your browser from saved rules, the same ones the app uses. Kai makes no network calls, and nothing you type leaves your browser. If a message sounds like a crisis, Kai shows 000 and Lifeline first. You can minimise Kai, drag it to the other side, or clear the chat. Kai hides while a breathing guide or meditation is playing.</p>
+<h3>How do meeting reminders work on the website?</h3><p>On a meeting, choose <strong>Add reminder</strong>, then <strong>Just this one</strong> or <strong>Every week</strong>. Your browser downloads a calendar file (.ics). Open it with your calendar app to add the meeting, with an alert set for 2 hours before it starts. The website sends no notifications and keeps no list of your reminders; to remove one, delete it in your calendar.</p>
 <h3>Spotted a wrong meeting or event?</h3><p>Meetings and events come from AA and NA's own public listings. Please tell the group or the fellowship, and email us too so we know.</p>
 <h2>The iPhone app</h2>
 {src}
-<h2>Privacy</h2><p>Read the <a href="{PRIVACY}">App Privacy Policy</a> to learn how HomeCircle keeps your information on your phone.</p>"""
+<h2>Privacy and terms</h2><p>Read the <a href="{PRIVACY}">App Privacy Policy</a> and <a href="{TERMS}">Terms of Use</a>. {E(BROWSER_ONLY)}</p>
+<h2>Who runs HomeCircle</h2><p>{E(L["owner"])} (sole trader), {E(L["ownerPlace"])}. Email: <a href="mailto:{L["supportEmail"]}">{L["supportEmail"]}</a> (not a crisis line).</p>"""
     page("support.html", "support.html", "Support – HomeCircle", "Get help with HomeCircle: contact, FAQs about the website and app, and crisis support.", body)
 
+
+# ---------- your circle (browser-only day count, journal, health safety) ----------
+HEALTH_TOGGLES = [("heartOrBloodPressure", "Heart condition or blood pressure"), ("asthmaOrLung", "Asthma or a lung condition"),
+                  ("epilepsy", "Epilepsy or seizures"), ("pregnancy", "Pregnancy"), ("panicAttacks", "Panic attacks"),
+                  ("traumaOrPTSD", "Trauma or PTSD"), ("recentDetox", "Recent detox or withdrawal")]
+JOURNAL_PROMPTS = ["What helped today?", "What am I grateful for?", "What was hard, and who can I tell?", "One thing for the next 24 hours."]
+MOODS = ["Grateful", "Steady", "Heavy", "Hopeful"]
+
+def build_circle():
+    r = ""
+    toggles = "".join(f'<label class="check"><input type="checkbox" data-health="{k}"> {E(t)}</label>' for k, t in HEALTH_TOGGLES)
+    prompts = "".join(f'<option>{E(x)}</option>' for x in JOURNAL_PROMPTS)
+    moods = "".join(f'<option>{E(x)}</option>' for x in MOODS)
+    body = f"""<h1>Your circle</h1>
+<p class="lede">A day counter, a private journal and health safety notes, if you'd like them. All optional.</p>
+<div class="notice"><strong>Stored only in this browser.</strong> Anything you save on this page stays in this browser's local storage, on this device. It isn't sent to HomeCircle or anyone else, and it isn't shared with the app or your other devices. On a shared computer, anyone using this browser could read it. Private browsing or clearing your browser data removes it.</div>
+<p class="notice" data-storage-check hidden>This browser isn't letting the site save anything (it may be in private mode or have storage turned off). You can still use the page, but nothing will be kept.</p>
+<div class="grid g2">
+<section class="card" aria-labelledby="days-h"><h2 class="mt0" id="days-h">Day count</h2>
+<p class="day-count" id="day-count" aria-live="polite">Set a sober date when you want a day count.</p>
+<form id="sober-form" class="form-row"><div><label for="sober-date">Sober date</label><input type="date" id="sober-date" required></div><div class="btn-row"><button class="btn" type="submit">Save date</button><button class="btn ghost" type="button" id="sober-clear" hidden>Remove date</button></div></form>
+<p class="small">Day 1 is your sober date itself, as in the app. The day count is kept in this browser only.</p></section>
+<section class="card sage" id="health" aria-labelledby="health-h"><h2 class="mt0" id="health-h">Health safety</h2>
+<p>Always talk to your doctor. This is not medical advice. Answers stay in this browser.</p>
+<fieldset><legend class="sr-only">Health notes</legend>{toggles}</fieldset>
+<label class="check strong"><input type="checkbox" data-health="hideHolds"> Hide breath holds</label>
+<p class="small" data-holds-status aria-live="polite"></p>
+<p class="small">{E(L["breathHold"])} If you tick heart or blood pressure, a lung condition, pregnancy or panic attacks, HomeCircle hides breath holds and offers the slow out-breath instead, as the app does.</p></section>
+</div>
+<section aria-labelledby="journal-h"><h2 id="journal-h">A private journal, just for you</h2>
+<form class="card" id="journal-form">
+<div class="form-row"><div><label for="j-prompt">Prompt</label><select id="j-prompt" name="prompt"><option value="">No prompt</option>{prompts}</select></div>
+<div><label for="j-mood">Mood (optional)</label><select id="j-mood" name="mood"><option value="">None</option>{moods}</select></div></div>
+<label for="j-title">Title (optional)</label><input type="text" id="j-title" name="title" maxlength="120">
+<label for="j-body">Your note</label><textarea id="j-body" name="body" rows="5" maxlength="5000" required></textarea>
+<div class="btn-row"><button class="btn" type="submit">Save in this browser</button></div>
+<p class="small" id="journal-status" role="status"></p>
+<p class="small">{E(L["privateDetails"])}</p>
+</form>
+<p id="journal-empty">No notes yet.</p>
+<ul class="journal-list" id="journal-list"></ul></section>
+<section class="card mt" id="delete" aria-labelledby="del-h"><h2 class="mt0" id="del-h">Delete your data in this browser</h2>
+<p>This removes your journal, sober date, health answers, Kai chat and Kai's position from this browser. It can't be undone, and HomeCircle doesn't hold a copy.</p>
+<button class="btn danger" type="button" id="delete-all">Delete all HomeCircle data in this browser</button></section>
+<p class="small mt">{E(L["gpLine"])} In an emergency call <a href="tel:000">000</a>, or Lifeline on <a href="tel:131114">13 11 14</a>.</p>"""
+    page("your-circle.html", "your-circle.html", "Your circle – HomeCircle", "An optional day counter, private journal and health safety notes, stored only in your browser.", body)
+
+# ---------- Kai data for the in-browser engine ----------
+def build_kai_data():
+    import json as _j
+    pages = {i["id"]: f"library/{SLUG[i['id']]}.html" for i in C["items"] if i["id"] in SLUG}
+    pages.update({"page-twelve-steps": "twelve-steps.html", "page-body-stages": STAGES_HREF, "page-recovery-books": BOOKS_HREF})
+    data = {
+        "items": {i["id"]: {"title": i["title"], "kind": i["kind"]} for i in C["items"]},
+        "steps": {str(t["number"]): {"theme": t["theme"], "note": t["note"]} for t in C["twelveSteps"]},
+        "stages": [{"days": st["days"], "kaiLine": st["kaiLine"], "statID": st.get("statID")} for st in C["stages"]],
+        "stats": {st["id"]: {"text": st["text"], "sourceTitle": st["sourceTitle"], "sourceURL": st["sourceURL"]} for st in C["stats"]},
+        "safetyLine": C["stageCopy"]["safetyLine"],
+        "privateDetails": L["privateDetails"],
+        "pages": pages,
+    }
+    (ROOT / "assets" / "kai-data.js").write_text("/* Generated by tools/build.py from the app's content. Do not edit. */\nself.HCKaiData = " + _j.dumps(data, ensure_ascii=False, separators=(",", ":")) + ";\n")
+
+build_kai_data(); build_circle()
 build_home(); build_library(); build_steps(); build_meditations(); build_meetings(); build_help(); build_support()
 for i in C["items"]:
     build_item(i)

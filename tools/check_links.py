@@ -16,7 +16,7 @@ class P(HTMLParser):
 for f in pages: P(f).feed(open(f).read())
 bad = []
 for f, u in refs:
-    if u.startswith(("mailto:", "tel:")): continue
+    if u.startswith(("mailto:", "tel:", "sms:")): continue
     if u.startswith("http"): ext.add(u); continue
     path, _, frag = u.partition("#")
     target = os.path.normpath(os.path.join(os.path.dirname(f), path)) if path else f

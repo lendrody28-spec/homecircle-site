@@ -43,7 +43,7 @@ class P:
         elif k == "num":
             val = float(v.replace("_", "")) if "." in v else int(v.replace("_", ""))
             if self.peek()[0] == "range":
-                self.take(); self.take(); val = None
+                self.take(); hi = self.take()[1]; val = [val, int(hi.replace("_", ""))]
         elif k == "p" and v == "[":
             val = []
             while self.peek()[1] != "]":
@@ -123,9 +123,42 @@ def clean(o):
         return [clean(v) for v in o]
     return o
 
+def enum_block(text, name):
+    """Source of one `enum Name { ... }` block (brace matched, strings skipped)."""
+    m = re.search(r'enum ' + name + r'\s*\{', text)
+    i, depth = m.end() - 1, 0
+    while True:
+        ch = text[i]
+        if ch == '"':
+            i += 1
+            while text[i] != '"':
+                i += 2 if text[i] == "\\" else 1
+        elif ch == "{": depth += 1
+        elif ch == "}":
+            depth -= 1
+            if depth == 0: return text[m.start():i+1]
+        i += 1
+
+def helplines(legal_src, consts):
+    """HelpDirectory, Gam-Anon and Gamblers Anonymous Australia, exactly as the app has them."""
+    hd = enum_block(legal_src, "HelpDirectory")
+    lines = {}
+    for name in re.findall(r'static let (\w+) = Helpline\(', hd):
+        lines[name] = clean(struct_literal(hd, name, consts))
+    primary = array_literal(hd, "primary", {})
+    ga = enum_block(legal_src, "GAAustralia")
+    return {
+        "lines": lines,
+        "primary": [lines[n]["id"] for n in primary],
+        "byName": {n: v["id"] for n, v in lines.items()},
+        "familyDrugSupportURL": static_strings(hd)["familyDrugSupportURL"],
+        "gamAnon": static_strings(enum_block(legal_src, "GamAnon")),
+        "ga": {**static_strings(ga.split("static let contacts")[0]), "contacts": clean(array_literal(ga, "contacts", consts))},
+    }
+
 def main():
     legal = (CORE / "LegalCopy.swift").read_text()
-    consts = static_strings(legal)
+    consts = static_strings(enum_block(legal, "LegalCopy"))
     steps_src = (CORE / "TwelveSteps.swift").read_text()
     consts.update(static_strings(steps_src))
     consts["TwelveSteps.officialURL"] = consts["officialURL"]
@@ -190,8 +223,10 @@ def main():
     steps_consts = static_strings(steps_src.split("enum TwelveSteps")[1].split("static let all")[0])
 
     json.dump({
-        "legal": static_strings(legal),
-        "helplines": {m.group(1): m.group(0) for m in []},
+        "legal": static_strings(enum_block(legal, "LegalCopy")),
+        "helplines": helplines(legal, {f"LegalCopy.{k}": v for k, v in static_strings(enum_block(legal, "LegalCopy")).items()}),
+        "reminder": static_strings((CORE / "ReminderTiming.swift").read_text()),
+        "helpButton": {"title": "Help", "fillHex": "#F2A08B", "foregroundHex": "#6B2416"},
         "items": items, "backgrounds": backgrounds, "arts": arts, "drawing": drawing, "hero": hero,
         "stats": stats, "stages": stages, "stageCopy": st_consts, "stageSources": stage_sources,
         "twelveSteps": steps, "twelveStepsCopy": steps_consts, "books": books, "booksCopy": books_consts,

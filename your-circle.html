@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en-AU" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self' https://lendrody28-spec.github.io; base-uri 'self'; form-action 'self'; object-src 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Your circle – HomeCircle</title>
+<meta name="description" content="An optional day counter, private journal and health safety notes, stored only in your browser.">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="assets/logo-192.png">
+<link rel="stylesheet" href="assets/site.css">
+<script src="assets/site.js" defer></script>
+<script src="assets/kai-data.js" defer></script>
+<script src="assets/kai-engine.js" defer></script>
+<script src="assets/kai.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head"><div class="wrap">
+  <a class="brand" href="index.html"><img src="assets/logo-96.png" alt="" width="46" height="46"><span><b>HomeCircle</b><small>Support for your recovery journey</small></span></a>
+  <button class="btn ghost menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav" hidden>Menu</button>
+  <nav class="nav" id="site-nav" aria-label="Main"><ul><li><a href="index.html">Home</a></li><li><a href="library.html">Library</a></li><li><a href="twelve-steps.html">12 Steps</a></li><li><a href="meditations.html">Meditations &amp; breathing</a></li><li><a href="meetings.html">Meetings</a></li><li><a href="help.html">Help</a></li><li><a href="your-circle.html" aria-current="page">Your circle</a></li><li><a href="support.html">Support</a></li></ul></nav>
+</div></header>
+<a class="help-pill" id="help-pill" href="help.html#now" aria-label="Get help now" aria-describedby="help-pill-hint" aria-controls="help-dialog"><svg class="heart" aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M12 21.2l-1.4-1.3C5.4 15.3 2 12.2 2 8.4 2 5.3 4.4 3 7.4 3c1.7 0 3.4.8 4.6 2.1C13.2 3.8 14.9 3 16.6 3 19.6 3 22 5.3 22 8.4c0 3.8-3.4 6.9-8.6 11.5L12 21.2z"/></svg><span aria-hidden="true">Help</span></a>
+<span class="sr-only" id="help-pill-hint">Opens Call 000 and Call Lifeline 13 11 14.</span>
+<main id="main"><div class="wrap">
+<h1>Your circle</h1>
+<p class="lede">A day counter, a private journal and health safety notes, if you'd like them. All optional.</p>
+<div class="notice"><strong>Stored only in this browser.</strong> Anything you save on this page stays in this browser's local storage, on this device. It isn't sent to HomeCircle or anyone else, and it isn't shared with the app or your other devices. On a shared computer, anyone using this browser could read it. Private browsing or clearing your browser data removes it.</div>
+<p class="notice" data-storage-check hidden>This browser isn't letting the site save anything (it may be in private mode or have storage turned off). You can still use the page, but nothing will be kept.</p>
+<div class="grid g2">
+<section class="card" aria-labelledby="days-h"><h2 class="mt0" id="days-h">Day count</h2>
+<p class="day-count" id="day-count" aria-live="polite">Set a sober date when you want a day count.</p>
+<form id="sober-form" class="form-row"><div><label for="sober-date">Sober date</label><input type="date" id="sober-date" required></div><div class="btn-row"><button class="btn" type="submit">Save date</button><button class="btn ghost" type="button" id="sober-clear" hidden>Remove date</button></div></form>
+<p class="small">Day 1 is your sober date itself, as in the app. The day count is kept in this browser only.</p></section>
+<section class="card sage" id="health" aria-labelledby="health-h"><h2 class="mt0" id="health-h">Health safety</h2>
+<p>Always talk to your doctor. This is not medical advice. Answers stay in this browser.</p>
+<fieldset><legend class="sr-only">Health notes</legend><label class="check"><input type="checkbox" data-health="heartOrBloodPressure"> Heart condition or blood pressure</label><label class="check"><input type="checkbox" data-health="asthmaOrLung"> Asthma or a lung condition</label><label class="check"><input type="checkbox" data-health="epilepsy"> Epilepsy or seizures</label><label class="check"><input type="checkbox" data-health="pregnancy"> Pregnancy</label><label class="check"><input type="checkbox" data-health="panicAttacks"> Panic attacks</label><label class="check"><input type="checkbox" data-health="traumaOrPTSD"> Trauma or PTSD</label><label class="check"><input type="checkbox" data-health="recentDetox"> Recent detox or withdrawal</label></fieldset>
+<label class="check strong"><input type="checkbox" data-health="hideHolds"> Hide breath holds</label>
+<p class="small" data-holds-status aria-live="polite"></p>
+<p class="small">Skip breath holds if you have heart, lung or blood pressure conditions, or are pregnant. If you tick heart or blood pressure, a lung condition, pregnancy or panic attacks, HomeCircle hides breath holds and offers the slow out-breath instead, as the app does.</p></section>
+</div>
+<section aria-labelledby="journal-h"><h2 id="journal-h">A private journal, just for you</h2>
+<form class="card" id="journal-form">
+<div class="form-row"><div><label for="j-prompt">Prompt</label><select id="j-prompt" name="prompt"><option value="">No prompt</option><option>What helped today?</option><option>What am I grateful for?</option><option>What was hard, and who can I tell?</option><option>One thing for the next 24 hours.</option></select></div>
+<div><label for="j-mood">Mood (optional)</label><select id="j-mood" name="mood"><option value="">None</option><option>Grateful</option><option>Steady</option><option>Heavy</option><option>Hopeful</option></select></div></div>
+<label for="j-title">Title (optional)</label><input type="text" id="j-title" name="title" maxlength="120">
+<label for="j-body">Your note</label><textarea id="j-body" name="body" rows="5" maxlength="5000" required></textarea>
+<div class="btn-row"><button class="btn" type="submit">Save in this browser</button></div>
+<p class="small" id="journal-status" role="status"></p>
+<p class="small">Don&#x27;t share your full name, address, phone, bank details or passwords with anyone in HomeCircle or at meetings. Real friends and sponsors won&#x27;t ask for money or private details. If someone does, tell your sponsor or a trusted person.</p>
+</form>
+<p id="journal-empty">No notes yet.</p>
+<ul class="journal-list" id="journal-list"></ul></section>
+<section class="card mt" id="delete" aria-labelledby="del-h"><h2 class="mt0" id="del-h">Delete your data in this browser</h2>
+<p>This removes your journal, sober date, health answers, Kai chat and Kai's position from this browser. It can't be undone, and HomeCircle doesn't hold a copy.</p>
+<button class="btn danger" type="button" id="delete-all">Delete all HomeCircle data in this browser</button></section>
+<p class="small mt">For any health concern, talk to your GP or a doctor. HomeCircle is support, not medical care. In an emergency call <a href="tel:000">000</a>, or Lifeline on <a href="tel:131114">13 11 14</a>.</p>
+</div></main>
+<footer class="site-foot"><div class="wrap cols">
+  <div>
+    <h2>HomeCircle</h2>
+    <p>Support for your recovery journey. Free, with no accounts, no sign-in, no cookies, no ads, no trackers and no analytics.</p>
+    <p>For any health concern, talk to your GP or a doctor. HomeCircle is support, not medical care. HomeCircle is not a medical device and doesn&#x27;t give medical advice. In an emergency call <a href="tel:000">000</a>. Lifeline <a href="tel:131114">13 11 14</a>.</p>
+    <p>HomeCircle is independent and isn&#x27;t affiliated with or endorsed by Alcoholics Anonymous, Narcotics Anonymous, Gamblers Anonymous or Porn Addicts Anonymous.</p>
+    <p>© 2026 Luke Endrody (sole trader), Queensland, Australia. ABN 53 687 374 897.</p>
+  </div>
+  <div><h2>Explore</h2><ul><li><a href="index.html">Home</a></li><li><a href="library.html">Library</a></li><li><a href="twelve-steps.html">12 Steps</a></li><li><a href="meditations.html">Meditations &amp; breathing</a></li><li><a href="meetings.html">Meetings</a></li><li><a href="help.html">Help</a></li><li><a href="your-circle.html">Your circle</a></li><li><a href="support.html">Support</a></li></ul></div>
+  <div><h2>About</h2><ul>
+    <li><a href="https://lendrody28-spec.github.io/homecircle/privacy.html">Privacy Policy</a></li>
+    <li><a href="https://lendrody28-spec.github.io/homecircle/terms.html">Terms of Use</a></li>
+    <li><a href="support.html#website">About this website</a></li>
+    <li><a href="mailto:lendrody28@gmail.com">lendrody28@gmail.com</a> (not a crisis line)</li>
+  </ul><p class="small">Site features that save anything (your day count, journal, health notes and Kai chat) keep it only in this browser&#x27;s local storage. Nothing is sent to HomeCircle.</p></div>
+</div></footer>
+<dialog class="help" id="help-dialog" aria-labelledby="help-title">
+  <div class="help-in">
+    <button class="close-x" type="button" data-close aria-label="Close">×</button>
+    <h2 id="help-title">Get help now</h2>
+    <ul class="help-lines">
+      <li><a class="first" href="tel:000">Call 000<small>Call 000 or go to your nearest emergency department.</small></a></li>
+      <li><a class="second" href="tel:131114">Call Lifeline 13 11 14<small>24 hours. Call 13 11 14</small></a></li>
+    </ul>
+    <p>If you or someone else is in danger, call 000. Lifeline is there 24 hours.</p>
+    <a class="btn ghost wide" href="help.html">More helplines on the Help page</a>
+    <button class="btn ghost wide plain" type="button" data-close>Close</button>
+  </div>
+</dialog>
+<div class="kai" id="kai" data-root="" hidden>
+  <section class="kai-panel" id="kai-panel" role="dialog" aria-labelledby="kai-title" hidden>
+    <div class="kai-head">
+      <img src="assets/kai.png" alt="" width="44" height="44">
+      <div><h2 id="kai-title">Kai</h2><p>Recovery Buddy</p></div>
+      <button class="btn ghost kai-small" type="button" id="kai-clear">Clear</button>
+      <button class="btn ghost kai-small" type="button" id="kai-min" aria-label="Minimise Kai">Minimise</button>
+    </div>
+    <div class="kai-confirm card" id="kai-confirm" role="alertdialog" aria-labelledby="kai-confirm-h" hidden>
+      <p id="kai-confirm-h"><strong>Clear this chat?</strong> This removes the messages in this browser. The Help button in the top corner still calls 000 or Lifeline 13 11 14, and the Help page lists every line.</p>
+      <div class="btn-row"><button class="btn danger" type="button" data-yes>Clear chat</button><button class="btn ghost" type="button" data-no>Cancel</button></div>
+    </div>
+    <div class="kai-crisis" id="kai-crisis" hidden><a class="btn danger" href="tel:000">Call 000</a><a class="btn" href="tel:131114">Call Lifeline 13 11 14</a></div>
+    <div class="kai-scroll">
+      <p class="kai-note"><strong>Kai isn't AI, and isn't a person, counsellor, doctor or sponsor.</strong> Replies are written in this browser from saved rules. No network and no AI service: nothing you type leaves your browser.</p>
+      <p class="kai-note">Kai is a recovery buddy, not a counsellor. HomeCircle doesn't give medical advice. In an emergency call <a href="tel:000">000</a>, or Lifeline on <a href="tel:131114">13 11 14</a>.</p>
+      <p class="kai-empty" id="kai-empty">Kai is here. Pick a chip, or write a line.</p>
+      <div class="kai-log" id="kai-log"></div>
+      <div class="kai-after" id="kai-after"></div>
+    </div>
+    <p class="sr-only" id="kai-live" aria-live="polite"></p>
+    <div class="kai-chips" id="kai-chips" role="group" aria-label="Quick replies"></div>
+    <form class="kai-form" id="kai-form" autocomplete="off">
+      <label class="sr-only" for="kai-input">Message Kai</label>
+      <textarea id="kai-input" rows="1" maxlength="500" placeholder="Write a line"></textarea>
+      <button class="btn" type="submit">Send</button>
+    </form>
+    <p class="kai-foot">The chat is kept only in this browser until you clear it. <button class="linkish" type="button" id="kai-move">Move Kai to the left</button></p>
+  </section>
+  <button class="kai-bubble" id="kai-bubble" type="button" aria-expanded="false" aria-controls="kai-panel" aria-label="Kai, Recovery Buddy. Not AI and not a person."><img src="assets/kai.png" alt="" width="64" height="64" draggable="false"></button>
+</div>
+</body>
+</html>

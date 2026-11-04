@@ -6,19 +6,24 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self' https://lendrody28-spec.github.io; base-uri 'self'; form-action 'self'; object-src 'none'">
 <meta name="referrer" content="no-referrer">
 <title>Get help – HomeCircle</title>
-<meta name="description" content="Helplines for Australia: 000, Lifeline 13 11 14, Beyond Blue, alcohol and drug lines, Gambling Helpline, and family support.">
+<meta name="description" content="Helplines for Australia: 000, Lifeline 13 11 14, Beyond Blue, Suicide Call Back Service, 13YARN, QLife, alcohol and drug lines by state, gambling help, and family support.">
 <link rel="icon" href="favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="assets/logo-192.png">
 <link rel="stylesheet" href="assets/site.css">
 <script src="assets/site.js" defer></script>
+<script src="assets/kai-data.js" defer></script>
+<script src="assets/kai-engine.js" defer></script>
+<script src="assets/kai.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-head"><div class="wrap">
   <a class="brand" href="index.html"><img src="assets/logo-96.png" alt="" width="46" height="46"><span><b>HomeCircle</b><small>Support for your recovery journey</small></span></a>
   <button class="btn ghost menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav" hidden>Menu</button>
-  <nav class="nav" id="site-nav" aria-label="Main"><ul><li><a href="index.html">Home</a></li><li><a href="library.html">Library</a></li><li><a href="twelve-steps.html">12 Steps</a></li><li><a href="meditations.html">Meditations &amp; breathing</a></li><li><a href="meetings.html">Meetings</a></li><li><a href="help.html" aria-current="page">Help</a></li><li><a href="support.html">Support</a></li></ul></nav>
+  <nav class="nav" id="site-nav" aria-label="Main"><ul><li><a href="index.html">Home</a></li><li><a href="library.html">Library</a></li><li><a href="twelve-steps.html">12 Steps</a></li><li><a href="meditations.html">Meditations &amp; breathing</a></li><li><a href="meetings.html">Meetings</a></li><li><a href="help.html" aria-current="page">Help</a></li><li><a href="your-circle.html">Your circle</a></li><li><a href="support.html">Support</a></li></ul></nav>
 </div></header>
+<a class="help-pill" id="help-pill" href="help.html#now" aria-label="Get help now" aria-describedby="help-pill-hint" aria-controls="help-dialog"><svg class="heart" aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M12 21.2l-1.4-1.3C5.4 15.3 2 12.2 2 8.4 2 5.3 4.4 3 7.4 3c1.7 0 3.4.8 4.6 2.1C13.2 3.8 14.9 3 16.6 3 19.6 3 22 5.3 22 8.4c0 3.8-3.4 6.9-8.6 11.5L12 21.2z"/></svg><span aria-hidden="true">Help</span></a>
+<span class="sr-only" id="help-pill-hint">Opens Call 000 and Call Lifeline 13 11 14.</span>
 <main id="main"><div class="wrap">
 <div id="now" class="btn-row"><a class="btn danger" href="tel:000">Call 000</a><a class="btn" href="tel:131114">Call Lifeline 13 11 14</a></div>
 <h1>Get help</h1>
@@ -26,22 +31,35 @@
 <p><strong>HomeCircle is not a medical device and doesn&#x27;t give medical advice.</strong></p>
 <div class="notice"><strong>Call 000 immediately</strong> if a life is in danger. Call 000 or go to your nearest emergency department.</div>
 <h2>Helplines</h2>
-<div class="grid g3"><div class="card"><h3>Lifeline</h3><p>24 hours. Call 13 11 14</p><a class="btn ghost" href="tel:131114">Call 13 11 14</a></div><div class="card"><h3>Beyond Blue</h3><p>24 hours. Call 1300 22 4636</p><a class="btn ghost" href="tel:1300224636">Call 1300 22 4636</a></div><div class="card"><h3>National Alcohol and Other Drug Hotline</h3><p>Call 1800 250 015</p><p class="small">Connects you to your state&#x27;s alcohol and drug service. Hours vary by state, and some aren&#x27;t 24/7. In an emergency call 000, or Lifeline 13 11 14 any time.</p><a class="btn ghost" href="tel:1800250015">Call 1800 250 015</a></div><div class="card"><h3>Adis 24/7 Alcohol and Drug Support (QLD)</h3><p>Call 1800 177 833</p><p class="small">Queensland only.</p><a class="btn ghost" href="tel:1800177833">Call 1800 177 833</a></div><div class="card"><h3>Gambling Helpline</h3><p>Call 1800 858 858</p><a class="btn ghost" href="tel:1800858858">Call 1800 858 858</a></div><div class="card"><h3>AA Australia</h3><p>Call 1300 222 222</p><a class="btn ghost" href="tel:1300222222">Call 1300 222 222</a></div><div class="card"><h3>NA Australia</h3><p>Call 1300 652 820</p><a class="btn ghost" href="tel:1300652820">Call 1300 652 820</a></div></div>
+<div class="grid g3"><div class="card"><h3>Lifeline</h3><p>24 hours. Call 13 11 14</p><p class="small teal">You can also text 0477 13 11 14.</p><div class="btn-row"><a class="btn ghost" href="tel:131114">Call 13 11 14</a><a class="btn ghost" href="sms:0477131114">Text 0477 13 11 14</a></div></div><div class="card"><h3>Beyond Blue</h3><p>24 hours. Call 1300 22 4636</p><div class="btn-row"><a class="btn ghost" href="tel:1300224636">Call 1300 22 4636</a></div></div><div class="card"><h3>Suicide Call Back Service</h3><p>24 hours. Call 1300 659 467</p><p class="small teal">For anyone thinking about suicide, worried about someone, or grieving a suicide.</p><div class="btn-row"><a class="btn ghost" href="tel:1300659467">Call 1300 659 467</a></div></div><div class="card"><h3>13YARN</h3><p>24 hours. Call 13 92 76</p><p class="small teal">Crisis support from Aboriginal and Torres Strait Islander people.</p><div class="btn-row"><a class="btn ghost" href="tel:139276">Call 13 92 76</a></div></div><div class="card"><h3>QLife</h3><p>3pm to 9pm local time, every day. Call 1800 184 527</p><p class="small teal">LGBTIQ+ peer support. Not a crisis line. Out of hours, call Lifeline 13 11 14.</p><div class="btn-row"><a class="btn ghost" href="tel:1800184527">Call 1800 184 527</a></div></div><div class="card"><h3>National Alcohol and Other Drug Hotline</h3><p>Call 1800 250 015</p><p class="small teal">Connects you to your state&#x27;s alcohol and drug service. Open 24/7, except South Australia (8.30am to 10pm). In an emergency call 000, or Lifeline 13 11 14 any time.</p><div class="btn-row"><a class="btn ghost" href="tel:1800250015">Call 1800 250 015</a></div></div><div class="card"><h3>Adis 24/7 Alcohol and Drug Support (QLD)</h3><p>Call 1800 177 833</p><p class="small teal">Queensland only.</p><div class="btn-row"><a class="btn ghost" href="tel:1800177833">Call 1800 177 833</a></div></div><div class="card"><h3>National Gambling Helpline</h3><p>24 hours. Call 1800 858 858</p><p class="small teal">Free and confidential, anywhere in Australia. Not run by Gamblers Anonymous.</p><div class="btn-row"><a class="btn ghost" href="tel:1800858858">Call 1800 858 858</a></div></div><div class="card"><h3>AA Australia</h3><p>24 hours. Call 1300 222 222</p><div class="btn-row"><a class="btn ghost" href="tel:1300222222">Call 1300 222 222</a></div></div><div class="card"><h3>NA Australia</h3><p>Call 1300 652 820</p><div class="btn-row"><a class="btn ghost" href="tel:1300652820">Call 1300 652 820</a></div></div></div>
 <p class="small">These are independent services. HomeCircle is not affiliated with them.</p>
-<h2>Self-help kit</h2>
-<p>Tools to support you in the moment.</p>
-<div class="grid g4"><a class="card tile" href="library/urge-surfing.html"><img src="assets/art/ArtUrgeWave.jpg" alt="A person calmly riding a big, soft wave on a surfboard." width="1024" height="768" loading="lazy"><div class="tbody"><span class="tag">Guide</span><h3>Urge plan</h3><p>Watch an urge crest and fall without obeying it.</p></div></a><a class="card tile" href="library/halt.html"><img src="assets/art/ArtHaltPause.jpg" alt="A person on a park bench with a hand on their chest, next to a sandwich, a glass of water, a cushion and a phone." width="1024" height="768" loading="lazy"><div class="tbody"><span class="tag">Guide</span><h3>HALT</h3><p>Hungry, Angry, Lonely, Tired. A pause, not a medical check.</p></div></a><a class="card tile" href="library/24-hour-plan.html"><img src="assets/art/ArtDayPlan.jpg" alt="A person writing in a notebook at a small table, with a sun and moon above showing one day." width="1024" height="768" loading="lazy"><div class="tbody"><span class="tag">Guide</span><h3>24-hour plan</h3><p>Plan the next day, not the whole year.</p></div></a><a class="card tile" href="meditations.html"><img src="assets/art/ArtBreathOut.jpg" alt="A person sitting upright, breathing out slowly through softly parted lips." width="1024" height="768" loading="lazy"><div class="tbody"><span class="tag">Breathing</span><h3>Breathe now</h3><p>An animated breathing guide.</p></div></a></div>
-<div class="grid g2 mt">
-<div class="card"><h2 class="mt0">Keep your details private</h2><p>Don&#x27;t share your full name, address, phone, bank details or passwords with anyone in HomeCircle or at meetings. Real friends and sponsors won&#x27;t ask for money or private details. If someone does, tell your sponsor or a trusted person.</p></div>
-<div class="card"><h2 class="mt0">Code of conduct</h2><p>Be kind. At meetings you find through HomeCircle, please respect that group&#x27;s own guidelines, and don&#x27;t record or share what people say. HomeCircle is support, not medical care.</p></div>
-</div>
 <h2 id="family">Family &amp; Partners</h2>
 <div class="note">This is not medical advice. For any major concern, see a local doctor or GP. If a life is in danger, call 000.</div>
 <p>For partners, family members, and couples. These lines are beside someone in recovery.</p>
 <div class="grid g2">
 <div class="card"><h3>Al-Anon Family Groups Australia</h3><p>For families and friends of someone with a drinking problem.</p><div class="btn-row"><a class="btn ghost" href="tel:1300252666">Call 1300 252 666</a><a class="btn ghost" href="https://al-anon.org.au/">Open site</a></div></div>
 <div class="card"><h3>Alateen</h3><p>Part of Al-Anon Australia, for ages about 13 to 18. Same Australian line. HomeCircle itself is an 18+ app.</p><div class="btn-row"><a class="btn ghost" href="tel:1300252666">Call 1300 252 666</a><a class="btn ghost" href="https://al-anon.org.au/">Open site</a></div></div>
+<div class="card"><h3>Family Drug Support</h3><p>For families and friends of someone using alcohol or other drugs.</p><p class="small">24 hours. Call 1300 368 186</p><div class="btn-row"><a class="btn ghost" href="tel:1300368186">Call 1300 368 186</a><a class="btn ghost" href="https://www.fds.org.au/">Open site</a><a class="btn ghost" href="https://www.fds.org.au/fds-meetings-events/support-meetings" rel="noopener">Find a family meeting</a></div><p class="small">FDS lists no support meetings in WA, Tasmania or the NT. In WA, the Parent and Family Drug Support Line is listed under Western Australia below.</p></div>
+<div class="card"><h3>Gam-Anon</h3><p>For families and friends of someone with a gambling problem. Meetings in NSW and Queensland, some on Zoom.</p><div class="btn-row"><a class="btn ghost" href="mailto:gam-anon@live.com.au">Email gam-anon@live.com.au</a><a class="btn ghost" href="https://gaaustralia.org.au/gam-anon/">Open site</a></div></div>
 </div>
+<h2 id="ga">Gamblers Anonymous Australia</h2>
+<div class="card"><p>Meetings and a member to talk to. Not a crisis line, and hours aren&#x27;t published.</p><ul class="plain-list"><li><a href="tel:0455717543">NSW: Call 0455 717 543</a></li><li><a href="tel:0467655799">Queensland and NT: Call 0467 655 799</a></li><li><a href="tel:0882126933">South Australia: Call (08) 8212 6933</a></li><li><a href="tel:0431965974">Tasmania: Call 0431 965 974</a></li><li><a href="tel:0894870688">Western Australia: Call (08) 9487 0688</a></li><li><a href="mailto:gavictoria18a@gmail.com">Victoria: Email gavictoria18a@gmail.com</a></li></ul><a class="btn ghost" href="https://gaaustralia.org.au/get-in-touch/">Open site</a></div>
+<h2 id="states">Support by state and territory</h2>
+<p>Alcohol and drug lines run by each state and territory. Keep 000 and Lifeline first: these lines are for advice and support, not emergencies. Checked against each service's own website on 4 November 2026.</p>
+<div class="grid g2 states"><details class="card state"><summary><h3>Queensland</h3></summary><div class="state-line"><h4>Adis 24/7 Alcohol and Drug Support</h4><p>24/7. For Queenslanders and their family and friends.</p><div class="btn-row"><a class="btn ghost" href="tel:1800177833">Call 1800 177 833</a><a class="btn ghost" href="https://adis.health.qld.gov.au/" rel="noopener">Open site</a></div></div></details><details class="card state"><summary><h3>New South Wales</h3></summary><div class="state-line"><h4>Alcohol and Drug Information Service (ADIS) NSW</h4><p>24/7. Sydney metro: 02 8382 1000. For NSW residents and their families.</p><div class="btn-row"><a class="btn ghost" href="tel:1800250015">Call 1800 250 015</a><a class="btn ghost" href="https://yourroom.health.nsw.gov.au/getting-help/Pages/adis.aspx" rel="noopener">Open site</a></div></div></details><details class="card state"><summary><h3>Victoria</h3></summary><div class="state-line"><h4>DirectLine</h4><p>24/7 phone and online counselling. For Victorians, family members and others.</p><div class="btn-row"><a class="btn ghost" href="tel:1800888236">Call 1800 888 236</a><a class="btn ghost" href="https://www.directline.org.au/" rel="noopener">Open site</a></div></div></details><details class="card state"><summary><h3>South Australia</h3></summary><div class="state-line"><h4>Alcohol and Drug Information Service (ADIS), DASSA</h4><p>Every day 8.30am to 10pm, not 24/7. Local call fee for SA callers. For the public, family and friends.</p><div class="btn-row"><a class="btn ghost" href="tel:1300131340">Call 1300 131 340</a><a class="btn ghost" href="https://www.sahealth.sa.gov.au/wps/wcm/connect/public+content/sa+health+internet/services/mental+health+and+drug+and+alcohol+services/drug+and+alcohol+services/dassa+services/alcohol+and+drug+information+service+adis" rel="noopener">Open site</a></div></div></details><details class="card state"><summary><h3>Western Australia</h3></summary><div class="state-line"><h4>Alcohol and Drug Support Line</h4><p>24/7. Country callers: 1800 198 024. For anyone worried about their own or someone else&#x27;s alcohol or drug use.</p><div class="btn-row"><a class="btn ghost" href="tel:0894425000">Call (08) 9442 5000</a><a class="btn ghost" href="tel:1800198024">Call 1800 198 024 (country)</a><a class="btn ghost" href="https://www.mhc.wa.gov.au/getting-help/helplines" rel="noopener">Open site</a></div></div><div class="state-line"><h4>Parent and Family Drug Support Line</h4><p>24/7. Country callers: 1800 653 203. For anyone worried about someone else&#x27;s use.</p><div class="btn-row"><a class="btn ghost" href="tel:0894425050">Call (08) 9442 5050</a><a class="btn ghost" href="tel:1800653203">Call 1800 653 203 (country)</a><a class="btn ghost" href="https://www.mhc.wa.gov.au/getting-help/helplines" rel="noopener">Open site</a></div></div></details><details class="card state"><summary><h3>Tasmania</h3></summary><div class="state-line"><h4>Alcohol and Drug Information Service</h4><p>24 hours. For people who use drugs, and family members.</p><div class="btn-row"><a class="btn ghost" href="tel:1800811994">Call 1800 811 994</a><a class="btn ghost" href="https://www.health.tas.gov.au/health-topics/alcohol-and-drugs/learn-about-alcohol-and-drugs/alcohol-and-drug-treatment-and-support" rel="noopener">Open site</a></div></div></details><details class="card state"><summary><h3>Northern Territory</h3></summary><div class="state-line"><h4>Alcohol and Drug Information Service (ADIS)</h4><p>Listed on the NT Government&#x27;s 24-hour helplines page. For anyone in the NT with alcohol or drug concerns.</p><div class="btn-row"><a class="btn ghost" href="tel:1800131350">Call 1800 131 350</a><a class="btn ghost" href="https://nt.gov.au/wellbeing/mental-health/24-hour-mental-health-hotlines" rel="noopener">Open site</a></div></div></details><details class="card state"><summary><h3>Australian Capital Territory</h3></summary><div class="state-line"><h4>Alcohol and Drug Service Intake, Canberra Health Services</h4><p>Intake, weekdays 8am to 5pm (closes 3.30pm Wednesdays). Not a crisis line. After hours, call the National Alcohol and Other Drug Hotline on 1800 250 015.</p><div class="btn-row"><a class="btn ghost" href="tel:0251249977">Call (02) 5124 9977</a><a class="btn ghost" href="https://www.canberrahealthservices.act.gov.au/services-and-clinics/services/central-health-intake-chi" rel="noopener">Open site</a></div></div></details></div>
+<div class="grid g2 mt">
+<div class="card"><h3>SMART Recovery Australia</h3><p>Free weekly groups, online and in person, for any addictive behaviour, including alcohol, drugs and gambling. Run by a trained facilitator. Not a 12-step program, and not a support line.</p><a class="btn ghost" href="https://smartrecoveryaustralia.com.au/smart-recovery-meetings" rel="noopener">Find a SMART Recovery meeting</a></div>
+<div class="card"><h3>Gambling help in every state</h3><p>Every state and territory gambling service uses the National Gambling Helpline for 24/7 phone help.</p><a class="btn ghost" href="tel:1800858858">Call 1800 858 858</a></div>
+</div>
+<p class="small">These are independent services. HomeCircle is not affiliated with them. Hours and numbers can change, so check the service's own website.</p>
+<h2>Self-help kit</h2>
+<p>Tools to support you in the moment.</p>
+<div class="grid g4"><a class="card tile" href="library/urge-surfing.html"><img src="assets/art/ArtUrgeWave.jpg" alt="A person calmly riding a big, soft wave on a surfboard." width="1024" height="768" loading="lazy"><div class="tbody"><span class="tag">Guide</span><h3>Urge plan</h3><p>Watch an urge crest and fall without obeying it.</p></div></a><a class="card tile" href="library/halt.html"><img src="assets/art/ArtHaltPause.jpg" alt="A person on a park bench with a hand on their chest, next to a sandwich, a glass of water, a cushion and a phone." width="1024" height="768" loading="lazy"><div class="tbody"><span class="tag">Guide</span><h3>HALT</h3><p>Hungry, Angry, Lonely, Tired. A pause, not a medical check.</p></div></a><a class="card tile" href="library/24-hour-plan.html"><img src="assets/art/ArtDayPlan.jpg" alt="A person writing in a notebook at a small table, with a sun and moon above showing one day." width="1024" height="768" loading="lazy"><div class="tbody"><span class="tag">Guide</span><h3>24-hour plan</h3><p>Plan the next day, not the whole year.</p></div></a><a class="card tile" href="meditations.html"><img src="assets/art/ArtBreathOut.jpg" alt="A person sitting upright, breathing out slowly through softly parted lips." width="1024" height="768" loading="lazy"><div class="tbody"><span class="tag">Breathing</span><h3>Breathe now</h3><p>An animated breathing guide.</p></div></a></div>
+<div class="grid g2 mt">
+<div class="card"><h2 class="mt0">Keep your details private</h2><p>Don&#x27;t share your full name, address, phone, bank details or passwords with anyone in HomeCircle or at meetings. Real friends and sponsors won&#x27;t ask for money or private details. If someone does, tell your sponsor or a trusted person.</p></div>
+<div class="card"><h2 class="mt0">Code of conduct</h2><p>Be kind. At meetings you find through HomeCircle, please respect that group&#x27;s own guidelines, and don&#x27;t record or share what people say. Questions or concerns? Email us, and we aim to reply within 24 hours. HomeCircle is support, not medical care.</p></div>
+</div>
+<div class="emergency-card mt"><h2 class="mt0">Call 000 immediately</h2><p>Call 000 or go to your nearest emergency department.</p><a class="btn" href="tel:000">Call 000</a></div>
 <h2>More information</h2>
 <p><a href="https://adf.org.au/">Alcohol and Drug Foundation</a> · <a href="https://www.healthdirect.gov.au/alcohol">Alcohol on Healthdirect</a> · <a href="https://www.gamblinghelponline.org.au/">Gambling Help Online</a></p>
 <p class="small">For any health concern, talk to your GP or a doctor. HomeCircle is support, not medical care.</p>
@@ -50,28 +68,61 @@
   <div>
     <h2>HomeCircle</h2>
     <p>Support for your recovery journey. Free, with no accounts, no sign-in, no cookies, no ads, no trackers and no analytics.</p>
-    <p>For any health concern, talk to your GP or a doctor. HomeCircle is support, not medical care. HomeCircle is not a medical device and doesn&#x27;t give medical advice. In an emergency call <a href="tel:000">000</a>.</p>
+    <p>For any health concern, talk to your GP or a doctor. HomeCircle is support, not medical care. HomeCircle is not a medical device and doesn&#x27;t give medical advice. In an emergency call <a href="tel:000">000</a>. Lifeline <a href="tel:131114">13 11 14</a>.</p>
     <p>HomeCircle is independent and isn&#x27;t affiliated with or endorsed by Alcoholics Anonymous, Narcotics Anonymous, Gamblers Anonymous or Porn Addicts Anonymous.</p>
-    <p>© 2026 LJ Endrody (Luke Endrody, ABN 53 687 374 897). Australian-owned, Brisbane, Queensland.</p>
+    <p>© 2026 Luke Endrody (sole trader), Queensland, Australia. ABN 53 687 374 897.</p>
   </div>
-  <div><h2>Explore</h2><ul><li><a href="index.html">Home</a></li><li><a href="library.html">Library</a></li><li><a href="twelve-steps.html">12 Steps</a></li><li><a href="meditations.html">Meditations &amp; breathing</a></li><li><a href="meetings.html">Meetings</a></li><li><a href="help.html">Help</a></li><li><a href="support.html">Support</a></li></ul></div>
+  <div><h2>Explore</h2><ul><li><a href="index.html">Home</a></li><li><a href="library.html">Library</a></li><li><a href="twelve-steps.html">12 Steps</a></li><li><a href="meditations.html">Meditations &amp; breathing</a></li><li><a href="meetings.html">Meetings</a></li><li><a href="help.html">Help</a></li><li><a href="your-circle.html">Your circle</a></li><li><a href="support.html">Support</a></li></ul></div>
   <div><h2>About</h2><ul>
-    <li><a href="https://lendrody28-spec.github.io/homecircle/privacy.html">App Privacy Policy</a></li>
-    <li>Terms of Use (coming soon)</li>
+    <li><a href="https://lendrody28-spec.github.io/homecircle/privacy.html">Privacy Policy</a></li>
+    <li><a href="https://lendrody28-spec.github.io/homecircle/terms.html">Terms of Use</a></li>
     <li><a href="support.html#website">About this website</a></li>
     <li><a href="mailto:lendrody28@gmail.com">lendrody28@gmail.com</a> (not a crisis line)</li>
-  </ul></div>
+  </ul><p class="small">Site features that save anything (your day count, journal, health notes and Kai chat) keep it only in this browser&#x27;s local storage. Nothing is sent to HomeCircle.</p></div>
 </div></footer>
-<a class="help-fab" id="help-fab" href="help.html#now" aria-label="Get help now: opens Call 000 and Lifeline 13 11 14" aria-controls="help-dialog">Get help now</a>
 <dialog class="help" id="help-dialog" aria-labelledby="help-title">
   <div class="help-in">
     <button class="close-x" type="button" data-close aria-label="Close">×</button>
     <h2 id="help-title">Get help now</h2>
+    <ul class="help-lines">
+      <li><a class="first" href="tel:000">Call 000<small>Call 000 or go to your nearest emergency department.</small></a></li>
+      <li><a class="second" href="tel:131114">Call Lifeline 13 11 14<small>24 hours. Call 13 11 14</small></a></li>
+    </ul>
     <p>If you or someone else is in danger, call 000. Lifeline is there 24 hours.</p>
-    <ul class="help-lines"><li><a class="first" href="tel:000">Call 000<small>Emergency. If a life is in danger.</small></a></li><li><a class="second" href="tel:131114">Call Lifeline 13 11 14<small>24 hours, crisis support.</small></a></li><li><a class="" href="tel:1800858858">Call Gambling Helpline 1800 858 858<small>Gambling Help Online and its helpline. Not run by Gamblers Anonymous.</small></a></li><li><a class="" href="tel:1800250015">Call 1800 250 015<small>National Alcohol and Other Drug Hotline. Connects you to your state&#x27;s service. Hours vary by state.</small></a></li></ul>
-    <p class="small">These are independent services. HomeCircle is not affiliated with them. <a href="help.html">More helplines on the Help page</a>.</p>
-    <button class="btn ghost" type="button" data-close>Close</button>
+    <a class="btn ghost wide" href="help.html">More helplines on the Help page</a>
+    <button class="btn ghost wide plain" type="button" data-close>Close</button>
   </div>
 </dialog>
+<div class="kai" id="kai" data-root="" hidden>
+  <section class="kai-panel" id="kai-panel" role="dialog" aria-labelledby="kai-title" hidden>
+    <div class="kai-head">
+      <img src="assets/kai.png" alt="" width="44" height="44">
+      <div><h2 id="kai-title">Kai</h2><p>Recovery Buddy</p></div>
+      <button class="btn ghost kai-small" type="button" id="kai-clear">Clear</button>
+      <button class="btn ghost kai-small" type="button" id="kai-min" aria-label="Minimise Kai">Minimise</button>
+    </div>
+    <div class="kai-confirm card" id="kai-confirm" role="alertdialog" aria-labelledby="kai-confirm-h" hidden>
+      <p id="kai-confirm-h"><strong>Clear this chat?</strong> This removes the messages in this browser. The Help button in the top corner still calls 000 or Lifeline 13 11 14, and the Help page lists every line.</p>
+      <div class="btn-row"><button class="btn danger" type="button" data-yes>Clear chat</button><button class="btn ghost" type="button" data-no>Cancel</button></div>
+    </div>
+    <div class="kai-crisis" id="kai-crisis" hidden><a class="btn danger" href="tel:000">Call 000</a><a class="btn" href="tel:131114">Call Lifeline 13 11 14</a></div>
+    <div class="kai-scroll">
+      <p class="kai-note"><strong>Kai isn't AI, and isn't a person, counsellor, doctor or sponsor.</strong> Replies are written in this browser from saved rules. No network and no AI service: nothing you type leaves your browser.</p>
+      <p class="kai-note">Kai is a recovery buddy, not a counsellor. HomeCircle doesn't give medical advice. In an emergency call <a href="tel:000">000</a>, or Lifeline on <a href="tel:131114">13 11 14</a>.</p>
+      <p class="kai-empty" id="kai-empty">Kai is here. Pick a chip, or write a line.</p>
+      <div class="kai-log" id="kai-log"></div>
+      <div class="kai-after" id="kai-after"></div>
+    </div>
+    <p class="sr-only" id="kai-live" aria-live="polite"></p>
+    <div class="kai-chips" id="kai-chips" role="group" aria-label="Quick replies"></div>
+    <form class="kai-form" id="kai-form" autocomplete="off">
+      <label class="sr-only" for="kai-input">Message Kai</label>
+      <textarea id="kai-input" rows="1" maxlength="500" placeholder="Write a line"></textarea>
+      <button class="btn" type="submit">Send</button>
+    </form>
+    <p class="kai-foot">The chat is kept only in this browser until you clear it. <button class="linkish" type="button" id="kai-move">Move Kai to the left</button></p>
+  </section>
+  <button class="kai-bubble" id="kai-bubble" type="button" aria-expanded="false" aria-controls="kai-panel" aria-label="Kai, Recovery Buddy. Not AI and not a person."><img src="assets/kai.png" alt="" width="64" height="64" draggable="false"></button>
+</div>
 </body>
 </html>

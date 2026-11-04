@@ -83,6 +83,130 @@
   function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
   var FORMAT = { in_person: "In person", online: "Online", hybrid: "Hybrid" };
 
+
+  /* ---------- Add reminder: a calendar file with an alert 2 hours before ----------
+     Made in this browser and downloaded straight to you. HomeCircle sends no notifications
+     and keeps no copy. The alert is always 2 hours before the start, never at the start. */
+  var VTZ = {
+    east: ["+1000", "+1100"], adelaide: ["+0930", "+1030"],
+    fixed: { "Australia/Brisbane": "+1000", "Australia/Lindeman": "+1000", "Australia/Darwin": "+0930", "Australia/Perth": "+0800" },
+    zones: { "Australia/Sydney": "east", "Australia/Melbourne": "east", "Australia/Hobart": "east", "Australia/Canberra": "east",
+      "Australia/ACT": "east", "Australia/NSW": "east", "Australia/Victoria": "east", "Australia/Tasmania": "east", "Australia/Currie": "east",
+      "Australia/Adelaide": "adelaide", "Australia/Broken_Hill": "adelaide", "Australia/South": "adelaide" }
+  };
+  function vtimezone(tz) {
+    var lines = ["BEGIN:VTIMEZONE", "TZID:" + tz];
+    if (VTZ.fixed[tz]) {
+      lines.push("BEGIN:STANDARD", "DTSTART:19700101T000000", "TZOFFSETFROM:" + VTZ.fixed[tz], "TZOFFSETTO:" + VTZ.fixed[tz], "END:STANDARD");
+    } else {
+      var o = VTZ[VTZ.zones[tz]];
+      // Daylight saving in south-eastern Australia: starts 2am on the first Sunday in October, ends 3am on the first Sunday in April.
+      lines.push("BEGIN:STANDARD", "DTSTART:19700405T030000", "RRULE:FREQ=YEARLY;BYMONTH=4;BYDAY=1SU", "TZOFFSETFROM:" + o[1], "TZOFFSETTO:" + o[0], "END:STANDARD",
+        "BEGIN:DAYLIGHT", "DTSTART:19701004T020000", "RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=1SU", "TZOFFSETFROM:" + o[0], "TZOFFSETTO:" + o[1], "END:DAYLIGHT");
+    }
+    lines.push("END:VTIMEZONE");
+    return lines;
+  }
+  function knownTZ(tz) { return !!(VTZ.fixed[tz] || VTZ.zones[tz]); }
+  function pad(n) { return String(n).padStart(2, "0"); }
+  function partsIn(tz, d) {
+    var p = new Intl.DateTimeFormat("en-US", { timeZone: tz, year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit", hourCycle: "h23", weekday: "short" }).formatToParts(d);
+    var g = function (t) { return (p.filter(function (x) { return x.type === t; })[0] || {}).value; };
+    return { y: +g("year"), m: +g("month"), d: +g("day"), h: +g("hour"), mi: +g("minute"), s: +g("second"), wd: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].indexOf(g("weekday")) };
+  }
+  // The UTC instant of a wall-clock time in a time zone.
+  function instant(tz, y, m, d, h, mi) {
+    var guess = Date.UTC(y, m - 1, d, h, mi);
+    for (var k = 0; k < 2; k++) {
+      var p = partsIn(tz, new Date(guess));
+      var shown = Date.UTC(p.y, p.m - 1, p.d, p.h, p.mi);
+      guess += Date.UTC(y, m - 1, d, h, mi) - shown;
+    }
+    return new Date(guess);
+  }
+  function nextStart(m) {
+    var s = m.schedule || {}, tz = s.timezone || "Australia/Sydney";
+    var t = String(s.start || "").split(":"), h = parseInt(t[0], 10), mi = parseInt(t[1], 10);
+    if (isNaN(h) || isNaN(mi)) return null;
+    var now = new Date(), p = partsIn(tz, now);
+    var ahead = (wd(m) - p.wd + 7) % 7;
+    if (ahead === 0 && (p.h * 60 + p.mi) >= h * 60 + mi) ahead = 7;
+    var day = new Date(Date.UTC(p.y, p.m - 1, p.d + ahead));
+    var y = day.getUTCFullYear(), mo = day.getUTCMonth() + 1, d = day.getUTCDate();
+    return { tz: tz, y: y, m: mo, d: d, h: h, mi: mi, at: instant(tz, y, mo, d, h, mi) };
+  }
+  function icsText(v) { return String(v || "").replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\r?\n/g, "\\n"); }
+  function fold(line) {
+    var out = [], cur = "", len = 0;
+    Array.from(line).forEach(function (ch) {
+      var b = unescape(encodeURIComponent(ch)).length;
+      if (len + b > 73) { out.push(cur); cur = " "; len = 1; }
+      cur += ch; len += b;
+    });
+    out.push(cur);
+    return out.join("\r\n");
+  }
+  function utcStamp(d) { return d.getUTCFullYear() + pad(d.getUTCMonth() + 1) + pad(d.getUTCDate()) + "T" + pad(d.getUTCHours()) + pad(d.getUTCMinutes()) + pad(d.getUTCSeconds()) + "Z"; }
+  function buildICS(m, weekly) {
+    var n = nextStart(m); if (!n) return null;
+    var dur = Math.max(15, Math.min(360, parseInt((m.schedule || {}).duration_minutes, 10) || 60));
+    var end = new Date(n.at.getTime() + dur * 60000);
+    var l = m.location || {}, name = (m.fellowship ? m.fellowship + ": " : "") + (m.name || "Meeting");
+    var where = m.format === "online" ? "Online" : [l.name, l.address, l.suburb, l.state, l.postal_code].filter(function (x) { return x && String(x).trim(); }).join(", ");
+    var src = safeURL((m.source || {}).record_url), join = safeURL((m.online || {}).url);
+    var desc = "Reminder added from homecircle.au. Times can change, so check the official listing." + (src ? "\nOfficial listing: " + src : "") + (join ? "\nJoin online: " + join : "") +
+      "\nHomeCircle is support, not medical care. In an emergency call 000. Lifeline 13 11 14.";
+    var lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//HomeCircle//Meeting reminder//EN", "CALSCALE:GREGORIAN", "METHOD:PUBLISH"];
+    var start, finish;
+    if (knownTZ(n.tz)) {
+      lines = lines.concat(vtimezone(n.tz));
+      var e = partsIn(n.tz, end);
+      start = "DTSTART;TZID=" + n.tz + ":" + n.y + pad(n.m) + pad(n.d) + "T" + pad(n.h) + pad(n.mi) + "00";
+      finish = "DTEND;TZID=" + n.tz + ":" + e.y + pad(e.m) + pad(e.d) + "T" + pad(e.h) + pad(e.mi) + "00";
+    } else {
+      start = "DTSTART:" + utcStamp(n.at); finish = "DTEND:" + utcStamp(end);
+    }
+    lines.push("BEGIN:VEVENT", "UID:" + (m.id || "meeting").toString().replace(/[^A-Za-z0-9._-]/g, "") + "-" + (weekly ? "weekly" : utcStamp(n.at)) + "@homecircle.au",
+      "DTSTAMP:" + utcStamp(new Date()), start, finish);
+    if (weekly) lines.push("RRULE:FREQ=WEEKLY");
+    lines.push("SUMMARY:" + icsText(name));
+    if (where) lines.push("LOCATION:" + icsText(where));
+    if (src) lines.push("URL:" + src);
+    lines.push("DESCRIPTION:" + icsText(desc),
+      "BEGIN:VALARM", "ACTION:DISPLAY", "DESCRIPTION:" + icsText("Starts in 2 hours: " + name), "TRIGGER:-PT2H", "END:VALARM",
+      "END:VEVENT", "END:VCALENDAR");
+    return { text: lines.map(fold).join("\r\n") + "\r\n", next: n, soon: n.at.getTime() - Date.now() < 2 * 3600000 };
+  }
+  function download(name, text) {
+    var blob = new Blob([text], { type: "text/calendar;charset=utf-8" });
+    var url = URL.createObjectURL(blob), a = document.createElement("a");
+    a.href = url; a.download = name; document.body.appendChild(a); a.click();
+    setTimeout(function () { URL.revokeObjectURL(url); a.remove(); }, 1500);
+  }
+  function reminderBox(m, c) {
+    var box = el("div", "remind"); box.hidden = true;
+    box.id = "rem-" + Math.random().toString(36).slice(2, 9);
+    box.appendChild(el("p", "remind-h", "Remind me 2 hours before"));
+    var row = el("div", "btn-row");
+    var once = el("button", "btn ghost", "Just this one"), weekly = el("button", "btn ghost", "Every week");
+    once.type = weekly.type = "button";
+    row.appendChild(once); row.appendChild(weekly); box.appendChild(row);
+    var msg = el("p", "small"); msg.setAttribute("role", "status"); box.appendChild(msg);
+    box.appendChild(el("p", "small", "This downloads a calendar file (.ics) for your calendar app. Its alert is set for 2 hours before the meeting starts. HomeCircle sends no notifications, and nothing is sent to us."));
+    function go(isWeekly) {
+      var r = buildICS(m, isWeekly);
+      if (!r) { msg.textContent = "This meeting's time isn't clear in the list, so a reminder can't be made. Check the official listing."; return; }
+      var slug = String(m.name || "meeting").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 40) || "meeting";
+      download("homecircle-" + slug + (isWeekly ? "-weekly" : "") + ".ics", r.text);
+      var when = DAYS[wd(m)] + " " + clock((m.schedule || {}).start);
+      msg.textContent = "Calendar file downloaded. Starts in 2 hours" + (isWeekly ? " · Every week" : "") + " · " + when + ". Open it to add it to your calendar." +
+        (r.soon ? " This one starts in less than 2 hours, so your calendar may not alert you this time." : "");
+    }
+    once.addEventListener("click", function () { go(false); });
+    weekly.addEventListener("click", function () { go(true); });
+    return box;
+  }
+
   function card(m) {
     var c = el("article", "meeting"), l = m.location || {}, s = m.schedule || {};
     var top = el("div");
@@ -109,7 +233,12 @@
     }
     var src = safeURL((m.source || {}).record_url);
     if (src) { var o = el("a", null, "Official listing"); o.href = src; o.rel = "noopener nofollow"; acts.appendChild(o); }
+    var rb = el("button", "linkish", "Add reminder"); rb.type = "button"; rb.setAttribute("aria-expanded", "false");
+    var box = reminderBox(m, c); rb.setAttribute("aria-controls", box.id);
+    rb.addEventListener("click", function () { box.hidden = !box.hidden; rb.setAttribute("aria-expanded", box.hidden ? "false" : "true"); });
+    acts.appendChild(rb);
     c.appendChild(acts);
+    c.appendChild(box);
     if (m.notes) { var det = el("details"); det.appendChild(el("summary", null, "Notes from the listing")); det.appendChild(el("pre", null, String(m.notes))); c.appendChild(det); }
     return c;
   }

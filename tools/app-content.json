@@ -18,7 +18,9 @@
   "privateDetails": "Don't share your full name, address, phone, bank details or passwords with anyone in HomeCircle or at meetings. Real friends and sponsors won't ask for money or private details. If someone does, tell your sponsor or a trusted person.",
   "noServer": "Notes stay on this phone. HomeCircle has no community server, so other people's posts are never downloaded or shown.",
   "age": "18+",
-  "owner": "LJ Endrody",
+  "owner": "Luke Endrody",
+  "ownerPlace": "Queensland, Australia",
+  "operatorLine": "HomeCircle is made by Luke Endrody, a sole trader in Queensland, Australia.",
   "notAffiliated": "HomeCircle is independent and isn't affiliated with or endorsed by Alcoholics Anonymous, Narcotics Anonymous, Gamblers Anonymous or Porn Addicts Anonymous.",
   "notSubstitute": "Not a substitute for professional care.",
   "adisName": "Adis 24/7 Alcohol and Drug Support (QLD)",
@@ -26,13 +28,231 @@
   "adisNote": "Queensland only.",
   "nationalName": "National Alcohol and Other Drug Hotline",
   "nationalNumber": "1800 250 015",
-  "nationalNote": "Connects you to your state's alcohol and drug service. Hours vary by state, and some aren't 24/7. In an emergency call 000, or Lifeline 13 11 14 any time.",
-  "rulesBody": "Be kind. At meetings you find through HomeCircle, please respect that group's own guidelines, and don't record or share what people say. Questions or concerns? Email us, and we aim to reply within 24 hours. HomeCircle is support, not medical care.",
-  "index": "https://lendrody28-spec.github.io/homecircle/feed/au/index.json",
-  "homeItems": "https://lendrody28-spec.github.io/homecircle/feed/feed-items.json",
-  "folder": "https://lendrody28-spec.github.io/homecircle/feed/au/"
+  "nationalNote": "Connects you to your state's alcohol and drug service. Open 24/7, except South Australia (8.30am to 10pm). In an emergency call 000, or Lifeline 13 11 14 any time.",
+  "rulesBody": "Be kind. At meetings you find through HomeCircle, please respect that group's own guidelines, and don't record or share what people say. Questions or concerns? Email us, and we aim to reply within 24 hours. HomeCircle is support, not medical care."
  },
- "helplines": {},
+ "helplines": {
+  "lines": {
+   "emergency": {
+    "id": "000",
+    "name": "Emergency",
+    "displayNumber": "000",
+    "dial": "000",
+    "detail": "Call 000 or go to your nearest emergency department.",
+    "note": "If a life is in danger, call 000."
+   },
+   "lifeline": {
+    "id": "lifeline",
+    "name": "Lifeline",
+    "displayNumber": "13 11 14",
+    "dial": "131114",
+    "detail": "24 hours. Call 13 11 14",
+    "note": "You can also text 0477 13 11 14.",
+    "textDisplay": "0477 13 11 14",
+    "textDial": "0477131114"
+   },
+   "beyondBlue": {
+    "id": "beyond-blue",
+    "name": "Beyond Blue",
+    "displayNumber": "1300 22 4636",
+    "dial": "1300224636",
+    "detail": "24 hours. Call 1300 22 4636",
+    "note": null
+   },
+   "nationalAOD": {
+    "id": "national-aod",
+    "name": "National Alcohol and Other Drug Hotline",
+    "displayNumber": "1800 250 015",
+    "dial": "1800250015",
+    "detail": "Call 1800 250 015",
+    "note": "Connects you to your state's alcohol and drug service. Open 24/7, except South Australia (8.30am to 10pm). In an emergency call 000, or Lifeline 13 11 14 any time."
+   },
+   "adis": {
+    "id": "adis",
+    "name": "Adis 24/7 Alcohol and Drug Support (QLD)",
+    "displayNumber": "1800 177 833",
+    "dial": "1800177833",
+    "detail": "Call 1800 177 833",
+    "note": "Queensland only."
+   },
+   "suicideCallBack": {
+    "id": "suicide-call-back",
+    "name": "Suicide Call Back Service",
+    "displayNumber": "1300 659 467",
+    "dial": "1300659467",
+    "detail": "24 hours. Call 1300 659 467",
+    "note": "For anyone thinking about suicide, worried about someone, or grieving a suicide."
+   },
+   "yarn": {
+    "id": "13yarn",
+    "name": "13YARN",
+    "displayNumber": "13 92 76",
+    "dial": "139276",
+    "detail": "24 hours. Call 13 92 76",
+    "note": "Crisis support from Aboriginal and Torres Strait Islander people."
+   },
+   "qlife": {
+    "id": "qlife",
+    "name": "QLife",
+    "displayNumber": "1800 184 527",
+    "dial": "1800184527",
+    "detail": "3pm to 9pm local time, every day. Call 1800 184 527",
+    "note": "LGBTIQ+ peer support. Not a crisis line. Out of hours, call Lifeline 13 11 14."
+   },
+   "gambling": {
+    "id": "gambling",
+    "name": "National Gambling Helpline",
+    "displayNumber": "1800 858 858",
+    "dial": "1800858858",
+    "detail": "24 hours. Call 1800 858 858",
+    "note": "Free and confidential, anywhere in Australia. Not run by Gamblers Anonymous."
+   },
+   "aaAustralia": {
+    "id": "aa-au",
+    "name": "AA Australia",
+    "displayNumber": "1300 222 222",
+    "dial": "1300222222",
+    "detail": "24 hours. Call 1300 222 222",
+    "note": null
+   },
+   "naAustralia": {
+    "id": "na-au",
+    "name": "NA Australia",
+    "displayNumber": "1300 652 820",
+    "dial": "1300652820",
+    "detail": "Call 1300 652 820",
+    "note": null
+   },
+   "alAnon": {
+    "id": "al-anon",
+    "name": "Al-Anon Family Groups Australia",
+    "displayNumber": "1300 252 666",
+    "dial": "1300252666",
+    "detail": "Call 1300 252 666",
+    "note": null
+   },
+   "familyDrugSupport": {
+    "id": "fds",
+    "name": "Family Drug Support",
+    "displayNumber": "1300 368 186",
+    "dial": "1300368186",
+    "detail": "24 hours. Call 1300 368 186",
+    "note": "For families and friends of someone using alcohol or other drugs."
+   }
+  },
+  "primary": [
+   "lifeline",
+   "beyond-blue",
+   "suicide-call-back",
+   "13yarn",
+   "qlife",
+   "national-aod",
+   "adis",
+   "gambling",
+   "aa-au",
+   "na-au"
+  ],
+  "byName": {
+   "emergency": "000",
+   "lifeline": "lifeline",
+   "beyondBlue": "beyond-blue",
+   "nationalAOD": "national-aod",
+   "adis": "adis",
+   "suicideCallBack": "suicide-call-back",
+   "yarn": "13yarn",
+   "qlife": "qlife",
+   "gambling": "gambling",
+   "aaAustralia": "aa-au",
+   "naAustralia": "na-au",
+   "alAnon": "al-anon",
+   "familyDrugSupport": "fds"
+  },
+  "familyDrugSupportURL": "https://www.fds.org.au/",
+  "gamAnon": {
+   "name": "Gam-Anon",
+   "body": "For families and friends of someone with a gambling problem. Meetings in NSW and Queensland, some on Zoom.",
+   "email": "gam-anon@live.com.au",
+   "url": "https://gaaustralia.org.au/gam-anon/"
+  },
+  "ga": {
+   "title": "Gamblers Anonymous Australia",
+   "intro": "Meetings and a member to talk to. Not a crisis line, and hours aren't published.",
+   "siteURL": "https://gaaustralia.org.au/get-in-touch/",
+   "contacts": [
+    {
+     "id": "ga-nsw",
+     "label": "NSW",
+     "states": [
+      "NSW"
+     ],
+     "phoneDisplay": "0455 717 543",
+     "phoneDial": "0455717543",
+     "email": null
+    },
+    {
+     "id": "ga-qld-nt",
+     "label": "Queensland and NT",
+     "states": [
+      "QLD",
+      "NT"
+     ],
+     "phoneDisplay": "0467 655 799",
+     "phoneDial": "0467655799",
+     "email": null
+    },
+    {
+     "id": "ga-sa",
+     "label": "South Australia",
+     "states": [
+      "SA"
+     ],
+     "phoneDisplay": "(08) 8212 6933",
+     "phoneDial": "0882126933",
+     "email": null
+    },
+    {
+     "id": "ga-tas",
+     "label": "Tasmania",
+     "states": [
+      "TAS"
+     ],
+     "phoneDisplay": "0431 965 974",
+     "phoneDial": "0431965974",
+     "email": null
+    },
+    {
+     "id": "ga-wa",
+     "label": "Western Australia",
+     "states": [
+      "WA"
+     ],
+     "phoneDisplay": "(08) 9487 0688",
+     "phoneDial": "0894870688",
+     "email": null
+    },
+    {
+     "id": "ga-vic",
+     "label": "Victoria",
+     "states": [
+      "VIC"
+     ],
+     "phoneDisplay": null,
+     "phoneDial": null,
+     "email": "gavictoria18a@gmail.com"
+    }
+   ]
+  }
+ },
+ "reminder": {
+  "savedNote": "Reminder saved on this phone. We'll remind you 2 hours before.",
+  "savedNoteShort": "Saved on this phone. We'll remind you 2 hours before.",
+  "circleHint": "Set Just this one or Every week from a meeting. Alerts come 2 hours before it starts."
+ },
+ "helpButton": {
+  "title": "Help",
+  "fillHex": "#F2A08B",
+  "foregroundHex": "#6B2416"
+ },
  "items": [
   {
    "id": "breath-box",
@@ -801,7 +1021,7 @@
   {
    "id": "fell-aa",
    "title": "Alcoholics Anonymous",
-   "summary": "Official pages live on aa.org.au. HomeCircle does not host the literature.",
+   "summary": "AA Australia's own pages are on aa.org.au. HomeCircle does not host the literature.",
    "category": "fellowship",
    "tag": "Fellowship",
    "minutes": 1,
@@ -820,7 +1040,7 @@
    "links": [
     {
      "id": "aa-site",
-     "title": "Official AA Australia",
+     "title": "AA Australia website",
      "url": "https://aa.org.au/",
      "inAppMeetings": false
     },
@@ -843,7 +1063,7 @@
   {
    "id": "fell-na",
    "title": "Narcotics Anonymous",
-   "summary": "Official pages live on na.org.au. HomeCircle does not host the literature.",
+   "summary": "NA Australia's own pages are on na.org.au. HomeCircle does not host the literature.",
    "category": "fellowship",
    "tag": "Fellowship",
    "minutes": 1,
@@ -856,13 +1076,13 @@
    "paragraphs": [
     "Narcotics Anonymous in Australia publishes its own meeting list and literature. HomeCircle does not copy that text.",
     "HomeCircle is independent and isn't affiliated with or endorsed by Alcoholics Anonymous, Narcotics Anonymous, Gamblers Anonymous or Porn Addicts Anonymous.",
-    "Use the official site, or find a meeting in the app."
+    "Use NA Australia's website, or find a meeting in the app."
    ],
    "steps": [],
    "links": [
     {
      "id": "na-site",
-     "title": "Official NA Australia",
+     "title": "NA Australia website",
      "url": "https://na.org.au/",
      "inAppMeetings": false
     },
@@ -1304,7 +1524,10 @@
   {
    "id": "first-days",
    "title": "First days",
-   "days": null,
+   "days": [
+    1,
+    3
+   ],
    "notes": [
     "Withdrawal can start within hours. People describe sweating, shaking, an upset stomach, a racing heart, worry and broken sleep.",
     "This is the stage where medical support matters most. A GP or a drug and alcohol service can check that stopping is safe for you."
@@ -1317,7 +1540,10 @@
   {
    "id": "week-1",
    "title": "Week 1",
-   "days": null,
+   "days": [
+    4,
+    7
+   ],
    "notes": [
     "For many people the sharpest physical symptoms start to ease during the first week.",
     "Sleep, appetite and mood can still be up and down. Tiredness is normal while the body adjusts."
@@ -1330,7 +1556,10 @@
   {
    "id": "weeks-2-4",
    "title": "Weeks 2–4",
-   "days": null,
+   "days": [
+    8,
+    30
+   ],
    "notes": [
     "Many people notice a bit more energy and clearer mornings, with rough patches in between.",
     "Sleep can take a while to settle. Cravings often come in waves, especially at old times and places."
@@ -1343,7 +1572,10 @@
   {
    "id": "months-1-3",
    "title": "Months 1–3",
-   "days": null,
+   "days": [
+    31,
+    90
+   ],
    "notes": [
     "Thinking often feels clearer and days can feel steadier, though mood can still dip.",
     "Cravings may come less often but can still surprise you around stress, people or routines."
@@ -1356,7 +1588,10 @@
   {
    "id": "months-3-6",
    "title": "3–6 months",
-   "days": null,
+   "days": [
+    91,
+    182
+   ],
    "notes": [
     "New routines often start to feel more natural. Some people still have patches of poor sleep or low mood, and that is common.",
     "Research suggests the brain keeps recovering over months without alcohol."
@@ -1369,7 +1604,10 @@
   {
    "id": "months-6-12",
    "title": "6–12 months",
-   "days": null,
+   "days": [
+    183,
+    100000
+   ],
    "notes": [
     "Life can feel more like your own. It's a good time for a GP check-up, which can look at things like liver health.",
     "Anniversaries, holidays and big life changes can stir up old feelings. Planning for them helps."
@@ -1486,11 +1724,11 @@
  "twelveStepsCopy": {
   "pageID": "page-twelve-steps",
   "title": "The 12 Steps",
-  "summary": "Plain-language notes on what each step is about, with the official wording on aa.org.",
+  "summary": "Plain-language notes on what each step is about, with a link to AA's own wording on aa.org.",
   "officialURL": "https://www.aa.org/the-twelve-steps",
-  "officialLinkTitle": "Read the official 12 Steps (opens aa.org)",
+  "officialLinkTitle": "Read the 12 Steps on AA's website (opens aa.org)",
   "independence": "HomeCircle is independent and not affiliated with or endorsed by Alcoholics Anonymous or Narcotics Anonymous.",
-  "intro": "Many AA and NA members work through 12 Steps over time, often with a sponsor. These are HomeCircle's own short notes on the idea behind each one. They aren't the official wording, and every group and member finds their own way through them."
+  "intro": "Many AA and NA members work through the 12 Steps over time, often with a sponsor. These are HomeCircle's own plain-language reflections on the idea behind each Step, not the official wording of AA or NA. Every group and member finds their own way through them. You can read the official Steps on AA's website (aa.org)."
  },
  "books": [
   {
@@ -1503,7 +1741,7 @@
   {
    "id": "aa-twelve-steps",
    "title": "The Twelve Steps",
-   "detail": "The official wording, on AA's own site.",
+   "detail": "AA's own wording, on AA's website.",
    "url": "https://www.aa.org/the-twelve-steps",
    "opens": "opens aa.org"
   },
