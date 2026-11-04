@@ -16,7 +16,8 @@ def svc(name, who, phone=None, hours=None, url=None, url_label="Open site", extr
 
 TOP = """<div class="fam-strip" role="region" aria-label="Call for help now"><strong>Call for help now:</strong>
 <a class="btn danger" href="tel:000">Call 000</a><a class="btn" href="tel:131114">Lifeline 13 11 14</a>
-<button class="btn ghost fam-exit" type="button" id="quick-exit">Quick exit <span class="small">(Esc)</span></button></div>
+<button class="btn ghost fam-exit" type="button" id="quick-exit">Quick exit <span class="small">(Esc)</span></button>
+<span class="small fam-exit-note">Quick exit won't clear your browser history. A private window is safer.</span></div>
 <p class="fam-scared"><strong>If you're scared of them, call <a href="tel:000">000</a> or 1800RESPECT <a href="tel:1800737732">1800 737 732</a>.</strong></p>"""
 
 SHARE = """<div class="card sage mt"><h2 class="mt0">Send this page to someone</h2><p>Share it, or copy the link. Nothing is tracked.</p>
@@ -28,16 +29,17 @@ WITHDRAWAL_LINE = f'Withdrawal can be dangerous. Talk to a GP, or call the Natio
 def withdrawal():
     return f"""<section class="card mt" id="withdrawal"><h2 class="mt0">Withdrawal warning signs and when to call 000</h2>
 <p><strong>{WITHDRAWAL_LINE}</strong></p>
-<p>When someone cuts down or stops alcohol or some drugs, their body can react badly. Don't try to manage it at home on your own.</p>
 <p><strong>Call 000 straight away if they:</strong></p><ul><li>have a seizure (fit)</li><li>are confused or don't know where they are</li><li>collapse or can't be woken</li></ul>
-<p>The hotline is open 24/7 and puts you through to your state or territory's service. SA calls are answered 8.30am–10pm.</p>
 <div class="btn-row"><a class="btn danger" href="tel:000">Call 000</a>{tel(AOD, "Call the AOD Hotline " + AOD)}</div>
+<details class="more"><summary>More info</summary>
+<p>When someone cuts down or stops alcohol or some drugs, their body can react badly. Don't try to manage it at home on your own.</p>
+<p>The hotline is open 24/7 and puts you through to your state or territory's service. SA calls are answered 8.30am–10pm.</p>
 <p>If opioids are involved, naloxone can reverse an overdose for a short time. It's free, with no prescription, at participating pharmacies and other approved sites.</p>
 <div class="btn-row">{link("https://www.health.gov.au/our-work/take-home-naloxone-program/about-the-take-home-naloxone-program", "About take-home naloxone")}{link("https://www.health.gov.au/our-work/take-home-naloxone-program/where-to-access-naloxone", "Where to get naloxone")}</div>
-<p class="small">{CHECKED}. HomeCircle is support, not medical care.</p></section>"""
+</details><p class="small">{CHECKED}. HomeCircle is support, not medical care.</p></section>"""
 
 def groups():
-    return f"""<section class="mt" id="groups"><h2>Family meetings, support groups and counselling</h2>
+    return f"""<details class="card more mt" id="groups"><summary><h2 class="mt0">Family meetings, support groups and counselling</h2></summary>
 <p>You don't have to work this out alone. Family support groups are free meetings where people with a loved one who drinks, uses drugs or gambles share what helps. Counselling services can help the whole family talk.</p>
 <p><strong>HomeCircle isn't part of these groups.</strong></p>
 <div class="grid g2">
@@ -49,20 +51,24 @@ def groups():
 {svc("Family Relationship Advice Line", "Help with family relationship or separation issues, for parents, grandparents and young people too.", "1800 050 321", "Mon–Fri 8am–8pm and Sat 10am–4pm, local time. Closed Sundays and national public holidays", "https://www.familyrelationships.gov.au/talk-someone/advice-line")}
 </div>
 <!-- PLACEHOLDER: future gambling (GA) family content goes here. Hidden from visitors until written and checked. -->
-</section>"""
+</details>"""
 
 def selfcare():
-    return f"""<section class="card sage mt" id="you"><h2 class="mt0">Looking after yourself</h2>
+    return f"""<details class="card sage more mt" id="you"><summary><h2 class="mt0">Looking after yourself</h2></summary>
 <ul><li>You didn't cause it, and you can't fix it alone.</li><li>Sleep, eat and get outside when you can.</li><li>Keep up with friends and things you enjoy.</li><li>Set limits that keep you safe, and stick to them.</li><li>Talk to someone: a GP, a counsellor, or a family support group.</li></ul>
 <p>If you're caring for someone, Carer Gateway supports unpaid carers, including family.</p>
 <div class="btn-row">{tel("1800 422 737", "Carer Gateway 1800 422 737")}{link("https://www.carergateway.gov.au/", "Open Carer Gateway")}</div>
-<p class="small"><strong>Hours:</strong> Mon–Fri 8am–5pm. {CHECKED}</p></section>"""
+<p class="small"><strong>Hours:</strong> Mon–Fri 8am–5pm. {CHECKED}</p></details>"""
 
 def legal():
-    return f"""<section class="card mt" id="legal"><h2 class="mt0">Legal questions</h2>
+    return f"""<details class="card more mt" id="legal"><summary><h2 class="mt0">Legal questions</h2></summary>
 <p>Questions about protection orders, custody or making someone get treatment need proper legal advice. We can't give legal steps. Please don't monitor or track someone's phone or messages.</p>
-<p>In Queensland, Legal Aid Queensland's Legal Information Line gives free legal information (Mon–Fri 8:30am–4:30pm AEST, except public holidays). In other states, 1800RESPECT can point you to help.</p>
-<div class="btn-row">{tel("1300 65 11 88", "Legal Aid Qld 1300 65 11 88")}{tel("1800 737 732", "1800RESPECT 1800 737 732")}</div><p class="small">{CHECKED}</p></section>"""
+<p><strong>Queensland:</strong> Legal Aid Queensland's Legal Information Line gives free legal information (Mon–Fri 8:30am–4:30pm AEST, except public holidays).</p>
+<div class="btn-row">{tel("1300 65 11 88", "Legal Aid Qld 1300 65 11 88")}{link("https://www.legalaid.qld.gov.au/", "Legal Aid Qld site")}</div>
+<p><strong>Other states and territories:</strong> National Legal Aid links to all 8 state and territory Legal Aid commissions, with a Find legal help page.</p>
+<div class="btn-row">{link("https://www.nationallegalaid.org/", "National Legal Aid")}</div>
+<p>For family and domestic violence, 1800RESPECT can help any time on <a href="tel:1800737732">1800 737 732</a>.</p>
+<p class="small">{CHECKED}</p></details>"""
 
 DV_STATES = [
     ("Queensland", "DVConnect Womensline", "Anyone in Queensland experiencing domestic or family violence.", "1800 811 811", "24 hours, 7 days", "https://www.dvconnect.org/womensline/"),
@@ -86,7 +92,7 @@ def dv_body():
 {svc("Kids Helpline", "Children and young people aged 5–25.", "1800 55 1800", "24/7", "https://kidshelpline.com.au/")}
 {svc("Men's Referral Service (No to Violence)", "For men worried about their own behaviour, and their family, friends and professionals.", "1300 766 491", "24 hours 7 days a week", "https://ntv.org.au/get-help/")}
 </div>
-<h2 class="mt">Lines in your state or territory</h2>
+<h2 class="mt">Find your state's line</h2><p>Tap your state or territory to see its line. The national lines above work everywhere.</p>
 {states}
 <div class="card mt"><h3>Northern Territory (whole territory)</h3><p>The NT Government doesn't list a single 24/7 NT line. It lists 1800RESPECT, NT Police and 000, plus regional services. Under NT law, everyone must report domestic and family violence to police.</p>
 <div class="btn-row">{tel("1800 737 732", "1800RESPECT 1800 737 732")}{tel("131 444", "NT Police 131 444")}{link("https://nt.gov.au/law/crime/domestic-and-family-violence", "NT Government DFV page")}</div><p class="small">{CHECKED}</p></div>
@@ -111,21 +117,42 @@ WHO = {
    ["Lecturing or judging", "Joining in to keep the peace", "Promising to keep a secret if they're in danger", "Gossiping about them"]),
 }
 
+START = {
+ "partner": "Living with a partner who drinks or uses can wear you down. You can't make them stop, but you can keep yourself safe and get support for you both.",
+ "child": "If your child is drinking or using drugs, stay calm and keep talking. Parents and families can call for advice any time, day or night.",
+ "family": "When a parent or relative drinks or uses, it affects the whole family. It's not your fault, and you're allowed to get help for you.",
+ "friend": "You don't have to fix your friend's problem. Listening, staying in touch and pointing them to support really helps.",
+}
+GROUP = {"partner": ("Al-Anon Family Groups Australia", "Meetings for families and friends of people with a drinking problem.", "1300 252 666", "https://www.al-anon.org.au/"),
+         "family": ("Al-Anon Family Groups Australia", "Meetings for families and friends of people with a drinking problem.", "1300 252 666", "https://www.al-anon.org.au/"),
+         "child": ("Nar-Anon Family Groups Australia", "Meetings for families and friends affected by someone else's addiction.", None, "https://naranon.com.au/find-a-meeting/"),
+         "friend": ("Nar-Anon Family Groups Australia", "Meetings for families and friends affected by someone else's addiction.", None, "https://naranon.com.au/find-a-meeting/")}
+
 def who_body(key):
     btn, h1, _, intro, say, dont = WHO[key]
     s = "".join(f"<li>{x}</li>" for x in say); d = "".join(f"<li>{x}</li>" for x in dont)
+    g = GROUP[key]
     return f"""<p><a href="index.html">← Who are you worried about?</a></p>
-<h1>{h1}</h1><p class="lede">{intro}</p>
-<section class="card mt" id="understand"><h2 class="mt0">Understanding addiction (for them and for you)</h2>
+<h1>{h1}</h1>
+<section class="card sage" id="start"><h2 class="mt0">Start here</h2><p>{START[key]}</p></section>
+<h2 class="mt">3 places to call or visit</h2>
+<div class="grid g3">
+{svc("Family Drug Support Australia", "Support for families and friends of people who use alcohol or other drugs.", "1300 368 186", "24 hours, 7 days", "https://www.fds.org.au/")}
+{svc("National Alcohol and Other Drug Hotline", "Advice about someone's alcohol or drug use. SA calls are answered 8.30am–10pm.", "1800 250 015", "24/7", "https://www.health.gov.au/contacts/national-alcohol-and-other-drug-hotline")}
+{svc(g[0], g[1] + " HomeCircle isn't part of this group.", g[2], None, g[3], "Find a meeting" if not g[2] else "Open site")}
+</div>
+<details class="card more mt" id="understand"><summary><h2 class="mt0">Understanding addiction (for them and for you)</h2></summary>
+<p>{intro}</p>
 <p>Addiction is a health problem, not a choice someone makes every day. People can and do recover, but it often takes time and more than one try.</p>
-<p>For you: worry, anger, guilt and sadness are all normal. You matter too.</p></section>
-<section class="card mt" id="say"><h2 class="mt0">What to say and what not to say</h2>
+<p>For you: worry, anger, guilt and sadness are all normal. You matter too.</p></details>
+<details class="card more mt" id="say"><summary><h2 class="mt0">What to say and what not to say</h2></summary>
 <p>Pick a calm time when they're sober. Use “I” words and keep it short.</p>
-<div class="grid g2"><div><h3>Try saying</h3><ul>{s}</ul></div><div><h3>Try not to</h3><ul>{d}</ul></div></div></section>
-{withdrawal()}
+<div class="grid g2"><div><h3>Try saying</h3><ul>{s}</ul></div><div><h3>Try not to</h3><ul>{d}</ul></div></div></details>
+<details class="card more mt" id="withdrawal"><summary><h2 class="mt0">Withdrawal warning signs and when to call 000</h2></summary>
+<p>Call <a href="tel:000">000</a> for a seizure, confusion or collapse.</p><p><a href="withdrawal.html">Supporting someone through withdrawal</a></p></details>
 {groups()}
 {selfcare()}
-<div class="card mt"><h2 class="mt0">Worried about violence?</h2><p>If you feel unsafe, there is help in every state and territory.</p><a class="btn" href="safety.html">Domestic and family violence help</a></div>
+<details class="card more mt"><summary><h2 class="mt0">Worried about violence?</h2></summary><p>If you feel unsafe, there is help in every state and territory.</p><a class="btn" href="safety.html">Domestic and family violence help</a></details>
 {legal()}"""
 
 def build(page, E):

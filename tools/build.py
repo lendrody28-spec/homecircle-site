@@ -168,6 +168,9 @@ def footer(r):
 def page(path, active, title, desc, body):
     r = "../" * path.count("/")
     out = head(title, desc, r) + header(active, r) + f'\n<main id="main"><div class="wrap">\n{body}\n</div></main>' + footer(r)
+    if path.startswith("families/"):  # no Kai chat on families pages, so nothing typed is kept
+        out = re.sub(r'<script src="[^"]*kai[^"]*" defer></script>\n', "", out)
+        out = re.sub(r'\n<div class="kai" id="kai".*?\n</div>(?=\n</body>)', "", out, flags=re.S)
     (ROOT / path).parent.mkdir(parents=True, exist_ok=True)
     (ROOT / path).write_text(out)
 

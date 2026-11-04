@@ -308,3 +308,5 @@ details.more p{margin:4px 0 0;font-size:16px}
 .fam-link{position:fixed;top:66px;right:12px;z-index:59;font-size:14px;font-weight:700;background:#fff;color:#6B2416;padding:4px 10px;border-radius:999px;text-decoration:none;box-shadow:0 2px 8px rgba(107,36,22,.18)}
 @media (max-width:700px){.fam-choices{grid-template-columns:1fr}}
 @media print{.fam-link,.fam-strip{display:none!important}}
+.fam-exit-note{flex-basis:100%;text-align:right}
+@media (max-width:760px){.fam-link{display:none}}
