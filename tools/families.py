@@ -45,7 +45,7 @@ def groups():
 <div class="grid g2">
 {svc("Family Drug Support Australia", "A support line and meetings for families and friends of people who use alcohol or other drugs, and for bereaved families.", "1300 368 186", "24 hours, 7 days", "https://www.fds.org.au/")}
 {svc("Al-Anon Family Groups Australia", "Meetings for families and friends of people with a drinking problem.", "1300 252 666", None, "https://www.al-anon.org.au/")}
-{svc("Gam-Anon", "For families and friends of people with a gambling problem.", None, None, "https://gaaustralia.org.au/gam-anon/", extra='<p><a href="mailto:gam-anon@live.com.au">gam-anon@live.com.au</a></p>')}
+{svc("Gam-Anon (listed on Gamblers Anonymous Australia's site)", "For families and friends of people with a gambling problem.", None, None, "https://gaaustralia.org.au/gam-anon/", extra='<p><a href="mailto:gam-anon@live.com.au">gam-anon@live.com.au</a></p>')}
 {svc("Relationships Australia", "Counselling, mediation and family support for individuals, couples and families.", "1300 364 277", None, "https://relationships.org.au/")}
 </div>
 <!-- PLACEHOLDER: future gambling (GA) family content goes here. Hidden from visitors until written and checked. -->
