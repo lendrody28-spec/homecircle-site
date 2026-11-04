@@ -33,7 +33,7 @@ def web(t):
 
 PAGES = [("index.html", "Home"), ("library.html", "Library"), ("twelve-steps.html", "12 Steps"),
          ("meditations.html", "Meditations & breathing"), ("meetings.html", "Meetings"),
-         ("help.html", "Help"), ("your-circle.html", "Your circle"), ("support.html", "Support")]
+         ("help.html", "Help"), ("families/index.html", "For families & partners"), ("your-circle.html", "Your circle"), ("support.html", "Support")]
 PRIVACY = L["privacyURL"]
 TERMS = L["termsURL"]
 H = C["helplines"]
@@ -90,6 +90,7 @@ def header(active, r):
   <nav class="nav" id="site-nav" aria-label="Main"><ul>{lis}</ul></nav>
 </div></header>
 <a class="help-pill" id="help-pill" href="{r}help.html#now" aria-label="{E(C["crisis"]["accessibilityLabel"])}" aria-describedby="help-pill-hint" aria-controls="help-dialog">{HEART}<span aria-hidden="true">Help</span></a>
+<a class="fam-link" href="{r}families/index.html">For families &amp; partners</a>
 <span class="sr-only" id="help-pill-hint">{E(C["crisis"]["accessibilityHint"])}</span>"""
 
 def kai_panel(r):
@@ -223,6 +224,7 @@ def build_home():
     ]
     feats2 = [
         ("your-circle.html", "Your circle", "A day counter and a private journal, kept only in this browser.", "Your circle", "oneThing"),
+        ("families/index.html", "For families & partners", "Worried about someone you love? What to say, warning signs and support for you.", "Families", "handOnChest"),
         ("help.html", "Helplines", "000, Lifeline and every helpline in the app, plus lines in your state.", "Help", "handOnChest"),
     ]
     tiles = "".join(tile(h, t, s, tg, a, r) for h, t, s, tg, a in feats)
@@ -240,7 +242,7 @@ def build_home():
 <div class="notice"><strong>Need help right now?</strong> {E(L["notMedicalDevice"])} In an emergency call <a href="tel:000">000</a>. For crisis support call Lifeline on <a href="tel:131114">13 11 14</a>.</div>
 <h2>What you can do here</h2>
 <div class="grid g4">{tiles}</div>
-<div class="grid g2 mt">{"".join(tile(h, t, s, tg, a, r) for h, t, s, tg, a in feats2)}</div>
+<div class="grid g3 mt">{"".join(tile(h, t, s, tg, a, r) for h, t, s, tg, a in feats2)}</div>
 <div class="card sage mt kai-intro"><img src="assets/kai.png" alt="" width="72" height="72"><div><h2 class="mt0">Meet Kai, your recovery buddy</h2><p>Kai is the round button in the corner of every page. Tell Kai how you're feeling and it can suggest a breathing practice, a short meditation or a walk, or point you to a meeting or a helpline. Replies are written in this browser from saved rules. No network and no AI service. Kai isn't AI, and isn't a person, counsellor, doctor or sponsor. Nothing you type leaves your browser.</p></div></div>
 {events_html()}
 <h2>The HomeCircle app</h2>
@@ -709,4 +711,5 @@ build_home(); build_library(); build_steps(); build_meditations(); build_meeting
 for i in C["items"]:
     build_item(i)
 build_stages(); build_books()
+import sys; sys.path.insert(0, str(ROOT / "tools")); import families; families.build(page, E)
 print("built")

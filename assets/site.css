@@ -299,3 +299,12 @@ details.more li{margin:4px 0;font-size:16px}
 details.more p{margin:4px 0 0;font-size:16px}
 /* Help pill: always inside the visible viewport, 320px to 1440px+ */
 .help-pill{right:max(12px,env(safe-area-inset-right));max-width:calc(100vw - 24px);box-sizing:border-box}
+/* Families pages */
+.fam-strip{display:flex;flex-wrap:wrap;align-items:center;gap:10px;background:#FBE3DC;border-radius:16px;padding:12px 16px;margin:8px 0 12px}
+.fam-strip .fam-exit{margin-left:auto}
+.fam-scared{font-size:18px}
+.fam-choices{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.fam-big{min-height:88px;font-size:21px;border-radius:20px}
+.fam-link{position:fixed;top:66px;right:12px;z-index:59;font-size:14px;font-weight:700;background:#fff;color:#6B2416;padding:4px 10px;border-radius:999px;text-decoration:none;box-shadow:0 2px 8px rgba(107,36,22,.18)}
+@media (max-width:700px){.fam-choices{grid-template-columns:1fr}}
+@media print{.fam-link,.fam-strip{display:none!important}}
