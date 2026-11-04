@@ -24,7 +24,7 @@ SHARE = """<div class="card sage mt"><h2 class="mt0">Send this page to someone</
 <button class="btn" type="button" id="fam-share">Send this page to someone</button><p class="small" id="fam-share-status" role="status"></p></div>"""
 
 AOD = "1800 250 015"
-WITHDRAWAL_LINE = f'Withdrawal can be dangerous. Talk to a GP, or call the National Alcohol and Other Drug Hotline on <a href="tel:1800250015">{AOD}</a>. In an emergency call <a href="tel:000">000</a>.'
+WITHDRAWAL_LINE = f'Withdrawal from alcohol or some medicines can be dangerous. Don\'t manage it at home alone. See a GP, or call the National Alcohol and Other Drug Hotline on <a href="tel:1800250015">{AOD}</a> (some state lines have set hours). Call <a href="tel:000">000</a> for a seizure, confusion or collapse.'
 
 def withdrawal():
     return f"""<section class="card mt" id="withdrawal"><h2 class="mt0">Withdrawal warning signs and when to call 000</h2>
@@ -45,10 +45,8 @@ def groups():
 <div class="grid g2">
 {svc("Family Drug Support Australia", "A support line and meetings for families and friends of people who use alcohol or other drugs, and for bereaved families.", "1300 368 186", "24 hours, 7 days", "https://www.fds.org.au/")}
 {svc("Al-Anon Family Groups Australia", "Meetings for families and friends of people with a drinking problem.", "1300 252 666", None, "https://www.al-anon.org.au/")}
-{svc("Nar-Anon Family Groups Australia", "Meetings for families and friends affected by someone else's addiction. Weekly Zoom and in-person meetings.", None, None, "https://naranon.com.au/find-a-meeting/", "Find a meeting")}
 {svc("Gam-Anon", "For families and friends of people with a gambling problem.", None, None, "https://gaaustralia.org.au/gam-anon/", extra='<p><a href="mailto:gam-anon@live.com.au">gam-anon@live.com.au</a></p>')}
 {svc("Relationships Australia", "Counselling, mediation and family support for individuals, couples and families.", "1300 364 277", None, "https://relationships.org.au/")}
-{svc("Family Relationship Advice Line", "Help with family relationship or separation issues, for parents, grandparents and young people too.", "1800 050 321", "Mon–Fri 8am–8pm and Sat 10am–4pm, local time. Closed Sundays and national public holidays", "https://www.familyrelationships.gov.au/talk-someone/advice-line")}
 </div>
 <!-- PLACEHOLDER: future gambling (GA) family content goes here. Hidden from visitors until written and checked. -->
 </details>"""
@@ -56,18 +54,17 @@ def groups():
 def selfcare():
     return f"""<details class="card sage more mt" id="you"><summary><h2 class="mt0">Looking after yourself</h2></summary>
 <ul><li>You didn't cause it, and you can't fix it alone.</li><li>Sleep, eat and get outside when you can.</li><li>Keep up with friends and things you enjoy.</li><li>Set limits that keep you safe, and stick to them.</li><li>Talk to someone: a GP, a counsellor, or a family support group.</li></ul>
-<p>If you're caring for someone, Carer Gateway supports unpaid carers, including family.</p>
-<div class="btn-row">{tel("1800 422 737", "Carer Gateway 1800 422 737")}{link("https://www.carergateway.gov.au/", "Open Carer Gateway")}</div>
-<p class="small"><strong>Hours:</strong> Mon–Fri 8am–5pm. {CHECKED}</p></details>"""
+<p class="small">{CHECKED}</p></details>"""
 
 def legal():
     return f"""<details class="card more mt" id="legal"><summary><h2 class="mt0">Legal questions</h2></summary>
-<p>Questions about protection orders, custody or making someone get treatment need proper legal advice. We can't give legal steps. Please don't monitor or track someone's phone or messages.</p>
+<p>Questions about protection orders, custody or making someone get treatment need proper legal advice. We can't give legal steps. Please don't secretly track someone's phone, location or messages. It can break the law, it can be a form of abuse, and it usually damages trust. Talk to a counsellor or Family Drug Support about other ways to help.</p>
 <p><strong>Queensland:</strong> Legal Aid Queensland's Legal Information Line gives free legal information (Mon–Fri 8:30am–4:30pm AEST, except public holidays).</p>
 <div class="btn-row">{tel("1300 65 11 88", "Legal Aid Qld 1300 65 11 88")}{link("https://www.legalaid.qld.gov.au/", "Legal Aid Qld site")}</div>
 <p><strong>Other states and territories:</strong> National Legal Aid links to all 8 state and territory Legal Aid commissions, with a Find legal help page.</p>
 <div class="btn-row">{link("https://www.nationallegalaid.org/", "National Legal Aid")}</div>
 <p>For family and domestic violence, 1800RESPECT can help any time on <a href="tel:1800737732">1800 737 732</a>.</p>
+<p>Young people can call Kids Helpline any time on <a href="tel:1800551800">1800 55 1800</a>.</p>
 <p class="small">{CHECKED}</p></details>"""
 
 DV_STATES = [
@@ -125,8 +122,8 @@ START = {
 }
 GROUP = {"partner": ("Al-Anon Family Groups Australia", "Meetings for families and friends of people with a drinking problem.", "1300 252 666", "https://www.al-anon.org.au/"),
          "family": ("Al-Anon Family Groups Australia", "Meetings for families and friends of people with a drinking problem.", "1300 252 666", "https://www.al-anon.org.au/"),
-         "child": ("Nar-Anon Family Groups Australia", "Meetings for families and friends affected by someone else's addiction.", None, "https://naranon.com.au/find-a-meeting/"),
-         "friend": ("Nar-Anon Family Groups Australia", "Meetings for families and friends affected by someone else's addiction.", None, "https://naranon.com.au/find-a-meeting/")}
+         "child": ("Al-Anon Family Groups Australia", "For people affected by someone else's drinking.", "1300 252 666", "https://al-anon.org.au/"),
+         "friend": ("Al-Anon Family Groups Australia", "For people affected by someone else's drinking.", "1300 252 666", "https://al-anon.org.au/")}
 
 def who_body(key):
     btn, h1, _, intro, say, dont = WHO[key]
@@ -138,7 +135,7 @@ def who_body(key):
 <h2 class="mt">3 places to call or visit</h2>
 <div class="grid g3">
 {svc("Family Drug Support Australia", "Support for families and friends of people who use alcohol or other drugs.", "1300 368 186", "24 hours, 7 days", "https://www.fds.org.au/")}
-{svc("National Alcohol and Other Drug Hotline", "Advice about someone's alcohol or drug use. SA calls are answered 8.30am–10pm.", "1800 250 015", "24/7", "https://www.health.gov.au/contacts/national-alcohol-and-other-drug-hotline")}
+{svc("National Alcohol and Other Drug Hotline", "Advice about someone's alcohol or drug use. SA calls are answered 8.30am–10pm.", "1800 250 015", "24/7 nationally; some state lines have set hours (SA 8.30am–10pm).", "https://www.health.gov.au/contacts/national-alcohol-and-other-drug-hotline")}
 {svc(g[0], g[1] + " HomeCircle isn't part of this group.", g[2], None, g[3], "Find a meeting" if not g[2] else "Open site")}
 </div>
 <details class="card more mt" id="understand"><summary><h2 class="mt0">Understanding addiction (for them and for you)</h2></summary>
