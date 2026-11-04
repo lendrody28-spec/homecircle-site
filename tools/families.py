@@ -16,7 +16,7 @@ def svc(name, who, phone=None, hours=None, url=None, url_label="Open site", extr
 
 TOP = """<div class="fam-strip" role="region" aria-label="Call for help now"><strong>Call for help now:</strong>
 <a class="btn danger" href="tel:000">Call 000</a><a class="btn" href="tel:131114">Lifeline 13 11 14</a>
-<button class="btn ghost fam-exit" type="button" id="quick-exit">Quick exit <span class="small">(Esc)</span></button>
+<button class="btn ghost fam-exit" type="button" id="quick-exit" aria-label="Quick exit, leaves this site">Quick exit, leaves this site<span class="small fam-esc"> (Esc)</span></button>
 <span class="small fam-exit-note">Quick exit won't clear your browser history. A private window is safer.</span></div>
 <p class="fam-scared"><strong>If you're scared of them, call <a href="tel:000">000</a> or 1800RESPECT <a href="tel:1800737732">1800 737 732</a>.</strong></p>"""
 

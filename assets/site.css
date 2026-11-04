@@ -326,3 +326,5 @@ details.more p{margin:4px 0 0;font-size:16px}
 .ev-more summary{cursor:pointer;font-weight:700;color:var(--ink);min-height:44px;display:flex;align-items:center;border-radius:10px}
 .ev-more summary:focus-visible{outline:3px solid #F2A08B;outline-offset:2px}
 .ev-more p{margin:6px 0;font-size:15px}
+
+@media (max-width:760px){.fam-esc{display:none}}
