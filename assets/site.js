@@ -308,8 +308,8 @@
   }
   var wipe = document.getElementById("delete-all");
   if (wipe) wipe.addEventListener("click", function () {
-    if (!confirm("Delete HomeCircle data in this browser? This removes your journal, sober date, health answers, Kai chat and Kai's position from this browser. It cannot be undone.")) return;
-    try { Object.keys(localStorage).forEach(function (k) { if (k.indexOf("hc.") === 0) localStorage.removeItem(k); }); } catch (e) {}
+    if (!confirm("This deletes your sober date, journal, health answers, Kai chat and settings from this browser. It can't be undone.")) return;
+    try { Object.keys(localStorage).forEach(function (k) { if (k.indexOf("hc") === 0 || /kai/i.test(k)) localStorage.removeItem(k); }); } catch (e) {}
     location.reload();
   });
   document.querySelectorAll("[data-storage-check]").forEach(function (n) {

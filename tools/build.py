@@ -141,6 +141,7 @@ def footer(r):
     <li><a href="{PRIVACY}">Privacy Policy</a></li>
     <li><a href="{TERMS}">Terms of Use</a></li>
     <li><a href="{r}support.html#website">About this website</a></li>
+    <li><a href="mailto:lendrody28@gmail.com">Contact</a></li>
     <li><a href="mailto:{L["supportEmail"]}">{L["supportEmail"]}</a> (not a crisis line)</li>
   </ul><p class="small">{E(BROWSER_ONLY)}</p></div>
 </div></footer>
@@ -245,7 +246,7 @@ def build_home():
   <div class="card"><h3>In the iPhone app</h3><ul>
     <li><strong>Meetings near you</strong>, with a map.</li>
     <li><strong>A private journal and sober date</strong> that stay on your phone.</li>
-    <li><strong>Kai, your recovery buddy</strong>: built-in templates on your phone for reflection and encouragement. It isn't AI and nothing you type leaves your phone.</li>
+    <li><strong>Kai, your recovery buddy</strong>: built-in templates on your phone for reflection and encouragement. It isn't AI, and nothing you type leaves your phone when you use the app.</li>
     <li><strong>Meeting reminders</strong> 2 hours before a meeting starts.</li>
     <li><strong>The same Library</strong>, breathing and meditation guides.</li>
   </ul><div class="btn-row"><a class="btn" href="https://apps.apple.com/au/app/homecircle/id6819366068">Get HomeCircle free on the App Store</a></div></div>
@@ -479,7 +480,7 @@ STATE_LINES = [  # helplines-verification-2026-11-04.md, section 4 (checked 4 No
                            ("Parent and Family Drug Support Line", "0894425050", "(08) 9442 5050", "24/7. Country callers: 1800 653 203. For anyone worried about someone else's use.", "https://www.mhc.wa.gov.au/getting-help/helplines", ("1800653203", "1800 653 203"))]),
     ("Tasmania", [("Alcohol and Drug Information Service", "1800811994", "1800 811 994", "24 hours. For people who use drugs, and family members.", "https://www.health.tas.gov.au/health-topics/alcohol-and-drugs/learn-about-alcohol-and-drugs/alcohol-and-drug-treatment-and-support")]),
     ("Northern Territory", [("Alcohol and Drug Information Service (ADIS)", "1800131350", "1800 131 350", "Listed on the NT Government's 24-hour helplines page. For anyone in the NT with alcohol or drug concerns.", "https://nt.gov.au/wellbeing/mental-health/24-hour-mental-health-hotlines")]),
-    ("Australian Capital Territory", [("Alcohol and Drug Service Intake, Canberra Health Services", "0251249977", "(02) 5124 9977", "Intake, weekdays 8am to 5pm (closes 3.30pm Wednesdays). Not a crisis line. After hours, call the National Alcohol and Other Drug Hotline on 1800 250 015.", "https://www.canberrahealthservices.act.gov.au/services-and-clinics/services/central-health-intake-chi")]),
+    ("Australian Capital Territory", [("Alcohol and Drug Service Intake, Canberra Health Services", "0251249977", "(02) 5124 9977", "Intake, weekdays 8am to 5pm (closes 3.30pm Wednesdays), excluding public holidays. Not a crisis line. After hours, call the National Alcohol and Other Drug Hotline on 1800 250 015.", "https://www.canberrahealthservices.act.gov.au/services-and-clinics/services/central-health-intake-chi")]),
 ]
 
 def line_card(line):
@@ -551,7 +552,7 @@ def build_support():
 <h3>Does the website collect my data?</h3><p>No. There are no cookies, no ads, no trackers, no analytics and no third-party scripts or fonts. Nothing you type or save is sent to HomeCircle.</p>
 <h3>What does the website save, and where?</h3><p>Only what you choose to save: your day count, journal notes, health safety answers, the breath-hold setting, Kai's chat and where you put Kai on the screen. These are kept only in this browser's local storage, on this device. They aren't sent to us, and they aren't shared with the app or your other devices. Private browsing, clearing your browser data or using another browser removes them or starts fresh. You can delete everything on <a href="your-circle.html#delete">Your circle</a>.</p>
 <h3>How does the meeting finder work?</h3><p>Your browser downloads the same public meeting list the app uses, from GitHub Pages, and searches it on your computer. What you type isn't sent anywhere. <strong>Near me</strong> only asks for your location when you press it, and your location stays on the page. The site and the list are hosted on GitHub Pages, which, like any web host, receives normal web requests.</p>
-<h3>Is Kai on the website?</h3><p>Yes. Kai, your recovery buddy, is the round button in the corner of every page. Kai isn't AI, and isn't a person, counsellor, doctor or sponsor. Replies are put together in your browser from saved rules, the same ones the app uses. Kai makes no network calls, and nothing you type leaves your browser. If a message sounds like a crisis, Kai shows 000 and Lifeline first. You can minimise Kai, drag it to the other side, or clear the chat. Kai hides while a breathing guide or meditation is playing.</p>
+<h3>Is Kai on the website?</h3><p>Yes. Kai, your recovery buddy, is the round button in the corner of every page. Kai isn't AI, and isn't a person, counsellor, doctor or sponsor. Replies are put together in your browser from saved rules, the same ones the app uses. Kai makes no network calls, and nothing you type leaves your browser. Kai looks for some words that may mean you're in danger and then shows 000 and Lifeline, but it can miss things. If you're unsafe, call 000 or Lifeline 13 11 14 yourself. You can minimise Kai, drag it to the other side, or clear the chat. Kai hides while a breathing guide or meditation is playing.</p>
 <h3>How do meeting reminders work on the website?</h3><p>On a meeting, choose <strong>Add reminder</strong>, then <strong>Just this one</strong> or <strong>Every week</strong>. Your browser downloads a calendar file (.ics). Open it with your calendar app to add the meeting, with an alert set for 2 hours before it starts. The website sends no notifications and keeps no list of your reminders; to remove one, delete it in your calendar.</p>
 <h3>Spotted a wrong meeting or event?</h3><p>Meetings and events come from AA and NA's own public listings. Please tell the group or the fellowship, and email us too so we know.</p>
 <h2>The iPhone app</h2>
@@ -575,7 +576,7 @@ def build_circle():
     moods = "".join(f'<option>{E(x)}</option>' for x in MOODS)
     body = f"""<h1>Your circle</h1>
 <p class="lede">A day counter, a private journal and health safety notes, if you'd like them. All optional.</p>
-<div class="notice"><strong>Stored only in this browser.</strong> Anything you save on this page stays in this browser's local storage, on this device. It isn't sent to HomeCircle or anyone else, and it isn't shared with the app or your other devices. On a shared computer, anyone using this browser could read it. Private browsing or clearing your browser data removes it.</div>
+<div class="notice"><strong>Stored only in this browser.</strong> Anything you save on this page stays in this browser's local storage, on this device. It isn't sent to HomeCircle or anyone else, and it isn't shared with the app or your other devices. Private browsing or clearing your browser data removes it. On a shared or public computer, anyone using this browser could read it, including your journal and health answers. Use private browsing, or tap Clear everything on this browser when you're done.</div>
 <p class="notice" data-storage-check hidden>This browser isn't letting the site save anything (it may be in private mode or have storage turned off). You can still use the page, but nothing will be kept.</p>
 <div class="grid g2">
 <section class="card" aria-labelledby="days-h"><h2 class="mt0" id="days-h">Day count</h2>
@@ -603,7 +604,7 @@ def build_circle():
 <ul class="journal-list" id="journal-list"></ul></section>
 <section class="card mt" id="delete" aria-labelledby="del-h"><h2 class="mt0" id="del-h">Delete your data in this browser</h2>
 <p>This removes your journal, sober date, health answers, Kai chat and Kai's position from this browser. It can't be undone, and HomeCircle doesn't hold a copy.</p>
-<button class="btn danger" type="button" id="delete-all">Delete all HomeCircle data in this browser</button></section>
+<button class="btn danger" type="button" id="delete-all">Clear everything on this browser</button></section>
 <p class="small mt">{E(L["gpLine"])} In an emergency call <a href="tel:000">000</a>, or Lifeline on <a href="tel:131114">13 11 14</a>.</p>"""
     page("your-circle.html", "your-circle.html", "Your circle – HomeCircle", "An optional day counter, private journal and health safety notes, stored only in your browser.", body)
 
