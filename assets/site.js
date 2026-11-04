@@ -70,45 +70,7 @@
   if (evList) {
     hidePast(evList);
     var limit = parseInt(evList.getAttribute("data-limit") || "0", 10);
-    fetch(evList.getAttribute("data-src"), { cache: "no-cache" }).then(function (r) { return r.ok ? r.json() : null; }).then(function (data) {
-      if (!data || !Array.isArray(data.events)) return;
-      var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-      var evs = data.events.filter(function (e) { return e && e.title && e.start && /^https:\/\//.test(e.source || ""); })
-        .sort(function (a, b) { return a.start < b.start ? -1 : a.start > b.start ? 1 : 0; });
-      evList.textContent = "";
-      evs.forEach(function (e) {
-        var li = document.createElement("li");
-        li.className = "event";
-        li.setAttribute("data-end", e.end || e.start);
-        var p = e.start.split("-"), q = (e.end || e.start).split("-");
-        var date = document.createElement("div"); date.className = "date";
-        var b = document.createElement("b"); b.textContent = String(parseInt(p[2], 10));
-        date.appendChild(b);
-        date.appendChild(document.createTextNode(months[parseInt(p[1], 10) - 1] + " " + p[0]));
-        var body = document.createElement("div");
-        var h = document.createElement("h3"); var a = document.createElement("a");
-        a.href = e.source; a.textContent = e.title; a.rel = "noopener"; h.appendChild(a);
-        var range = e.end && e.end !== e.start ? " to " + parseInt(q[2], 10) + " " + months[parseInt(q[1], 10) - 1] + " " + q[0] : "";
-        var m1 = document.createElement("p");
-        m1.textContent = parseInt(p[2], 10) + " " + months[parseInt(p[1], 10) - 1] + " " + p[0] + range + " · " + [e.place, e.state].filter(Boolean).join(", ") + " · " + (e.fellowship || "");
-        var m2 = document.createElement("p");
-        m2.textContent = "Listed by " + (e.organiser || "the organiser") + ". Check the official page for times and details.";
-        body.appendChild(h); body.appendChild(m1); body.appendChild(m2);
-        li.appendChild(date); li.appendChild(body);
-        evList.appendChild(li);
-      });
-      var n = hidePast(evList);
-      if (limit && n > limit) {
-        var vis = Array.prototype.filter.call(evList.children, function (li) { return !li.hidden; });
-        vis.slice(limit).forEach(function (li) { li.hidden = true; li.setAttribute("data-more", ""); });
-        var more = document.getElementById("events-more");
-        if (more) {
-          more.hidden = false;
-          more.textContent = "Show all " + n + " events";
-          more.onclick = function () { evList.querySelectorAll("[data-more]").forEach(function (li) { li.hidden = false; }); more.hidden = true; };
-        }
-      }
-    }).catch(function () { /* keep the built-in copy */ });
+    if (limit) Array.prototype.filter.call(evList.children, function (li) { return !li.hidden; }).slice(limit).forEach(function (li) { li.hidden = true; });
   }
 
   /* Breathing guide */

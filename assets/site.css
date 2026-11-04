@@ -310,3 +310,19 @@ details.more p{margin:4px 0 0;font-size:16px}
 @media print{.fam-link,.fam-strip{display:none!important}}
 .fam-exit-note{flex-basis:100%;text-align:right}
 @media (max-width:760px){.fam-link{display:none}}
+
+/* events feed: post-style cards in sage and coral */
+.ev-feed{list-style:none;padding:0;margin:0;display:grid;gap:18px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.ev-card article{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;height:100%;display:flex;flex-direction:column;border-top:4px solid #F2A08B}
+.ev-pic{margin:0}
+.ev-pic img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.ev-pic figcaption{padding:4px 18px 0;color:var(--muted)}
+.ev-ph{aspect-ratio:16/9;background:var(--sage);display:flex;align-items:center;justify-content:center}
+.ev-ph .ev-ico{width:72px;height:72px}
+.ev-body{padding:14px 18px 18px}
+.ev-body h3{font-size:19px;margin:4px 0 6px;color:var(--ink)}
+.ev-meta{display:flex;flex-direction:column;margin:0 0 6px;font-size:15px;color:var(--text)}
+.ev-sum{margin:0 0 8px;color:var(--muted);font-size:16px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.ev-more summary{cursor:pointer;font-weight:700;color:var(--ink);min-height:44px;display:flex;align-items:center;border-radius:10px}
+.ev-more summary:focus-visible{outline:3px solid #F2A08B;outline-offset:2px}
+.ev-more p{margin:6px 0;font-size:15px}

@@ -197,23 +197,39 @@ def aside(r):
 MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 def fmt_date(d):
     y, m, dd = d.split("-"); return f"{int(dd)} {MONTHS[int(m)-1]} {y}"
-def events_html(limit=8):
+EV_ICON = '<svg class="ev-ico" aria-hidden="true" focusable="false" viewBox="0 0 64 64" width="64" height="64"><circle cx="32" cy="32" r="30" fill="#B9D3B0"/><rect x="17" y="20" width="30" height="26" rx="5" fill="#FBF6E8" stroke="#0D6968" stroke-width="3"/><path d="M17 28h30M25 15v9M39 15v9" stroke="#0D6968" stroke-width="3" stroke-linecap="round"/><circle cx="32" cy="37" r="4" fill="#F2A08B"/></svg>'
+def ev_image(e, r):
+    """Show a photo only with permission and a local file under assets/events/; never a remote URL."""
+    img = e.get("image") or ""
+    ok = e.get("image_permission") is True and img.startswith("assets/events/") and ".." not in img and (ROOT / img).is_file()
+    credit = f'<figcaption class="small">{E(e["image_credit"])}</figcaption>' if ok and e.get("image_credit") else ""
+    if ok:
+        return f'<figure class="ev-pic"><img src="{r}{E(img)}" alt="{E(e.get("image_alt") or "")}" loading="lazy">{credit}</figure>'
+    return f'<figure class="ev-pic ev-ph">{EV_ICON}</figure>'
+def ev_card(e, r=""):
+    end = e.get("end", e["start"])
+    rng = fmt_date(e["start"]) + (f" to {fmt_date(end)}" if end != e["start"] else "")
+    when = E(rng) + (f" · {E(e['time'])}" if e.get("time") else "")
+    summary = e.get("summary") or f"A {e['fellowship']} event listed by {e['organiser']}."
+    full = e.get("description") or "HomeCircle only shows what the official listing says. Times, costs and full details are on the organiser's page."
+    return f"""<li class="ev-card" data-end="{end}"><article aria-labelledby="ev-{E(e['start'])}-{_h.sha1(e["source"].encode()).hexdigest()[:6]}">{ev_image(e, r)}
+<div class="ev-body"><span class="pill">{E(e['fellowship'])}</span><h3 id="ev-{E(e['start'])}-{_h.sha1(e["source"].encode()).hexdigest()[:6]}">{E(e['title'])}</h3>
+<p class="ev-meta"><span><b>When:</b> {when}</span><span><b>Where:</b> {E(e['place'])}, {E(e['state'])}</span></p>
+<p class="ev-sum">{E(summary)}</p>
+<details class="ev-more"><summary>More details</summary><p>{E(full)}</p><p><b>Organiser:</b> {E(e['organiser'])}</p><p><a href="{E(e['source'])}" rel="noopener">Official event page<span class="sr-only">: {E(e['title'])}</span></a></p></details></div></article></li>"""
+def events_html(limit=4, r="", full=False):
     evs = sorted([e for e in EVENTS["events"] if e.get("end", e["start"]) >= TODAY], key=lambda e: e["start"])
-    lis = []
-    for k, e in enumerate(evs):
-        y, m, d = e["start"].split("-")
-        rng = fmt_date(e["start"]) + (f' to {fmt_date(e["end"])}' if e.get("end") and e["end"] != e["start"] else "")
-        hid = " hidden data-more" if k >= limit else ""
-        lis.append(f'<li class="event" data-end="{e.get("end", e["start"])}"{hid}><div class="date"><b>{int(d)}</b>{MONTHS[int(m)-1]} {y}</div><div><h3><a href="{E(e["source"])}" rel="noopener">{E(e["title"])}</a></h3><p>{E(rng)} · {E(e["place"])}, {E(e["state"])} · {E(e["fellowship"])}</p><p>Listed by {E(e["organiser"])}. Check the official page for times and details.</p></div></li>')
-    more = f'<button class="btn ghost" id="events-more" type="button"{"" if len(evs) > limit else " hidden"}>Show all {len(evs)} events</button>'
-    return f"""<section aria-labelledby="ev-h">
+    shown = evs if full else evs[:limit]
+    cards = "".join(ev_card(e, r) for e in shown)
+    see = "" if full else f'<p><a class="btn" href="{r}events.html">See all events</a></p>'
+    return f"""
+<section aria-labelledby="ev-h">
 <h2 id="ev-h">Upcoming events</h2>
-<p>Conventions, rallies, round-ups, unity days and service events from the fellowships' own event pages, soonest first. Each one links to its official page.</p>
-<p class="note small">HomeCircle is independent and isn't affiliated with or endorsed by Alcoholics Anonymous or Narcotics Anonymous. We only list events posted on their official pages and don't run or check them. Dates and details can change, so always check the official page.</p>
-<ul class="events" id="events-list" data-src="events.json" data-limit="{limit}">{"".join(lis)}</ul>
-<div class="card sage" id="events-empty"{" hidden" if evs else ""}><h3>No upcoming events listed right now</h3><p>Check the fellowships' own event pages: <a href="https://members.aa.org.au/events/">AA Australia events</a> and <a href="https://www.na.org.au/multi/events/">NA Australia upcoming events</a>.</p></div>
-<div class="btn-row">{more}<a class="btn ghost" href="https://members.aa.org.au/events/">All AA Australia events</a><a class="btn ghost" href="https://www.na.org.au/multi/events/">All NA Australia events</a></div>
-<p class="small">Event list checked on {fmt_date(EVENTS["updated"])}.</p>
+<p>Conventions, rallies, unity days and service events from the fellowships' own event pages, soonest first.</p>
+<p class="note small">HomeCircle is independent and isn't affiliated with or endorsed by Alcoholics Anonymous or Narcotics Anonymous. Dates and details can change, so always check the official page.</p>
+<ul class="ev-feed" id="events-list" data-limit="{0 if full else limit}">{cards}</ul>
+<div class="card sage" id="events-empty"{" hidden" if evs else ""}><h3>No upcoming events listed right now</h3><p>Check <a href="https://members.aa.org.au/events/">AA Australia events</a> and <a href="https://www.na.org.au/multi/events/">NA Australia events</a>.</p></div>
+{see}<p class="small">Event list checked on {fmt_date(EVENTS["updated"])}.</p>
 </section>"""
 
 # ---------- home ----------
@@ -259,6 +275,8 @@ def build_home():
   </ul><div class="btn-row"><a class="btn" href="https://apps.apple.com/au/app/homecircle/id6819366068">Get HomeCircle free on the App Store</a></div></div>
   <div class="card sage"><h3>Support, not medical care</h3><p>{E(L["gpLine"])}</p><p>{E(L["notAffiliated"])}</p><p>HomeCircle never reproduces the Big Book or NA literature. We link to the free official pages instead.</p></div>
 </div>"""
+    page("events.html", "", "Events – HomeCircle", "Upcoming AA and NA events from the fellowships' official pages.",
+         events_html(full=True) + '<div class="btn-row"><a class="btn ghost" href="https://members.aa.org.au/events/">All AA Australia events</a><a class="btn ghost" href="https://www.na.org.au/multi/events/">All NA Australia events</a></div>')
     page("index.html", "index.html", "HomeCircle – Support for your recovery journey",
          "HomeCircle is a free Australian recovery support app and website: find AA and NA meetings, breathing and meditation guides, the 12 Steps and helplines. No accounts.", body)
 
