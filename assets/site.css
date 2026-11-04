@@ -280,7 +280,7 @@ fieldset{border:0;padding:0;margin:0 0 10px;display:grid;gap:8px}
 .practice-running .kai{display:none}
 @media (max-width:760px){.kai-panel{left:12px;right:12px;width:auto}.kai.left .kai-panel{left:12px;right:12px}}
 @media (max-width:480px){
-  .site-head .wrap{padding-right:108px;gap:8px}
+  .site-head .wrap{padding-left:16px;padding-right:124px;gap:8px}
   .brand{gap:8px}.brand img{width:38px;height:38px}.brand b{font-size:20px}
   .site-head .menu-btn{padding:6px 12px}
   .help-pill{right:8px;padding:8px 14px 8px 12px}
