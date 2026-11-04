@@ -137,7 +137,6 @@ def footer(r):
     <p>Support for your recovery journey. Free, with no accounts, no sign-in, no cookies, no ads, no trackers and no analytics.</p>
     <p>{E(L["gpLine"])} {E(L["notMedicalDevice"])} In an emergency call <a href="tel:000">000</a>. Lifeline <a href="tel:131114">13 11 14</a>.</p>
     <p>{E(L["notAffiliated"])}</p>
-    <p>© 2026 {E(L["owner"])} (sole trader), {E(L["ownerPlace"])}. ABN 53 687 374 897.</p>
   </div>
   <div><h2>Explore</h2><ul>{"".join(f'<li><a href="{r}{h}">{E(t)}</a></li>' for h, t in PAGES)}</ul></div>
   <div><h2>About</h2><ul>
@@ -147,7 +146,7 @@ def footer(r):
     <li><a href="mailto:support@homecircle.au">Contact</a></li>
     <li><a href="mailto:{L["supportEmail"]}">{L["supportEmail"]}</a> (not a crisis line)</li>
   </ul><p class="small">{E(BROWSER_ONLY)}</p></div>
-</div></footer>
+</div><div class="wrap"><p class="fine-print">© 2026 {E(L["owner"])} (sole trader), {E(L["ownerPlace"])}. ABN 53 687 374 897.</p></div></footer>
 <dialog class="help" id="help-dialog" aria-labelledby="help-title">
   <div class="help-in">
     <button class="close-x" type="button" data-close aria-label="Close">×</button>
@@ -661,7 +660,7 @@ def build_support():
 <h2>The iPhone app</h2>
 {src}
 <h2>Privacy and terms</h2><p>Read the <a href="{PRIVACY}">App Privacy Policy</a> and <a href="{TERMS}">Terms of Use</a>. {E(BROWSER_ONLY)}</p>
-<h2>Who runs HomeCircle</h2><p>{E(L["owner"])} (sole trader), {E(L["ownerPlace"])}. Email: <a href="mailto:{L["supportEmail"]}">{L["supportEmail"]}</a> (not a crisis line).</p>"""
+<h2>Contact us</h2><p>Email: <a href="mailto:{L["supportEmail"]}">{L["supportEmail"]}</a> (not a crisis line).</p>"""
     page("support.html", "support.html", "Support – HomeCircle", "Get help with HomeCircle: contact, FAQs about the website and app, and crisis support.", body)
 
 
