@@ -37,6 +37,8 @@ PAGES = [("index.html", "Home"), ("library.html", "Library"), ("twelve-steps.htm
 PRIVACY = L["privacyURL"]
 TERMS = L["termsURL"]
 H = C["helplines"]
+import hashlib as _h
+CSS_V = _h.sha1((ROOT / "assets" / "site.css").read_bytes()).hexdigest()[:8]
 HL = {v["id"]: v for v in H["lines"].values()}
 BROWSER_ONLY = "Site features that save anything (your day count, journal, health notes and Kai chat) keep it only in this browser's local storage. Nothing is sent to HomeCircle."
 SLUG = {
@@ -70,7 +72,7 @@ def head(title, desc, r):
 <meta name="description" content="{E(desc)}">
 <link rel="icon" href="{r}favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="{r}assets/logo-192.png">
-<link rel="stylesheet" href="{r}assets/site.css">
+<link rel="stylesheet" href="{r}assets/site.css?v={CSS_V}">
 <script src="{r}assets/site.js" defer></script>
 <script src="{r}assets/kai-data.js" defer></script>
 <script src="{r}assets/kai-engine.js" defer></script>
@@ -483,10 +485,88 @@ STATE_LINES = [  # helplines-verification-2026-11-04.md, section 4 (checked 4 No
     ("Australian Capital Territory", [("Alcohol and Drug Service Intake, Canberra Health Services", "0251249977", "(02) 5124 9977", "Intake, weekdays 8am to 5pm (closes 3.30pm Wednesdays), excluding public holidays. Not a crisis line. After hours, call the National Alcohol and Other Drug Hotline on 1800 250 015.", "https://www.canberrahealthservices.act.gov.au/services-and-clinics/services/central-health-intake-chi")]),
 ]
 
+# Helpline one-liners and "More info" lines. Checked against each service's own website on 4 Nov 2026.
+# Keep to what the official page says. If something can't be verified, leave it out.
+LINE_INFO = {
+    "lifeline": ("24/7 crisis support for anyone in Australia who is feeling overwhelmed or finding it hard to cope.", [
+        "Short-term, confidential support from a trained crisis supporter, including if you're thinking about suicide or worried about someone.",
+        "Call 13 11 14, text 0477 13 11 14 or chat online. All three are open 24/7."], "https://www.lifeline.org.au/", "lifeline.org.au"),
+    "beyond-blue": ("Free counselling for anxiety, depression or feeling overwhelmed, for anyone in Australia.", [
+        "Counsellors listen and help you find the right mental health services. You can also call if you're supporting a partner, family member or friend.",
+        "Call 1300 22 4636 or use webchat, both 24/7.",
+        "Free and confidential. Local call costs apply on the phone. On webchat you don't have to give your real name."], "https://www.beyondblue.org.au/get-support/talk-to-a-counsellor", "beyondblue.org.au"),
+    "suicide-call-back": ("Free 24/7 counselling for anyone affected by suicide, aged 15 and over.", [
+        "For people feeling suicidal, worried about or caring for someone, or who have lost someone to suicide. Also for emotional or mental health issues.",
+        "Phone and online chat are 24/7. Video chat is by appointment (18 and over).",
+        "Free, for people living in Australia. No referral needed."], "https://www.suicidecallbackservice.org.au/phone-and-online-counselling/", "suicidecallbackservice.org.au"),
+    "13yarn": ("Free 24/7 crisis support for Aboriginal and Torres Strait Islander people, from Aboriginal and Torres Strait Islander Crisis Supporters.", [
+        "A confidential, culturally safe place to yarn if you're feeling worried or no good, or worried about someone you know.",
+        "Call 13 92 76 24/7. Text 0447 13 92 76, or type to them online, 4pm to midnight every day.",
+        "Free and confidential."], "https://www.13yarn.org.au/", "13yarn.org.au"),
+    "qlife": ("Free, anonymous LGBTIQ+ peer support for talking about sexuality, gender, bodies, feelings or relationships.", [
+        "Run by LGBTIQA+SB people. Family members, friends and others who support someone LGBTIQA+SB are welcome too.",
+        "Phone or webchat, 3pm to 9pm your local time, every day including holidays. Last calls are taken by 8.40pm.",
+        "Free and anonymous. Not a crisis line."], "https://qlife.org.au/", "qlife.org.au"),
+    "national-aod": ("Free, confidential support for anyone worried about their own or someone else's alcohol or drug use.", [
+        "Your call goes through to the alcohol and drug service in your state or territory.",
+        "Open 24/7. From South Australia, the service runs 8.30am to 10pm.",
+        "Free and confidential. Run by the Australian Government Department of Health, Disability and Ageing."], "https://www.health.gov.au/contacts/national-alcohol-and-other-drug-hotline", "health.gov.au"),
+    "adis": ("24/7 confidential alcohol and drug support for Queenslanders and the people who care about them.", [
+        "For people in Queensland with alcohol or drug concerns, their loved ones, and health professionals.",
+        "Call 24/7, chat online with a counsellor, or request a call back. There's also an SMS support program."], "https://adis.health.qld.gov.au/", "adis.health.qld.gov.au"),
+    "gambling": ("Free, confidential 24/7 support for anyone affected by gambling, yours or someone else's.", [
+        "Talk to a trained counsellor any time, day or night, from anywhere in Australia.",
+        "Gambling Help Online also has live chat and email support, free and confidential.",
+        "Government funded. Not run by Gamblers Anonymous."], "https://www.gamblinghelponline.org.au/", "gamblinghelponline.org.au"),
+    "aa-au": ("Talk to a sober member of Alcoholics Anonymous, any time, if drinking is a problem for you.", [
+        "Call the 24-hour helpline to speak with a sober alcoholic.",
+        "You can also chat live with a member on the AA website, or find an in-person or online meeting."], "https://www.aa.org.au/", "aa.org.au"),
+    "na-au": ("Talk to a member of Narcotics Anonymous, or find a meeting near you.", [
+        "Call 1300 652 820 to find someone to talk to. Hours aren't published.",
+        "To find meetings, text your suburb or postcode and state (for example, Paddington QLD) to 0488 811 247 and you'll get a list of meetings nearby."], "https://www.na.org.au/", "na.org.au"),
+    "al-anon": (None, [
+        "Talk to an Al-Anon member in confidence on 1300 252 666. Hours aren't published.",
+        "Support groups for family and friends of problem drinkers, plus Alateen groups for teens."], "https://al-anon.org.au/", "al-anon.org.au"),
+    "fds": (None, [
+        "A national support line for families and friends affected by someone's alcohol or other drug use.",
+        "Open 24/7. FDS also runs support meetings in some states."], "https://www.fds.org.au/", "fds.org.au"),
+}
+
+# "More info" lines for the state and territory lines, keyed by name. Same rules as LINE_INFO.
+STATE_INFO = {
+    "Adis 24/7 Alcohol and Drug Support": ["Call 24/7, chat online with a counsellor, or request a call back."],
+    "Alcohol and Drug Information Service (ADIS) NSW": [
+        "Free, confidential counselling, information and referral from professional counsellors, for NSW residents worried about alcohol or drugs.",
+        "Phone 24/7. Web chat is Monday to Friday, 8.30am to 5pm (including public holidays)."],
+    "DirectLine": ["Free, confidential alcohol and drug counselling and referral in Victoria, for you or someone else.",
+        "Phone or online, 24/7."],
+    "Alcohol and Drug Information Service (ADIS), DASSA": [
+        "Confidential telephone counselling, information and referral. Run by Drug and Alcohol Services South Australia.",
+        "Every day, 8.30am to 10pm. Calling from outside SA: (08) 7087 1743, same hours."],
+    "Alcohol and Drug Support Line": ["Confidential, free and anonymous, 24/7. Metro (08) 9442 5000, country 1800 198 024."],
+    "Parent and Family Drug Support Line": ["For family and friends worried about someone else's alcohol or drug use.",
+        "Confidential, free and anonymous, 24/7. Metro (08) 9442 5050, country 1800 653 203."],
+    "Alcohol and Drug Information Service": ["24-hour phone information and counselling about the effects of alcohol and drugs, with referral to services.",
+        "For people who use drugs and their family members."],
+    "Alcohol and Drug Information Service (ADIS)": ["The NT Government lists this number on its 24-hour helplines page. It doesn't describe the service in more detail."],
+    "Alcohol and Drug Service Intake, Canberra Health Services": ["An intake line, not a crisis line.",
+        "After hours, the National Alcohol and Other Drug Hotline on 1800 250 015 is open 24/7."],
+}
+
+def domain_of(url):
+    from urllib.parse import urlparse
+    d = urlparse(url).netloc
+    return d[4:] if d.startswith("www.") else d
+
+def more_info(lines, url, label=None):
+    items = "".join(f"<li>{E(x)}</li>" for x in lines)
+    return f'<details class="more"><summary>More info</summary><ul>{items}</ul><p><a href="{E(url)}" rel="noopener">{E(label or domain_of(url))}</a></p></details>'
+
 def line_card(line):
     note = f'<p class="small teal">{E(line["note"])}</p>' if line.get("note") else ""
     txt = f'<a class="btn ghost" href="sms:{line["textDial"]}">Text {E(line["textDisplay"])}</a>' if line.get("textDial") else ""
-    return f'<div class="card"><h3>{E(line["name"])}</h3><p>{E(line["detail"])}</p>{note}<div class="btn-row">{tel(line)}{txt}</div></div>'
+    one, extra, url, label = LINE_INFO[line["id"]]
+    return f'<div class="card"><h3>{E(line["name"])}</h3><p class="one">{E(one)}</p><p>{E(line["detail"])}</p>{note}<div class="btn-row">{tel(line)}{txt}</div>{more_info(extra, url, label)}</div>'
 
 def build_help():
     lines = "".join(line_card(HL[i]) for i in H["primary"])
@@ -498,7 +578,7 @@ def build_help():
     ga_list = "".join(ga_contact(c) for c in ga["contacts"])
     def state_line(n, dial, disp, detail, url, *country):
         extra = f'<a class="btn ghost" href="tel:{country[0][0]}">Call {E(country[0][1])} (country)</a>' if country else ""
-        return f'<div class="state-line"><h4>{E(n)}</h4><p>{E(detail)}</p><div class="btn-row"><a class="btn ghost" href="tel:{dial}">Call {E(disp)}</a>{extra}<a class="btn ghost" href="{E(url)}" rel="noopener">Open site</a></div></div>'
+        return f'<div class="state-line"><h4>{E(n)}</h4><p>{E(detail)}</p><div class="btn-row"><a class="btn ghost" href="tel:{dial}">Call {E(disp)}</a>{extra}<a class="btn ghost" href="{E(url)}" rel="noopener">Open site</a></div>{more_info(STATE_INFO[n], url)}</div>'
     states = "".join(f'<details class="card state"><summary><h3>{E(st)}</h3></summary>{"".join(state_line(*l) for l in ls)}</details>' for st, ls in STATE_LINES)
     body = f"""<div id="now" class="btn-row"><a class="btn danger" href="tel:000">Call 000</a><a class="btn" href="tel:131114">Call Lifeline 13 11 14</a></div>
 <h1>Get help</h1>
@@ -512,9 +592,9 @@ def build_help():
 <div class="note">This is not medical advice. For any major concern, see a local doctor or GP. If a life is in danger, call 000.</div>
 <p>For partners, family members, and couples. These lines are beside someone in recovery.</p>
 <div class="grid g2">
-<div class="card"><h3>{E(al["name"])}</h3><p>For families and friends of someone with a drinking problem.</p><div class="btn-row">{tel(al)}<a class="btn ghost" href="https://al-anon.org.au/">Open site</a></div></div>
+<div class="card"><h3>{E(al["name"])}</h3><p>For families and friends of someone with a drinking problem.</p><div class="btn-row">{tel(al)}<a class="btn ghost" href="https://al-anon.org.au/">Open site</a></div>{more_info(*LINE_INFO["al-anon"][1:])}</div>
 <div class="card"><h3>Alateen</h3><p>Part of Al-Anon Australia, for ages about 13 to 18. Same Australian line. HomeCircle itself is an 18+ app.</p><div class="btn-row">{tel(al)}<a class="btn ghost" href="https://al-anon.org.au/">Open site</a></div></div>
-<div class="card"><h3>{E(fds["name"])}</h3><p>{E(fds.get("note") or "")}</p><p class="small">{E(fds["detail"])}</p><div class="btn-row">{tel(fds)}<a class="btn ghost" href="{E(H["familyDrugSupportURL"])}">Open site</a><a class="btn ghost" href="https://www.fds.org.au/fds-meetings-events/support-meetings" rel="noopener">Find a family meeting</a></div><p class="small">FDS lists no support meetings in WA, Tasmania or the NT. In WA, the Parent and Family Drug Support Line is listed under Western Australia below.</p></div>
+<div class="card"><h3>{E(fds["name"])}</h3><p>{E(fds.get("note") or "")}</p><p class="small">{E(fds["detail"])}</p><div class="btn-row">{tel(fds)}<a class="btn ghost" href="{E(H["familyDrugSupportURL"])}">Open site</a><a class="btn ghost" href="https://www.fds.org.au/fds-meetings-events/support-meetings" rel="noopener">Find a family meeting</a></div>{more_info(*LINE_INFO["fds"][1:])}<p class="small">FDS lists no support meetings in WA, Tasmania or the NT. In WA, the Parent and Family Drug Support Line is listed under Western Australia below.</p></div>
 <div class="card"><h3>{E(gam["name"])}</h3><p>{E(gam["body"])}</p><div class="btn-row"><a class="btn ghost" href="mailto:{E(gam["email"])}">Email {E(gam["email"])}</a><a class="btn ghost" href="{E(gam["url"])}">Open site</a></div></div>
 </div>
 <h2 id="ga">{E(ga["title"])}</h2>
@@ -524,7 +604,7 @@ def build_help():
 <div class="grid g2 states">{states}</div>
 <div class="grid g2 mt">
 <div class="card"><h3>SMART Recovery Australia</h3><p>Free weekly groups, online and in person, for any addictive behaviour, including alcohol, drugs and gambling. Run by a trained facilitator. Not a 12-step program, and not a support line.</p><a class="btn ghost" href="https://smartrecoveryaustralia.com.au/smart-recovery-meetings" rel="noopener">Find a SMART Recovery meeting</a></div>
-<div class="card"><h3>Gambling help in every state</h3><p>Every state and territory gambling service uses the National Gambling Helpline for 24/7 phone help.</p>{tel(HL["gambling"])}</div>
+<div class="card"><h3>Gambling help in every state</h3><p class="one">{E(LINE_INFO["gambling"][0])}</p><p>Every state and territory gambling service uses the National Gambling Helpline for 24/7 phone help.</p>{tel(HL["gambling"])}{more_info(*LINE_INFO["gambling"][1:])}</div>
 </div>
 <p class="small">These are independent services. HomeCircle is not affiliated with them. Hours and numbers can change, so check the service's own website.</p>
 <h2>Self-help kit</h2>

@@ -19,6 +19,7 @@ for f, u in refs:
     if u.startswith(("mailto:", "tel:", "sms:")): continue
     if u.startswith("http"): ext.add(u); continue
     path, _, frag = u.partition("#")
+    path = path.partition("?")[0]
     target = os.path.normpath(os.path.join(os.path.dirname(f), path)) if path else f
     if not os.path.exists(target): bad.append((f, u)); continue
     if frag and target.endswith(".html") and frag not in ids.get(target, set()): bad.append((f, u + " (missing id)"))

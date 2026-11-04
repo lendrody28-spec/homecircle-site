@@ -289,3 +289,13 @@ fieldset{border:0;padding:0;margin:0 0 10px;display:grid;gap:8px}
 #journal-form label{display:block;font-weight:700;margin:10px 0 4px}
 #journal-form textarea{min-height:120px}
 #sober-form label{display:block;font-weight:700;margin-bottom:4px}
+/* helpline cards: one-line description and a native "More info" expander */
+.card .one{font-weight:600;color:var(--ink)}
+details.more{margin-top:12px;border-top:1px solid var(--line);padding-top:8px}
+details.more summary{cursor:pointer;font-weight:700;color:var(--ink);display:list-item;padding:10px 0}
+details.more summary:focus-visible{outline:3px solid var(--ink);outline-offset:2px;border-radius:8px}
+details.more ul{margin:4px 0 8px;padding-left:20px}
+details.more li{margin:4px 0;font-size:16px}
+details.more p{margin:4px 0 0;font-size:16px}
+/* Help pill: always inside the visible viewport, 320px to 1440px+ */
+.help-pill{right:max(12px,env(safe-area-inset-right));max-width:calc(100vw - 24px);box-sizing:border-box}
