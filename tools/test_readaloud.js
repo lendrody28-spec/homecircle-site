@@ -78,12 +78,14 @@ ok(R.textOf(el("H2", "", ["Done?"])) === "Done?", "heading with punctuation unch
   ok(/aria-pressed", paused/.test(src) && /"Resume" : "Pause"/.test(src), "pause button swaps label and aria-pressed");
   const safety = src.slice(src.indexOf("/* SAFETY"));
   ok(/tel:.*#kai-notsafe/.test(safety.split("\n")[1] + safety.split("\n")[2]) && /if \(a\) stop\(\)/.test(safety), "call links and I'm not safe still stop playback");
+  ok(/function chosen\(\) \{ return "B"; \}/.test(src) && /localStorage\.removeItem\("hc\.ra\.voice\.v1"\)/.test(src), "chosen is always B; clears stored preference");
+  ok(/function voicePicker\(\)/.test(src) && /g\.hidden = true/.test(src) && !/data-ra-voice/.test(src) && !/data-ra-sample/.test(src), "voice picker is a hidden stub; no A/B controls");
 })();
 // click handler calls P.unlock() before preload/fetch
 (function () {
   const src = require("fs").readFileSync(__dirname + "/../assets/readaloud.js", "utf8");
   const h = src.slice(src.indexOf('document.addEventListener("click", function (e) {'));
-  ok(h.indexOf("P.unlock()") > 0 && h.indexOf("P.unlock()") < h.indexOf("preload(") && h.indexOf("P.unlock()") < h.indexOf("run(t"), "unlock() before preload/run in the click handler");
+  ok(h.indexOf("P.unlock()") > 0 && h.indexOf("P.unlock()") < h.indexOf("run(t"), "unlock() before run in the click handler");
 })();
 // python page_chunks mirrors chunksOf on help.html (text-level parity is also checked in the browser test)
 // on-device voices only
@@ -105,9 +107,13 @@ const m = require("./audio-manifest.json");
 m.lines.forEach(l => ok(l.spoken === S(l.text), "spoken script current: " + l.id));
 m.lines.forEach(l => ok(!/\b(911|988)\b|nine one one|nine eight eight/.test(l.text + l.spoken), "no US numbers: " + l.id));
 const HELD = ["help.22", "help.37", "help.56"];
-m.lines.forEach(l => ok(HELD.includes(l.id) ? !l.clips.A && !l.clips.B && l.clipsHeld.A && l.clipsHeld.B : !!(l.clips.A && l.clips.B), "both voices (or held for a human listen): " + l.id));
+ok(Object.keys(m.voices).join() === "B" && !m.voices.A, "manifest ships Voice B only");
+m.lines.forEach(l => ok(HELD.includes(l.id) ? !l.clips.B && l.clipsHeld && l.clipsHeld.B && !l.clipsHeld.A : !!(l.clips.B && !l.clips.A), "Voice B only (or held for a human listen): " + l.id));
 const ca = m.lines.find(l => l.id === "kai.crisis.childAbuse");
 ok(ca.clips.B.file === "1ef6b3b450e7.mp3" && !ca.clipsHeld, "childAbuse: own Voice B recording kept (human-listened OK by LJ)");
 const fs = require("fs");
-m.lines.forEach(l => Object.values(l.clipsHeld || {}).forEach(c => { if (!(l.clips.A && l.clips.A.file === c.file)) ok(!fs.existsSync(__dirname + "/../assets/audio/" + c.file), "held clip not in build: " + c.file); }));
+m.lines.forEach(l => Object.values(l.clipsHeld || {}).forEach(c => ok(!fs.existsSync(__dirname + "/../assets/audio/" + c.file), "held clip not in build: " + c.file)));
+// no Voice A files shipped
+ok(!fs.existsSync(__dirname + "/../assets/audio/licences/MeloTTS-MIT-LICENSE.txt"), "MeloTTS licence not shipped");
+ok(fs.existsSync(__dirname + "/../assets/audio/licences/Kokoro-Apache-2.0-LICENSE.txt"), "Kokoro licence kept");
 console.log(`readaloud unit: ${n - f}/${n} passed`); process.exit(f ? 1 : 0);

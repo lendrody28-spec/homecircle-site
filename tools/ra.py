@@ -151,7 +151,7 @@ def check(region, lines):
     return missing
 
 def page_clips(lines_on_page, base):
-    """JSON for one page: only this site's manifest, only lines on this page, both voices."""
+    """JSON for one page: only this site's manifest, only lines on this page, Voice B only."""
     m = load(); by_text = {l["text"]: l for l in m.get("lines", [])}
     out = {"clips": {v: {} for v in m.get("voices", {})}, "voices": {}}
     for t in lines_on_page:

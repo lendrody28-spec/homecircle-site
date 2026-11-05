@@ -46,7 +46,7 @@ const fileVoice = {}; manifest.lines.forEach(l => { for (const v in l.clips) if 
     ok(await btn.isVisible(), `${t}: read button visible`);
     ok(await p.$eval('.ra-note', e => e.textContent) === "Read aloud plays recordings stored on this website, or your device's own voice. Nothing you read or type is sent anywhere.", `${t}: Hale note`);
     const box = await btn.boundingBox(); ok(box.height >= 44 && box.width >= 44, `${t}: 44px read button ${box.width}x${box.height}`);
-    for (const s of await p.$$('.ra-bar .ra-voice,.ra-bar .ra-sample')) { const bb = await s.boundingBox(); ok(bb && bb.height >= 44 && bb.width >= 44, `${t}: 44px voice control`); }
+    ok(await p.locator('.ra-bar .ra-voice,.ra-bar .ra-sample').count() === 0 && !(await p.locator('.ra-bar .ra-voices').isVisible()), `${t}: no voice picker`);
     ok(await p.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), `${t}: no horizontal scroll`);
     // DOM / tab order: every call link in #now precedes the read button
     ok(await p.evaluate(() => { const r = document.querySelector('.ra-bar .ra-btn'); return [...document.querySelectorAll('#now a[href^="tel:"]')].every(a => a.compareDocumentPosition(r) & Node.DOCUMENT_POSITION_FOLLOWING); }), `${t}: call buttons before read button in DOM`);
@@ -62,8 +62,8 @@ const fileVoice = {}; manifest.lines.forEach(l => { for (const v in l.clips) if 
     }
     await btn.click(); await p.waitForTimeout(800);
     ok(await btn.getAttribute('aria-pressed') === 'true' && /Stop/.test(await btn.innerText()) && await btn.getAttribute('aria-label') === 'Stop reading', `${t}: toggles to Stop`);
-    const vA = p.audioReqs.map(f => fileVoice[f]);
-    ok(p.audioReqs.length > 20 && vA.every(v => v === 'A'), `${t}: first tap preloads all Voice A clips in one go (${p.audioReqs.length}) and none of B`);
+    const vB = p.audioReqs.map(f => fileVoice[f]);
+    ok(p.audioReqs.length > 20 && vB.every(v => v === 'B'), `${t}: first tap preloads all Voice B clips in one go (${p.audioReqs.length})`);
     ok((await p.evaluate(() => window.__played.length)) >= 1 && (await p.evaluate(() => window.__spoken.length)) === 0, `${t}: plays a clip, no device speech`);
     // Pause / Resume: one toggle under the section being read, 44px, text label, keyboard
     { const pb = p.locator('.ra-pause');
@@ -92,20 +92,21 @@ const fileVoice = {}; manifest.lines.forEach(l => { for (const v in l.clips) if 
     if (vp.width !== 320) await p.screenshot({ path: `/workspace/shots/readaloud-help-${vp.width}.png` });
     await ctx.close();
   }
-  // 2. Voice B choice: stored in localStorage only; next tap loads B only
-  { const { ctx, p } = await open(b, 'help.html', 'network');
-    ok(await p.locator('.ra-bar .ra-voices').isVisible(), 'voice picker visible when both voices exist');
-    ok(await p.$eval('.ra-bar .ra-voices', e => e.getAttribute('aria-label')) === 'Read aloud voice' && await p.$eval('.ra-bar [data-ra-voice="B"]', e => e.getAttribute('aria-label')) === 'Use Voice B for read aloud', 'voice picker labelled');
-    ok(JSON.stringify(await p.$$eval('.ra-bar [data-ra-voice]', x => x.map(e => e.textContent))) === '["Voice A","Voice B"]', 'labels Voice A / Voice B');
-    await p.click('.ra-bar [data-ra-voice="B"]');
-    ok(await p.evaluate(() => localStorage.getItem('hc.ra.voice.v1')) === 'B' && await p.$eval('.ra-bar [data-ra-voice="B"]', e => e.getAttribute('aria-pressed')) === 'true', 'Voice B stored in localStorage');
+  // 2. Voice B only: no picker; a stored Voice A preference is cleared and ignored
+  { const ctx = await b.newContext({ viewport: { width: 1280, height: 800 } });
+    await ctx.addInitScript(() => { localStorage.setItem('hc.ra.voice.v1', 'A'); });
+    await ctx.addInitScript(mock('local'));
+    const p = await ctx.newPage(); p.audioReqs = []; p.on('request', r => { if (/assets\/audio\/.*\.(m4a|mp3)/.test(r.url())) p.audioReqs.push(r.url().split('/').pop()); });
+    await p.goto(BASE + 'help.html'); await p.waitForTimeout(500);
+    ok(await p.locator('.ra-bar .ra-voice,.ra-bar .ra-sample').count() === 0 && !(await p.locator('.ra-bar .ra-voices').isVisible()), 'no voice picker on the page');
+    ok(await p.evaluate(() => localStorage.getItem('hc.ra.voice.v1')) === null, 'stored Voice A preference cleared');
     ok(await p.evaluate(() => document.cookie === ''), 'no cookie');
-    await p.click('.ra-bar [data-ra-sample="B"]'); await p.waitForTimeout(800);
-    ok(p.audioReqs.length > 0 && p.audioReqs.every(f => fileVoice[f] === 'B' || shared.has(f)), 'sample B loads B clips only');
+    await p.click('.ra-bar .ra-btn'); await p.waitForTimeout(800);
+    ok(p.audioReqs.length > 20 && p.audioReqs.every(f => fileVoice[f] === 'B' || shared.has(f)), 'first tap loads Voice B only even after a stored A preference');
     await ctx.close(); }
-  // 3. Missing clip in chosen voice -> other voice's clip (crisis), never silent
-  { const emA = manifest.lines.find(l => l.id === 'kai.crisis.emergency').clips.A.file, emB = manifest.lines.find(l => l.id === 'kai.crisis.emergency').clips.B.file;
-    const { ctx, p } = await open(b, 'index.html', 'none', null, { block: '**/' + emA });
+  // 3. Crisis reply plays Voice B clip; call / I'm not safe still stop
+  { const emB = manifest.lines.find(l => l.id === 'kai.crisis.emergency').clips.B.file;
+    const { ctx, p } = await open(b, 'index.html', 'none');
     await p.click('#kai-bubble'); await p.waitForSelector('#kai-panel:not([hidden])');
     await p.click('#kai-notsafe');
     const r = await p.evaluate(() => ({ live: document.getElementById('kai-live').textContent, cls: document.activeElement.className, name: document.activeElement.getAttribute('aria-label') }));
@@ -117,8 +118,8 @@ const fileVoice = {}; manifest.lines.forEach(l => { for (const v in l.clips) if 
     const bb = await rb.boundingBox(); ok(bb.height >= 44 && bb.width >= 44, 'reply read button 44px');
     await rb.click(); await p.waitForTimeout(900);
     const played = await p.evaluate(() => window.__played);
-    ok(played.length === 1 && played[0].startsWith('blob:') && (await p.evaluate(() => window.__primed)) >= 1, 'crisis reply plays a clip through the element primed in the tap (from Voice B, as A is missing) ' + played);
-    ok(p.audioReqs.includes(emB), 'fell back to the other voice\'s crisis clip');
+    ok(played.length === 1 && played[0].startsWith('blob:') && (await p.evaluate(() => window.__primed)) >= 1, 'crisis reply plays a Voice B clip through the element primed in the tap ' + played);
+    ok(p.audioReqs.includes(emB) && p.audioReqs.every(f => fileVoice[f] === 'B' || shared.has(f)), 'crisis preload is Voice B only (' + p.audioReqs.length + ')');
     ok((await p.evaluate(() => window.__spoken.length)) === 0, 'no device speech needed');
     ok(await p.locator('#kai-notsafe').isEnabled(), 'I\'m not safe still clickable while playing');
     ok(await p.evaluate(() => { const b = document.querySelector('#kai-after .ra-pause'); return !!b && !b.hidden && b.previousElementSibling === document.querySelector('#kai-after .ra-btn'); }), 'Kai: Pause under the reply, after its read button');
@@ -137,7 +138,7 @@ const fileVoice = {}; manifest.lines.forEach(l => { for (const v in l.clips) if 
     const btn = p.locator('.ra-bar .ra-btn'); ok(await btn.isVisible(), 'twelve steps: shown with a local voice (after late voiceschanged)');
     await btn.click(); await p.waitForTimeout(150);
     const sp = await p.evaluate(() => window.__spoken);
-    ok(sp.length >= 1 && sp.every(s => s.local === true && s.voice === 'Karen'), 'device fallback uses local en-AU voice only (Voice A style) ' + JSON.stringify(sp[0]));
+    ok(sp.length >= 1 && sp.every(s => s.local === true && s.voice === 'Lee'), 'device fallback uses local en-AU male voice (Voice B style) ' + JSON.stringify(sp[0]));
     ok(p.audioReqs.length === 0, 'twelve steps loads no clips');
     await p.click('.ra-pause', { timeout: 3000 }); await p.waitForTimeout(50);
     ok((await p.evaluate(() => window.__ssPause)) >= 1 && await p.locator('.ra-pause').innerText() === 'Resume', 'device voice: speechSynthesis.pause()');
@@ -176,39 +177,39 @@ const fileVoice = {}; manifest.lines.forEach(l => { for (const v in l.clips) if 
     await p.locator('#kai-after .ra-btn').scrollIntoViewIfNeeded();
     await p.screenshot({ path: `/workspace/shots/readaloud-kai-crisis-${vp.width}.png` });
     await ctx.close(); }
-  // Held back pending human listen: help.22/37/56 have no clips and fall back to the device's own voice; childAbuse B uses Voice A's recording
+  // Held back pending human listen: help.22/37/56 have no clips and fall back to the device's own voice
   { const held = manifest.lines.filter(l => l.clipsHeld && !Object.keys(l.clips).length);
     const ca = manifest.lines.find(l => l.id === 'kai.crisis.childAbuse');
-    for (const v of ['A', 'B']) {
-      const ctx = await b.newContext({ viewport: { width: 375, height: 667 } });
-      await ctx.addInitScript(v => { window.__fast = 1; localStorage.setItem('hc.ra.voice.v1', v); }, v); await ctx.addInitScript(mock('local'));
-      const p = await ctx.newPage(); const reqs = []; p.on('request', r => { if (/assets\/audio\//.test(r.url())) reqs.push(r.url().split('/').pop()); });
-      await p.goto(BASE + 'help.html'); await p.waitForTimeout(500);
-      const map = await p.evaluate(() => JSON.parse(document.getElementById('ra-clips').textContent));
-      for (const l of held) {
-        const k = await p.evaluate(t => HCReadAloud.key(t), l.text);
-        ok(!map.clips.A[k] && !map.clips.B[k], `held ${l.id}: no clip in page map`);
-      }
-      const kc = await p.evaluate(t => HCReadAloud.key(t), ca.text);
-      ok(map.clips.A[kc] === ca.clips.A.file && map.clips.B[kc] === ca.clips.B.file, `childAbuse: each voice keeps its own recording (${map.clips.A[kc]}, ${map.clips.B[kc]})`);
-      await p.locator('.ra-bar .ra-btn').click();
-      await p.waitForFunction(n => window.__spoken.length >= n, held.length, { timeout: 60000 }).catch(() => {});
-      await p.waitForTimeout(300);
-      const spoken = await p.evaluate(() => window.__spoken);
-      for (const l of held) { const s = spoken.find(x => x.text === l.spoken || x.text === l.text);
-        ok(s && s.local, `held ${l.id} [voice ${v}]: read by device voice (${s && s.voice})`); }
-      const heldFiles = held.flatMap(l => Object.values(l.clipsHeld).map(c => c.file));
-      ok(!reqs.some(f => heldFiles.includes(f)), `held [voice ${v}]: no held recording fetched`);
-      ok(spoken.length === held.length, `held [voice ${v}]: only held cards use device voice (${spoken.length})`);
-      await ctx.close(); } }
+    const ctx = await b.newContext({ viewport: { width: 375, height: 667 } });
+    await ctx.addInitScript(() => { window.__fast = 1; localStorage.setItem('hc.ra.voice.v1', 'A'); }); await ctx.addInitScript(mock('local'));
+    const p = await ctx.newPage(); const reqs = []; p.on('request', r => { if (/assets\/audio\//.test(r.url())) reqs.push(r.url().split('/').pop()); });
+    await p.goto(BASE + 'help.html'); await p.waitForTimeout(500);
+    const map = await p.evaluate(() => JSON.parse(document.getElementById('ra-clips').textContent));
+    ok(!map.clips.A || !Object.keys(map.clips.A).length, 'page map has no Voice A clips');
+    for (const l of held) {
+      const k = await p.evaluate(t => HCReadAloud.key(t), l.text);
+      ok(!map.clips.B[k], `held ${l.id}: no clip in page map`);
+    }
+    const kc = await p.evaluate(t => HCReadAloud.key(t), ca.text);
+    ok(map.clips.B[kc] === ca.clips.B.file, `childAbuse: Voice B recording kept (${map.clips.B[kc]})`);
+    await p.locator('.ra-bar .ra-btn').click();
+    await p.waitForFunction(n => window.__spoken.length >= n, held.length, { timeout: 60000 }).catch(() => {});
+    await p.waitForTimeout(300);
+    const spoken = await p.evaluate(() => window.__spoken);
+    for (const l of held) { const s = spoken.find(x => x.text === l.spoken || x.text === l.text);
+      ok(s && s.local, `held ${l.id}: read by device voice (${s && s.voice})`); }
+    const heldFiles = held.flatMap(l => Object.values(l.clipsHeld).map(c => c.file));
+    ok(!reqs.some(f => heldFiles.includes(f)), 'held: no held recording fetched');
+    ok(spoken.length === held.length, `held: only held cards use device voice (${spoken.length})`);
+    await ctx.close(); }
   // Real playback (no media mock): the clip must play under the site's CSP, one batch for the chosen voice only, no fallback
   { const man = JSON.parse(require('fs').readFileSync(require('path').join(process.env.SITE, 'tools/audio-manifest.json')));
-    for (const [pg, sel, v] of [['help.html', '.ra-bar .ra-btn', 'A'], ['index.html', '.kai-ra .ra-btn', 'B']]) {
-      const want = new Set(man.lines.map(l => l.clips[v] && l.clips[v].file).filter(Boolean));
+    for (const [pg, sel] of [['help.html', '.ra-bar .ra-btn'], ['index.html', '.kai-ra .ra-btn']]) {
+      const want = new Set(man.lines.map(l => l.clips.B && l.clips.B.file).filter(Boolean));
       const ctx = await b.newContext({ viewport: { width: 375, height: 667 } });
-      await ctx.addInitScript(v => { localStorage.setItem('hc.ra.voice.v1', v);   // a local device voice only (held Help cards need one); media is real
-        const ss = new EventTarget(); ss.getVoices = () => [{ name: 'Karen', lang: 'en-AU', localService: true, default: true }]; ss.speak = () => {}; ss.cancel = () => {}; ss.pause = () => {}; ss.resume = () => {};
-        Object.defineProperty(window, 'speechSynthesis', { value: ss }); window.SpeechSynthesisUtterance = function (t) { this.text = t; }; setTimeout(() => ss.dispatchEvent(new Event('voiceschanged')), 100); }, v);
+      await ctx.addInitScript(() => { localStorage.setItem('hc.ra.voice.v1', 'A');   // leftover A preference must be ignored; media is real
+        const ss = new EventTarget(); ss.getVoices = () => [{ name: 'Lee', lang: 'en-AU', localService: true, default: true }]; ss.speak = () => {}; ss.cancel = () => {}; ss.pause = () => {}; ss.resume = () => {};
+        Object.defineProperty(window, 'speechSynthesis', { value: ss }); window.SpeechSynthesisUtterance = function (t) { this.text = t; }; setTimeout(() => ss.dispatchEvent(new Event('voiceschanged')), 100); });
       const p = await ctx.newPage(); const csp = [], reqs = [], off = [];
       p.on('console', m => { if (/Content Security Policy/.test(m.text())) csp.push(m.text().slice(0, 120)); });
       p.on('request', r => { const u = r.url(); if (/assets\/audio\/.*\.mp3/.test(u)) reqs.push(u.split('/').pop()); if (!u.startsWith(BASE) && !/^(data|blob):/.test(u)) off.push(u); });
@@ -216,7 +217,7 @@ const fileVoice = {}; manifest.lines.forEach(l => { for (const v in l.clips) if 
       if (sel.startsWith('.kai')) { await p.click('#kai-bubble'); await p.waitForTimeout(200); }
       await p.locator(sel).first().click(); await p.waitForTimeout(2500);
       ok(csp.length === 0, `real playback ${pg}: no CSP blocks ${csp}`);
-      ok(reqs.length > 0 && reqs.every(f => want.has(f)), `real playback ${pg}: only Voice ${v} batch fetched (${reqs.length} clips)`);
+      ok(reqs.length > 0 && reqs.every(f => want.has(f)), `real playback ${pg}: only Voice B batch fetched (${reqs.length} clips)`);
       ok(await p.locator('.ra-pause').isVisible(), `real playback ${pg}: still playing after 2.5 s (Pause shown)`);
       ok(off.length === 0, `real playback ${pg}: no off-site requests`);
       await ctx.close(); } }
