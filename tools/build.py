@@ -53,7 +53,7 @@ KAI_V = _h.sha256(b"".join((ROOT / "assets" / f).read_bytes() for f in ("kai.js"
 SITE_URL = "https://homecircle.au"
 APP_STORE_URL = "https://apps.apple.com/au/app/homecircle/id6819366068"
 APP_STORE_ID = "6819366068"
-OG_IMAGE = f"{SITE_URL}/assets/logo-192.png"
+OG_IMAGE = f"{SITE_URL}/assets/og-homecircle.png"
 BUILT_PAGES = []  # filled by page(); used for sitemap.xml
 # Raven titles/descriptions (seo-basics-v2). Exact strings; do not keyword-stuff.
 SEO_META = json.loads((ROOT / "tools" / "seo_meta.json").read_text())
@@ -134,7 +134,10 @@ def seo_head(title, desc, path):
 <meta property="og:title" content="{E(title)}">
 <meta property="og:description" content="{E(desc)}">
 <meta property="og:image" content="{OG_IMAGE}">
-<meta name="twitter:card" content="summary">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="HomeCircle: free recovery support in Australia">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{E(title)}">
 <meta name="twitter:description" content="{E(desc)}">
 <meta name="twitter:image" content="{OG_IMAGE}">
@@ -281,6 +284,12 @@ def ra_insert_bar(path, body):
     i = body.find("<h1")
     return body[:i] + RA_BAR + body[i:] if i >= 0 else RA_BAR + body
 
+SHARE_ICON = '<svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>'
+SHARE_HOME = """<div class="card share-card mt"><div><p class="eyebrow">Share HomeCircle</p><h2 class="mt0">Know someone who'd find this useful?</h2>
+<p>Share HomeCircle with a friend, family member or client, or post it to Facebook, Instagram or X. It opens the share options on your phone, or copies the link on a computer. Nothing is tracked.</p></div>
+<div class="share-actions"><button class="btn" type="button" id="hc-share">{icon}<span>Share HomeCircle</span></button><p class="small" id="hc-share-status" role="status"></p></div></div>
+<script src="assets/share.js" defer></script>""".format(icon=SHARE_ICON)
+
 def page(path, active, title, desc, body):
     global RA_HELP_BODY
     if path in SEO_META:
@@ -403,6 +412,7 @@ def build_home():
 </ul>
 <p class="small">{E("HomeCircle is a support tool, not medical care. It isn't part of, affiliated with or endorsed by AA, NA, GA or PA. If you're in danger, call ")}<a href="tel:000">000</a>{E(". For crisis support, call Lifeline on ")}<a href="tel:131114">13 11 14</a>.</p></div>
 {events_html()}
+{SHARE_HOME}
 <h2>The HomeCircle app</h2>
 <div class="grid g2">
   <div class="card"><h3>In the iPhone app</h3><ul>

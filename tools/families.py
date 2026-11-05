@@ -22,8 +22,8 @@ TOP = """<div class="fam-strip" role="region" aria-label="Call for help now"><st
 <p class="fam-scared"><strong>If you're scared of them, call <a href="tel:000">000</a> or 1800RESPECT <a href="tel:1800737732">1800 737 732</a>.</strong></p>"""
 KIDS_SCARED = """<p class="fam-scared"><strong>If you're scared or in danger, call <a href="tel:000">000</a>. You can call Kids Helpline any time on <a href="tel:1800551800">1800 55 1800</a>.</strong></p>"""
 
-SHARE = """<div class="card sage mt"><h2 class="mt0">Send this page to someone</h2><p>Share it, or copy the link. Nothing is tracked.</p>
-<button class="btn" type="button" id="fam-share">Send this page to someone</button><p class="small" id="fam-share-status" role="status"></p></div>"""
+SHARE = """<div class="card sage mt"><h2 class="mt0">Share this page</h2><p>Send it to someone you care about, or copy the link. Nothing is tracked.</p>
+<button class="btn" type="button" id="fam-share">Share this page</button><p class="small" id="fam-share-status" role="status"></p></div>"""
 
 AOD = "1800 250 015"
 WITHDRAWAL_LINE = f'Withdrawal from alcohol or some medicines can be dangerous. Don\'t manage it at home alone. See a GP, or call the National Alcohol and Other Drug Hotline on <a href="tel:1800250015">{AOD}</a> (some state lines have set hours). Call <a href="tel:000">000</a> for a seizure, confusion or collapse.'

@@ -374,3 +374,14 @@ html.ra-on .ra-voices:not([hidden]){display:inline-flex;flex-wrap:wrap;gap:4px;a
 .ra-voice,.ra-sample{min-height:44px;min-width:44px;border:2px solid var(--muted);background:#fff;color:var(--text);font:inherit;font-size:14px;border-radius:10px;padding:4px 10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
 .ra-voice[aria-pressed="true"]{background:var(--text);border-color:var(--text);color:#fff;font-weight:600}
 .kai-foot .ra-voices{margin-top:4px}
+
+/* Share card */
+.share-card{display:flex;align-items:center;justify-content:space-between;gap:24px;background:linear-gradient(120deg,#0D6968,#1A8F86);color:#fff;border:none}
+.share-card h2{color:#fff;margin-bottom:8px}
+.share-card p{color:#F2F7F2;max-width:60ch}
+.share-card .eyebrow{color:#BFE6DA}
+.share-card .btn{background:#fff;color:#0D6968;border-color:#fff;white-space:nowrap}
+.share-card .btn:hover{background:#E4EFDF;border-color:#E4EFDF}
+.share-card .small{margin:10px 0 0;color:#EAF4EF;text-align:center;min-height:1em}
+.share-actions{flex-shrink:0;text-align:center}
+@media (max-width:720px){.share-card{flex-direction:column;align-items:flex-start}.share-actions{width:100%}.share-card .btn{width:100%}}
