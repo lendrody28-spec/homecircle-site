@@ -1,0 +1,10 @@
+DRAFT
+id: help.68
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/3aa33acb2594.mp3
+
+On screen:
+Code of conduct. Be kind. At meetings you find through HomeCircle, please respect that group's own guidelines, and don't record or share what people say. Questions or concerns? Email us, and we aim to reply within 24 hours. HomeCircle is support, not medical care.
+
+Spoken script:
+Code of conduct. Be kind. At meetings you find through HomeCircle, please respect that group's own guidelines, and don't record or share what people say. Questions or concerns? Email us, and we aim to reply within 24 hours. HomeCircle is support, not medical care.

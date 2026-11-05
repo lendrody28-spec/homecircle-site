@@ -1,0 +1,10 @@
+DRAFT
+id: help.01
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/719e6981d490.mp3
+
+On screen:
+Get help.
+
+Spoken script:
+Get help.

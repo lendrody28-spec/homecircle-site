@@ -1,0 +1,10 @@
+DRAFT
+id: help.50
+voice: A (melo EN-AU, speed 0.9)
+file: assets/audio/74c508113ca6.mp3
+
+On screen:
+Parent and Family Drug Support Line. 24/7. Country callers: 1800 653 203. For anyone worried about someone else's use. Call (08) 9442 5050 Call 1800 653 203 (country) Open site More info. For family and friends worried about someone else's alcohol or drug use. Confidential, free and anonymous, 24/7. Metro (08) 9442 5050, country 1800 653 203. mhc.wa.gov.au
+
+Spoken script:
+Parent and Family Drug Support Line. twenty-four seven. Country callers: one eight hundred, six five three, two zero three. For anyone worried about someone else's use. Call zero eight, nine four four two, five zero five zero Call one eight hundred, six five three, two zero three (country) Open site More info. For family and friends worried about someone else's alcohol or drug use. Confidential, free and anonymous, twenty-four seven. Metro zero eight, nine four four two, five zero five zero, country one eight hundred, six five three, two zero three. mhc.wa.gov.au

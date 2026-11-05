@@ -1,0 +1,10 @@
+DRAFT
+id: kai.fu.encourage
+voice: A (melo EN-AU, speed 0.9)
+file: assets/audio/6e9f8745ebd0.mp3
+
+On screen:
+Today sounds hard. You're still here and still trying, and that counts. You've got a goal and people in your corner.
+
+Spoken script:
+Today sounds hard. You're still here and still trying, and that counts. You've got a goal and people in your corner.

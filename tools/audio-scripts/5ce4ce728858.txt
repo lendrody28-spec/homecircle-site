@@ -1,0 +1,10 @@
+DRAFT
+id: help.48
+voice: A (melo EN-AU, speed 0.9)
+file: assets/audio/5ce4ce728858.mp3
+
+On screen:
+Western Australia.
+
+Spoken script:
+Western Australia.

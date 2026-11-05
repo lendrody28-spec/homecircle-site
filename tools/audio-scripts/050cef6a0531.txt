@@ -1,0 +1,10 @@
+DRAFT
+id: kai.fu.journalSaved
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/050cef6a0531.mp3
+
+On screen:
+Saved to your journal, in this browser only.
+
+Spoken script:
+Saved to your journal, in this browser only.

@@ -1,0 +1,10 @@
+DRAFT
+id: help.03
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/432044fd3380.mp3
+
+On screen:
+HomeCircle is not a medical device and doesn't give medical advice.
+
+Spoken script:
+HomeCircle is not a medical device and doesn't give medical advice.

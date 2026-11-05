@@ -1,0 +1,10 @@
+DRAFT
+id: help.64
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/f2eb8cb70833.mp3
+
+On screen:
+HALT. Hungry, Angry, Lonely, Tired. A pause, not a medical check.
+
+Spoken script:
+HALT. Hungry, Angry, Lonely, Tired. A pause, not a medical check.

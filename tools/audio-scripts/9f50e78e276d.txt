@@ -1,0 +1,10 @@
+DRAFT
+id: kai.crisis.selfHarm
+voice: A (melo EN-AU, speed 0.9)
+file: assets/audio/9f50e78e276d.mp3
+
+On screen:
+If you might act on this, call 000 now. Lifeline is 13 11 14. Kai is a recovery buddy, not a counsellor, and can't diagnose. Kai can miss things, so please reach out yourself.
+
+Spoken script:
+If you might act on this, call triple zero now. Lifeline, thirteen eleven fourteen. Kye is a recovery buddy, not a counsellor, and can't diagnose. Kye can miss things, so please reach out yourself.

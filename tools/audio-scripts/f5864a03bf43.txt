@@ -1,0 +1,10 @@
+DRAFT
+id: help.26
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/f5864a03bf43.mp3
+
+On screen:
+These are independent services. HomeCircle is not affiliated with them.
+
+Spoken script:
+These are independent services. HomeCircle is not affiliated with them.

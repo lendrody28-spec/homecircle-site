@@ -1,0 +1,10 @@
+DRAFT
+id: help.16
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/e6ecedb5c796.mp3
+
+On screen:
+National Alcohol and Other Drug Hotline. Free, confidential support for anyone worried about their own or someone else's alcohol or drug use. Call 1800 250 015 Connects you to your state's alcohol and drug service. Open 24/7, except South Australia (8.30am to 10pm). In an emergency call 000, or Lifeline 13 11 14 any time. Call 1800 250 015
+
+Spoken script:
+National Alcohol and Other Drug Hotline. Free, confidential support for anyone worried about their own or someone else's alcohol or drug use. Call one eight hundred, two five zero, zero one five Connects you to your state's alcohol and drug service. Open twenty-four seven, except South Australia (8.30am to 10pm). In an emergency call triple zero, or Lifeline thirteen eleven fourteen any time. Call one eight hundred, two five zero, zero one five

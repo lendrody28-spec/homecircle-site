@@ -1,0 +1,10 @@
+DRAFT
+id: kai.fu.t.ground
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/c434719b6c2a.mp3
+
+On screen:
+Something some people find helps: notice 5 things you can see, 4 you can feel, 3 you can hear, 2 you can smell and 1 you can taste.
+
+Spoken script:
+Something some people find helps: notice 5 things you can see, 4 you can feel, 3 you can hear, 2 you can smell and 1 you can taste.

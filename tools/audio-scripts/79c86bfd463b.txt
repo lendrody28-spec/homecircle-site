@@ -1,0 +1,10 @@
+DRAFT
+id: kai.fu.t.ground
+voice: A (melo EN-AU, speed 0.9)
+file: assets/audio/79c86bfd463b.mp3
+
+On screen:
+Something some people find helps: notice 5 things you can see, 4 you can feel, 3 you can hear, 2 you can smell and 1 you can taste.
+
+Spoken script:
+Something some people find helps: notice 5 things you can see, 4 you can feel, 3 you can hear, 2 you can smell and 1 you can taste.

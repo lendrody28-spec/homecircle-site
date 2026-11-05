@@ -1,0 +1,10 @@
+DRAFT
+id: help.48
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/2597fffa7d32.mp3
+
+On screen:
+Western Australia.
+
+Spoken script:
+Western Australia.

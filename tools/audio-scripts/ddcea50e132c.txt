@@ -1,0 +1,10 @@
+DRAFT
+id: help.42
+voice: A (melo EN-AU, speed 0.9)
+file: assets/audio/ddcea50e132c.mp3
+
+On screen:
+New South Wales.
+
+Spoken script:
+New South Wales.

@@ -1,0 +1,10 @@
+DRAFT
+id: kai.fu.worse
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/4a2c475354cc.mp3
+
+On screen:
+Thanks for telling me. You don't have to push through this alone.
+
+Spoken script:
+Thanks for telling me. You don't have to push through this alone.

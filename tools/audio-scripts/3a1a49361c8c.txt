@@ -1,0 +1,10 @@
+DRAFT
+id: kai.crisis.worse
+voice: A (melo EN-AU, speed 0.9)
+file: assets/audio/3a1a49361c8c.mp3
+
+On screen:
+If you or anyone else is in danger right now, call 000, or Lifeline on 13 11 14. Kai can miss things.
+
+Spoken script:
+If you or anyone else is in danger right now, call triple zero, or Lifeline on thirteen eleven fourteen. Kye can miss things.

@@ -1,0 +1,10 @@
+DRAFT
+id: kai.fu.t.meditation
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/e702f5a6cbee.mp3
+
+On screen:
+Something some people find helps: a short meditation from the Library.
+
+Spoken script:
+Something some people find helps: a short meditation from the Library.

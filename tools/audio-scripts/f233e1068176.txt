@@ -1,0 +1,10 @@
+DRAFT
+id: kai.fu.ask
+voice: A (melo EN-AU, speed 0.9)
+file: assets/audio/f233e1068176.mp3
+
+On screen:
+How was that? Did you notice any change in your body, even a small one?
+
+Spoken script:
+How was that? Did you notice any change in your body, even a small one?

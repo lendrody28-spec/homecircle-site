@@ -1,0 +1,10 @@
+DRAFT
+id: kai.fu.same
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/b69c5f451a53.mp3
+
+On screen:
+That's okay. Not every tool works every time. Want to try a different one?
+
+Spoken script:
+That's okay. Not every tool works every time. Want to try a different one?

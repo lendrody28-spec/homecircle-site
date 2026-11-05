@@ -1,0 +1,10 @@
+DRAFT
+id: help.40
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/7a3947c1bbb6.mp3
+
+On screen:
+Queensland.
+
+Spoken script:
+Queensland.

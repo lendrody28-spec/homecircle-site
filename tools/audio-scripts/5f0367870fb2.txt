@@ -1,0 +1,10 @@
+DRAFT
+id: help.46
+voice: A (melo EN-AU, speed 0.9)
+file: assets/audio/5f0367870fb2.mp3
+
+On screen:
+South Australia.
+
+Spoken script:
+South Australia.

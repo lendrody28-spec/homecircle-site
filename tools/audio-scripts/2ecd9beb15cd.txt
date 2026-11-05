@@ -1,0 +1,10 @@
+DRAFT
+id: help.26
+voice: A (melo EN-AU, speed 0.9)
+file: assets/audio/2ecd9beb15cd.mp3
+
+On screen:
+These are independent services. HomeCircle is not affiliated with them.
+
+Spoken script:
+These are independent services. HomeCircle is not affiliated with them.

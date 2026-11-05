@@ -1,0 +1,10 @@
+DRAFT
+id: help.24
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/0a3c0a4aad8a.mp3
+
+On screen:
+NA Australia. Talk to a member of Narcotics Anonymous, or find a meeting near you. Call 1300 652 820 Call 1300 652 820
+
+Spoken script:
+NA Australia. Talk to a member of Narcotics Anonymous, or find a meeting near you. Call thirteen hundred, six five two, eight two zero Call thirteen hundred, six five two, eight two zero

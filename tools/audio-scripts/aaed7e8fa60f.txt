@@ -1,0 +1,10 @@
+DRAFT
+id: kai.fu.t.outbreath
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/aaed7e8fa60f.mp3
+
+On screen:
+Something some people find helps: breathe out slowly, a little longer than you breathe in.
+
+Spoken script:
+Something some people find helps: breathe out slowly, a little longer than you breathe in.

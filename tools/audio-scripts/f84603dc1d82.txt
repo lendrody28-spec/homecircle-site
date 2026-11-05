@@ -1,0 +1,10 @@
+DRAFT
+id: help.29
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/f84603dc1d82.mp3
+
+On screen:
+For partners, family members, and couples. These lines are beside someone in recovery.
+
+Spoken script:
+For partners, family members, and couples. These lines are beside someone in recovery.

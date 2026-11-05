@@ -1,0 +1,10 @@
+DRAFT
+id: help.45
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/1d8c8f02ccbc.mp3
+
+On screen:
+DirectLine. 24/7 phone and online counselling. For Victorians, family members and others. Call 1800 888 236 Open site More info. Free, confidential alcohol and drug counselling and referral in Victoria, for you or someone else. Phone or online, 24/7. directline.org.au
+
+Spoken script:
+DirectLine. twenty-four seven phone and online counselling. For Victorians, family members and others. Call one eight hundred, eight eight eight, two three six Open site More info. Free, confidential alcohol and drug counselling and referral in Victoria, for you or someone else. Phone or online, twenty-four seven. directline.org.au

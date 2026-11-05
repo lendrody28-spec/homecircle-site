@@ -1,0 +1,10 @@
+DRAFT
+id: help.58
+voice: A (melo EN-AU, speed 0.9)
+file: assets/audio/e0e56f4db865.mp3
+
+On screen:
+Gambling help in every state. Free, confidential 24/7 support for anyone affected by gambling, yours or someone else's. Every state and territory gambling service uses the National Gambling Helpline for 24/7 phone help. Call 1800 858 858
+
+Spoken script:
+Gambling help in every state. Free, confidential twenty-four seven support for anyone affected by gambling, yours or someone else's. Every state and territory gambling service uses the National Gambling Helpline for twenty-four seven phone help. Call one eight hundred, eight five eight, eight five eight

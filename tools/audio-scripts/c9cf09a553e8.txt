@@ -1,0 +1,10 @@
+DRAFT
+id: help.72
+voice: A (melo EN-AU, speed 0.9)
+file: assets/audio/c9cf09a553e8.mp3
+
+On screen:
+More information.
+
+Spoken script:
+More information.

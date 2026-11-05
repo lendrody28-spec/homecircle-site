@@ -1,0 +1,10 @@
+DRAFT
+id: help.06
+voice: A (melo EN-AU, speed 0.9)
+file: assets/audio/f16cc7f1e04a.mp3
+
+On screen:
+Lifeline. 24/7 crisis support for anyone in Australia who is feeling overwhelmed or finding it hard to cope. 24 hours. Call 13 11 14 You can also text 0477 13 11 14. Call 13 11 14 Text 0477 13 11 14
+
+Spoken script:
+Lifeline. twenty-four seven crisis support for anyone in Australia who is feeling overwhelmed or finding it hard to cope. 24 hours. Call thirteen eleven fourteen You can also text zero four seven seven, thirteen eleven fourteen. Call thirteen eleven fourteen Text zero four seven seven, thirteen eleven fourteen

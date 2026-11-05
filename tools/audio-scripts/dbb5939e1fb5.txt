@@ -1,0 +1,10 @@
+DRAFT
+id: help.25
+voice: A (melo EN-AU, speed 0.9)
+file: assets/audio/dbb5939e1fb5.mp3
+
+On screen:
+More info. Call 1300 652 820 to find someone to talk to. Hours aren't published. To find meetings, text your suburb or postcode and state (for example, Paddington QLD) to 0488 811 247 and you'll get a list of meetings nearby. na.org.au
+
+Spoken script:
+More info. Call thirteen hundred, six five two, eight two zero to find someone to talk to. Hours aren't published. To find meetings, text your suburb or postcode and state (for example, Paddington QLD) to zero four eight eight, eight one one, two four seven and you'll get a list of meetings nearby. na.org.au

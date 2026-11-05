@@ -1,0 +1,10 @@
+DRAFT
+id: help.49
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/a09d25637ac1.mp3
+
+On screen:
+Alcohol and Drug Support Line. 24/7. Country callers: 1800 198 024. For anyone worried about their own or someone else's alcohol or drug use. Call (08) 9442 5000 Call 1800 198 024 (country) Open site More info. Confidential, free and anonymous, 24/7. Metro (08) 9442 5000, country 1800 198 024. mhc.wa.gov.au
+
+Spoken script:
+Alcohol and Drug Support Line. twenty-four seven. Country callers: one eight hundred, one nine eight, zero two four. For anyone worried about their own or someone else's alcohol or drug use. Call zero eight, nine four four two, five zero zero zero Call one eight hundred, one nine eight, zero two four (country) Open site More info. Confidential, free and anonymous, twenty-four seven. Metro zero eight, nine four four two, five zero zero zero, country one eight hundred, one nine eight, zero two four. mhc.wa.gov.au

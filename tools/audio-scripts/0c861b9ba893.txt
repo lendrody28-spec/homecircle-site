@@ -1,0 +1,10 @@
+DRAFT
+id: help.17
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/0c861b9ba893.mp3
+
+On screen:
+More info. Your call goes through to the alcohol and drug service in your state or territory. Open 24/7. From South Australia, the service runs 8.30am to 10pm. Free and confidential. Run by the Australian Government Department of Health, Disability and Ageing. health.gov.au
+
+Spoken script:
+More info. Your call goes through to the alcohol and drug service in your state or territory. Open twenty-four seven. From South Australia, the service runs 8.30am to 10pm. Free and confidential. Run by the Australian Government Department of Health, Disability and Ageing. health.gov.au

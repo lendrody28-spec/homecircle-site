@@ -1,0 +1,10 @@
+DRAFT
+id: help.36
+voice: A (melo EN-AU, speed 0.9)
+file: assets/audio/c42ce4a2ca6c.mp3
+
+On screen:
+Gamblers Anonymous Australia.
+
+Spoken script:
+Gamblers Anonymous Australia.

@@ -1,0 +1,10 @@
+DRAFT
+id: help.61
+voice: A (melo EN-AU, speed 0.9)
+file: assets/audio/e104e5e1f8a5.mp3
+
+On screen:
+Self-help kit.
+
+Spoken script:
+Self-help kit.

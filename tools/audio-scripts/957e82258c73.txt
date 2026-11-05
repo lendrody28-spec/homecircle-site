@@ -1,0 +1,10 @@
+DRAFT
+id: kai.start.struggling
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/957e82258c73.mp3
+
+On screen:
+Thanks for telling me. You don't have to sort it all out right now. We could slow your breathing for a minute, find a meeting, or keep talking here. If you're not safe right now, tap I'm not safe or call 000.
+
+Spoken script:
+Thanks for telling me. You don't have to sort it all out right now. We could slow your breathing for a minute, find a meeting, or keep talking here. If you're not safe right now, tap I'm not safe or call triple zero.

@@ -1,0 +1,10 @@
+DRAFT
+id: help.74
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/5016f744a1e9.mp3
+
+On screen:
+For any health concern, talk to your GP or a doctor. HomeCircle is support, not medical care.
+
+Spoken script:
+For any health concern, talk to your G P or a doctor. HomeCircle is support, not medical care.

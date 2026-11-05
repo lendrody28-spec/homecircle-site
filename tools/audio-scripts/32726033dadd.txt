@@ -1,0 +1,10 @@
+DRAFT
+id: help.28
+voice: A (melo EN-AU, speed 0.9)
+file: assets/audio/32726033dadd.mp3
+
+On screen:
+This is not medical advice. For any major concern, see a local doctor or GP. If a life is in danger, call 000.
+
+Spoken script:
+This is not medical advice. For any major concern, see a local doctor or G P. If a life is in danger, call triple zero.

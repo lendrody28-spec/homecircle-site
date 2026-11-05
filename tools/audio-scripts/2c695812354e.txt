@@ -1,0 +1,10 @@
+DRAFT
+id: help.11
+voice: A (melo EN-AU, speed 0.9)
+file: assets/audio/2c695812354e.mp3
+
+On screen:
+More info. For people feeling suicidal, worried about or caring for someone, or who have lost someone to suicide. Also for emotional or mental health issues. Phone and online chat are 24/7. Video chat is by appointment (18 and over). Free, for people living in Australia. No referral needed. suicidecallbackservice.org.au
+
+Spoken script:
+More info. For people feeling suicidal, worried about or caring for someone, or who have lost someone to suicide. Also for emotional or mental health issues. Phone and online chat are twenty-four seven. Video chat is by appointment (18 and over). Free, for people living in Australia. No referral needed. suicidecallbackservice.org.au

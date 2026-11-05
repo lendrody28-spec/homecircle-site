@@ -1,0 +1,10 @@
+DRAFT
+id: help.55
+voice: A (melo EN-AU, speed 0.9)
+file: assets/audio/fd3a2625fec7.mp3
+
+On screen:
+Australian Capital Territory.
+
+Spoken script:
+Australian Capital Territory.

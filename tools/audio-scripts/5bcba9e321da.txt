@@ -1,0 +1,10 @@
+DRAFT
+id: help.41
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/5bcba9e321da.mp3
+
+On screen:
+Adis 24/7 Alcohol and Drug Support. 24/7. For Queenslanders and their family and friends. Call 1800 177 833 Open site More info. Call 24/7, chat online with a counsellor, or request a call back. adis.health.qld.gov.au
+
+Spoken script:
+Adis twenty-four seven Alcohol and Drug Support. twenty-four seven. For Queenslanders and their family and friends. Call one eight hundred, one seven seven, eight three three Open site More info. Call twenty-four seven, chat online with a counsellor, or request a call back. adis.health.qld.gov.au

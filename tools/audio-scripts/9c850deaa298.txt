@@ -1,0 +1,10 @@
+DRAFT
+id: help.61
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/9c850deaa298.mp3
+
+On screen:
+Self-help kit.
+
+Spoken script:
+Self-help kit.

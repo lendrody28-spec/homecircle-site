@@ -1,0 +1,10 @@
+DRAFT
+id: help.57
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/723d017ca20f.mp3
+
+On screen:
+SMART Recovery Australia. Free weekly groups, online and in person, for any addictive behaviour, including alcohol, drugs and gambling. Run by a trained facilitator. Not a 12-step program, and not a support line. Find a SMART Recovery meeting
+
+Spoken script:
+SMART Recovery Australia. Free weekly groups, online and in person, for any addictive behaviour, including alcohol, drugs and gambling. Run by a trained facilitator. Not a 12-step program, and not a support line. Find a SMART Recovery meeting

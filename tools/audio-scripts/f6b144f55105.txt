@@ -1,0 +1,10 @@
+DRAFT
+id: kai.fu.ask
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/f6b144f55105.mp3
+
+On screen:
+How was that? Did you notice any change in your body, even a small one?
+
+Spoken script:
+How was that? Did you notice any change in your body, even a small one?

@@ -1,0 +1,10 @@
+DRAFT
+id: help.35
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/e7abc3dae017.mp3
+
+On screen:
+Gam-Anon. For families and friends of someone with a gambling problem. Meetings in NSW and Queensland, some on Zoom. Email gam-anon@live.com.au Open site
+
+Spoken script:
+Gam-Anon. For families and friends of someone with a gambling problem. Meetings in NSW and Queensland, some on Zoom. Email gam-anon@live.com.au Open site

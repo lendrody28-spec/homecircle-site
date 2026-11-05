@@ -1,0 +1,10 @@
+DRAFT
+id: kai.fu.journalFailed
+voice: A (melo EN-AU, speed 0.9)
+file: assets/audio/2fca8490414b.mp3
+
+On screen:
+This browser isn't letting the site save notes, so nothing was kept.
+
+Spoken script:
+This browser isn't letting the site save notes, so nothing was kept.

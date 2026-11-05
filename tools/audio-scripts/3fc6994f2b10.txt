@@ -1,0 +1,10 @@
+DRAFT
+id: kai.crisis.familyHarm
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/3fc6994f2b10.mp3
+
+On screen:
+Call 000 now if anyone is in danger. Please keep everyone safe: step away and give yourself space. Lifeline is 13 11 14. Men's Referral Service is 1300 766 491, for help to stop using violence. Please make the call yourself. Kai can't call anyone and can miss things.
+
+Spoken script:
+Please call triple zero now if anyone is in danger. Please keep everyone safe: step away and give yourself space. Lifeline, thirteen eleven fourteen. Men's Referral Service is thirteen hundred, seven six six, four nine one, for help to stop using violence. Please make the call yourself. Kye can't call anyone and can miss things.

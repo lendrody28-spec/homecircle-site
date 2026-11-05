@@ -1,0 +1,10 @@
+DRAFT
+id: help.34
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/59f225e7c745.mp3
+
+On screen:
+More info. A national support line for families and friends affected by someone's alcohol or other drug use. Open 24/7. FDS also runs support meetings in some states. fds.org.au
+
+Spoken script:
+More info. A national support line for families and friends affected by someone's alcohol or other drug use. Open twenty-four seven. FDS also runs support meetings in some states. fds.org.au

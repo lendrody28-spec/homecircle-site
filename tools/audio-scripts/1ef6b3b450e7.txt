@@ -1,0 +1,10 @@
+DRAFT
+id: kai.crisis.childAbuse
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/1ef6b3b450e7.mp3
+
+On screen:
+If anyone is in danger right now, call 000. 1800RESPECT (1800 737 732) helps with sexual abuse, any time. Kids Helpline (1800 55 1800) is for young people up to 25. Bravehearts (1800 272 831) supports people affected by child sexual abuse. Kai can miss things.
+
+Spoken script:
+If anyone is in danger right now, call triple zero. one eight hundred respect, on one eight hundred, seven three seven, seven three two, helps with sexual abuse, any time. Kids Helpline, on one eight hundred, five five, eighteen hundred, is for young people up to 25. Bravehearts, on one eight hundred, two seven two, eight three one, supports people affected by child sexual abuse. Kye can miss things.

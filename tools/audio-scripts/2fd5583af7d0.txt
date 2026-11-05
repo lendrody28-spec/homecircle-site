@@ -1,0 +1,10 @@
+DRAFT
+id: help.15
+voice: A (melo EN-AU, speed 0.9)
+file: assets/audio/2fd5583af7d0.mp3
+
+On screen:
+More info. Run by LGBTIQA+SB people. Family members, friends and others who support someone LGBTIQA+SB are welcome too. Phone or webchat, 3pm to 9pm your local time, every day including holidays. Last calls are taken by 8.40pm. Free and anonymous. Not a crisis line. qlife.org.au
+
+Spoken script:
+More info. Run by LGBTIQA+SB people. Family members, friends and others who support someone LGBTIQA+SB are welcome too. Phone or webchat, 3pm to 9pm your local time, every day including holidays. Last calls are taken by 8.40pm. Free and anonymous. Not a crisis line. qlife.org.au

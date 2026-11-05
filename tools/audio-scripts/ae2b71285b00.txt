@@ -1,0 +1,10 @@
+DRAFT
+id: help.43
+voice: A (melo EN-AU, speed 0.9)
+file: assets/audio/ae2b71285b00.mp3
+
+On screen:
+Alcohol and Drug Information Service (ADIS) NSW. 24/7. Sydney metro: 02 8382 1000. For NSW residents and their families. Call 1800 250 015 Open site More info. Free, confidential counselling, information and referral from professional counsellors, for NSW residents worried about alcohol or drugs. Phone 24/7. Web chat is Monday to Friday, 8.30am to 5pm (including public holidays). yourroom.health.nsw.gov.au
+
+Spoken script:
+Alcohol and Drug Information Service (ADIS) NSW. twenty-four seven. Sydney metro: zero two, eight three eight two, one zero zero zero. For NSW residents and their families. Call one eight hundred, two five zero, zero one five Open site More info. Free, confidential counselling, information and referral from professional counsellors, for NSW residents worried about alcohol or drugs. Phone twenty-four seven. Web chat is Monday to Friday, 8.30am to 5pm (including public holidays). yourroom.health.nsw.gov.au

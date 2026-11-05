@@ -1,0 +1,10 @@
+DRAFT
+id: help.00
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/ec48f38a95cc.mp3
+
+On screen:
+Call 000 Call Lifeline 13 11 14
+
+Spoken script:
+Please call triple zero. Call Lifeline thirteen eleven fourteen

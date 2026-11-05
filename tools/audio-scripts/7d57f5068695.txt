@@ -1,0 +1,10 @@
+DRAFT
+id: help.22
+voice: A (melo EN-AU, speed 0.9)
+file: assets/audio/7d57f5068695.mp3
+
+On screen:
+AA Australia. Talk to a sober member of Alcoholics Anonymous, any time, if drinking is a problem for you. 24 hours. Call 1300 222 222 Call 1300 222 222
+
+Spoken script:
+AA Australia. Talk to a sober member of Alcoholics Anonymous, any time, if drinking is a problem for you. 24 hours. Call thirteen hundred, two two two, two two two Call thirteen hundred, two two two, two two two

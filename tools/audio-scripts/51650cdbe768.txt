@@ -1,0 +1,10 @@
+DRAFT
+id: kai.fu.same
+voice: A (melo EN-AU, speed 0.9)
+file: assets/audio/51650cdbe768.mp3
+
+On screen:
+That's okay. Not every tool works every time. Want to try a different one?
+
+Spoken script:
+That's okay. Not every tool works every time. Want to try a different one?

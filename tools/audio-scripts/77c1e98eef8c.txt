@@ -1,0 +1,10 @@
+DRAFT
+id: help.33
+voice: A (melo EN-AU, speed 0.9)
+file: assets/audio/77c1e98eef8c.mp3
+
+On screen:
+Family Drug Support. For families and friends of someone using alcohol or other drugs. 24 hours. Call 1300 368 186 Call 1300 368 186 Open site Find a family meeting FDS lists no support meetings in WA, Tasmania or the NT. In WA, the Parent and Family Drug Support Line is listed under Western Australia below.
+
+Spoken script:
+Family Drug Support. For families and friends of someone using alcohol or other drugs. 24 hours. Call thirteen hundred, three six eight, one eight six Call thirteen hundred, three six eight, one eight six Open site Find a family meeting FDS lists no support meetings in WA, Tasmania or the NT. In WA, the Parent and Family Drug Support Line is listed under Western Australia below.

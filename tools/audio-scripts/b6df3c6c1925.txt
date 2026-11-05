@@ -1,0 +1,10 @@
+DRAFT
+id: help.53
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/b6df3c6c1925.mp3
+
+On screen:
+Northern Territory.
+
+Spoken script:
+Northern Territory.

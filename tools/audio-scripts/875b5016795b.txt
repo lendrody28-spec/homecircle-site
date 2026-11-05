@@ -1,0 +1,10 @@
+DRAFT
+id: kai.fu.better
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/875b5016795b.mp3
+
+On screen:
+Good on you for giving it a go. You can come back to this any time.
+
+Spoken script:
+Good on you for giving it a go. You can come back to this any time.

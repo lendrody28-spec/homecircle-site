@@ -1,0 +1,10 @@
+DRAFT
+id: help.63
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/606a517c6853.mp3
+
+On screen:
+Urge plan. Watch an urge crest and fall without obeying it.
+
+Spoken script:
+Urge plan. Watch an urge crest and fall without obeying it.

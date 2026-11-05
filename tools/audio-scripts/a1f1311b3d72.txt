@@ -1,0 +1,10 @@
+DRAFT
+id: help.51
+voice: A (melo EN-AU, speed 0.9)
+file: assets/audio/a1f1311b3d72.mp3
+
+On screen:
+Tasmania.
+
+Spoken script:
+Tasmania.

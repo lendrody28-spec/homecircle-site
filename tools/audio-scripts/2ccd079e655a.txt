@@ -1,0 +1,10 @@
+DRAFT
+id: help.23
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/2ccd079e655a.mp3
+
+On screen:
+More info. Call the 24-hour helpline to speak with a sober alcoholic. You can also chat live with a member on the AA website, or find an in-person or online meeting. aa.org.au
+
+Spoken script:
+More info. Call the 24-hour helpline to speak with a sober alcoholic. You can also chat live with a member on the AA website, or find an in-person or online meeting. aa.org.au

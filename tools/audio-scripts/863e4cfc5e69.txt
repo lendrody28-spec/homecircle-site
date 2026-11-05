@@ -1,0 +1,10 @@
+DRAFT
+id: help.42
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/863e4cfc5e69.mp3
+
+On screen:
+New South Wales.
+
+Spoken script:
+New South Wales.

@@ -1,0 +1,10 @@
+DRAFT
+id: help.13
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/e0a19b32b7a4.mp3
+
+On screen:
+More info. A confidential, culturally safe place to yarn if you're feeling worried or no good, or worried about someone you know. Call 13 92 76 24/7. Text 0447 13 92 76, or type to them online, 4pm to midnight every day. Free and confidential. 13yarn.org.au
+
+Spoken script:
+More info. A confidential, culturally safe place to yarn if you're feeling worried or no good, or worried about someone you know. Call thirteen ninety two seventy six twenty-four seven. Text zero four four seven, thirteen ninety two seventy six, or type to them online, 4pm to midnight every day. Free and confidential. 13yarn.org.au

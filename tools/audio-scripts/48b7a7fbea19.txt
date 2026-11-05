@@ -1,0 +1,10 @@
+DRAFT
+id: help.67
+voice: A (melo EN-AU, speed 0.9)
+file: assets/audio/48b7a7fbea19.mp3
+
+On screen:
+Keep your details private. Don't share your full name, address, phone, bank details or passwords with anyone in HomeCircle or at meetings. Real friends and sponsors won't ask for money or private details. If someone does, tell your sponsor or a trusted person.
+
+Spoken script:
+Keep your details private. Don't share your full name, address, phone, bank details or passwords with anyone in HomeCircle or at meetings. Real friends and sponsors won't ask for money or private details. If someone does, tell your sponsor or a trusted person.

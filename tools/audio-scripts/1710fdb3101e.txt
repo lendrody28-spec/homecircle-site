@@ -1,0 +1,10 @@
+DRAFT
+id: help.10
+voice: A (melo EN-AU, speed 0.9)
+file: assets/audio/1710fdb3101e.mp3
+
+On screen:
+Suicide Call Back Service. Free 24/7 counselling for anyone affected by suicide, aged 15 and over. 24 hours. Call 1300 659 467 For anyone thinking about suicide, worried about someone, or grieving a suicide. Call 1300 659 467
+
+Spoken script:
+Suicide Call Back Service. Free twenty-four seven counselling for anyone affected by suicide, aged 15 and over. 24 hours. Call thirteen hundred, six five nine, four six seven For anyone thinking about suicide, worried about someone, or grieving a suicide. Call thirteen hundred, six five nine, four six seven

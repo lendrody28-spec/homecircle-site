@@ -1,0 +1,10 @@
+DRAFT
+id: help.14
+voice: A (melo EN-AU, speed 0.9)
+file: assets/audio/c4d1015fb63d.mp3
+
+On screen:
+QLife. Free, anonymous LGBTIQ+ peer support for talking about sexuality, gender, bodies, feelings or relationships. 3pm to 9pm local time, every day. Call 1800 184 527 LGBTIQ+ peer support. Not a crisis line. Out of hours, call Lifeline 13 11 14. Call 1800 184 527
+
+Spoken script:
+QLife. Free, anonymous LGBTIQ+ peer support for talking about sexuality, gender, bodies, feelings or relationships. 3pm to 9pm local time, every day. Call one eight hundred, one eight four, five two seven LGBTIQ+ peer support. Not a crisis line. Out of hours, call Lifeline thirteen eleven fourteen. Call one eight hundred, one eight four, five two seven

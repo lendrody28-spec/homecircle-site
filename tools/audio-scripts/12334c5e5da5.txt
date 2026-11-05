@@ -1,0 +1,10 @@
+DRAFT
+id: help.30
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/12334c5e5da5.mp3
+
+On screen:
+Al-Anon Family Groups Australia. For families and friends of someone with a drinking problem. Call 1300 252 666 Open site
+
+Spoken script:
+Al-Anon Family Groups Australia. For families and friends of someone with a drinking problem. Call thirteen hundred, two five two, six six six Open site

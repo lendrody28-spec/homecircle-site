@@ -1,0 +1,10 @@
+DRAFT
+id: help.39
+voice: A (melo EN-AU, speed 0.9)
+file: assets/audio/0278e8ed4785.mp3
+
+On screen:
+Alcohol and drug lines run by each state and territory. Keep 000 and Lifeline first: these lines are for advice and support, not emergencies. Checked against each service's own website on 4 November 2026.
+
+Spoken script:
+Alcohol and drug lines run by each state and territory. Keep triple zero and Lifeline first: these lines are for advice and support, not emergencies. Checked against each service's own website on 4 November 2026.

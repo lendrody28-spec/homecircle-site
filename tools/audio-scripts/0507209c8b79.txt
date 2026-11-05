@@ -1,0 +1,10 @@
+DRAFT
+id: help.02
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/0507209c8b79.mp3
+
+On screen:
+We're here to support you. Help is always available. You're not alone.
+
+Spoken script:
+We're here to support you. Help is always available. You're not alone.

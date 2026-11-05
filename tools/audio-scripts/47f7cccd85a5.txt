@@ -1,0 +1,10 @@
+DRAFT
+id: help.12
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/47f7cccd85a5.mp3
+
+On screen:
+13YARN. Free 24/7 crisis support for Aboriginal and Torres Strait Islander people, from Aboriginal and Torres Strait Islander Crisis Supporters. 24 hours. Call 13 92 76 Crisis support from Aboriginal and Torres Strait Islander people. Call 13 92 76
+
+Spoken script:
+13YARN. Free twenty-four seven crisis support for Aboriginal and Torres Strait Islander people, from Aboriginal and Torres Strait Islander Crisis Supporters. 24 hours. Call thirteen ninety two seventy six Crisis support from Aboriginal and Torres Strait Islander people. Call thirteen ninety two seventy six

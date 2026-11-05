@@ -1,0 +1,10 @@
+DRAFT
+id: help.32
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/4792bfdeada5.mp3
+
+On screen:
+Alateen. Part of Al-Anon Australia, for ages about 13 to 18. Same Australian line. HomeCircle itself is an 18+ app. Call 1300 252 666 Open site
+
+Spoken script:
+Alateen. Part of Al-Anon Australia, for ages about 13 to 18. Same Australian line. HomeCircle itself is an 18+ app. Call thirteen hundred, two five two, six six six Open site
