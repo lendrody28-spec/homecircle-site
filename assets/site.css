@@ -291,6 +291,12 @@ fieldset{border:0;padding:0;margin:0 0 10px;display:grid;gap:8px}
 .kai-typehint{font-size:14px;color:var(--muted);margin:0}
 .kai-chips,.kai-form,.kai-foot{flex-shrink:0}
 .kai-tel{min-height:44px;font-size:15px;padding:6px 14px}
+.kai-tel{white-space:normal;text-align:left;max-width:100%;height:auto}
+.kai-note{margin:6px 0;font-size:14px;color:var(--text)}
+.kai-copy{margin:6px 0;max-width:100%}
+.kai-copyline{margin:4px 0;padding:6px 10px;border:1px dashed var(--muted);border-radius:8px;user-select:all}
+.kai-copybtn{min-height:44px}
+.kai-copied{margin-left:8px;font-size:14px}
 .kai-fallback{position:fixed;left:12px;right:12px;bottom:12px;z-index:54;display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:10px 12px;background:#fff;border:3px solid var(--ink);border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.2)}
 .kai-fallback .btn{min-height:44px;padding:6px 14px;font-size:15px}
 .kai-fallback[hidden]{display:none}
