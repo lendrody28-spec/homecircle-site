@@ -34,7 +34,7 @@
     t = t.replace(/\b1800RESPECT\b/g, "one eight hundred respect");
     t = t.replace(/\b(1[38]00) ?(\d{2,3}) ?(\d{3,4})\b/g, function (m, a, b, c) {
       var head = a === "1800" ? "one eight hundred" : "thirteen hundred";
-      return head + ", " + (b.length === 2 ? pair(b) : digits(b)) + ", " + (c === "1800" ? "eighteen hundred" : digits(c));
+      return head + ", " + digits(b) + ", " + (c === "1800" ? "eighteen hundred" : digits(c));
     });
     t = t.replace(/\s*\(((?:one eight hundred|thirteen hundred), [^()]*)\)\s*/g, ", on $1, ");  /* "(1800 ...)" read as ", on ...," so the number is not run into the name */
     t = t.replace(/\(?\b(0[2378])\)? (\d{4}) (\d{4})\b/g, function (m, a, b, c) { return digits(a) + ", " + digits(b) + ", " + digits(c); });

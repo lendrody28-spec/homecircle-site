@@ -9,7 +9,7 @@ ok(S("or call 000 now.") === "or call triple zero now.", "mid-sentence call 000 
 ok(S("Call 000 Call Lifeline 13 11 14") === "Please call triple zero. Call Lifeline thirteen eleven fourteen", "two call buttons -> two sentences");
 ok(S("Lifeline is 13 11 14, any time.") === "Lifeline, thirteen eleven fourteen, any time.", "Lifeline");
 ok(S("1800RESPECT is 1800 737 732") === "one eight hundred respect is one eight hundred, seven three seven, seven three two", "1800 groups");
-ok(S("Kids Helpline (1800 55 1800) is for") === "Kids Helpline, on one eight hundred, fifty five, eighteen hundred, is for", "1800 55 1800 (pair + eighteen hundred, parens read as 'on')");
+ok(S("Kids Helpline (1800 55 1800) is for") === "Kids Helpline, on one eight hundred, five five, eighteen hundred, is for", "1800 55 1800 (digits + eighteen hundred, parens read as 'on')");
 ok(S("call 1800 177 833") === "call one eight hundred, one seven seven, eight three three", "1800 177 833");
 ok(S("1300 766 491") === "thirteen hundred, seven six six, four nine one", "1300");
 ok(S("1300 22 4636") === "thirteen hundred, twenty two, four six three six", "1300 with 2-digit group");

@@ -206,18 +206,18 @@
   {
    "id": "kai.crisis.childAbuse",
    "text": "If anyone is in danger right now, call 000. 1800RESPECT (1800 737 732) helps with sexual abuse, any time. Kids Helpline (1800 55 1800) is for young people up to 25. Bravehearts (1800 272 831) supports people affected by child sexual abuse. Kai can miss things.",
-   "spoken": "If anyone is in danger right now, call triple zero. one eight hundred respect, on one eight hundred, seven three seven, seven three two, helps with sexual abuse, any time. Kids Helpline, on one eight hundred, fifty five, eighteen hundred, is for young people up to 25. Bravehearts, on one eight hundred, two seven two, eight three one, supports people affected by child sexual abuse. Kye can miss things.",
+   "spoken": "If anyone is in danger right now, call triple zero. one eight hundred respect, on one eight hundred, seven three seven, seven three two, helps with sexual abuse, any time. Kids Helpline, on one eight hundred, five five, eighteen hundred, is for young people up to 25. Bravehearts, on one eight hundred, two seven two, eight three one, supports people affected by child sexual abuse. Kye can miss things.",
    "status": "DRAFT",
    "clips": {
     "A": {
-     "file": "62614465cc8e.mp3",
-     "bytes": 182496,
-     "sha256": "b69f326e606cb83da78b0711e371dc3d37d0f66245130874f63defae33076315"
+     "file": "aab6185b7ca6.mp3",
+     "bytes": 181776,
+     "sha256": "b1f26ffdf848af897f6661ac4b4aaba5d223d3eead483ece37cf9dc144e965f9"
     },
     "B": {
-     "file": "22eadd456789.mp3",
-     "bytes": 171840,
-     "sha256": "a0894d27f57cc892e408100f1105ecd835ba481893d838cded7d46ef277f360e"
+     "file": "1ef6b3b450e7.mp3",
+     "bytes": 171408,
+     "sha256": "1b7dee05e19fca485ad77c550c7fcf5184a656e1c3d181a5e37d1a3184fd5d0c"
     }
    }
   },
@@ -254,6 +254,222 @@
      "file": "4c7eaf095d0f.mp3",
      "bytes": 111648,
      "sha256": "6a9a18b1aeb12453bd7a77ea1526be24976a5ddef2103e6e4e7262e9018308eb"
+    }
+   }
+  },
+  {
+   "id": "kai.fu.ask",
+   "text": "How was that? Did you notice any change in your body, even a small one?",
+   "spoken": "How was that? Did you notice any change in your body, even a small one?",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "f233e1068176.mp3",
+     "bytes": 33456,
+     "sha256": "07a6f45ca7855a82f6c3106c41aa6d7e374fd8e0d168bd48b1b2b19aad61f16d"
+    },
+    "B": {
+     "file": "f6b144f55105.mp3",
+     "bytes": 33456,
+     "sha256": "b69ab509e18092c37694cc6f5f29c114993740fe8a634cd52531ef69ffe76f38"
+    }
+   }
+  },
+  {
+   "id": "kai.crisis.worse",
+   "text": "If you or anyone else is in danger right now, call 000, or Lifeline on 13 11 14. Kai can miss things.",
+   "spoken": "If you or anyone else is in danger right now, call triple zero, or Lifeline on thirteen eleven fourteen. Kye can miss things.",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "3a1a49361c8c.mp3",
+     "bytes": 56352,
+     "sha256": "6ae3d61d25a46abe191c58949036587082a549e211e536263b9c454a06f16544"
+    },
+    "B": {
+     "file": "74797f816e34.mp3",
+     "bytes": 62544,
+     "sha256": "fd658d73625793bdb9ef5a57471a96f49a9a48a4671738d10308061eb77aa52c"
+    }
+   }
+  },
+  {
+   "id": "kai.fu.better",
+   "text": "Good on you for giving it a go. You can come back to this any time.",
+   "spoken": "Good on you for giving it a go. You can come back to this any time.",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "a54f9da76e28.mp3",
+     "bytes": 29280,
+     "sha256": "b342ad10ebc09086a68d1868d9bf40493b89ddedf2cef4011cf64e9830d5343f"
+    },
+    "B": {
+     "file": "875b5016795b.mp3",
+     "bytes": 30864,
+     "sha256": "6ce6e8ff04c07c31af1ab2ad0987039dd47135e31ff50867c4a4433698156776"
+    }
+   }
+  },
+  {
+   "id": "kai.fu.same",
+   "text": "That's okay. Not every tool works every time. Want to try a different one?",
+   "spoken": "That's okay. Not every tool works every time. Want to try a different one?",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "51650cdbe768.mp3",
+     "bytes": 36768,
+     "sha256": "ac7f0c04829bc6b25521f2d45003527227b02485882b6d3ff5a59180b04070d5"
+    },
+    "B": {
+     "file": "b69c5f451a53.mp3",
+     "bytes": 37632,
+     "sha256": "d87e3aad92b9b6773d4ed4fcd46bed170946b46b2968be4cde190b9655e36637"
+    }
+   }
+  },
+  {
+   "id": "kai.fu.encourage",
+   "text": "Today sounds hard. You're still here and still trying, and that counts. You've got a goal and people in your corner.",
+   "spoken": "Today sounds hard. You're still here and still trying, and that counts. You've got a goal and people in your corner.",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "6e9f8745ebd0.mp3",
+     "bytes": 50304,
+     "sha256": "708d379c989a9e8cdde15635fdf7544caa4b2b1fea2d1a36dd0249dd0cc3849c"
+    },
+    "B": {
+     "file": "08eb1f2e2735.mp3",
+     "bytes": 49296,
+     "sha256": "b09977e3c693292f57672060a8339c60fd1007b0d71335e6718b9d75087032cc"
+    }
+   }
+  },
+  {
+   "id": "kai.fu.t.ground",
+   "text": "Something some people find helps: notice 5 things you can see, 4 you can feel, 3 you can hear, 2 you can smell and 1 you can taste.",
+   "spoken": "Something some people find helps: notice 5 things you can see, 4 you can feel, 3 you can hear, 2 you can smell and 1 you can taste.",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "79c86bfd463b.mp3",
+     "bytes": 60096,
+     "sha256": "860a5a7e87bd4d3574c32cd3ca524151cee2be5212965130cfda4d0a733db4ce"
+    },
+    "B": {
+     "file": "c434719b6c2a.mp3",
+     "bytes": 63696,
+     "sha256": "54c1b4f66945402096027eaa13a30594038973b6b56a4a6cea424bce45a98cf8"
+    }
+   }
+  },
+  {
+   "id": "kai.fu.t.outbreath",
+   "text": "Something some people find helps: breathe out slowly, a little longer than you breathe in.",
+   "spoken": "Something some people find helps: breathe out slowly, a little longer than you breathe in.",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "387fe23a4655.mp3",
+     "bytes": 36480,
+     "sha256": "eda1eadddccba9aa3c22242efc5b42f00149655157c2b8e3df62b7d2f68ebb40"
+    },
+    "B": {
+     "file": "aaed7e8fa60f.mp3",
+     "bytes": 41520,
+     "sha256": "ce716f3d39132239f5e1e56731452f8b65b578b23065bbb50f9c138df352d0e2"
+    }
+   }
+  },
+  {
+   "id": "kai.fu.t.meditation",
+   "text": "Something some people find helps: a short meditation from the Library.",
+   "spoken": "Something some people find helps: a short meditation from the Library.",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "c845cfdb290e.mp3",
+     "bytes": 33456,
+     "sha256": "33336b3413d98270b2011659fbb5d74f4d0e499500a2ded748a2c2db96929acd"
+    },
+    "B": {
+     "file": "e702f5a6cbee.mp3",
+     "bytes": 34752,
+     "sha256": "8e52ccbfcc58bbfac94e4e2d45c75801d7cd675c25b859a43bd080326f61fbc7"
+    }
+   }
+  },
+  {
+   "id": "kai.fu.worse",
+   "text": "Thanks for telling me. You don't have to push through this alone.",
+   "spoken": "Thanks for telling me. You don't have to push through this alone.",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "400c983e9f04.mp3",
+     "bytes": 27408,
+     "sha256": "b500028a9a5d758d8a9de00eae7804ebee9d0fbc4e5a39aea2701ac34515dae8"
+    },
+    "B": {
+     "file": "4a2c475354cc.mp3",
+     "bytes": 27840,
+     "sha256": "4388ef0712629950fe78673e3db350294fed04a252d46e4cf91775bde02840f3"
+    }
+   }
+  },
+  {
+   "id": "kai.fu.reachOut",
+   "text": "Reaching out takes guts. Who would you like to contact?",
+   "spoken": "Reaching out takes guts. Who would you like to contact?",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "549eaa9612d9.mp3",
+     "bytes": 27408,
+     "sha256": "27197292b81eeb0aee43a582f8446b03b9f504ee1b9db815c109400362c3fb26"
+    },
+    "B": {
+     "file": "a474f06bd859.mp3",
+     "bytes": 27120,
+     "sha256": "d94b4c18b6d93ab7466515c0336ace3d64e6446b0b3b4661d0fd57e300deb291"
+    }
+   }
+  },
+  {
+   "id": "kai.fu.journalSaved",
+   "text": "Saved to your journal, in this browser only.",
+   "spoken": "Saved to your journal, in this browser only.",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "5e8abb2b8122.mp3",
+     "bytes": 24096,
+     "sha256": "7977cbcb6633d823ab7b004905941b665fb7cb139f2859b831af484c6771829b"
+    },
+    "B": {
+     "file": "050cef6a0531.mp3",
+     "bytes": 23664,
+     "sha256": "00f040b3dbd2739d164d6f51a7326a00ee2253909f66ef9a30f3acbd79ffcdcc"
+    }
+   }
+  },
+  {
+   "id": "kai.fu.journalFailed",
+   "text": "This browser isn't letting the site save notes, so nothing was kept.",
+   "spoken": "This browser isn't letting the site save notes, so nothing was kept.",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "2fca8490414b.mp3",
+     "bytes": 32880,
+     "sha256": "361135e80f647cae16a8119f56891f9ff4966ac2dc16d89cd8b0965125592000"
+    },
+    "B": {
+     "file": "01312ba23496.mp3",
+     "bytes": 32592,
+     "sha256": "1aedd743b9ae931cbbf89c6ff6078e26bb0a8b4612b34b67bd4c6f466e484c5b"
     }
    }
   },
@@ -404,36 +620,36 @@
   {
    "id": "help.08",
    "text": "Beyond Blue. Free counselling for anxiety, depression or feeling overwhelmed, for anyone in Australia. 24 hours. Call 1300 22 4636 Call 1300 22 4636",
-   "spoken": "Beyond Blue. Free counselling for anxiety, depression or feeling overwhelmed, for anyone in Australia. 24 hours. Call thirteen hundred, twenty two, four six three six Call thirteen hundred, twenty two, four six three six",
+   "spoken": "Beyond Blue. Free counselling for anxiety, depression or feeling overwhelmed, for anyone in Australia. 24 hours. Call thirteen hundred, two two, four six three six Call thirteen hundred, two two, four six three six",
    "status": "DRAFT",
    "clips": {
     "A": {
-     "file": "bd8485f90acd.mp3",
-     "bytes": 97104,
-     "sha256": "f3456981d64c000e91347b339fd3dae2b02efc7f8dbe8c93d3d23a3f5180240e"
+     "file": "3c804a8687db.mp3",
+     "bytes": 93936,
+     "sha256": "f8f6d2d979996ca7e8f93a47c4fd737cf337e158bca78b5c2f575829603f7b54"
     },
     "B": {
-     "file": "f3585089998d.mp3",
-     "bytes": 107760,
-     "sha256": "980f5c99213b472f15067df5b0d05dad03f921270a99628b73fe5933014e079b"
+     "file": "fe3dc4ab28a3.mp3",
+     "bytes": 105888,
+     "sha256": "f8e78ce1c10817ba4c2e3dff58260638f3d2d72bde801b4fa8064eca966042af"
     }
    }
   },
   {
    "id": "help.09",
    "text": "More info. Counsellors listen and help you find the right mental health services. You can also call if you're supporting a partner, family member or friend. Call 1300 22 4636 or use webchat, both 24/7. Free and confidential. Local call costs apply on the phone. On webchat you don't have to give your real name. beyondblue.org.au",
-   "spoken": "More info. Counsellors listen and help you find the right mental health services. You can also call if you're supporting a partner, family member or friend. Call thirteen hundred, twenty two, four six three six or use webchat, both twenty-four seven. Free and confidential. Local call costs apply on the phone. On webchat you don't have to give your real name. beyondblue.org.au",
+   "spoken": "More info. Counsellors listen and help you find the right mental health services. You can also call if you're supporting a partner, family member or friend. Call thirteen hundred, two two, four six three six or use webchat, both twenty-four seven. Free and confidential. Local call costs apply on the phone. On webchat you don't have to give your real name. beyondblue.org.au",
    "status": "DRAFT",
    "clips": {
     "A": {
-     "file": "37f201c5f5ca.mp3",
-     "bytes": 160176,
-     "sha256": "d0d630941050fc9487e01e87fe06566327ba07c4d76c6255b85bf31d5c31cf3b"
+     "file": "bc2ab8ab852e.mp3",
+     "bytes": 158880,
+     "sha256": "64ab3f552367e05f3dfef1fb8a171dd5f74f16c1dd944c424d24c46cb63e5153"
     },
     "B": {
-     "file": "1ce92231c2f5.mp3",
-     "bytes": 158304,
-     "sha256": "0a79c6ea2b878b3bf0805dc36c8a0f2f6537992d80159d5e424ebfdfc7d15044"
+     "file": "8750941da202.mp3",
+     "bytes": 157440,
+     "sha256": "786b52ed6839dfc58486cbed619d268d47102be8be253fa276859492ecea061f"
     }
    }
   },
