@@ -152,7 +152,8 @@
     synth.speak(u);
   }
   function run(btn, texts) {
-    stop(); preload(chosen());   /* one batch for the chosen voice */
+    stop();
+    var v = chosen(); if (texts.some(function (t) { return clips[v] && clips[v][key(t)]; })) preload(v);   /* one batch for the chosen voice, only if this text has clips */
     var my = token; active = btn; setBtn(btn, true); queue = texts.slice();
     (function next() {
       if (my !== token) return;

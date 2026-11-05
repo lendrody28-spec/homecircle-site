@@ -20,11 +20,17 @@
     moveBtn = document.getElementById("kai-move"), confirmBox = document.getElementById("kai-confirm"),
     after = document.getElementById("kai-after");
   root.hidden = false;
-  (function () {   /* read aloud for the first-open line, and the voice choice in the footer (only if readaloud.js is on this site) */
-    var RA = window.HCReadAloud, fo = document.getElementById("kai-firstopen"), foot = panel && panel.querySelector(".kai-foot");
+  (function () {   /* read aloud for the first-open line, and the voice choice under the start buttons (only if readaloud.js is on this site) */
+    var RA = window.HCReadAloud, fo = document.getElementById("kai-firstopen");
     if (!RA || !RA.button) return;
-    if (fo) fo.appendChild(RA.button("Read this line aloud", function () { return [RA.textOf(fo)]; }, true));
-    if (foot) foot.appendChild(RA.voicePicker());
+    /* below the start buttons, inside the scroll area, so the first-open line, start buttons and pinned bar keep their place */
+    var st = document.getElementById("kai-start");
+    if (fo && st) {
+      var row = document.createElement("div"); row.className = "kai-ra ra-skip";
+      row.appendChild(RA.button("Read Kai's intro line aloud", function () { return [RA.textOf(fo)]; }, true));
+      row.appendChild(RA.voicePicker());
+      st.parentNode.insertBefore(row, st.nextSibling);
+    }
   })();
   var fallback = document.getElementById("kai-fallback"); if (fallback) fallback.hidden = true;
   /* Buttons-first. "I'm not safe" is wired first, with no phrase matching, delay or animation. */
