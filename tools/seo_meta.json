@@ -1,0 +1,170 @@
+{
+  "index.html": {
+    "title": "HomeCircle: free addiction recovery support in Australia",
+    "description": "Find AA/NA meetings, try breathing exercises when cravings hit, count your days and reach helplines. Free, no account needed. Support, not medical care."
+  },
+  "help.html": {
+    "title": "Helplines and gambling help in Australia – HomeCircle",
+    "description": "Call 000 in an emergency. Lifeline 13 11 14, Beyond Blue, alcohol and drug lines, gambling help and family support, all in one place."
+  },
+  "meetings.html": {
+    "title": "Find AA/NA meetings near you – HomeCircle",
+    "description": "Search AA and NA meetings in Australia by suburb, postcode or day. No sign-in needed. HomeCircle isn't affiliated with AA or NA."
+  },
+  "events.html": {
+    "title": "Recovery events in Australia – HomeCircle",
+    "description": "Upcoming AA and NA events in Australia, linked from their own official pages. HomeCircle isn't affiliated with AA or NA."
+  },
+  "support.html": {
+    "title": "Support and FAQs – HomeCircle",
+    "description": "How to contact HomeCircle, answers to common questions, and where to get help right now. Support, not medical care."
+  },
+  "your-circle.html": {
+    "title": "Sober day counter and journal – HomeCircle",
+    "description": "An optional day counter and private journal that stay only in your browser. Nothing is sent anywhere."
+  },
+  "twelve-steps.html": {
+    "title": "The 12 Steps in plain language – HomeCircle",
+    "description": "Plain-language notes on the 12 Steps, with a link to AA's own wording. HomeCircle isn't affiliated with AA or NA. Support, not medical care."
+  },
+  "library.html": {
+    "title": "Recovery Library – HomeCircle",
+    "description": "Short guides for recovery: breathing and grounding tools, urge surfing, quit-drinking tips and links to official recovery resources in Australia."
+  },
+  "meditations.html": {
+    "title": "Breathing exercises and short meditations – HomeCircle",
+    "description": "Animated box, 4-7-8 and slow out-breath guides to try when cravings hit, plus short meditations. Free, and you can stop any time."
+  },
+  "families/index.html": {
+    "title": "For families, partners and friends – HomeCircle",
+    "description": "Help for people who care about someone with an alcohol, drug or gambling problem in Australia. Support, not medical care."
+  },
+  "families/child.html": {
+    "title": "My child is drinking or using drugs, how can I help? – HomeCircle",
+    "description": "For parents worried about a son or daughter's drinking or drug use: what to say, what to watch for and where to get support in Australia."
+  },
+  "families/family.html": {
+    "title": "My parent or family member is addicted, what can I do? – HomeCircle",
+    "description": "When a mum, dad, brother, sister or other relative has a drinking or drug problem: what helps, and where to get support in Australia."
+  },
+  "families/friend.html": {
+    "title": "My friend has a drug or alcohol problem, how can I help? – HomeCircle",
+    "description": "How to support a friend who drinks or uses drugs too much, without carrying it all yourself. Where to get help in Australia."
+  },
+  "families/partner.html": {
+    "title": "My partner is addicted, what can I do? – HomeCircle",
+    "description": "When your partner drinks, uses drugs or gambles: what to say, warning signs, and where you can both get support in Australia."
+  },
+  "families/kids.html": {
+    "title": "For kids and teens – HomeCircle",
+    "description": "A HomeCircle page for kids and teens whose parent drinks or uses drugs: it's not your fault, and who to talk to."
+  },
+  "families/overdose.html": {
+    "title": "What to do in an overdose – HomeCircle",
+    "description": "Signs of an overdose and what to do: call 000, recovery position, CPR and naloxone, from Australian first aid sources. Support, not medical care."
+  },
+  "families/safety.html": {
+    "title": "Family violence help – HomeCircle",
+    "description": "1800RESPECT, every state and territory domestic violence line, and the Men's Referral Service, for families affected by addiction and violence."
+  },
+  "families/withdrawal.html": {
+    "title": "Supporting someone through withdrawal – HomeCircle",
+    "description": "Warning signs, when to call 000, and who to call for advice in Australia when someone you love is in withdrawal. Support, not medical care."
+  },
+  "library/alcoholics-anonymous.html": {
+    "title": "Alcoholics Anonymous – HomeCircle",
+    "description": "Where to find AA Australia's own pages and meetings. HomeCircle doesn't host AA literature and isn't affiliated with AA or NA."
+  },
+  "library/narcotics-anonymous.html": {
+    "title": "Narcotics Anonymous – HomeCircle",
+    "description": "Where to find NA Australia's own pages and meetings. HomeCircle doesn't host NA literature and isn't affiliated with AA or NA."
+  },
+  "library/gambling-support.html": {
+    "title": "Gambling help – HomeCircle",
+    "description": "Gambling Help Online and 1800 858 858, plus a link to Gamblers Anonymous's own site. HomeCircle isn't affiliated with Gamblers Anonymous."
+  },
+  "library/pornography-addiction-support.html": {
+    "title": "Pornography addiction support – HomeCircle",
+    "description": "Lifeline can talk now on 13 11 14. Links to an official support group's own site, which HomeCircle isn't affiliated with. Support, not medical care."
+  },
+  "library/recovery-books.html": {
+    "title": "Recovery books and audio – HomeCircle",
+    "description": "Links to free recovery reading and audio on official recovery sites. Links only. HomeCircle isn't affiliated with AA or NA."
+  },
+  "library/24-hour-plan.html": {
+    "title": "24-hour plan – HomeCircle",
+    "description": "Plan the next day, not the whole year. A simple guide for getting through today without a drink. Support, not medical care."
+  },
+  "library/4-7-8-breathing.html": {
+    "title": "4-7-8 breathing – HomeCircle",
+    "description": "Breathe in for 4, hold for 7, out for 8. A longer out-breath to try when cravings hit."
+  },
+  "library/box-breathing.html": {
+    "title": "Box breathing – HomeCircle",
+    "description": "A steady 4-4-4-4 count: in, hold, out, hold. Something to try when cravings hit. Stop whenever you want."
+  },
+  "library/slow-out-breath.html": {
+    "title": "Slow out-breath – HomeCircle",
+    "description": "Breathe in for 4 and out for 6, with no hold. The gentlest of the three breathing guides."
+  },
+  "library/breathing-anchor.html": {
+    "title": "Breathing anchor – HomeCircle",
+    "description": "Five easy out-breaths with your eyes open and the room still in view. Support, not medical care."
+  },
+  "library/body-scan.html": {
+    "title": "Body scan – HomeCircle",
+    "description": "An optional short walk of attention from your feet upward. Support, not medical care."
+  },
+  "library/grounding-5-4-3-2-1.html": {
+    "title": "5-4-3-2-1 grounding – HomeCircle",
+    "description": "Eyes open. Notice five things you see, then what you feel, hear, smell and taste. Support, not medical care."
+  },
+  "library/halt.html": {
+    "title": "HALT: hungry, angry, lonely, tired – HomeCircle",
+    "description": "A quick pause to check if you're hungry, angry, lonely or tired. A self check-in, not a medical check. Support, not medical care."
+  },
+  "library/mindful-eating.html": {
+    "title": "Mindful eating – HomeCircle",
+    "description": "Slow down one snack or meal and notice it with your senses. Support, not medical care."
+  },
+  "library/mindful-walking.html": {
+    "title": "Mindful walking – HomeCircle",
+    "description": "A slow walk where you notice your feet, your breath and what's around you. Support, not medical care."
+  },
+  "library/one-thing-focus.html": {
+    "title": "One-thing focus – HomeCircle",
+    "description": "Ten minutes on one ordinary task, to give your mind somewhere to rest. Support, not medical care."
+  },
+  "library/urge-surfing.html": {
+    "title": "Urge surfing guide – HomeCircle",
+    "description": "Watch an urge rise and fall without acting on it. A short guide to try when cravings hit. Support, not medical care."
+  },
+  "library/urge-surfing-meditation.html": {
+    "title": "Urge surfing meditation – HomeCircle",
+    "description": "A short guided sit with the wave of an urge, until it passes. Support, not medical care."
+  },
+  "library/stress-and-anxiety.html": {
+    "title": "Stress and anxiety – HomeCircle",
+    "description": "What stress does in the body, and three small things to try when it builds. Support, not medical care."
+  },
+  "library/alcohol-and-the-body.html": {
+    "title": "Alcohol and the body – HomeCircle",
+    "description": "Rough stages people describe after they stop drinking. General notes, not a diagnosis. Support, not medical care."
+  },
+  "library/cannabis-and-the-body.html": {
+    "title": "Cannabis and the body – HomeCircle",
+    "description": "Sleep, appetite and irritability after stopping cannabis. General notes, not a verdict. Support, not medical care."
+  },
+  "library/opioids-and-the-body.html": {
+    "title": "Opioids and the body – HomeCircle",
+    "description": "Opioid withdrawal can feel like a severe flu. Get medical advice before you stop. Support, not medical care."
+  },
+  "library/stimulants-and-the-body.html": {
+    "title": "Stimulants and the body – HomeCircle",
+    "description": "The crash, sleep and mood after stopping stimulants. General notes only. Support, not medical care."
+  },
+  "library/body-and-recovery-stages.html": {
+    "title": "Body and recovery stages – HomeCircle",
+    "description": "What many people notice in the first days, weeks and months of recovery. General notes, not a diagnosis. Support, not medical care."
+  }
+}
