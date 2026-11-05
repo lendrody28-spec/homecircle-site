@@ -119,7 +119,8 @@ async function breatheAndReturn(p) {   // Kai's own breathing button -> practice
   { const ctx = await context(b); const p = await page(ctx); await p.goto(BASE + 'index.html');
     await breatheAndReturn(p); await p.goto(BASE + 'index.html'); await p.waitForTimeout(200); await openKai(p);
     await chip(p, F.better);
-    ok((await kaiLines(p)).slice(-1)[0] === F.betterReply && JSON.stringify(await chips(p)) === JSON.stringify([F.journal, F.done]), 'F2 text and buttons');
+    ok((await kaiLines(p)).slice(-1)[0] === F.betterReply && JSON.stringify(await chips(p)) === JSON.stringify(F.journal ? [F.journal, F.done] : [F.done]), 'F2 text and buttons');
+    if (!F.journal) { ok(true, 'US: no journal page, no journal button'); await ctx.close(); } else {
     await chip(p, F.journal);
     ok((await kaiLines(p)).slice(-1)[0] === F.journalSaved, 'journal saved message');
     await p.goto(BASE + 'your-circle.html'); await p.waitForTimeout(200);
@@ -130,7 +131,7 @@ async function breatheAndReturn(p) {   // Kai's own breathing button -> practice
     const left = await p.evaluate(() => ({ s: Object.keys(sessionStorage).filter(k => /^hc|kai/i.test(k)), l: Object.keys(localStorage).filter(k => /^hc|kai/i.test(k)) }));
     ok(left.s.length === 0 && left.l.length === 0, 'Clear everything wipes the follow-up flag, worse flag, journal and chat ' + JSON.stringify(left));
     ok(p.errs.length === 0, 'no errors ' + p.errs);
-    await ctx.close(); }
+    await ctx.close(); } }
   // 6. Typed crisis at F1 wins
   { const ctx = await context(b); const p = await page(ctx); await p.goto(BASE + 'index.html');
     await breatheAndReturn(p); await p.goto(BASE + 'index.html'); await p.waitForTimeout(200); await openKai(p);

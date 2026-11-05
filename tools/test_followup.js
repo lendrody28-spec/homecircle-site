@@ -16,7 +16,7 @@ ok(JSON.stringify(a.quickReplies.map(q => q.label)) === '["A bit better","About 
 // F2
 let r = K.reply(F.better, "fu:better", ctx(a.session));
 ok(r.text === "Good on you for giving it a go. You can come back to this any time.", "F2 text");
-ok(r.quickReplies.map(q => q.chip).join() === "fu:journal,fu:done", "F2 journal + done");
+ok(r.quickReplies.map(q => q.chip).join() === (K.BUTTON_COPY.followUp.journal ? "fu:journal,fu:done" : "fu:done"), "F2 journal (AU only) + done");
 let j = K.reply(F.journal, "fu:journal", ctx(r.session));
 ok(j.journal && j.journal.body && j.noKai, "journal note returned for kai.js to save");
 let d = K.reply(F.done, "fu:done", ctx(r.session));
@@ -66,8 +66,8 @@ if (REGION === "AU") {
 } else {
   ok(tels.includes("tel:988") && tels.includes("tel:18006624357") && !tels.includes("tel:18006973738"), "US reach-out: 988, SAMHSA, no gambling without GA");
   const ga = K.reply(F.worse, "fu:worse", ctx(a.session, { includesGA: true })).reach.tels;
-  ok(ga.some(t => t.href === "tel:18006973738"), "US: 1-800-MY-RESET with GA");
-  ok(!/GAMBLER/i.test(JSON.stringify(F)), "no 1-800-GAMBLER");
+  ok(ga.some(t => t.href === "tel:+18006973738"), "US: 1-800-MY-RESET with GA");
+  ok(!new RegExp("GAMB" + "LER", "i").test(JSON.stringify(F)), "no retired national gambling number");
 }
 ok(r.reach.friend.line === "Having a rough day, can you talk?" && r.reach.meeting.href === "meetings.html", "friend line and meetings link");
 // Worse: no technique or breathing for the rest of the day

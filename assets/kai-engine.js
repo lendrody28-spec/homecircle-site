@@ -656,7 +656,7 @@
     var base = { route: "followUp", crisis: false, offerBreathing: false, link: null, stat: null, session: s };
     function out(o) { for (var k in base) if (!(k in o)) o[k] = base[k]; o.text = o.messages.length ? o.messages[o.messages.length - 1].text : ""; return o; }
     if (chip === "fu:better") {
-      return out({ id: "fuBetter", messages: [{ text: c.betterReply }], quickReplies: [Q("fu-journal", c.journal, "fu:journal"), Q("fu-done", c.done, "fu:done")] });
+      return out({ id: "fuBetter", messages: [{ text: c.betterReply }], quickReplies: (c.journal ? [Q("fu-journal", c.journal, "fu:journal")] : []).concat([Q("fu-done", c.done, "fu:done")]) });   /* US site has no journal page */
     }
     if (chip === "fu:journal") return out({ id: "fuJournal", messages: [], journal: { title: c.journalTitle, body: c.journalNote }, quickReplies: [Q("fu-done", c.done, "fu:done")] , noKai: true });
     if (chip === "fu:done") { s.fu = null; return out({ id: "fuDone", messages: [], quickReplies: [], noKai: true }); }
