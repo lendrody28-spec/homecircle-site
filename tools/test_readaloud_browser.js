@@ -208,7 +208,7 @@ const fileVoice = {}; manifest.lines.forEach(l => { for (const v in l.clips) if 
       const ctx = await b.newContext({ viewport: { width: 375, height: 667 } });
       await ctx.addInitScript(v => { localStorage.setItem('hc.ra.voice.v1', v);   // a local device voice only (held Help cards need one); media is real
         const ss = new EventTarget(); ss.getVoices = () => [{ name: 'Karen', lang: 'en-AU', localService: true, default: true }]; ss.speak = () => {}; ss.cancel = () => {}; ss.pause = () => {}; ss.resume = () => {};
-        Object.defineProperty(window, 'speechSynthesis', { value: ss }); window.SpeechSynthesisUtterance = function (t) { this.text = t; }; }, v);
+        Object.defineProperty(window, 'speechSynthesis', { value: ss }); window.SpeechSynthesisUtterance = function (t) { this.text = t; }; setTimeout(() => ss.dispatchEvent(new Event('voiceschanged')), 100); }, v);
       const p = await ctx.newPage(); const csp = [], reqs = [], off = [];
       p.on('console', m => { if (/Content Security Policy/.test(m.text())) csp.push(m.text().slice(0, 120)); });
       p.on('request', r => { const u = r.url(); if (/assets\/audio\/.*\.mp3/.test(u)) reqs.push(u.split('/').pop()); if (!u.startsWith(BASE) && !/^(data|blob):/.test(u)) off.push(u); });
