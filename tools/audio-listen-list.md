@@ -15,7 +15,7 @@ Whisper (base, CPU) often mishears names and long numbers, so a flag here means 
 - [ ] f1e1812ca576.mp3 - kai.crisis.familyViolence [A] - triple zero at 0.62s - heard: "Please call triple zero now if you or anyone else is in danger. Lifeline 131114-1800 respect is 1-800-737-732-24 hours for family and domest"
 - [ ] 6f89df2fa952.mp3 - kai.crisis.familyViolence [B] - triple zero at 0.92s - heard: "Please call triple zero now if you or anyone else is in danger. Lifeline 131114 1-800 respect is 1-800-737-732-24 hours for family and domes"
 - [ ] aab6185b7ca6.mp3 - kai.crisis.childAbuse [A] - triple zero at 2.34s - heard: "If anyone is in danger right now call triple zero, 1-800-RESPECT on 1-800-737-732 helps with sexual abuse anytime. Kids help line on 1-800-5"
-- [ ] 1ef6b3b450e7.mp3 - kai.crisis.childAbuse [B] - triple zero at 2.94s; numbers not matched: 1800551800 - heard: "If anyone is in danger right now, call triple zero. 1-800 respect on 1-800-737-732 helps with sexual abuse anytime. Kids' help line on 1-800"
+- [x] 1ef6b3b450e7.mp3 - kai.crisis.childAbuse [B] - triple zero at 2.94s; numbers not matched: 1800551800 - heard: "If anyone is in danger right now, call triple zero. 1-800 respect on 1-800-737-732 helps with sexual abuse anytime. Kids' help line on 1-800" -> human-listened OK by LJ, 5 Nov 11:50pm
 - [ ] a546a43334b0.mp3 - kai.crisis.checkIn [A] - triple zero at 3.14s - heard: "If you or anyone else is in danger right now, call triple zero, or lifeline on 13 11 14, Kai can miss things, want to tell me more."
 - [ ] 6d139a940618.mp3 - kai.crisis.checkIn [B] - triple zero at 3.78s - heard: "If you or anyone else is in danger right now, call triple zero or lifeline on 131114. Kai can miss things. Want to tell me more."
 - [ ] f532912a1942.mp3 - kai.crisis.medical [A] - triple zero at 3.08s - heard: "This sounds like a medical emergency. Please call Triple Zero now and ask for an ambulance. Stay with the person if it's safe. Lifeline 1311"
@@ -40,3 +40,18 @@ Whisper (base, CPU) often mishears names and long numbers, so a flag here means 
 - [ ] 76f0e3f7db77.mp3 - help.45 [A] - numbers not matched: 1800888236 - heard: "Direct Line 24-Senate Phone and Online Counseling For Victorians, Family Members and Others, Call 1-800-88-236-Open-Sight-More-Info, Free Co"
 - [ ] 0c230bfd6089.mp3 - help.56 [A] - numbers not matched: 30, 1800250015, 1800250015 - heard: "Alcohol and drug service intake can bear a health services intake. Weekdays 8am to 5am closes 3am, third from Wednesdays, excluding public h"
 - [ ] 777e148af921.mp3 - help.56 [B] - numbers not matched: 30 - heard: "Alcohol and drug service intake can bear a health services. Intake weekdays 8 a.m. to 5 p.m. closes 3.3 p.m. Wednesdays excluding public hol"
+
+## Held back pending human listen
+
+Not in the build (files kept outside the site in /workspace/tts-work/held/). Until a person listens and signs off, these read with the device's own voice.
+
+- [ ] 7d57f5068695.mp3 - help.22 [A] - held back pending human listen; now: device voice
+- [ ] 998a1e910345.mp3 - help.22 [B] - held back pending human listen; now: device voice
+- [ ] d1d5a1eb275a.mp3 - help.37 [A] - held back pending human listen; now: device voice
+- [ ] 64b133173e91.mp3 - help.37 [B] - held back pending human listen; now: device voice
+- [ ] 0c230bfd6089.mp3 - help.56 [A] - held back pending human listen; now: device voice
+- [ ] 777e148af921.mp3 - help.56 [B] - held back pending human listen; now: device voice
+
+## Human-listened
+
+- [x] 1ef6b3b450e7.mp3 - kai.crisis.childAbuse [B] - human-listened OK by LJ, 5 Nov 11:50pm

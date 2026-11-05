@@ -104,5 +104,10 @@ texts.forEach((t, i) => ok(R.key(t) === py[i], "key matches python for " + JSON.
 const m = require("./audio-manifest.json");
 m.lines.forEach(l => ok(l.spoken === S(l.text), "spoken script current: " + l.id));
 m.lines.forEach(l => ok(!/\b(911|988)\b|nine one one|nine eight eight/.test(l.text + l.spoken), "no US numbers: " + l.id));
-m.lines.forEach(l => ok(l.clips.A && l.clips.B, "both voices: " + l.id));
+const HELD = ["help.22", "help.37", "help.56"];
+m.lines.forEach(l => ok(HELD.includes(l.id) ? !l.clips.A && !l.clips.B && l.clipsHeld.A && l.clipsHeld.B : !!(l.clips.A && l.clips.B), "both voices (or held for a human listen): " + l.id));
+const ca = m.lines.find(l => l.id === "kai.crisis.childAbuse");
+ok(ca.clips.B.file === "1ef6b3b450e7.mp3" && !ca.clipsHeld, "childAbuse: own Voice B recording kept (human-listened OK by LJ)");
+const fs = require("fs");
+m.lines.forEach(l => Object.values(l.clipsHeld || {}).forEach(c => { if (!(l.clips.A && l.clips.A.file === c.file)) ok(!fs.existsSync(__dirname + "/../assets/audio/" + c.file), "held clip not in build: " + c.file); }));
 console.log(`readaloud unit: ${n - f}/${n} passed`); process.exit(f ? 1 : 0);

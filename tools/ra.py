@@ -137,9 +137,11 @@ def check(region, lines):
             errs.append(f"{l['id']}: spoken script is stale")
         for v in voices:
             c = e.get("clips", {}).get(v)
-            if not c: missing.append(f"{l['id']} [{v}]"); continue
+            if not c:
+                if v in e.get("clipsHeld", {}): continue   # held back pending human listen: device voice reads it
+                missing.append(f"{l['id']} [{v}]"); continue
             f = AUDIO / c["file"]
-            if c["file"] != clip_name(voices[v], e["spoken"]): errs.append(f"{l['id']} [{v}]: clip name doesn't match its text hash")
+            if c["file"] != clip_name(voices[c.get("sharedFrom", v)], e["spoken"]): errs.append(f"{l['id']} [{v}]: clip name doesn't match its text hash")
             elif not f.exists(): errs.append(f"{l['id']} [{v}]: {c['file']} missing")
             elif hashlib.sha256(f.read_bytes()).hexdigest() != c["sha256"]: errs.append(f"{l['id']} [{v}]: file contents changed")
     stale = [i for i in by_id if i not in cur_ids and not by_id[i].get("sample")]
@@ -210,6 +212,8 @@ def make(region, lines, only=None, voices_only=None):
     new, todo = [], {v: [] for v in m["voices"]}
     for l, sp in zip(lines, spoken):
         old = by_id.get(l["id"])
+        if old and old.get("clipsHeld") and old["text"] == l["text"] and old["spoken"] == sp:
+            new.append(old); continue   # held-back or shared clips stay as recorded until a human listen
         if only and l["id"] not in only:
             if old: new.append(old)
             continue

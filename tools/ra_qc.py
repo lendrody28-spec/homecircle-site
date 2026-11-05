@@ -90,6 +90,18 @@ def listen(report, m):
             if r["missingNumbers"]: why.append("numbers not matched: " + ", ".join(r["missingNumbers"]))
             out.append(f"- [ ] {r['file']} - {r['id']} [{r['voice']}] - {'; '.join(why) or 'ok'} - heard: \"{r['heard'][:140]}\"")
         out.append("")
+    out += ["## Held back pending human listen", "", "Not in the build (files kept outside the site in /workspace/tts-work/held/). Until a person listens and signs off, these read with the device's own voice.", ""]
+    for l in m["lines"]:
+        for v, c in l.get("clipsHeld", {}).items():
+            use = "Voice A clip used for both voices" if l.get("clips", {}).get(v, {}).get("sharedFrom") else "device voice"
+            out.append(f"- [ ] {c['file']} - {l['id']} [{v}] - held back pending human listen; now: {use}")
+    out += ["", "## Human-listened", ""]
+    for l in m["lines"]:
+        for v, note in l.get("listened", {}).items():
+            out.append(f"- [x] {l['clips'][v]['file']} - {l['id']} [{v}] - {note}")
+    out.append("")
+    ok = {l["clips"][v]["file"]: n for l in m["lines"] for v, n in l.get("listened", {}).items()}
+    out = [("- [x] " + x[6:] + f" -> {ok[x[6:].split(' ')[0]]}") if x.startswith("- [ ] ") and x[6:].split(" ")[0] in ok else x for x in out]
     (ROOT / "tools" / "audio-listen-list.md").write_text("\n".join(out))
 
 def retake(rows, tries=4):
