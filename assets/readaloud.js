@@ -2,7 +2,7 @@
  *
  * PRIVACY: read aloud never sends text anywhere.
  *  1. Fixed lines (Kai's crisis reply, start-button replies, first-open line, Help page)
- *     play pre-recorded clips made offline with Piper. Clip files have neutral hashed
+ *     play pre-recorded clips made offline (MeloTTS, Kokoro). Clip files have neutral hashed
  *     names, and all of a page's clips for the chosen voice load together on the first
  *     tap, so the server can't tell which line was played.
  *  2. Anything without a clip uses the device's own speech voice, and ONLY voices with
@@ -33,18 +33,24 @@
     var t = String(text);
     t = t.replace(/\b1800RESPECT\b/g, "one eight hundred respect");
     t = t.replace(/\b(1[38]00) ?(\d{2,3}) ?(\d{3,4})\b/g, function (m, a, b, c) {
-      var head = a === "1800" ? "one eight hundred" : "one three hundred";
-      return head + ", " + digits(b) + ", " + (c === "1800" ? "one eight hundred" : digits(c));
+      var head = a === "1800" ? "one eight hundred" : "thirteen hundred";
+      return head + ", " + (b.length === 2 ? pair(b) : digits(b)) + ", " + (c === "1800" ? "eighteen hundred" : digits(c));
     });
+    t = t.replace(/\s*\(((?:one eight hundred|thirteen hundred), [^()]*)\)\s*/g, ", on $1, ");  /* "(1800 ...)" read as ", on ...," so the number is not run into the name */
     t = t.replace(/\(?\b(0[2378])\)? (\d{4}) (\d{4})\b/g, function (m, a, b, c) { return digits(a) + ", " + digits(b) + ", " + digits(c); });
     t = t.replace(/\b(04\d\d) (\d{3}) (\d{3})\b/g, function (m, a, b, c) { return digits(a) + ", " + digits(b) + ", " + digits(c); });
     t = t.replace(/\b(04\d\d) (?=1[38]\b)/g, function (m, a) { return digits(a) + ", "; });
     t = t.replace(/\b24\/7\b/g, "twenty-four seven");
+    t = t.replace(/\bCall 000 Call\b/g, "Please call 000. Call");      /* two call buttons read as two sentences */
+    t = t.replace(/(^|[.!?]\s+)Call (000|911)\b/g, "$1Please call $2");  /* "Call triple zero" at a start was heard as "Core" */
     t = t.replace(/\b(13) (\d\d) (\d\d)\b/g, function (m, a, b, c) { return pair(a) + " " + pair(b) + " " + pair(c); });
     t = t.replace(/\b000\b/g, "triple zero");
+    t = t.replace(/\bGPs\b/g, "G Ps").replace(/\bGP\b/g, "G P");
+    t = t.replace(/\bKai\b/g, "Kye");                                  /* both voices say "Kye" */
     t = t.replace(/\b911\b/g, "nine one one");
     t = t.replace(/\b988\b/g, "nine eight eight");
     t = t.replace(/ > /g, ", then ");
+    t = t.replace(/\s+·\s+/g, ", ");                                 /* separators are not read */
     t = t.replace(/\bLifeline is thirteen/g, "Lifeline, thirteen");
     return t.replace(/\s+/g, " ").trim();
   }
@@ -56,15 +62,90 @@
     return ("0000000" + h.toString(16)).slice(-8);
   }
   /* Text of an element: text nodes joined by a space, whitespace collapsed. Same in tools/ra.py. */
+  /* Headings (h1-h6, summary) end with a full stop so the voice pauses. Labels (.tag, e.g. "Guide") are not read. */
+  var HEAD = /^(H[1-6]|SUMMARY)$/;
+  function stopAfter(out, from) {
+    for (var i = out.length - 1; i >= from; i--) if (/\S/.test(out[i])) { if (!/[.!?:;,]\s*$/.test(out[i])) out[i] = out[i].replace(/\s*$/, "."); return; }
+  }
   function textOf(node) {
     var out = [];
     (function walk(n) {
       for (var c = n.firstChild; c; c = c.nextSibling) {
         if (c.nodeType === 3) out.push(c.nodeValue);
-        else if (c.nodeType === 1 && !/^(SCRIPT|STYLE)$/.test(c.nodeName) && !(c.classList && c.classList.contains("ra-skip"))) walk(c);
+        else if (c.nodeType === 1 && !/^(SCRIPT|STYLE)$/.test(c.nodeName) && !(c.classList && (c.classList.contains("ra-skip") || c.classList.contains("tag")))) {
+          var from = out.length; walk(c); if (HEAD.test(c.nodeName)) stopAfter(out, from);
+        }
       }
     })(node);
-    return norm(out.join(" "));
+    var t = norm(out.join(" "));
+    if (HEAD.test(node.nodeName || "")) { var o = [t]; stopAfter(o, 0); t = o[0]; }
+    return t;
+  }
+  function textOfExcept(node, skip) {
+    if (!skip.length) return textOf(node);
+    skip.forEach(function (d) { d.classList.add("ra-skip"); });
+    try { return textOf(node); } finally { skip.forEach(function (d) { d.classList.remove("ra-skip"); }); }
+  }
+  /* Read-aloud chunks of a container: its children, except a .grid, whose cards are read (and recorded) one by one, each card's <details> and .state-line separately (keeps clips under about a minute). */
+  function chunksOf(w) {
+    var out = [];
+    Array.prototype.forEach.call(w.children, function (c) {
+      if (c.classList.contains("ra-bar") || c.classList.contains("ra-skip")) return;
+      if (c.classList.contains("grid")) Array.prototype.forEach.call(c.children, function (k) {
+        if (k.classList.contains("ra-skip")) return;
+        var more = Array.prototype.filter.call(k.children, function (d) { return d.nodeName === "DETAILS" || d.classList.contains("state-line"); });
+        out.push(textOfExcept(k, more)); more.forEach(function (d) { out.push(textOf(d)); });   /* a card's "More info" is its own clip */
+      });
+      else out.push(textOf(c));
+    });
+    return out.filter(Boolean);
+  }
+  /* Playback. Call unlock() synchronously inside the tap handler, before any await or fetch.
+     - navigator.audioSession (iOS 17+ Safari): set type "playback" so the ring/silent switch doesn't mute us, then use Web Audio
+       (one AudioContext, created or resumed in the tap).
+     - otherwise: one HTMLAudioElement, primed in the tap with a silent clip, then reused for every clip. */
+  var SILENT = "data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAIlYAAESsAAACABAAZGF0YQAAAAA=";
+  function makePlayer(env) {
+    var ctx = null, el = null, src = null, mode = null, urls = [];
+    function unlock() {
+      var nav = env.navigator || {}, AC = env.AudioContext || env.webkitAudioContext;
+      if (nav.audioSession && AC) {
+        try { nav.audioSession.type = "playback"; } catch (e) {}
+        mode = "webaudio";
+        if (!ctx) ctx = new AC();
+        if (ctx.state !== "running" && ctx.resume) { var r = ctx.resume(); if (r && r.catch) r.catch(function () {}); }
+      } else {
+        mode = "element";
+        if (!el) el = new env.Audio();
+        el.onended = el.onerror = null;
+        el.src = SILENT; var q = el.play(); if (q && q.catch) q.catch(function () {});
+      }
+      return mode;
+    }
+    function halt() {
+      if (src) { src.onended = null; try { src.stop(); } catch (e) {} src = null; }
+      if (el) { el.onended = el.onerror = null; try { el.pause(); } catch (e) {} }
+    }
+    /* blob: a downloaded clip. Calls done() at the end, fail() if it can't play. */
+    function play(blob, done, fail) {
+      halt();
+      if (mode === "webaudio" && ctx) {
+        (blob.arrayBuffer ? blob.arrayBuffer() : new env.Response(blob).arrayBuffer()).then(function (ab) {
+          return new Promise(function (res, rej) { var p = ctx.decodeAudioData(ab, res, rej); if (p && p.then) p.then(res, rej); });
+        }).then(function (buf) {
+          var s = ctx.createBufferSource(); s.buffer = buf; s.connect(ctx.destination);
+          s.onended = function () { if (src === s) { src = null; done(); } };
+          src = s; s.start(0);
+        }, fail);
+        return;
+      }
+      if (!el) el = new env.Audio();
+      var u = env.URL.createObjectURL(blob); urls.push(u);
+      el.onended = function () { done(); };
+      el.onerror = function () { fail(); };
+      el.src = u; var q = el.play(); if (q && q.catch) q.catch(function () { fail(); });
+    }
+    return { unlock: unlock, play: play, halt: halt, mode: function () { return mode; } };
   }
   var FEMALE = /female|woman|karen|catherine|samantha|victoria|serena|kate|moira|tessa|fiona|allison|ava|susan|zira|hazel|libby|natasha|sonia|joanna|salli|kimberly/i;
   var MALE = /\bmale\b|\bman\b|daniel|lee|gordon|alex|fred|tom|aaron|arthur|oliver|george|ryan|william|james|david|mark|guy|rishi/i;
@@ -82,7 +163,7 @@
     }
     return local.slice().sort(function (a, b) { return score(b) - score(a); })[0];
   }
-  var api = { speakable: speakable, key: key, norm: norm, pickVoice: pickVoice, textOf: textOf };
+  var api = { speakable: speakable, key: key, norm: norm, pickVoice: pickVoice, textOf: textOf, chunksOf: chunksOf, makePlayer: makePlayer };
   if (typeof document === "undefined" || typeof window === "undefined") return api;
 
   /* ---------- browser ---------- */
@@ -100,7 +181,7 @@
     localVoice = synth && synth.getVoices ? pickVoice(synth.getVoices(), LANG, chosen()) : null;
     update();
   }
-  /* blobs: voice -> Promise<{file: objectURL}> ; loaded once per voice, on first tap */
+  /* blobs: voice -> Promise<{file: Blob}> ; all of the page's clips for one voice, loaded together once, on first tap */
   var loads = {};
   function preload(v) {
     if (loads[v]) return loads[v];
@@ -108,14 +189,14 @@
     Object.keys(clips[v] || {}).forEach(function (k) { var f = clips[v][k]; if (list.indexOf(f) < 0) list.push(f); });
     loads[v] = Promise.all(list.map(function (f) {
       return fetch(base + "assets/audio/" + f).then(function (r) { if (!r.ok) throw 0; return r.blob(); })
-        .then(function (b) { files[f] = URL.createObjectURL(b); }, function () {});
+        .then(function (b) { files[f] = b; }, function () {});
     })).then(function () { return files; });
     return loads[v];
   }
-  var audio = null, active = null, queue = [], token = 0;
+  var P = makePlayer(window), active = null, queue = [], token = 0;
   function stop() {
     token++; queue = [];
-    if (audio) { try { audio.pause(); } catch (e) {} audio = null; }
+    P.halt();
     if (synth) try { synth.cancel(); } catch (e) {}
     if (active) { setBtn(active, false); active = null; }
   }
@@ -134,12 +215,9 @@
       if (i >= order.length) return speakDevice(text, my, done);
       preload(order[i]).then(function (files) {
         if (my !== token) return;
-        var url = files[clips[order[i]][k]];
-        if (!url) return tryClip(i + 1);
-        audio = new Audio(url);
-        audio.onended = function () { if (my === token) done(); };
-        audio.onerror = function () { tryClip(i + 1); };
-        var p = audio.play(); if (p && p.catch) p.catch(function () { if (my === token) tryClip(i + 1); });
+        var blob = files[clips[order[i]][k]];
+        if (!blob) return tryClip(i + 1);
+        P.play(blob, function () { if (my === token) done(); }, function () { if (my === token) tryClip(i + 1); });
       });
     }
     tryClip(0);
@@ -165,8 +243,7 @@
   }
   function canRead(texts) { return !!localVoice || texts.every(function (t) { var k = key(t); return (clips.A && clips.A[k]) || (clips.B && clips.B[k]); }); }
   function pageTexts() {
-    var w = document.querySelector("main .wrap"); if (!w) return [];
-    return Array.prototype.filter.call(w.children, function (c) { return !c.classList.contains("ra-bar") && !c.classList.contains("ra-skip"); }).map(textOf).filter(Boolean);
+    var w = document.querySelector("main .wrap"); return w ? chunksOf(w) : [];
   }
   function button(label, getTexts, small) {
     var b = document.createElement("button");
@@ -210,10 +287,11 @@
     var t = e.target.closest ? e.target.closest(".ra-btn,[data-ra-voice],[data-ra-sample]") : null;
     if (!t) return;
     if (t.hasAttribute("data-ra-voice")) { stop(); setChosen(t.getAttribute("data-ra-voice")); return; }
+    if (t !== active) P.unlock();   /* synchronously in the tap, before any fetch or await (iOS) */
     if (t.hasAttribute("data-ra-sample")) {
       var v = t.getAttribute("data-ra-sample"), s = voiceNames.sample;
       stop(); var my = token;
-      if (s && clips[v] && clips[v][s]) preload(v).then(function (f) { if (my !== token) return; var u = f[clips[v][s]]; if (u) { audio = new Audio(u); audio.play(); } });
+      if (s && clips[v] && clips[v][s]) preload(v).then(function (f) { if (my !== token) return; var b = f[clips[v][s]]; if (b) P.play(b, function () {}, function () {}); });
       return;
     }
     if (t === active) { stop(); return; }

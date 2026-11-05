@@ -2,7 +2,7 @@
 
 Clips are DRAFTS until Hale approves the voice licences and the wording is locked.
 Usage:
-  python3 tools/ra.py make  [--only ID,ID] [--voices A,B]   # needs PIPER=/path/to/piper, PIPER_VOICES=dir
+  python3 tools/ra.py make  [--only ID,ID] [--voices A,B]   # engines run in their own venvs (tools/tts/gen.py)
   python3 tools/ra.py check                                 # also run by build.py
 """
 import hashlib, html.parser, json, os, re, subprocess, sys
@@ -27,32 +27,58 @@ def _surrogates(ch):
     c = ord(ch) - 0x10000
     return [0xD800 + (c >> 10), 0xDC00 + (c & 0x3FF)]
 
-class _Chunks(html.parser.HTMLParser):
-    """Top-level children of a body fragment -> text (text nodes joined by a space), like readaloud.js textOf()."""
+class _Node:
+    def __init__(self, tag, attrs, parent):
+        self.tag = tag.upper(); self.cls = (dict(attrs).get("class") or "").split(); self.kids = []; self.parent = parent
+class _Tree(html.parser.HTMLParser):
+    """Body fragment -> element tree (text nodes are str), enough to mirror readaloud.js textOf()/chunksOf()."""
     def __init__(self):
-        super().__init__(convert_charrefs=True); self.depth = 0; self.out = []; self.cur = None; self.skip = 0; self.skipdepth = []
+        super().__init__(convert_charrefs=True); self.root = _Node("ROOT", [], None); self.cur = self.root
     def handle_starttag(self, tag, attrs):
-        a = dict(attrs)
-        if self.depth == 0:
-            self.cur = None if "ra-bar" in (a.get("class") or "") or "ra-skip" in (a.get("class") or "") else []
-        if tag in VOID: return
-        self.depth += 1
-        if tag in ("script", "style") or "ra-skip" in (a.get("class") or "").split():
-            self.skipdepth.append(self.depth)
-    def handle_startendtag(self, tag, attrs): self.handle_starttag(tag, attrs)
+        n = _Node(tag, attrs, self.cur); self.cur.kids.append(n)
+        if tag not in VOID: self.cur = n
+    def handle_startendtag(self, tag, attrs):
+        self.cur.kids.append(_Node(tag, attrs, self.cur))
     def handle_endtag(self, tag):
-        if tag in VOID: return
-        if self.skipdepth and self.skipdepth[-1] == self.depth: self.skipdepth.pop()
-        self.depth -= 1
-        if self.depth == 0 and self.cur is not None:
-            t = norm(" ".join(self.cur))
-            if t: self.out.append(t)
-            self.cur = None
-    def handle_data(self, d):
-        if self.depth >= 1 and self.cur is not None and not self.skipdepth: self.cur.append(d)
+        n = self.cur
+        while n is not self.root and n.tag != tag.upper(): n = n.parent
+        if n is not self.root: self.cur = n.parent
+    def handle_data(self, d): self.cur.kids.append(d)
+
+HEAD = re.compile(r"^(H[1-6]|SUMMARY)$")
+def _stop_after(out, frm):
+    for i in range(len(out) - 1, frm - 1, -1):
+        if re.search(r"\S", out[i]):
+            if not re.search(r"[.!?:;,]\s*$", out[i]): out[i] = re.sub(r"\s*$", ".", out[i], count=1)
+            return
+
+def text_of(node, skip=()):
+    """Same as readaloud.js textOf(): text nodes joined by a space; skips script/style/.ra-skip/.tag; headings end with a full stop."""
+    out = []
+    def walk(n):
+        for c in n.kids:
+            if isinstance(c, str): out.append(c)
+            elif c.tag not in ("SCRIPT", "STYLE") and "ra-skip" not in c.cls and "tag" not in c.cls and c not in skip:
+                frm = len(out); walk(c)
+                if HEAD.match(c.tag): _stop_after(out, frm)
+    walk(node)
+    t = norm(" ".join(out))
+    if HEAD.match(node.tag):
+        o = [t]; _stop_after(o, 0); t = o[0]
+    return t
 
 def page_chunks(body):
-    p = _Chunks(); p.feed(body); p.close(); return p.out
+    """Same as readaloud.js chunksOf(): children, a .grid split into cards, each card's <details>/.state-line read separately."""
+    p = _Tree(); p.feed(body); p.close(); out = []
+    for c in p.root.kids:
+        if isinstance(c, str) or "ra-bar" in c.cls or "ra-skip" in c.cls: continue
+        if "grid" in c.cls:
+            for k in c.kids:
+                if isinstance(k, str) or "ra-skip" in k.cls: continue
+                more = [d for d in k.kids if not isinstance(d, str) and (d.tag == "DETAILS" or "state-line" in d.cls)]
+                out.append(text_of(k, more)); out += [text_of(d) for d in more]
+        else: out.append(text_of(c))
+    return [t for t in out if t]
 
 def node(js):
     return json.loads(subprocess.run(["node", "-e", js], cwd=ROOT, capture_output=True, text=True, check=True).stdout)
@@ -84,7 +110,7 @@ def voice_id(vi):
     return json.dumps({k: vi.get(k) for k in keys}, sort_keys=True)
 
 def clip_name(vi, spoken):
-    return hashlib.sha256((voice_id(vi) + "\n" + spoken).encode()).hexdigest()[:12] + ".m4a"
+    return hashlib.sha256((voice_id(vi) + "\n" + spoken).encode()).hexdigest()[:12] + ".mp3"
 
 def check(region, lines):
     """Raise SystemExit on any mismatch. Returns (missing list, report)."""
@@ -147,16 +173,16 @@ def _measure(f):
     return float(re.search(r"I:\s+(-?[\d.]+) LUFS", t).group(1)), float(re.search(r"Peak:\s+(-?[\d.inf]+) dBFS", t).group(1))
 
 def _loudnorm(wav, out, ln):
-    """Two-pass loudness normalisation to ln["I"] LUFS with a true-peak ceiling of ln["TP"] dBTP, then AAC .m4a.
+    """Two-pass loudness normalisation to ln["I"] LUFS with a true-peak ceiling of ln["TP"] dBTP, then mono MP3 48 kbps CBR.
     Pass 1 measures the source (EBU R128). Pass 2 applies the gain plus a 4x-oversampled peak limiter.
-    The encoded file is re-measured and the gain/limiter corrected (max 10 rounds) so AAC overshoot cannot slip through."""
+    The encoded file is re-measured and the gain/limiter corrected (max 10 rounds) so encoder overshoot cannot slip through."""
     I, TP = ln["I"], ln["TP"]
     mi, _ = _measure(wav)
     gain, lim = I - mi, TP - 1.5
     for _ in range(10):
         af = f"aresample=96000,volume={gain:.2f}dB,alimiter=limit={10 ** (lim / 20):.4f}:attack=1:release=60:level=false,aresample=24000"
-        subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", str(wav), "-af", af, "-ac", "1", "-c:a", "aac", "-b:a", "48k",
-                        "-movflags", "+faststart", "-map_metadata", "-1", "-fflags", "+bitexact", str(out)], check=True)
+        subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", str(wav), "-af", af, "-ac", "1", "-c:a", "libmp3lame", "-b:a", "48k",
+                        "-id3v2_version", "0", "-map_metadata", "-1", "-fflags", "+bitexact", str(out)], check=True)
         oi, otp = _measure(out)
         if abs(oi - I) <= 0.5 and otp <= TP: return oi, otp
         if otp > TP: lim -= (otp - TP) + 0.3
@@ -164,9 +190,9 @@ def _loudnorm(wav, out, ln):
     return oi, otp
 
 def synth(vi, jobs):
-    """jobs: [(spoken, out_m4a)]. Runs the engine in its own venv (tools/tts/gen.py)."""
+    """jobs: [(spoken, out_mp3)]. Runs the engine in its own venv (tools/tts/gen.py)."""
     if not jobs: return
-    tmp = Path("/tmp/ra-gen"); tmp.mkdir(exist_ok=True)
+    tmp = Path(os.environ.get("RA_TMP", "/workspace/tts-work/ra-gen")); tmp.mkdir(parents=True, exist_ok=True); tmp.mkdir(exist_ok=True)
     js = [{"spoken": sp, "wav": str(tmp / (Path(o).stem + ".wav"))} for sp, o in jobs]
     py = os.environ.get(vi["venvEnv"], vi["venvDefault"])
     subprocess.run([py, str(ROOT / "tools" / "tts" / "gen.py"), vi["engine"], vi["lang"], vi["voice"], str(vi["speed"])],
@@ -200,7 +226,7 @@ def make(region, lines, only=None, voices_only=None):
             e["clips"][v] = {"file": name, "bytes": f.stat().st_size, "sha256": hashlib.sha256(f.read_bytes()).hexdigest()}
     m["lines"] = new
     used = {c["file"] for l in new for c in l["clips"].values()}
-    for f in AUDIO.glob("*.m4a"):
+    for f in [*AUDIO.glob("*.m4a"), *AUDIO.glob("*.mp3")]:
         if f.name not in used: f.unlink()
     MANIFEST.write_text(json.dumps(m, indent=1, ensure_ascii=False) + "\n")
 

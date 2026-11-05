@@ -3,15 +3,63 @@ const R = require("../assets/readaloud.js");
 const { execFileSync } = require("child_process");
 let n = 0, f = 0; const ok = (c, m) => { n++; if (!c) { f++; console.log("FAIL " + m); } };
 const S = R.speakable;
-ok(S("Call 000 now.") === "Call triple zero now.", "000");
+ok(S("Call 000 now.") === "Please call triple zero now.", "000: sentence-start Call becomes Please call");
+ok(S("Danger? Call 000 now.") === "Danger? Please call triple zero now.", "Please call after a full stop");
+ok(S("or call 000 now.") === "or call triple zero now.", "mid-sentence call 000 unchanged");
+ok(S("Call 000 Call Lifeline 13 11 14") === "Please call triple zero. Call Lifeline thirteen eleven fourteen", "two call buttons -> two sentences");
 ok(S("Lifeline is 13 11 14, any time.") === "Lifeline, thirteen eleven fourteen, any time.", "Lifeline");
 ok(S("1800RESPECT is 1800 737 732") === "one eight hundred respect is one eight hundred, seven three seven, seven three two", "1800 groups");
-ok(S("Kids Helpline (1800 55 1800)") === "Kids Helpline (one eight hundred, five five, one eight hundred)", "1800 55 1800");
-ok(S("1300 766 491") === "one three hundred, seven six six, four nine one", "1300");
+ok(S("Kids Helpline (1800 55 1800) is for") === "Kids Helpline, on one eight hundred, fifty five, eighteen hundred, is for", "1800 55 1800 (pair + eighteen hundred, parens read as 'on')");
+ok(S("call 1800 177 833") === "call one eight hundred, one seven seven, eight three three", "1800 177 833");
+ok(S("1300 766 491") === "thirteen hundred, seven six six, four nine one", "1300");
+ok(S("1300 22 4636") === "thirteen hundred, twenty two, four six three six", "1300 with 2-digit group");
 ok(S("text 0477 13 11 14") === "text zero four seven seven, thirteen eleven fourteen", "mobile + 13");
 ok(S("(08) 8212 6933") === "zero eight, eight two one two, six nine three three", "landline");
 ok(S("Settings > Accessibility") === "Settings, then Accessibility", "> path");
+ok(S("see a GP. GPs can help") === "see a G P. G Ps can help", "GP");
+ok(S("Kai can miss things") === "Kye can miss things", "Kai -> Kye");
+ok(S("Free · 24/7 · Phone") === "Free, twenty-four seven, Phone", "· not read");
 ok(S("Call 000 now") !== "Call 000 now" && !/\d/.test(S("Call 000 or Lifeline on 13 11 14")), "no digits left in crisis line");
+// textOf / chunksOf on a tiny fake DOM
+function el(name, cls, kids) { const e = { nodeType: 1, nodeName: name, classList: { _c: (cls || "").split(" ").filter(Boolean), contains(c) { return this._c.includes(c); }, add(c) { this._c.push(c); }, remove(c) { this._c = this._c.filter(x => x !== c); } }, kids: kids || [] };
+  e.kids.forEach((k, i) => { if (typeof k === "string") e.kids[i] = k = { nodeType: 3, nodeValue: k }; k.nextSibling = null; if (i) e.kids[i - 1].nextSibling = k; });
+  e.firstChild = e.kids[0] || null; e.children = e.kids.filter(k => k.nodeType === 1); return e; }
+const card = el("DIV", "card", [el("SPAN", "tag", ["Guide"]), el("H3", "", ["QLife"]), el("P", "", ["Free · peer support"]), el("DETAILS", "", [el("SUMMARY", "", ["More info"]), el("P", "", ["Hours 3pm to 9pm"])])]);
+const wrap = el("DIV", "wrap", [el("DIV", "ra-bar", ["x"]), el("H1", "", ["Get help now"]), el("DIV", "grid", [card]), el("P", "ra-skip", ["skip"])]);
+const ch = R.chunksOf(wrap);
+ok(JSON.stringify(ch) === JSON.stringify(["Get help now.", "QLife. Free · peer support", "More info. Hours 3pm to 9pm"]), "chunksOf: heading full stop, no Guide label, card details split: " + JSON.stringify(ch));
+ok(!/Guide/.test(ch.join(" ")) && !/·/.test(ch.map(S).join(" ")), "no Guide label or · in spoken text");
+ok(R.textOf(el("H2", "", ["Done?"])) === "Done?", "heading with punctuation unchanged");
+// player: audioSession -> playback + Web Audio, unlocked synchronously in the tap
+(function () {
+  const log = []; let ctxN = 0;
+  function AC() { ctxN++; this.state = "suspended"; this.resume = () => { log.push("resume"); this.state = "running"; return Promise.resolve(); }; }
+  const env = { navigator: { audioSession: { type: "auto" } }, AudioContext: AC, Audio: function () { log.push("audio-el"); } };
+  const P = R.makePlayer(env);
+  ok(P.unlock() === "webaudio", "audioSession present -> webaudio");
+  ok(env.navigator.audioSession.type === "playback", "audioSession.type set to playback");
+  ok(ctxN === 1 && log[0] === "resume", "AudioContext created and resumed synchronously in unlock");
+  P.unlock(); ok(ctxN === 1, "one AudioContext reused");
+  ok(!log.includes("audio-el"), "no audio element on the webaudio path");
+})();
+// player: no audioSession -> HTMLAudioElement primed synchronously with a silent clip, then reused
+(function () {
+  const els = [];
+  function Audio() { this.src = ""; this.plays = []; this.play = () => { this.plays.push(this.src); return Promise.resolve(); }; this.pause = () => {}; els.push(this); }
+  const env = { navigator: {}, AudioContext: function () { throw new Error("should not be used"); }, Audio, URL: { createObjectURL: () => "blob:x" } };
+  const P = R.makePlayer(env);
+  ok(P.unlock() === "element", "no audioSession -> element");
+  ok(els.length === 1 && /^data:audio\/wav/.test(els[0].plays[0] || ""), "element primed with silent data:audio/wav inside the tap");
+  P.play({}, () => {}, () => {});
+  ok(els.length === 1 && els[0].plays[1] === "blob:x", "same primed element plays the clip");
+})();
+// click handler calls P.unlock() before preload/fetch
+(function () {
+  const src = require("fs").readFileSync(__dirname + "/../assets/readaloud.js", "utf8");
+  const h = src.slice(src.indexOf('document.addEventListener("click", function (e) {'));
+  ok(h.indexOf("P.unlock()") > 0 && h.indexOf("P.unlock()") < h.indexOf("preload(") && h.indexOf("P.unlock()") < h.indexOf("run(t"), "unlock() before preload/run in the click handler");
+})();
+// python page_chunks mirrors chunksOf on help.html (text-level parity is also checked in the browser test)
 // on-device voices only
 const net = [{ name: "Google UK English Female", lang: "en-GB", localService: false }, { name: "Google US English", lang: "en-US", localService: false }];
 ok(R.pickVoice(net, "en-AU", "A") === null, "network-only voices -> null (buttons hidden)");
