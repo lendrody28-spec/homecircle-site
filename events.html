@@ -11,6 +11,10 @@
 <link rel="apple-touch-icon" href="assets/logo-192.png">
 <link rel="stylesheet" href="assets/site.css?v=2947cd1f">
 <script src="assets/site.js" defer></script>
+<script src="assets/kai-data.js?v=b5e837991f" defer></script>
+<script src="assets/kai-crisis.js?v=2c01e85c5c" defer></script>
+<script src="assets/kai-engine.js?v=2c01e85c5c" defer></script>
+<script src="assets/kai.js?v=2c01e85c5c" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -194,5 +198,40 @@
     <button class="btn ghost wide plain" type="button" data-close>Close</button>
   </div>
 </dialog>
+<div class="kai" id="kai" data-root="" hidden>
+  <section class="kai-panel" id="kai-panel" role="dialog" aria-labelledby="kai-title" hidden>
+    <div class="kai-head">
+      <img src="assets/kai.png" alt="" width="44" height="44">
+      <div><h2 id="kai-title">Kai</h2><p>Recovery Buddy</p></div>
+      <button class="btn ghost kai-small" type="button" id="kai-clear">Clear</button>
+      <button class="btn ghost kai-small" type="button" id="kai-min" aria-label="Minimise Kai">Minimise</button>
+    </div>
+    <div class="kai-confirm card" id="kai-confirm" role="alertdialog" aria-labelledby="kai-confirm-h" hidden>
+      <p id="kai-confirm-h"><strong>Clear this chat?</strong> This removes the messages in this browser. The Help button in the top corner still calls 000 or Lifeline 13 11 14, and the Help page lists every line.</p>
+      <div class="btn-row"><button class="btn danger" type="button" data-yes>Clear chat</button><button class="btn ghost" type="button" data-no>Cancel</button></div>
+    </div>
+    <div class="kai-crisis kai-pinned" id="kai-crisis" role="region" aria-label="Get help now"><button class="kai-notsafe" id="kai-notsafe" type="button" aria-label="I&#x27;m not safe, get help now"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="12" cy="12" r="3.5" fill="currentColor"/></svg><span>I&#x27;m not safe</span></button><a class="btn danger" href="tel:000">Call 000</a><a class="btn" href="tel:131114" aria-label="Call Lifeline 13 11 14">Lifeline 13 11 14</a></div>
+    <div class="kai-scroll">
+      <p class="kai-firstopen" id="kai-firstopen">Kai is a recovery buddy, not a person, counsellor, medical care or an emergency service. Kai can miss things.</p>
+      <div class="kai-start" id="kai-start" role="group" aria-labelledby="kai-start-h"><h3 id="kai-start-h">What would help right now?</h3><button class="kai-big" type="button" data-kai-button="struggling">I&#x27;m struggling</button><button class="kai-big" type="button" data-kai-button="cravings">I&#x27;m having cravings</button><button class="kai-big" type="button" data-kai-button="meeting">Find a meeting</button><p class="kai-typehint">Or write a line below.</p></div>
+      <p class="kai-note"><strong>Kai isn't AI, and isn't a person, counsellor, doctor or sponsor.</strong> Replies are written in this browser from saved rules. No network and no AI service: nothing you type leaves your browser.</p>
+      <p class="kai-note">Kai is a recovery buddy, not a counsellor. HomeCircle doesn't give medical advice. In an emergency call 000, or Lifeline on 13 11 14.</p>
+      <p class="kai-empty" id="kai-empty">Kai is here. Pick a chip, or write a line.</p>
+      <div class="kai-log" id="kai-log"></div>
+      <div class="kai-after" id="kai-after"></div>
+    </div>
+    <p class="sr-only" id="kai-live" aria-live="polite"></p>
+    <div class="kai-chips" id="kai-chips" role="group" aria-label="Quick replies"></div>
+    <form class="kai-form" id="kai-form" autocomplete="off">
+      <label class="sr-only" for="kai-input">Message Kai</label>
+      <textarea id="kai-input" rows="1" maxlength="500" placeholder="Write a line"></textarea>
+      <button class="btn" type="submit">Send</button>
+    </form>
+    <p class="kai-foot">Kai isn&#x27;t a person or AI, and isn&#x27;t medical care. Kai can miss things. The chat stays in this browser until you clear it. <button class="linkish" type="button" id="kai-move">Move Kai to the left</button></p>
+  </section>
+  <button class="kai-bubble" id="kai-bubble" type="button" aria-expanded="false" aria-controls="kai-panel" aria-label="Kai, Recovery Buddy. Not AI and not a person."><img src="assets/kai.png" alt="" width="64" height="64" draggable="false"></button>
+</div>
+<div class="kai-fallback" id="kai-fallback" role="region" aria-label="Get help now"><strong>I&#x27;m not safe:</strong> <a class="btn danger" href="tel:000">Call 000</a><a class="btn" href="tel:131114" aria-label="Call Lifeline 13 11 14">Lifeline 13 11 14</a>
+</div>
 </body>
 </html>

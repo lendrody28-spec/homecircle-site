@@ -11,6 +11,10 @@
 <link rel="apple-touch-icon" href="assets/logo-192.png">
 <link rel="stylesheet" href="assets/site.css?v=2947cd1f">
 <script src="assets/site.js" defer></script>
+<script src="assets/kai-data.js?v=b5e837991f" defer></script>
+<script src="assets/kai-crisis.js?v=2c01e85c5c" defer></script>
+<script src="assets/kai-engine.js?v=2c01e85c5c" defer></script>
+<script src="assets/kai.js?v=2c01e85c5c" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -28,7 +32,7 @@
   <div>
     <p class="eyebrow">Free · Australian · No sign-in</p>
     <h1><span class="grad-text">Support for your recovery journey</span></h1>
-    <p class="lede">HomeCircle is a free Australian recovery support app, and this website brings its no-account tools to your browser: find AA and NA meetings and add a reminder, breathe along with a guide, read plain-language guides and the 12 Steps, keep a day count and journal in your browser.</p>
+    <p class="lede">HomeCircle is a free Australian recovery support app, and this website brings its no-account tools to your browser: find AA and NA meetings and add a reminder, breathe along with a guide, read plain-language guides and the 12 Steps, keep a day count and journal in your browser, and chat with Kai.</p>
     <div class="btn-row"><a class="btn" href="meetings.html">Find a meeting</a><a class="btn ghost" href="meditations.html">Breathe now</a><a class="btn ghost" href="library.html">Open the Library</a></div>
     <p class="small">Everything here is free. No accounts, no cookies, no ads, no trackers and no analytics. Anything you save stays in this browser.</p>
   </div>
@@ -38,7 +42,7 @@
 <h2>What you can do here</h2>
 <div class="grid g4"><a class="card tile" href="meetings.html"><img src="assets/art/ArtGroundSee.jpg" alt="A person sitting in a room, looking around at a plant, a picture, a lamp and a cup." width="1024" height="768" loading="lazy"><div class="tbody"><span class="tag">Meetings</span><h3>Find a meeting</h3><p>AA and NA meetings across Australia. Search by suburb, postcode and day.</p></div></a><a class="card tile" href="meditations.html"><img src="assets/art/ArtBreathIn.jpg" alt="A person sitting upright, breathing in slowly through the nose." width="1024" height="768" loading="lazy"><div class="tbody"><span class="tag">Breathing</span><h3>Breathe now</h3><p>An animated breathing guide: box, 4-7-8 or a slow out-breath.</p></div></a><a class="card tile" href="library.html"><img src="assets/art/ArtOneThing.jpg" alt="A person at a kitchen sink, slowly washing one mug." width="1024" height="768" loading="lazy"><div class="tbody"><span class="tag">Library</span><h3>Library</h3><p>Guides, breathing, meditation, body and fellowships.</p></div></a><a class="card tile" href="twelve-steps.html"><img src="assets/art/ArtDayPlan.jpg" alt="A person writing in a notebook at a small table, with a sun and moon above showing one day." width="1024" height="768" loading="lazy"><div class="tbody"><span class="tag">12 Steps</span><h3>The 12 Steps</h3><p>Plain-language notes on what each step is about, with a link to AA&#x27;s own wording on aa.org.</p></div></a></div>
 <div class="grid g3 mt"><a class="card tile" href="your-circle.html"><img src="assets/art/ArtOneThing.jpg" alt="A person at a kitchen sink, slowly washing one mug." width="1024" height="768" loading="lazy"><div class="tbody"><span class="tag">Your circle</span><h3>Your circle</h3><p>A day counter and a private journal, kept only in this browser.</p></div></a><a class="card tile" href="families/index.html"><img src="assets/art/ArtHandOnChest.jpg" alt="A person with eyes closed and a hand resting on their chest, noticing how they feel." width="1024" height="768" loading="lazy"><div class="tbody"><span class="tag">Families</span><h3>For families &amp; partners</h3><p>Worried about someone you love? What to say, warning signs and support for you.</p></div></a><a class="card tile" href="help.html"><img src="assets/art/ArtHandOnChest.jpg" alt="A person with eyes closed and a hand resting on their chest, noticing how they feel." width="1024" height="768" loading="lazy"><div class="tbody"><span class="tag">Help</span><h3>Helplines</h3><p>000, Lifeline and every helpline in the app, plus lines in your state.</p></div></a></div>
-
+<div class="card sage mt kai-intro"><img src="assets/kai.png" alt="" width="72" height="72"><div><h2 class="mt0">Meet Kai, your recovery buddy</h2><p>Kai is the round button in the corner of every page. Tell Kai how you're feeling and it can suggest a breathing practice, a short meditation or a walk, or point you to a meeting or a helpline. Replies are written in this browser from saved rules. No network and no AI service. Kai isn't AI, and isn't a person, counsellor, doctor or sponsor. Nothing you type leaves your browser.</p></div></div>
 <div class="card mt about-hc"><h2 class="mt0">Support for your recovery journey, and for the people who love you</h2>
 <p>Whether you&#x27;re in recovery, or you&#x27;re a parent, partner, child or friend of someone with an addiction, HomeCircle is here for you. It&#x27;s free for everyone. The app is for adults 18+. Our <a href="families/index.html">Families pages</a> are open to everyone, with Kids Helpline (<a href="tel:1800551800">1800 55 1800</a>) for young people.</p>
 <ul>
@@ -116,5 +120,40 @@
     <button class="btn ghost wide plain" type="button" data-close>Close</button>
   </div>
 </dialog>
+<div class="kai" id="kai" data-root="" hidden>
+  <section class="kai-panel" id="kai-panel" role="dialog" aria-labelledby="kai-title" hidden>
+    <div class="kai-head">
+      <img src="assets/kai.png" alt="" width="44" height="44">
+      <div><h2 id="kai-title">Kai</h2><p>Recovery Buddy</p></div>
+      <button class="btn ghost kai-small" type="button" id="kai-clear">Clear</button>
+      <button class="btn ghost kai-small" type="button" id="kai-min" aria-label="Minimise Kai">Minimise</button>
+    </div>
+    <div class="kai-confirm card" id="kai-confirm" role="alertdialog" aria-labelledby="kai-confirm-h" hidden>
+      <p id="kai-confirm-h"><strong>Clear this chat?</strong> This removes the messages in this browser. The Help button in the top corner still calls 000 or Lifeline 13 11 14, and the Help page lists every line.</p>
+      <div class="btn-row"><button class="btn danger" type="button" data-yes>Clear chat</button><button class="btn ghost" type="button" data-no>Cancel</button></div>
+    </div>
+    <div class="kai-crisis kai-pinned" id="kai-crisis" role="region" aria-label="Get help now"><button class="kai-notsafe" id="kai-notsafe" type="button" aria-label="I&#x27;m not safe, get help now"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="12" cy="12" r="3.5" fill="currentColor"/></svg><span>I&#x27;m not safe</span></button><a class="btn danger" href="tel:000">Call 000</a><a class="btn" href="tel:131114" aria-label="Call Lifeline 13 11 14">Lifeline 13 11 14</a></div>
+    <div class="kai-scroll">
+      <p class="kai-firstopen" id="kai-firstopen">Kai is a recovery buddy, not a person, counsellor, medical care or an emergency service. Kai can miss things.</p>
+      <div class="kai-start" id="kai-start" role="group" aria-labelledby="kai-start-h"><h3 id="kai-start-h">What would help right now?</h3><button class="kai-big" type="button" data-kai-button="struggling">I&#x27;m struggling</button><button class="kai-big" type="button" data-kai-button="cravings">I&#x27;m having cravings</button><button class="kai-big" type="button" data-kai-button="meeting">Find a meeting</button><p class="kai-typehint">Or write a line below.</p></div>
+      <p class="kai-note"><strong>Kai isn't AI, and isn't a person, counsellor, doctor or sponsor.</strong> Replies are written in this browser from saved rules. No network and no AI service: nothing you type leaves your browser.</p>
+      <p class="kai-note">Kai is a recovery buddy, not a counsellor. HomeCircle doesn't give medical advice. In an emergency call 000, or Lifeline on 13 11 14.</p>
+      <p class="kai-empty" id="kai-empty">Kai is here. Pick a chip, or write a line.</p>
+      <div class="kai-log" id="kai-log"></div>
+      <div class="kai-after" id="kai-after"></div>
+    </div>
+    <p class="sr-only" id="kai-live" aria-live="polite"></p>
+    <div class="kai-chips" id="kai-chips" role="group" aria-label="Quick replies"></div>
+    <form class="kai-form" id="kai-form" autocomplete="off">
+      <label class="sr-only" for="kai-input">Message Kai</label>
+      <textarea id="kai-input" rows="1" maxlength="500" placeholder="Write a line"></textarea>
+      <button class="btn" type="submit">Send</button>
+    </form>
+    <p class="kai-foot">Kai isn&#x27;t a person or AI, and isn&#x27;t medical care. Kai can miss things. The chat stays in this browser until you clear it. <button class="linkish" type="button" id="kai-move">Move Kai to the left</button></p>
+  </section>
+  <button class="kai-bubble" id="kai-bubble" type="button" aria-expanded="false" aria-controls="kai-panel" aria-label="Kai, Recovery Buddy. Not AI and not a person."><img src="assets/kai.png" alt="" width="64" height="64" draggable="false"></button>
+</div>
+<div class="kai-fallback" id="kai-fallback" role="region" aria-label="Get help now"><strong>I&#x27;m not safe:</strong> <a class="btn danger" href="tel:000">Call 000</a><a class="btn" href="tel:131114" aria-label="Call Lifeline 13 11 14">Lifeline 13 11 14</a>
+</div>
 </body>
 </html>
