@@ -92,6 +92,9 @@ const B=K.BUTTON_COPY||{};const out=[];const add=(id,t)=>{if(t&&!out.some(x=>x.t
 add('kai.firstOpen',B.firstOpen);
 for(const id of ['struggling','cravings','meeting']){const r=K.buttonReply(id,{});add('kai.start.'+id,r&&r.text)}
 const R=C.region(%s).replies;for(const k in R)add('kai.crisis.'+k,R[k]);
+const F=B.followUp;if(F){add('kai.fu.ask',F.ask);add('kai.crisis.worse',K.reply('Worse','fu:worse',{session:K.freshSession(),health:{}}).messages[0].text);
+add('kai.fu.better',F.betterReply);add('kai.fu.same',F.sameReply);add('kai.fu.encourage',F.encourage);
+F.techniques.forEach(t=>add('kai.fu.t.'+t.id,t.sub));add('kai.fu.worse',F.worseReply);add('kai.fu.reachOut',F.reachOut);add('kai.fu.journalSaved',F.journalSaved);add('kai.fu.journalFailed',F.journalFailed)}
 process.stdout.write(JSON.stringify(out))""" % json.dumps(region)
     return node(js)
 

@@ -2,94 +2,113 @@
  {
   "id": "kai.firstOpen",
   "voice": "A",
-  "file": "7436d83c1356.m4a",
-  "heard": "Chi is a recovery buddy, not a person, counselor, medical care or an emergency service. Chi can miss things.",
+  "file": "bdf0f714b075.mp3",
+  "heard": "Kai is a recovery buddy, not a person, counselor, medical care or an emergency service. Kai can miss things.",
   "expectedNumbers": [],
-  "missingNumbers": []
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
  },
  {
   "id": "kai.firstOpen",
   "voice": "B",
-  "file": "737dca67b177.m4a",
-  "heard": "Kai is a recovery buddy, not a person, counselor, medical care, or an emergency service. Kai can miss things.",
+  "file": "a700e35c35fa.mp3",
+  "heard": "Kai is a recovery buddy, not a person, counselor, medical care or an emergency service. Kai can miss things.",
   "expectedNumbers": [],
-  "missingNumbers": []
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
  },
  {
   "id": "kai.start.struggling",
   "voice": "A",
-  "file": "131ef9d07fed.m4a",
+  "file": "67133b752fb5.mp3",
   "heard": "Thanks for telling me, you don't have to sort it all out right now, we could slow your breathing for a minute, find a meeting, or keep talking here, if you're not safe right now, tap I'm not safe, or call triple zero.",
   "expectedNumbers": [
    "000"
   ],
-  "missingNumbers": []
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
  },
  {
   "id": "kai.start.struggling",
   "voice": "B",
-  "file": "18e6ea94bc17.m4a",
-  "heard": "Thanks for telling me. You don't have to sort it all out right now. We could slow your breathing for a minute, find a meeting, or keep talking here. If you're not safe right now, tap I'm not safe or call triple zero.",
+  "file": "957e82258c73.mp3",
+  "heard": "Thanks for telling me, you don't have to sort it all out right now. We could slow your breathing for a minute, find a meeting, or keep talking here. If you're not safe right now, tap I'm not safe or call triple zero.",
   "expectedNumbers": [
    "000"
   ],
-  "missingNumbers": []
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
  },
  {
   "id": "kai.start.cravings",
   "voice": "A",
-  "file": "dda62e1e464b.m4a",
-  "heard": "Cravings for a drink, a use or a bet rise and fall, and this one can pass. Try to wait 15 minutes before you decide anything. Slow breathing can help, so can calling your sponsor or someone in your circle, or getting to a meeting, if you are not safe right now. Tip I'm not safe, or call triple zero.",
+  "file": "6221919e61ab.mp3",
+  "heard": "Cravings for a drink, a use or a bet rise and fall, and this one can pass. Try to wait 15 minutes before you decide anything. Slow breathing can help, so can calling your sponsor or someone in your circle, or getting to a meeting, if you're not safe right now. Tap I'm not safe or call triple zero.",
   "expectedNumbers": [
    "15",
    "000"
   ],
-  "missingNumbers": []
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
  },
  {
   "id": "kai.start.cravings",
   "voice": "B",
-  "file": "ccf17d7daa30.m4a",
-  "heard": "Cravings for a drink, a use, or a bet rise and fall and this one can pass. Try to wait 15 minutes before you decide anything. Slow breathing can help, so can calling your sponsor or someone in your circle or getting to a meeting. If you're not safe right now, tap I'm not safe or call triple zero.",
+  "file": "9dda125f447e.mp3",
+  "heard": "Cravings for a drink, a use, or a bet rise and fall, and this one can pass. Try to wait 15 minutes before you decide anything. Slow breathing can help, so can calling your sponsor or someone in your circle or getting to a meeting. If you're not safe right now, tap I'm not safe or call triple zero.",
   "expectedNumbers": [
    "15",
    "000"
   ],
-  "missingNumbers": []
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
  },
  {
   "id": "kai.start.meeting",
   "voice": "A",
-  "file": "2cd11f99ec31.m4a",
+  "file": "03d970e11049.mp3",
   "heard": "I can open the meeting finder.",
   "expectedNumbers": [],
-  "missingNumbers": []
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
  },
  {
   "id": "kai.start.meeting",
   "voice": "B",
-  "file": "8c2a600a5d59.m4a",
+  "file": "7d556f231139.mp3",
   "heard": "I can open the meeting finder.",
   "expectedNumbers": [],
-  "missingNumbers": []
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
  },
  {
   "id": "kai.crisis.selfHarm",
   "voice": "A",
-  "file": "32c76036439d.m4a",
-  "heard": "If you might act on this, call triple zero now, Lifeline 131114, Kai is a recovery buddy, not a counselor, and can't diagnose, Kai can miss things, so please reach out yourself.",
+  "file": "9f50e78e276d.mp3",
+  "heard": "If you might act on this, call triple zero now, lifeline 131114, Chi is a recovery buddy, not a counselor, and can't diagnose, Chi can miss things, so please reach out yourself.",
   "expectedNumbers": [
    "000",
    "131114"
   ],
   "missingNumbers": [],
-  "tripleZeroAt": 1.88,
-  "tripleZeroWithin4s": true
+  "tripleZeroAt": 1.84,
+  "tripleZeroWithin4s": true,
+  "heardEmpty": false,
+  "heardCall": true,
+  "heardFail": false
  },
  {
   "id": "kai.crisis.selfHarm",
   "voice": "B",
-  "file": "88c57627d192.m4a",
+  "file": "73e4334f149f.mp3",
   "heard": "If you might act on this, call triple zero now. Lifeline 131114. Kai is a recovery buddy, not a counselor, and can't diagnose. Kai can miss things, so please reach out yourself.",
   "expectedNumbers": [
    "000",
@@ -97,83 +116,101 @@
   ],
   "missingNumbers": [],
   "tripleZeroAt": 1.88,
-  "tripleZeroWithin4s": true
+  "tripleZeroWithin4s": true,
+  "heardEmpty": false,
+  "heardCall": true,
+  "heardFail": false
  },
  {
   "id": "kai.crisis.emergency",
   "voice": "A",
-  "file": "a62b2e459221.m4a",
-  "heard": "Core triple zero now if you or anyone else is in danger. Lifeline 131114. Anytime. Please make the call yourself. Kai can't call anyone. Kai can miss things.",
+  "file": "5437c0cd2061.mp3",
+  "heard": "If you or anyone else is in danger, call Triple Zero now, Lifeline, 131114. Any time, please make the call yourself, I can't call anyone, I can miss things.",
   "expectedNumbers": [
    "000",
    "131114"
   ],
   "missingNumbers": [],
-  "tripleZeroAt": 0.26,
-  "tripleZeroWithin4s": true
+  "tripleZeroAt": 2.58,
+  "tripleZeroWithin4s": true,
+  "heardEmpty": false,
+  "heardCall": true,
+  "heardFail": false
  },
  {
   "id": "kai.crisis.emergency",
   "voice": "B",
-  "file": "34add38ed84d.m4a",
-  "heard": "Call triple zero now if you or anyone else is in danger. Lifeline 13 11 14 anytime. Please make the call yourself. Kai can't call anyone. Kai can miss things.",
+  "file": "f8f03404faeb.mp3",
+  "heard": "If you or anyone else is in danger, call triple zero now. Lifeline, 13, 11, 14 any time, please make the call yourself. Kai can't call anyone. Kai can miss things.",
   "expectedNumbers": [
    "000",
    "131114"
+  ],
+  "missingNumbers": [],
+  "tripleZeroAt": 2.86,
+  "tripleZeroWithin4s": true,
+  "heardEmpty": false,
+  "heardCall": true,
+  "heardFail": false
+ },
+ {
+  "id": "kai.crisis.familyHarm",
+  "voice": "A",
+  "file": "668db98d792a.mp3",
+  "heard": "Please call triple zero now if anyone is in danger. Please keep everyone safe step away and give yourself space. Lifeline 131114. Men's referral service is 1300-766-491 for help to stop using violence. Please make the call yourself. Kai can't call anyone and can miss things.",
+  "expectedNumbers": [
+   "000",
+   "131114",
+   "1300766491"
   ],
   "missingNumbers": [],
   "tripleZeroAt": 0.58,
-  "tripleZeroWithin4s": true
+  "tripleZeroWithin4s": true,
+  "heardEmpty": false,
+  "heardCall": true,
+  "heardFail": false
  },
  {
   "id": "kai.crisis.familyHarm",
-  "voice": "A",
-  "file": "7c1524ea4761.m4a",
-  "heard": "Call triple zero now if anyone is in danger, please keep everyone safe step away and give yourself space. Lifeline 131114. Men's referral service is 1-300-766-491. For help to stop using violence, please make the call yourself. Kai can't call anyone and can miss things.",
+  "voice": "B",
+  "file": "3fc6994f2b10.mp3",
+  "heard": "Please call triple zero now if anyone is in danger. Please keep everyone safe. Step away and give yourself space. Lifeline 131114 Men's referral service is 1300 766 491 for help to stop using violence. Please make the call yourself. I can't call anyone and can miss things.",
   "expectedNumbers": [
    "000",
    "131114",
    "1300766491"
   ],
   "missingNumbers": [],
-  "tripleZeroAt": 0.26,
-  "tripleZeroWithin4s": true
+  "tripleZeroAt": 0.92,
+  "tripleZeroWithin4s": true,
+  "heardEmpty": false,
+  "heardCall": true,
+  "heardFail": false
  },
  {
-  "id": "kai.crisis.familyHarm",
-  "voice": "B",
-  "file": "118cc52cb7b8.m4a",
-  "heard": "Call triple zero now if anyone is in danger. Please keep everyone safe, step away, and give yourself space. Lifeline 131114. Men's referral service is 1-300-766-491 for help to stop using violence. Please make the call yourself. I can't call anyone and can miss things.",
+  "id": "kai.crisis.familyViolence",
+  "voice": "A",
+  "file": "f1e1812ca576.mp3",
+  "heard": "Please call triple zero now if you or anyone else is in danger. Lifeline 13 11 14 1 800 respect is 1 800 737 732 24 hours for family and domestic violence. Please call one of them yourself. I can't call anyone and can miss things.",
   "expectedNumbers": [
    "000",
    "131114",
-   "1300766491"
+   "1800",
+   "1800737732",
+   "24"
   ],
   "missingNumbers": [],
   "tripleZeroAt": 0.62,
-  "tripleZeroWithin4s": true
- },
- {
-  "id": "kai.crisis.familyViolence",
-  "voice": "A",
-  "file": "526504d7d108.m4a",
-  "heard": "Call triple zero now if you or anyone else is in danger. Lifeline 13 11 14 1 800 respect is 1 800 737 732 24 hours for family and domestic violence. Please call one of them yourself. Kai can't call anyone and can miss things.",
-  "expectedNumbers": [
-   "000",
-   "131114",
-   "1800",
-   "1800737732",
-   "24"
-  ],
-  "missingNumbers": [],
-  "tripleZeroAt": 0.26,
-  "tripleZeroWithin4s": true
+  "tripleZeroWithin4s": true,
+  "heardEmpty": false,
+  "heardCall": true,
+  "heardFail": false
  },
  {
   "id": "kai.crisis.familyViolence",
   "voice": "B",
-  "file": "9e9dc296f368.m4a",
-  "heard": "Call triple zero now if you or anyone else is in danger. Lifeline 131114. 1-800 respect is 1-800-737-732-24 hours for family and domestic violence. Please call one of them yourself. I can't call anyone and can miss things.",
+  "file": "6f89df2fa952.mp3",
+  "heard": "Please call triple zero now if you or anyone else is in danger. Lifeline 131114 1-800 respect is 1-800-737-732-24 hours for family and domestic violence. Please call one of them yourself. I can't call anyone and can miss things.",
   "expectedNumbers": [
    "000",
    "131114",
@@ -182,14 +219,17 @@
    "24"
   ],
   "missingNumbers": [],
-  "tripleZeroAt": 0.64,
-  "tripleZeroWithin4s": true
+  "tripleZeroAt": 0.92,
+  "tripleZeroWithin4s": true,
+  "heardEmpty": false,
+  "heardCall": true,
+  "heardFail": false
  },
  {
   "id": "kai.crisis.childAbuse",
   "voice": "A",
-  "file": "8cffd10d7f9d.m4a",
-  "heard": "If anyone is in danger right now, call triple 0, 1-800-respect-1-800-737-732-helps with sexual abuse. Any time, kids' helpline 1-800-551-800 is for young people up to 25. Braverhats 1-800-272-831 supports people affected by child sexual abuse, kijk and misthings.",
+  "file": "62614465cc8e.mp3",
+  "heard": "If anyone is in danger right now, call triple zero, 1-800-RESPECT, on 1-800-737-732, helps with sexual abuse anytime, kids help line, on 1-800-55-1800, is for young people up to 25. Braverheads, on 1-800-272-831, supports people affected by child sexual abuse, Kai can miss things.",
   "expectedNumbers": [
    "000",
    "1800",
@@ -199,14 +239,17 @@
    "1800272831"
   ],
   "missingNumbers": [],
-  "tripleZeroAt": 2.44,
-  "tripleZeroWithin4s": true
+  "tripleZeroAt": 2.42,
+  "tripleZeroWithin4s": true,
+  "heardEmpty": false,
+  "heardCall": true,
+  "heardFail": false
  },
  {
   "id": "kai.crisis.childAbuse",
   "voice": "B",
-  "file": "fb4082bb13be.m4a",
-  "heard": "If anyone is in danger right now, call triple zero. 1-800 respect 1-800-737-732 helps with sexual abuse anytime. Kids' help line 1-800-555-1-800 is for young people up to 25. Braveheart's 1-800-272-831 supports people affected by child sexual abuse. Kai can miss things.",
+  "file": "22eadd456789.mp3",
+  "heard": "If anyone is in danger right now, call triple zero. 1-800 respect on 1-800-737-732 helps with sexual abuse anytime. Kids' help line on 1-800-555-1800 is for young people up to 25. Brave Hearts on 1-800-272-831 supports people affected by child sexual abuse. I can miss things.",
   "expectedNumbers": [
    "000",
    "1800",
@@ -218,174 +261,213 @@
   "missingNumbers": [
    "1800551800"
   ],
-  "tripleZeroAt": 2.78,
-  "tripleZeroWithin4s": true
+  "tripleZeroAt": 2.92,
+  "tripleZeroWithin4s": true,
+  "heardEmpty": false,
+  "heardCall": true,
+  "heardFail": true
  },
  {
   "id": "kai.crisis.checkIn",
   "voice": "A",
-  "file": "232253e67867.m4a",
-  "heard": "Just checking in, if you or anyone else is in danger right now, call triple zero, or lifeline on 131114, Kai can miss things, want to tell me more.",
+  "file": "a546a43334b0.mp3",
+  "heard": "If you or anyone else is in danger right now, call triple zero, or lifeline on 13 11 14, I can miss things. Want to tell me more.",
   "expectedNumbers": [
    "000",
    "131114"
   ],
   "missingNumbers": [],
-  "tripleZeroAt": 4.3,
-  "tripleZeroWithin4s": false
+  "tripleZeroAt": 3.14,
+  "tripleZeroWithin4s": true,
+  "heardEmpty": false,
+  "heardCall": true,
+  "heardFail": false
  },
  {
   "id": "kai.crisis.checkIn",
   "voice": "B",
-  "file": "8c12cd768ce0.m4a",
-  "heard": "Just checking in, if you or anyone else is in danger right now, call triple zero or lifeline on 13-11-14. Kai can miss things, want to tell me more.",
+  "file": "6d139a940618.mp3",
+  "heard": "If you or anyone else is in danger right now, call triple zero or lifeline on 131114. Kai can miss things. Want to tell me more.",
   "expectedNumbers": [
    "000",
    "131114"
   ],
   "missingNumbers": [],
-  "tripleZeroAt": 5.06,
-  "tripleZeroWithin4s": false
+  "tripleZeroAt": 3.78,
+  "tripleZeroWithin4s": true,
+  "heardEmpty": false,
+  "heardCall": true,
+  "heardFail": false
  },
  {
   "id": "kai.crisis.medical",
   "voice": "A",
-  "file": "1672bc41248f.m4a",
-  "heard": "This sounds like a medical emergency. Call 000 now and ask for an ambulance. Stay with the person if it's safe. Lifeline 131114. Kai can't call anyone and can miss things, so please make the call yourself.",
+  "file": "f532912a1942.mp3",
+  "heard": "This sounds like a medical emergency. Please call triple zero now and ask for an ambulance. Stay with the person if it's safe. Lifeline, 1311-14. Kai can't call anyone and can miss things. So please make the call yourself.",
   "expectedNumbers": [
    "000",
    "131114"
   ],
   "missingNumbers": [],
-  "tripleZeroAt": 2.76,
-  "tripleZeroWithin4s": true
+  "tripleZeroAt": 3.1,
+  "tripleZeroWithin4s": true,
+  "heardEmpty": false,
+  "heardCall": true,
+  "heardFail": false
  },
  {
   "id": "kai.crisis.medical",
   "voice": "B",
-  "file": "51606288f59f.m4a",
-  "heard": "This sounds like a medical emergency. Call triple zero now and ask for an ambulance. Stay with the person if it's safe. Lifeline 131114. Kai can't call anyone and can miss things so please make the call yourself.",
+  "file": "4c7eaf095d0f.mp3",
+  "heard": "This sounds like a medical emergency. Please call triple zero now and ask for an ambulance. Stay with the person if it's safe. Lifeline 131114. I can't call anyone and can miss things, so please make the call yourself.",
   "expectedNumbers": [
    "000",
    "131114"
   ],
   "missingNumbers": [],
-  "tripleZeroAt": 3.42,
-  "tripleZeroWithin4s": true
+  "tripleZeroAt": 3.74,
+  "tripleZeroWithin4s": true,
+  "heardEmpty": false,
+  "heardCall": true,
+  "heardFail": false
  },
  {
   "id": "help.00",
   "voice": "A",
-  "file": "2d87fad79351.m4a",
-  "heard": "Core Triple Zero Core Lifeline 131114",
+  "file": "d7f772c8e6cf.mp3",
+  "heard": "Please call triple zero, call lifeline 131114.",
   "expectedNumbers": [
    "000",
    "131114"
   ],
-  "missingNumbers": []
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
  },
  {
   "id": "help.00",
   "voice": "B",
-  "file": "5514f331bb9d.m4a",
-  "heard": "Call triple zero, call Lifeline 13-11-14.",
+  "file": "ec48f38a95cc.mp3",
+  "heard": "Please call triple-zero, call Lifeline 13-11-14.",
   "expectedNumbers": [
    "000",
    "131114"
   ],
-  "missingNumbers": []
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
  },
  {
   "id": "help.01",
   "voice": "A",
-  "file": "4b09bfc07ea9.m4a",
+  "file": "ebe53b2c213c.mp3",
   "heard": "Get help!",
   "expectedNumbers": [],
-  "missingNumbers": []
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
  },
  {
   "id": "help.01",
   "voice": "B",
-  "file": "8817d8266eea.m4a",
+  "file": "719e6981d490.mp3",
   "heard": "Get help.",
   "expectedNumbers": [],
-  "missingNumbers": []
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
  },
  {
   "id": "help.02",
   "voice": "A",
-  "file": "ad474bf00f0b.m4a",
-  "heard": "We're here to support you, help is always available, you're not alone.",
+  "file": "6fbe9c0f8488.mp3",
+  "heard": "We are here to support you, help is always available, you are not alone.",
   "expectedNumbers": [],
-  "missingNumbers": []
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
  },
  {
   "id": "help.02",
   "voice": "B",
-  "file": "6b2fe82b3bce.m4a",
+  "file": "0507209c8b79.mp3",
   "heard": "We're here to support you. Help is always available. You're not alone.",
   "expectedNumbers": [],
-  "missingNumbers": []
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
  },
  {
   "id": "help.03",
   "voice": "A",
-  "file": "4b37ad3e994e.m4a",
+  "file": "db71354af7e2.mp3",
   "heard": "Home Circle is not a medical device and doesn't give medical advice.",
   "expectedNumbers": [],
-  "missingNumbers": []
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
  },
  {
   "id": "help.03",
   "voice": "B",
-  "file": "f2a26f5e4524.m4a",
+  "file": "432044fd3380.mp3",
   "heard": "Home Circle is not a medical device and doesn't give medical advice.",
   "expectedNumbers": [],
-  "missingNumbers": []
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
  },
  {
   "id": "help.04",
   "voice": "A",
-  "file": "c9dab9308ef7.m4a",
-  "heard": "Call triple zero immediately if a life is in danger. Call triple zero or go to your nearest emergency department.",
+  "file": "ec1e5abfa447.mp3",
+  "heard": "Please call triple zero immediately if a life is in danger. Please call triple zero or go to your nearest emergency department.",
   "expectedNumbers": [
    "000",
    "000"
   ],
-  "missingNumbers": []
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
  },
  {
   "id": "help.04",
   "voice": "B",
-  "file": "47fab92c44dd.m4a",
-  "heard": "Call triple zero immediately if a life is in danger. Call triple zero or go to your nearest emergency department.",
+  "file": "23743515f649.mp3",
+  "heard": "Please call triple zero immediately if a life is in danger. Please call triple zero or go to your nearest emergency department.",
   "expectedNumbers": [
    "000",
    "000"
   ],
-  "missingNumbers": []
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
  },
  {
   "id": "help.05",
   "voice": "A",
-  "file": "1049876a683a.m4a",
+  "file": "dff07df17714.mp3",
   "heard": "Helplines",
   "expectedNumbers": [],
-  "missingNumbers": []
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
  },
  {
   "id": "help.05",
   "voice": "B",
-  "file": "732f2b2f116b.m4a",
-  "heard": "Help lines.",
+  "file": "5502ed24c3f2.mp3",
+  "heard": "Helplines",
   "expectedNumbers": [],
-  "missingNumbers": []
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
  },
  {
   "id": "help.06",
   "voice": "A",
-  "file": "73b5e0a0825b.m4a",
-  "heard": "Lifeline 24-7 crisis support for anyone in Australia who is feeling overwhelmed or finding it hard to cope. 24 hours, call 13-11-14 you can also text 0-47-7, 13-11-14, call 13-11-14 text 0-47-7. 13-11-14 more infoture term, confidential support from a trend crisis supporter, including if you're thinking about suicide or worried about someone. Call 13-11-14, text 0-47-7, 13-11-14, or chat online. All three are open 24-7, Lifeline Hogg, or Beyond Blue Free Counseling for Anxiety, Depression or Feeling Overwhelmed. For anyone in Australia, 24 hours, call 1-300-22-4636- call services. You can also call if you're supporting a partner, family member, or friend, call 1-300-22-4636- or use webchat, both 24-7, free and confidential, local call costs apply on the phone. On webchat, you don't have to give your real name. Bayne-Bult-Aug-O suicide callback service free 24-7 counselling for anyone affected by suicide, age 15 and over 24 hours, call 1-300-659-467 for anyone thinking about suicide, worried about someone, or grieving a suicide. Call 1-300-659-467 more infot for people feeling suicidal, worried about or caring for someone, or who have lost someone to suicide, also for emotional or mental health issues, phone and online chat are 24-7. Video chat is by appointment 18 and over, free, for people living in Australia, no referral needed, suture-spuddicative leap org authored in a free 24-cent and crisis support for Aboriginal and Torres Strait Islander people, from Aboriginal and Torres Strait Islander crisis supporters. 24 hours, call 13-92-76 crisis support from Aboriginal and Torres Strait Islander people, call 13-90-76 more info or confidential, culturally safe place to yarn if you are feeling worried or no good, or worried about someone you know. Call 13-92-76-247, text 0447, 13-90-76, or type to them online, form to midnight every day, free and confidential, that an inner org or client free, anonymous or back of peer support for talking about sexuality. Gender, bodies, feelings, or relationships, freement and inner local time, every day, call 1-800-184-527-a-batt of peer support, not a crisis line, out of hours, call lifeline 13-1114- call 1-800-184. 5-27 more info run by Lebtika CB people, family members, friends and others who support someone Lebtika CB are welcome to phone or web chat, freement and inner your local time, every day including holidays, last calls are taken by 8-4-tip, free and anonymous. Not a crisis line, Cliforg, or National Alcohol and other drug hotline free, confidential support for anyone worried about their own or someone else, alcohol or drug use, call 1-800-250-015 connects you to your state's alcohol and drug servers. Open 24-7 except South Australia 8-30m-10m in an emergency call triple zero, or lifeline 13-1114 anytime, call 1-800-250-015 more info your call goes through to the alcohol and drug service in your state or territory. Open 24-7 from South Australia, the service runs 8-30m-10m, free and confidential, run by the Australian Government Department of Health, Disability and Aging, HealthGovO at is 24-7 alcohol and drug support cleared 24-7 confidential alcohol and drug support for Queenslanders and the people who care about them. Call 1-800-177-83 Queensland only call 1-800-177-83 more info for people in Queensland with alcohol or drug concerns, their loved ones, and health professionals, call 24-7. Chat online with a counsellor, or request a callback, there's also an SMES support program at is health clinic of Honational Gambling Helpline-free, confidential 24-7 support for anyone affected by gambling, yours or someone else's 24 hours. Call 1-800-858-858-free and confidential, anywhere in Australia, not run by gamblers anonymous, call 1-800-858-858 more info talk to a trained counsellor any time, day or night. From anywhere in Australia, gambling help online also has live chat and email support, free and confidential, government funded, not run by gamblers anonymous, gambling homine or co-Australia talk to a sober member of alcoholics anonymous anytime. If drinking is a problem for you, 24 hours, call 1-300-22-22-3-300-22-22 more info call the 24 hour helpline to speak with a sober alcoholic, you can also chat live with a member on the website. Or find an in-person or online meeting, an org on Australia talk to a member of narcotics anonymous, or find a meeting near you, call 1-300-652-820 call 1-300-652-820 more info call 1-300. 652-820 to find someone to talk to hours unpublished, to find meetings, text your suburb or postcode and state for example, pattington cleared to 0488-811-247 and you'll get a list of meetings nearby.",
+  "file": "f16cc7f1e04a.mp3",
+  "heard": "Lifeline, 24-7 crisis support for anyone in Australia who is feeling overwhelmed or finding it hard to cope. 24 hours, call 13-11-14 you can also text 0-47-7, 13-11-14 call 13-11-14 text 0-47-7. 13-11-14",
   "expectedNumbers": [
    "24",
    "7",
@@ -393,396 +475,991 @@
    "131114",
    "0477131114",
    "131114",
+   "0477131114"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.06",
+  "voice": "B",
+  "file": "fceade82ff73.mp3",
+  "heard": "Lifeline. 24-7 crisis support for anyone in Australia who is feeling overwhelmed or finding it hard to cope. 24 hours. Call 13-11-14. You can also text 0-47-7-13-11-14. Call 131114-0477-131114",
+  "expectedNumbers": [
+   "24",
+   "7",
+   "24",
+   "131114",
    "0477131114",
+   "131114",
+   "0477131114"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.07",
+  "voice": "A",
+  "file": "edec0f929e10.mp3",
+  "heard": "More info, short-term, confidential support from a trained crisis supporter, including if you're thinking about suicide or worried about someone, call 131114, text 0477, 131114, or chat online, all three are open 247. Lifeline, or QO",
+  "expectedNumbers": [
    "131114",
    "0477131114",
    "24",
-   "7",
+   "7"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.07",
+  "voice": "B",
+  "file": "8efbe2c48384.mp3",
+  "heard": "More info. Short term, confidential support from a trained crisis supporter, including if you're thinking about suicide or worried about someone. Call 131114-0477-131114 or chat online. All three are open 24-7. Lifeline, org.",
+  "expectedNumbers": [
+   "131114",
+   "0477131114",
+   "24",
+   "7"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.08",
+  "voice": "A",
+  "file": "bd8485f90acd.mp3",
+  "heard": "Beyond blue, free counseling for anxiety, depression or feeling overwhelmed, for anyone in Australia, 24 hours, call 1322-4636 call 1322-4636.",
+  "expectedNumbers": [
    "24",
    "1300224636",
+   "1300224636"
+  ],
+  "missingNumbers": [
    "1300224636",
+   "1300224636"
+  ],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.08",
+  "voice": "B",
+  "file": "f3585089998d.mp3",
+  "heard": "Beyond blue, free counseling for anxiety, depression, or feeling overwhelmed for anyone in Australia. 24 hours. Call 1322-4636-1322-4636.",
+  "expectedNumbers": [
+   "24",
+   "1300224636",
+   "1300224636"
+  ],
+  "missingNumbers": [
+   "1300224636",
+   "1300224636"
+  ],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.09",
+  "voice": "A",
+  "file": "37f201c5f5ca.mp3",
+  "heard": "More info, counselors listen and help you find the right mental health services. You can also call if you're supporting a partner, family member or friend, call 1300-22-4636, or use webchat, both 24-7, free and confidential. Local call costs apply on the phone. On webchat you don't have to give your real name, Baina Biltorg-O",
+  "expectedNumbers": [
    "1300224636",
    "24",
-   "7",
+   "7"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.09",
+  "voice": "B",
+  "file": "1ce92231c2f5.mp3",
+  "heard": "More info, counselors listen and help you find the right mental health services. You can also call if you're supporting a partner, family member, or friend. Call 1300-224-636 or use WebJet both 24-7, free, and confidential. Local call costs apply on the phone. On WebJet you don't have to give your real name, Bay and Blue, org.",
+  "expectedNumbers": [
+   "1300224636",
+   "24",
+   "7"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.10",
+  "voice": "A",
+  "file": "1710fdb3101e.mp3",
+  "heard": "Suicide callback service, free 24-7 counselling for anyone affected by suicide, edge 15 and over 24 hours call 1300, 659, 467 for anyone thinking about suicide, worried about someone, or grieving a suicide call 1300. 659, 467",
+  "expectedNumbers": [
    "24",
    "7",
    "15",
    "24",
    "1300659467",
-   "1300659467",
-   "24",
-   "7",
-   "18",
-   "13",
-   "24",
-   "7",
-   "24",
-   "139276",
-   "139276",
-   "13927624",
-   "7",
-   "0447139276",
-   "4",
-   "13",
-   "3",
-   "9",
-   "1800184527",
-   "131114",
-   "1800184527",
-   "3",
-   "9",
-   "8",
-   "40",
-   "1800250015",
-   "24",
-   "7",
-   "8",
-   "30",
-   "10",
-   "000",
-   "131114",
-   "1800250015",
-   "24",
-   "7",
-   "8",
-   "30",
-   "10",
-   "24",
-   "7",
-   "24",
-   "7",
-   "1800177833",
-   "1800177833",
-   "24",
-   "7",
-   "24",
-   "7",
-   "24",
-   "1800858858",
-   "1800858858",
-   "24",
-   "1300222222",
-   "1300222222",
-   "24",
-   "1300652820",
-   "1300652820",
-   "1300652820",
-   "0488811247"
+   "1300659467"
   ],
-  "missingNumbers": [
-   "0447139276",
-   "40",
-   "1800177833",
-   "1800177833",
-   "1300222222",
-   "1300222222"
-  ]
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
  },
  {
-  "id": "help.06",
+  "id": "help.10",
   "voice": "B",
-  "file": "5dc324f092ad.m4a",
-  "heard": "Lifeline 24-7 crisis support for anyone in Australia who is feeling overwhelmed or finding it hard to cope. 24 hours. Call 13-11-14, you can also text 0-47-7, 13-11-14. 13-11-14, text 0-47-7, 13-11-14, more info short term, confidential support from a trained crisis supporter, including if you're thinking about suicide or worried about someone. Call 13-11-14, text 0-47-7, 13-11-14 or chat online. All three are open 24-7. Lifeline, org. O beyond blue-free counseling for anxiety, depression, or feeling overwhelmed for anyone in Australia. 24 hours. Call 1-300-22 for 636- call 1-300-22 for 636- more info counselors listen and help you find the right mental health services. You can also call if you're supporting a partner, family, member, or friend. Call 1-300-22 for 636 or use WebChat both 24-7, free, and confidential. Local call costs apply on the phone. On WebChat you don't have to give your real name. Bayon Blue, org. O suicide call back service free 24-7 counseling for anyone affected by suicide aged 15 and over. 24 hours. Call 1-300-659 for 6-7 for anyone thinking about suicide, worried about someone or grieving a suicide. Call 1-300-659 for 6-7 more info for people feeling suicidal, worried about or caring for someone or who have lost someone to suicide. Also for emotional or mental health issues. Phone and online chat are 24-7. Video chat is by appointment 18 and over. Free for people living in Australia. No referral needed. Suicide call back service. Org. O 13 yarn free 24-7 crisis support for Aboriginal and Torres Strait Islander people. From Aboriginal and Torres Strait Islander crisis supporters. 24 hours. Call 13-92-76 crisis support from Aboriginal and Torres Strait Islander people. Call 13-92-76 more info a confidential, culturally safe place to yarn if you're feeling worried or no good or worried about someone you know. Call 13-92-76 24-7. Text 0-4-4-7, 13-92-76, or type to them online, 4 p.m. to midnight every day. Free and confidential. 13 yarn, org. Ocue life free, anonymous LGBTIQ plus peer support for talking about sexuality, gender bodies, feelings, or relationships. 3 p.m. to 9 p.m. local time every day. Call 1-800-184-527 LGBTIQ plus peer support. Not a crisis line. Out of hours, call Lifeline 13-1114. Call 1-800-184-527 more info run by LGBTIQ plus SB people. Family members, friends and others who support someone LGBTIQ plus SB are welcome too. Phone or webchat, 3 p.m. to 9 p.m. your local time every day including holidays. Last calls are taken by 8.4 p.m. Free and anonymous. Not a crisis line. Cue life, org. O national alcohol and other drug hotline free confidential support for anyone worried about their own or someone else's alcohol or drug use. Call 1-800-250-015 connects you to your state's alcohol and drug service. Open 24-7, except South Australia 8.3 m to 10 p.m. In an emergency call triple zero or Lifeline 13-1114 any time. Call 1-800-250-015 more info your call goes through to the alcohol and drug service in your state or territory. Open 24-7. From South Australia, the service runs 8.3 m to 10 p.m. Free and confidential. Run by the Australian Government Department of Health, Disability and Aging. Health, Gov. O Addie's 24-7 alcohol and drug support QLD. 24-7 confidential alcohol and drug support for Queenslanders and the people who care about them. Call 1-800-177-833 Queensland only. Call 1-800-177-833 more info for people in Queensland with alcohol or drug concerns, their loved ones and health professionals. Call 24-7, chat online with a counselor or request a call back. There's also an SMS support program. Addie's Health, QLD, Gov. O National Gambling Helpline Free. Confidential 24-7 support for anyone affected by gambling, yours or someone else's. 24 hours. Call 1-800-858-858 free and confidential anywhere in Australia. Not run by gamblers anonymous. Call 1-800-858-858 more info talk to a trained counselor anytime, day or night from anywhere in Australia. Gambling Helpl Online also has live chat and email support, free and confidential. Government funded. Not run by gamblers anonymous. Gambling Helpl Online org. OAA Australia talk to a sober member of alcoholics anonymous. Any time, if drinking is a problem for you. 24 hours. Call 1-300-222-222 call 1-300-222-222 more info call the 24-hour helpline to speak with a sober alcoholic. You can also chat live with a member on the AA website or find an in-person or online meeting. OAA org. OAA Australia talk to a member of narcotics anonymous or find a meeting near you. Call 1-300-652-820 call 1-300-652-820 more info call 1-300-652-820 to find someone to talk to. Hours aren't published. To find meetings, text your suburb or postcode and state, for example, Paddington QLD to 0488-811-247 and you'll get a list of meetings nearby. Now org.",
+  "file": "58820d92e75f.mp3",
+  "heard": "Suicide call back service, free 24-7 counseling for anyone affected by suicide, aged 15 and over, 24 hours, call 1300-659 for 6-7 for anyone thinking about suicide, worried about someone or grieving a suicide, call 1300-659-467.",
   "expectedNumbers": [
-   "24",
-   "7",
-   "24",
-   "131114",
-   "0477131114",
-   "131114",
-   "0477131114",
-   "131114",
-   "0477131114",
-   "24",
-   "7",
-   "24",
-   "1300224636",
-   "1300224636",
-   "1300224636",
-   "24",
-   "7",
    "24",
    "7",
    "15",
    "24",
    "1300659467",
-   "1300659467",
+   "1300659467"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.11",
+  "voice": "A",
+  "file": "2c695812354e.mp3",
+  "heard": "More info for people feeling suicidal, worried about or caring for someone, or who have lost someone to suicide, also for emotional or mental health issues. Phone and online chat are 24-7. Video chat is by appointment 18 and over free, for people living in Australia. No referral needed, SUCH ESPONDERSATIVLEAT AUG-O",
+  "expectedNumbers": [
    "24",
    "7",
-   "18",
+   "18"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.11",
+  "voice": "B",
+  "file": "fc5cf090a1e5.mp3",
+  "heard": "More info. For people feeling suicidal, worried about or caring for someone or who have lost someone to suicide. Also for emotional or mental health issues. Phone and online chat are 24-7. Video chat is by appointment 18 and over. Free for people living in Australia. No referral needed. Suicide Co-Back Service, ORG",
+  "expectedNumbers": [
+   "24",
+   "7",
+   "18"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.12",
+  "voice": "A",
+  "file": "b351e16bb798.mp3",
+  "heard": "Third and inner, free 24-centen crisis support for Aboriginal and Torres Strait Islander people from Aboriginal and Torres Strait Islander crisis supporters. 24 hours call 1390-76 crisis support from Aboriginal and Torres Strait Islander people. Call 1392-76",
+  "expectedNumbers": [
    "13",
    "24",
    "7",
    "24",
    "139276",
+   "139276"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.12",
+  "voice": "B",
+  "file": "47f7cccd85a5.mp3",
+  "heard": "13 Yarn, Free 24-7 Crisis Support for Aboriginal and Torres Strait Islander People From Aboriginal and Torres Strait Islander Crisis Supporters, 24 Hours, Call 1392-76 Crisis Support from Aboriginal and Torres Strait Islander People, Call 1392-76",
+  "expectedNumbers": [
+   "13",
+   "24",
+   "7",
+   "24",
    "139276",
+   "139276"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.13",
+  "voice": "A",
+  "file": "7bb5b9bb82ea.mp3",
+  "heard": "More info, a confidential, culturally safe place to yarn if you're feeling worried or no good, or worried about someone you know, call 1392-76247, text 0447, 1392-76, or type to them online. Form to midnight every day, free and confidential, fit in in our org-o.",
+  "expectedNumbers": [
    "13927624",
    "7",
    "0447139276",
    "4",
-   "13",
-   "3",
-   "9",
-   "1800184527",
-   "131114",
-   "1800184527",
-   "3",
-   "9",
-   "8",
-   "40",
-   "1800250015",
-   "24",
-   "7",
-   "8",
-   "30",
-   "10",
-   "000",
-   "131114",
-   "1800250015",
-   "24",
-   "7",
-   "8",
-   "30",
-   "10",
-   "24",
-   "7",
-   "24",
-   "7",
-   "1800177833",
-   "1800177833",
-   "24",
-   "7",
-   "24",
-   "7",
-   "24",
-   "1800858858",
-   "1800858858",
-   "24",
-   "1300222222",
-   "1300222222",
-   "24",
-   "1300652820",
-   "1300652820",
-   "1300652820",
-   "0488811247"
+   "13"
   ],
-  "missingNumbers": [
-   "1300224636",
-   "1300224636",
-   "1300224636",
-   "1300659467",
-   "1300659467",
-   "40"
-  ]
- },
- {
-  "id": "help.07",
-  "voice": "A",
-  "file": "de3fa67754b8.m4a",
-  "heard": "These are independent services. Home Circle is not affiliated with them.",
-  "expectedNumbers": [],
-  "missingNumbers": []
- },
- {
-  "id": "help.07",
-  "voice": "B",
-  "file": "66316de3b4e5.m4a",
-  "heard": "These are independent services. Home Circle is not affiliated with them.",
-  "expectedNumbers": [],
-  "missingNumbers": []
- },
- {
-  "id": "help.08",
-  "voice": "A",
-  "file": "e7e8e81e443f.m4a",
-  "heard": "Family Partners",
-  "expectedNumbers": [],
-  "missingNumbers": []
- },
- {
-  "id": "help.08",
-  "voice": "B",
-  "file": "77a19b3b9f15.m4a",
-  "heard": "Family and Partners",
-  "expectedNumbers": [],
-  "missingNumbers": []
- },
- {
-  "id": "help.09",
-  "voice": "A",
-  "file": "1ea7fbf4b675.m4a",
-  "heard": "This is not medical advice. For any major concern, see a local doctor or EGPS, if a life is in danger, call triple zero.",
-  "expectedNumbers": [
-   "000"
-  ],
-  "missingNumbers": []
- },
- {
-  "id": "help.09",
-  "voice": "B",
-  "file": "a92108e90657.m4a",
-  "heard": "This is not medical advice. For any major concern see a local doctor or GP. If a life is in danger, call triple zero.",
-  "expectedNumbers": [
-   "000"
-  ],
-  "missingNumbers": []
- },
- {
-  "id": "help.10",
-  "voice": "A",
-  "file": "407a2314eea8.m4a",
-  "heard": "For partners, family members and couples, these lines are beside someone in recovery.",
-  "expectedNumbers": [],
-  "missingNumbers": []
- },
- {
-  "id": "help.10",
-  "voice": "B",
-  "file": "f246b75241de.m4a",
-  "heard": "For partners, family members and couples, these lines are beside someone in recovery.",
-  "expectedNumbers": [],
-  "missingNumbers": []
- },
- {
-  "id": "help.11",
-  "voice": "A",
-  "file": "c225e24e6ab2.m4a",
-  "heard": "Allen & Family Groups Australia for families and friends of someone with a drinking problem, call 1-300-252-666 open-site more info talk to an Allen & member in confidence on 1-300-252-666 hours aren't published. Support groups for family and friends of problem drinkers, plus allotine groups for teens, Allen & Cog O allotine part of Allen & Australia, for ages about 13-18, same Australian line, home circle itself is an 18-act call 1-300-252-666 open-site family drug support for families and friends of someone using alcohol or other drugs. 24 hours call 1-300-368-186 call 1-300-368-186 open-site find a family meeting more info a national support line for families and friends affected by someone's alcohol or other drug use. Open 24-7-0-0-0-0 D.S.T also runs support meetings in some states. D.S.T or co-D.S.T lists no support meetings in WAH, Tasmania or the N.T. In WAH, the parent and family drug support line is listed under western Australia below, come annan for families and friends ends of someone with a gambling problem. Meetings in snow and Queensland, someone on Zoom, email Gem and in live com ho open site.",
-  "expectedNumbers": [
-   "1300252666",
-   "1300252666",
-   "13",
-   "18",
-   "18",
-   "1300252666",
-   "24",
-   "1300368186",
-   "1300368186",
-   "24",
-   "7"
-  ],
-  "missingNumbers": []
- },
- {
-  "id": "help.11",
-  "voice": "B",
-  "file": "2f3e9757b4c3.m4a",
-  "heard": "Allanon family groups Australia for families and friends of someone with a drinking problem. Call 1-300-252-666 open site more info talk to an Allanon member in confidence on 1-300-252-666. Hours aren't published. Support groups for family and friends of problem drinkers plus a Latin groups for teens. Allanon, org, or a Latin part of Allanon Australia for ages about 13 to 18. Same Australian line. Home Circle itself is an 18 plus app. Call 1-300-252-666 open site family drug support for families and friends of someone using alcohol or other drugs. Call 1-300-368-186 call 1-300-368-186 open site find a family meeting more info a national support line for families and friends affected by someone's alcohol or other drug use. Open 24-7 FDS also run support meetings in some states. FDS, org, or FDS lists no support meetings in WA, Tasmania, or the NT. In WA, the parent and family drug support line is listed under Western Australia below. Gamonon for families and friends of someone with a gambling problem. Meetings in NSW and Queensland, some on Zoom. Email Gamonon at live, com, or open site.",
-  "expectedNumbers": [
-   "1300252666",
-   "1300252666",
-   "13",
-   "18",
-   "18",
-   "1300252666",
-   "24",
-   "1300368186",
-   "1300368186",
-   "24",
-   "7"
-  ],
-  "missingNumbers": []
- },
- {
-  "id": "help.12",
-  "voice": "A",
-  "file": "04138983bd8d.m4a",
-  "heard": "Gamble is anonymous Australia.",
-  "expectedNumbers": [],
-  "missingNumbers": []
- },
- {
-  "id": "help.12",
-  "voice": "B",
-  "file": "c6443674e7bf.m4a",
-  "heard": "Gambler's Anonymous Australia",
-  "expectedNumbers": [],
-  "missingNumbers": []
- },
- {
-  "id": "help.13",
-  "voice": "A",
-  "file": "cc4fe1f07752.m4a",
-  "heard": "Meetings and a member to talk to, not a crisis line, and hours aren't published, snow calls 0455, 717, 543 Queens land and entry calls 0467, 655, 799 South Australia calls 008, 8-12. 6933 Tasmania calls 0431, 965, 974 Western Australia calls 008, 9487, 0688 Victoria email cavitation came a comm open site.",
-  "expectedNumbers": [
-   "0455717543",
-   "0467655799",
-   "08",
-   "82126933",
-   "0431965974",
-   "08",
-   "94870688",
-   "18"
-  ],
-  "missingNumbers": [
-   "82126933",
-   "18"
-  ]
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
  },
  {
   "id": "help.13",
   "voice": "B",
-  "file": "bbf5aae09f23.m4a",
-  "heard": "Meetings and a member to talk to, not a crisis line and hours aren't published. NSW, call 0455-717-543 Queensland and NT. Call 0467-655-799 South Australia. Call 008-8212-693 Tasmania. Call 043-1965-974 Western Australia. Call 089-487-0688 Victoria. Email Gevictoria-18-A-G-Mail. Calm Open Site.",
+  "file": "e0a19b32b7a4.mp3",
+  "heard": "More info. A confidential, culturally safe place to yarn if you're feeling worried or no good or worried about someone you know. Call 1392-76247, text 0447-1392-76 or type to them online, 4 p.m. to midnight every day, free and confidential, 13 yarn org.",
   "expectedNumbers": [
-   "0455717543",
-   "0467655799",
-   "08",
-   "82126933",
-   "0431965974",
-   "08",
-   "94870688",
-   "18"
+   "13927624",
+   "7",
+   "0447139276",
+   "4",
+   "13"
   ],
-  "missingNumbers": [
-   "82126933"
-  ]
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
  },
  {
   "id": "help.14",
   "voice": "A",
-  "file": "8dc69cd77918.m4a",
-  "heard": "",
-  "expectedNumbers": [],
-  "missingNumbers": []
+  "file": "c4d1015fb63d.mp3",
+  "heard": "Clif, free, anonymous or bad peer support for talking about sexuality, gender, bodies, feelings or relationships. Treatment in in-it local time, every day, call 1-800-184-527 or bad peer support, not a crisis line out of hours. Call Lifeline 13-1114, call 1-800-184-527.",
+  "expectedNumbers": [
+   "3",
+   "9",
+   "1800184527",
+   "131114",
+   "1800184527"
+  ],
+  "missingNumbers": [
+   "9"
+  ],
+  "heardEmpty": false,
+  "heardFail": false
  },
  {
   "id": "help.14",
   "voice": "B",
-  "file": "695db12d8959.m4a",
-  "heard": "Support by State and Territory",
-  "expectedNumbers": [],
-  "missingNumbers": []
+  "file": "9cffedfe6879.mp3",
+  "heard": "Q-Life, free, anonymous LGBTIQ plus peer support for talking about sexuality, gender, bodies, feelings, or relationships, 3pm to 9pm local time every day. Call 1-800-184-527-LGBTIQ plus peer support, not a crisis line. Out of hours, call Lifeline 13-1114. Call 1-800-184-527",
+  "expectedNumbers": [
+   "3",
+   "9",
+   "1800184527",
+   "131114",
+   "1800184527"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
  },
  {
   "id": "help.15",
   "voice": "A",
-  "file": "e2afef6725cc.m4a",
-  "heard": "Alcohol and drug lines run by each state and territory, keep triple zero and lifeline first these lines are for advice and support, not emergencies, checked against each service's own website on 4 November 2026.",
+  "file": "2fd5583af7d0.mp3",
+  "heard": "More info, run by Lebtika CB people, family members, friends and others who support someone Lebtika CB are welcome to, phone or webchat, 3pm to ninnip from your local time, every day including holidays, last calls are taken by 840, free and anonymous, not a crisis line.",
+  "expectedNumbers": [
+   "3",
+   "9",
+   "8",
+   "40"
+  ],
+  "missingNumbers": [
+   "9"
+  ],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.15",
+  "voice": "B",
+  "file": "4f1cac86497b.mp3",
+  "heard": "More info. Run by LGBTIQA plus SB people. Family members, friends, and others who support someone LGBTIQA plus SB are welcome too. Phone or webchat, 3pm to 9pm your local time every day including holidays. Last calls are taken by 8.4pm. Free and anonymous, not a crisis line, Q life, org.",
+  "expectedNumbers": [
+   "3",
+   "9",
+   "8",
+   "40"
+  ],
+  "missingNumbers": [
+   "40"
+  ],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.16",
+  "voice": "A",
+  "file": "9aa36924a4a9.mp3",
+  "heard": "National alcohol and other drug hotline, free, confidential support for anyone worried about their own or someone else's alcohol or drug use, call 1-800-250-015 connects you to your state's alcohol and drug service, Open 24-7. Except South Australia 8, 30m to 10m in an emergency call triple zero, or lifeline 131114 any time call 1-800-250-015.",
+  "expectedNumbers": [
+   "1800250015",
+   "24",
+   "7",
+   "8",
+   "30",
+   "10",
+   "000",
+   "131114",
+   "1800250015"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.16",
+  "voice": "B",
+  "file": "e6ecedb5c796.mp3",
+  "heard": "National Alcohol and other Drug Hotline Free, confidential support for anyone worried about their own or someone else's alcohol or drug use Call 1-800-250-015 connects you to your state's alcohol and drug service Open 24-7 except South Australia 8.3M-10pm In an emergency call triple-0 or Lifeline 13-1114 anytime Call 1-800-250-015",
+  "expectedNumbers": [
+   "1800250015",
+   "24",
+   "7",
+   "8",
+   "30",
+   "10",
+   "000",
+   "131114",
+   "1800250015"
+  ],
+  "missingNumbers": [
+   "30"
+  ],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.17",
+  "voice": "A",
+  "file": "64de715c80a8.mp3",
+  "heard": "Moincho, your call goes through to the alcohol and drug service in your state or territory. Open 24-7, from South Australia, the service runs 8-30m to 10m, free and confidential, run by the Australian Government Department of Health, Disability and Aging. HealthGovO",
+  "expectedNumbers": [
+   "24",
+   "7",
+   "8",
+   "30",
+   "10"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.17",
+  "voice": "B",
+  "file": "0c861b9ba893.mp3",
+  "heard": "More info. Your call goes through to the alcohol and drug service in your state or territory. Open 24-7. From South Australia, the service runs 8.3 m to 10 p.m. Free and confidential. Run by the Australian Government Department of Health, Disability and Aging. Health, Gov.",
+  "expectedNumbers": [
+   "24",
+   "7",
+   "8",
+   "30",
+   "10"
+  ],
+  "missingNumbers": [
+   "30"
+  ],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.18",
+  "voice": "A",
+  "file": "fa47fe1fce84.mp3",
+  "heard": "Add is 24-7 alcohol and drug support alert, 24-7 confidential alcohol and drug support for Queenslanders and the people who care about them, call 1-800-177-33 Queensland only call 1-800-177-833.",
+  "expectedNumbers": [
+   "24",
+   "7",
+   "24",
+   "7",
+   "1800177833",
+   "1800177833"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.18",
+  "voice": "B",
+  "file": "4abdb6d9c3f8.mp3",
+  "heard": "Addies 24-7 Alcohol and Drug Support, QLD. 24-7 Confidential Alcohol and Drug Support for Queenslanders and the people who care about them. Call 1-800-177-833 Queensland only. Call 1-800-177-833.",
+  "expectedNumbers": [
+   "24",
+   "7",
+   "24",
+   "7",
+   "1800177833",
+   "1800177833"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.19",
+  "voice": "A",
+  "file": "624b2bb10eca.mp3",
+  "heard": "More in show, for people in Queensland with alcohol or drug concerns, their loved ones, and health professionals, core 24-setting, shed online with a counsellor, or request a call back. There's also an SMES support program at a Sir Health Cle de Gafo.",
+  "expectedNumbers": [
+   "24",
+   "7"
+  ],
+  "missingNumbers": [
+   "7"
+  ],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.19",
+  "voice": "B",
+  "file": "5aa9458c0e13.mp3",
+  "heard": "More info. For people in Queensland with alcohol or drug concerns, their loved ones and health professionals. Call 24-7, chat online with a counselor or request a call back. There's also an SMS support program. Addies, Health, QLD, GOV.",
+  "expectedNumbers": [
+   "24",
+   "7"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.20",
+  "voice": "A",
+  "file": "1e53c97431ad.mp3",
+  "heard": "National Gambling Helpline, free, confidential 24-7 support for anyone affected by gambling, use or someone else's 24 hours, call 1-800-858-858-free and confidential, anywhere in Australia's not run by gamblers anonymous. Call 1-800-858-858",
+  "expectedNumbers": [
+   "24",
+   "7",
+   "24",
+   "1800858858",
+   "1800858858"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.20",
+  "voice": "B",
+  "file": "4ede13607575.mp3",
+  "heard": "National Gambling Helpline. Free, confidential 24-7 support for anyone affected by gambling, yours or someone else's. 24 hours. Call 1-800-858-858-free and confidential anywhere in Australia. Not run by gamblers anonymous. Call 1-800-858-858.",
+  "expectedNumbers": [
+   "24",
+   "7",
+   "24",
+   "1800858858",
+   "1800858858"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.21",
+  "voice": "A",
+  "file": "2beb00ad6ce5.mp3",
+  "heard": "More info talk to a trained counsellor any time, day or night. From anywhere in Australia, gambling help online also has live chat and email support. court. Free and confidential, government funded, not run by gamblers anonymous gambling Himin or Klo.",
+  "expectedNumbers": [],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.21",
+  "voice": "B",
+  "file": "4ff5abd9e4f8.mp3",
+  "heard": "More info, talk to a trained counselor any time, day or night from anywhere in Australia. Gambling help online also has live chat and email support, free and confidential. Government funded, not run by gamblers anonymous. Gambling help in line, org.",
+  "expectedNumbers": [],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.22",
+  "voice": "A",
+  "file": "7d57f5068695.mp3",
+  "heard": "Australia talk to a sober member of alcoholics anonymous anytime if drinking is a problem for you 24 4 hours, call 1300 Choo Choo Choo, Choo Choo Choo Choo Choo Choo",
+  "expectedNumbers": [
+   "24",
+   "1300222222",
+   "1300222222"
+  ],
+  "missingNumbers": [
+   "1300222222",
+   "1300222222"
+  ],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.22",
+  "voice": "B",
+  "file": "998a1e910345.mp3",
+  "heard": "A.A. Australia. Talk to a sober member of Alcoholics Anonymous anytime if drinking is a problem for you. 24 hours. Call 1300-222-222. Call 1300-222-222.",
+  "expectedNumbers": [
+   "24",
+   "1300222222",
+   "1300222222"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.23",
+  "voice": "A",
+  "file": "1f5fe283c405.mp3",
+  "heard": "More info, call the 24-hour helpline to speak with the sober alcoholic. You can also chat live with a member on the A website, or find an in-person or online meeting on Orkho.",
+  "expectedNumbers": [
+   "24"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.23",
+  "voice": "B",
+  "file": "2ccd079e655a.mp3",
+  "heard": "More info, call the 24-hour helpline to speak with a sober alcoholic. You can also chat live with a member on the AA website or find an in-person or online meeting. Ah, org.",
+  "expectedNumbers": [
+   "24"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.24",
+  "voice": "A",
+  "file": "a02564eb7f01.mp3",
+  "heard": "Australia, talk to a member of narcotics anonymous, or find a meeting near you, call 1300 652 820-430-652-820",
+  "expectedNumbers": [
+   "1300652820",
+   "1300652820"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.24",
+  "voice": "B",
+  "file": "0a3c0a4aad8a.mp3",
+  "heard": "Nell Australia. Talk to a member of Narcotics Anonymous or find a meeting near you. Call 1300 652 820 call 1300 652 820.",
+  "expectedNumbers": [
+   "1300652820",
+   "1300652820"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.25",
+  "voice": "A",
+  "file": "dbb5939e1fb5.mp3",
+  "heard": "More info of Call 1300-652-820 to find someone to talk to hours aren't published, to find meetings, text your suburb or postcode and state for example, Paddington-Cled to 0488-811-247 and you'll get a list of meetings nearby. NARP or GO",
+  "expectedNumbers": [
+   "1300652820",
+   "0488811247"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.25",
+  "voice": "B",
+  "file": "23b5230a8786.mp3",
+  "heard": "More info. Call 1300 652 820 to find someone to talk to. Hours aren't published. To find meetings, text your suburb or post code in state, for example, Paddington QLD to 0488 811 247 and you'll get a list of meetings nearby. Nga Org",
+  "expectedNumbers": [
+   "1300652820",
+   "0488811247"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.26",
+  "voice": "A",
+  "file": "2ecd9beb15cd.mp3",
+  "heard": "These are independent services, home circle is not affiliated with them.",
+  "expectedNumbers": [],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.26",
+  "voice": "B",
+  "file": "f5864a03bf43.mp3",
+  "heard": "These are independent services. Home Circle is not affiliated with them.",
+  "expectedNumbers": [],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.27",
+  "voice": "A",
+  "file": "2df2da65db94.mp3",
+  "heard": "family partners",
+  "expectedNumbers": [],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.27",
+  "voice": "B",
+  "file": "79f9de712dc2.mp3",
+  "heard": "Family and partners",
+  "expectedNumbers": [],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.28",
+  "voice": "A",
+  "file": "32726033dadd.mp3",
+  "heard": "This is not medical advice, for any major concern, see a local doctor or GP, if a life is in danger, call triple zero.",
+  "expectedNumbers": [
+   "000"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.28",
+  "voice": "B",
+  "file": "c030bb288648.mp3",
+  "heard": "This is not medical advice. For any major concern, see a local doctor or GP if a life is in danger, call triple zero.",
+  "expectedNumbers": [
+   "000"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.29",
+  "voice": "A",
+  "file": "e1cefd6e1ec1.mp3",
+  "heard": "For partners, family members, and couples, these lines are beside someone in recovery.",
+  "expectedNumbers": [],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.29",
+  "voice": "B",
+  "file": "f84603dc1d82.mp3",
+  "heard": "For partners, family members and couples, these lines are beside someone in recovery.",
+  "expectedNumbers": [],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.30",
+  "voice": "A",
+  "file": "0a497c5167c6.mp3",
+  "heard": "Allen and family groups Australia, for families and friends of someone with a drinking problem, Call 1300-252-666 Open Site.",
+  "expectedNumbers": [
+   "1300252666"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.30",
+  "voice": "B",
+  "file": "12334c5e5da5.mp3",
+  "heard": "Allanon family groups Australia for families and friends of someone with a drinking problem call 1300 252 666 open site",
+  "expectedNumbers": [
+   "1300252666"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.31",
+  "voice": "A",
+  "file": "923ab6fae8a9.mp3",
+  "heard": "More info, talk to an Allianne member in confidence on 1300 252 666 hours aren't published. Support groups for family and friends of problem drinkers. Plus Allianne groups for teens, Allianne and Orgo.",
+  "expectedNumbers": [
+   "1300252666"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.31",
+  "voice": "B",
+  "file": "7b4862ee90d0.mp3",
+  "heard": "More info. Talk to an Allenon member in confidence on 1300, 2266. Hours aren't published. Support groups for family and friends of problem drinkers plus a Latin group for teens. Allenon, org.",
+  "expectedNumbers": [
+   "1300252666"
+  ],
+  "missingNumbers": [
+   "1300252666"
+  ],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.32",
+  "voice": "A",
+  "file": "81a8236cd8ed.mp3",
+  "heard": "Allatin' part of Allen and Australia. For ages about 13 to 18, same Australian line, home circle itself is an 18-app, call 1300-252-666 OpenSight.",
+  "expectedNumbers": [
+   "13",
+   "18",
+   "18",
+   "1300252666"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.32",
+  "voice": "B",
+  "file": "4792bfdeada5.mp3",
+  "heard": "A part of Al-Anon, Australia for ages about 13 to 18. Same Australian line, Home Circle itself is an 18-plus app, call 1300-252-6 open site.",
+  "expectedNumbers": [
+   "13",
+   "18",
+   "18",
+   "1300252666"
+  ],
+  "missingNumbers": [
+   "1300252666"
+  ],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.33",
+  "voice": "A",
+  "file": "77c1e98eef8c.mp3",
+  "heard": "Family drug support for families and friends of someone using alcohol or other drugs. 24 hours, call 1300-368-186 call 1300-368-186 open site find a family meeting dear since lists no support meetings in Wa. Tasmania or the NT in Wa, the parent and family drug support line is listed under Western Australia below.",
+  "expectedNumbers": [
+   "24",
+   "1300368186",
+   "1300368186"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.33",
+  "voice": "B",
+  "file": "259f61b4b5f9.mp3",
+  "heard": "Family Drug Support For families and friends of someone using alcohol or other drugs, 24 hours. Call 1300-368-186 call 1300-368-186 open site find a family meeting FDS lists no support meetings in WA, Tasmania or the NT. In WA, the parent and family drug support line is listed under Western Australia below. Hello.",
+  "expectedNumbers": [
+   "24",
+   "1300368186",
+   "1300368186"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.34",
+  "voice": "A",
+  "file": "a2cc02eae0fc.mp3",
+  "heard": "More info, a national support line for families and friends affected by someone's alcohol or other Drybuse, Open 24-7, DSNs also run support meetings in some states, DSNs or GO.",
+  "expectedNumbers": [
+   "24",
+   "7"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.34",
+  "voice": "B",
+  "file": "59f225e7c745.mp3",
+  "heard": "More info, a national support line for families and friends affected by someone's alcohol or other drug use. Open 24-7, FDS also runs support meetings in some states, FDS, ORG, O.",
+  "expectedNumbers": [
+   "24",
+   "7"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.35",
+  "voice": "A",
+  "file": "43849c74cada.mp3",
+  "heard": "Gananan, for families and friends of someone with a gambling problem, meetings in snow and Queensland, some on Zoom, Email Game and & Life Combo Open Site.",
+  "expectedNumbers": [],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.35",
+  "voice": "B",
+  "file": "e7abc3dae017.mp3",
+  "heard": "Gammonon. For families and friends of someone with a gambling problem. Meetings in NSW and Queensland, some on Zoom. Email Gammonon at live, com, or open site.",
+  "expectedNumbers": [],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.36",
+  "voice": "A",
+  "file": "c42ce4a2ca6c.mp3",
+  "heard": "Gamble is anonymous Australia.",
+  "expectedNumbers": [],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.36",
+  "voice": "B",
+  "file": "921f7a843f92.mp3",
+  "heard": "Gambler's Anonymous Australia",
+  "expectedNumbers": [],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.37",
+  "voice": "A",
+  "file": "d1d5a1eb275a.mp3",
+  "heard": "Meetings and a member to talk to, not a crisis line, and hours unpublished, snow call 0455, 717, 543 Queens land and NT call 0467, 655, 799 South Australia call 008, 8-12. 693 Tasmania Call 0431-965-974 Western Australia Call 08-9487-0688 Kate Victoria male cavitrication came a comm open site.",
+  "expectedNumbers": [
+   "0455717543",
+   "0467655799",
+   "08",
+   "82126933",
+   "0431965974",
+   "08",
+   "94870688",
+   "18"
+  ],
+  "missingNumbers": [
+   "82126933",
+   "18"
+  ],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.37",
+  "voice": "B",
+  "file": "64b133173e91.mp3",
+  "heard": "Meetings in a member to talk to, not a crisis line and hours aren't published. NSW, call 0455-717-5 Queensland and NT. Call 0467-655-799 South Australia. Call 08-8212-693-3 Tasmania. Call 0-4-3-1-965-974-Western Australia. Call 0-8-94870-688-Victoria. Email Gevictoria-18-A-G-Mail. Calm Open Site.",
+  "expectedNumbers": [
+   "0455717543",
+   "0467655799",
+   "08",
+   "82126933",
+   "0431965974",
+   "08",
+   "94870688",
+   "18"
+  ],
+  "missingNumbers": [
+   "0455717543"
+  ],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.38",
+  "voice": "A",
+  "file": "24997faaf4a2.mp3",
+  "heard": "Support by State and Territory.",
+  "expectedNumbers": [],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.38",
+  "voice": "B",
+  "file": "7645d414773a.mp3",
+  "heard": "Support by State and Territory",
+  "expectedNumbers": [],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.39",
+  "voice": "A",
+  "file": "0278e8ed4785.mp3",
+  "heard": "Alcohol and drug lines run by each state and territory, keep triple zero and lifeline first these lines are for advice and support, not emergencies, checked against each services own website on 4 November 2026.",
   "expectedNumbers": [
    "000",
    "4",
    "2026"
   ],
-  "missingNumbers": []
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
  },
  {
-  "id": "help.15",
+  "id": "help.39",
   "voice": "B",
-  "file": "a7250366d501.m4a",
+  "file": "7856c040b250.mp3",
   "heard": "Alcohol and drug lines run by each state and territory. Keep triple zero and lifeline first. These lines are for advice and support, not emergencies. Checked against each services' own website on 4 November, 2026.",
   "expectedNumbers": [
    "000",
    "4",
    "2026"
   ],
-  "missingNumbers": []
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
  },
  {
-  "id": "help.16",
+  "id": "help.40",
   "voice": "A",
-  "file": "8fe7e653b150.m4a",
-  "heard": "Queensland Addis 24-7 Alcohol and Drug Support 24-7 for Queenslanders and their family and friends. Call 181-177-833-OpenSightmore info call 24-7. Chat online with a counsellor. Or request a call back Addis Health. Gov. Onu South Wales Alcohol and Drug Information Service Addis snow 24-7 Sydney Metro 02-8382-10000 for snow residents and their families call 1-800-250-015-OpenSightmore info free, confidential counselling, information and referral from professional counsellors. The snow residents wrote about alcohol or drugs. Phone 24-7. Web chat is Monday to Friday. 830-5 of including public holidays. Euro-Mahealth snowgov O Victoria Direct Line 24-zone phone and online counselling for Victorians, family members and others call 1-800-888-236-OpenSightmore info free, confidential alcohol and drug counselling and referral in Victoria. For you or someone else phone or online 24-7 directly or go South Australia Alcohol and Drug Information Service Addis, does it every day 8-30am to 10am, not 24-7, local call fee for sock haulers, for the public, family and friends. Core 1-300-131-140-OpenSightmore info confidential telephone counselling, information and referral run by Drug and Alcohol Services South Australia, every day 8-30am to 10am, Calling from outside SO-08, 7087, 1743, Same Hours, Saifelt-Sunghav, a Western Australia alcohol and drug support line 24-7, Country Collars 1-800-198, 024, for anyone worried about their own or someone else's alcohol or drug use. Call 0-8-9442-50000 call 1-800-198, 024 country open site more info confidential, free and anonymous 24-7- Metro 0-8-9442-50000, Country 1-800-198, 024, Maxwell-Gov-Oparent and Family Drug Support Line 24-7, Country Collars 1-800-653-203, for anyone worried about someone else's use. Call 0-8-9442-505-0 call 1-800-653-203-country open site more info for family and friends worried about someone else's alcohol or drug use. Confidential, free and anonymous 24-7- Metro 0-8-9442-505-0, Country 1-800-653-203-Mex-Watgov-Otesmania alcohol and drug information service 24 hours for people who use drugs and family members. Call 1-800-811-994 open site more info 24-hour phone information and counseling about the effects of alcohol and drugs. With referral to services, for people who use drugs and their family members, health, Tuscov-O-Northern Territory alcohol and drug information service address listed on the NT government's 24-hour Helplines page, for anyone in the NT with alcohol or drug concerns. Call 1-800-131-350 open site more info for the NT government lists this number on its 24-hour Helplines page. It doesn't describe the service in more detail, NTGov or Australian Capital Territory alcohol and drug service intake. Canberra Health Services intake weekdays 8-5-8 closes 3, third-room Wednesdays, excluding public holidays, not a crisis line. After hours, call the national alcohol and other drug hotline on 1-800-250-015-202-5124. 9977 open site more info and intake line, not a crisis line. After hours, the national alcohol and other drug hotline on 1-800-250-015- is open 24-7. Canberra",
+  "file": "91778e933119.mp3",
+  "heard": "Queensland",
+  "expectedNumbers": [],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.40",
+  "voice": "B",
+  "file": "7a3947c1bbb6.mp3",
+  "heard": "Queensland",
+  "expectedNumbers": [],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.41",
+  "voice": "A",
+  "file": "9510cc2d06e9.mp3",
+  "heard": "Adders 24-7 alcohol and drug support, 24-7, for Queenslanders and their family and friends, call 1-800-177-833-OpenSightMoreInfo, call 24-7, Shed online with a counsellor or request a call back. Add his health, Clé de Gafo.",
   "expectedNumbers": [
    "24",
    "7",
@@ -790,7 +1467,56 @@
    "7",
    "1800177833",
    "24",
+   "7"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.41",
+  "voice": "B",
+  "file": "5bcba9e321da.mp3",
+  "heard": "Addies 24-7 Alcohol and Drug Support 24-7 for Queenslanders and their family and friends. Call 1-800-177-833-OpenSiteMoreInfo. Call 24-7 chat online with a counselor or request a call back. Addies, Health, QLD, Gov.",
+  "expectedNumbers": [
+   "24",
    "7",
+   "24",
+   "7",
+   "1800177833",
+   "24",
+   "7"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.42",
+  "voice": "A",
+  "file": "ddcea50e132c.mp3",
+  "heard": "New South Wales",
+  "expectedNumbers": [],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.42",
+  "voice": "B",
+  "file": "863e4cfc5e69.mp3",
+  "heard": "New South Wales",
+  "expectedNumbers": [],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.43",
+  "voice": "A",
+  "file": "ae2b71285b00.mp3",
+  "heard": "Alcohol and Drug Information Service add a snow 24-senin, Sydney Metro 02, 8382, 10000, for snow residents and their families, call 1-800-250-015, open site more info, free, confidential counseling. Information and referral from professional counselors, for snow residents worried about alcohol or drugs, phone 24-7, web chat is Monday day to Friday, 8.30am to 5am including public holidays, your own health snowm guffo.",
+  "expectedNumbers": [
    "24",
    "7",
    "0283821000",
@@ -799,12 +1525,116 @@
    "7",
    "8",
    "30",
-   "5",
+   "5"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.43",
+  "voice": "B",
+  "file": "ed7d61c7d4ea.mp3",
+  "heard": "Alcohol and Drug Information Service, ADIS, NSW, 24-7, Sidney Metro, 0-2-8382-1000 for NSW residents and their families. Call 1-800-250-015 open site more info. Free, confidential counseling, information and referral from professional counselors for NSW residents worried about alcohol or drugs. phone 24-7. Webchat is Monday to Friday 8.3 m to 5 p.m. including public holidays. Yorum Health NSW Gov",
+  "expectedNumbers": [
+   "24",
+   "7",
+   "0283821000",
+   "1800250015",
+   "24",
+   "7",
+   "8",
+   "30",
+   "5"
+  ],
+  "missingNumbers": [
+   "30"
+  ],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.44",
+  "voice": "A",
+  "file": "5c65b96bf07e.mp3",
+  "heard": "Victoria",
+  "expectedNumbers": [],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.44",
+  "voice": "B",
+  "file": "601c4f499de8.mp3",
+  "heard": "Victoria",
+  "expectedNumbers": [],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.45",
+  "voice": "A",
+  "file": "76f0e3f7db77.mp3",
+  "heard": "Direct Line 24-Send Phone and Online Counseling for Victorians, Family Members and Others, Call 1-800-88-236-Open-Site-More-Info, Free, Confidential Alcohol and Drug Counseling and Referral in Victoria for you or someone else. Phone or Online 24-Send Direct and Lead Org-O",
+  "expectedNumbers": [
    "24",
    "7",
    "1800888236",
    "24",
+   "7"
+  ],
+  "missingNumbers": [
    "7",
+   "1800888236",
+   "7"
+  ],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.45",
+  "voice": "B",
+  "file": "1d8c8f02ccbc.mp3",
+  "heard": "Direct Line 24-7 phone and online counseling for Victorians, family members, and others. Call 1-800-888-236-OPEN-CITE-MORE-INFO. Free, confidential alcohol and drug counseling and referral in Victoria for you or someone else. Phone or online 24-7. Direct Line ORG",
+  "expectedNumbers": [
+   "24",
+   "7",
+   "1800888236",
+   "24",
+   "7"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.46",
+  "voice": "A",
+  "file": "5f0367870fb2.mp3",
+  "heard": "South Australia",
+  "expectedNumbers": [],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.46",
+  "voice": "B",
+  "file": "791f86e02031.mp3",
+  "heard": "South Australia",
+  "expectedNumbers": [],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.47",
+  "voice": "A",
+  "file": "9d7967df0700.mp3",
+  "heard": "Alcohol and drug information service add is data at every day 8.30am to 10pm, not 24.7. Local call fee for stakeholders, for the public, family and friends, call 1300-131-340 OpenSight More Info, Confidential Telephone Counseling. Information and referral run by drug and alcohol services south Australia, every day, 8, 30am to 10pm, calling from outside Sozierite, 7087, 1743, same hours, Careful, some cover.",
+  "expectedNumbers": [
    "8",
    "30",
    "10",
@@ -815,7 +1645,60 @@
    "30",
    "10",
    "08",
-   "70871743",
+   "70871743"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.47",
+  "voice": "B",
+  "file": "770cd4ae83d5.mp3",
+  "heard": "Alcohol and Drug Information Service, ADIS, D-A-S-S-A, everyday 8.3-M to 10-PM, not 24-7, local call fee for SA callers, for the public family and friends. Call 1300-131-340-OpenSiteMoreInfo, confidential telephone counseling, information, and referral. Run by drug and alcohol services, South Australia. Every day, 8.3 m to 10 p.m. Calling from outside SA, 0870871743 same hours, health, song, gov.",
+  "expectedNumbers": [
+   "8",
+   "30",
+   "10",
+   "24",
+   "7",
+   "1300131340",
+   "8",
+   "30",
+   "10",
+   "08",
+   "70871743"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.48",
+  "voice": "A",
+  "file": "5ce4ce728858.mp3",
+  "heard": "Western Australia",
+  "expectedNumbers": [],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.48",
+  "voice": "B",
+  "file": "2597fffa7d32.mp3",
+  "heard": "Western Australia",
+  "expectedNumbers": [],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.49",
+  "voice": "A",
+  "file": "659fbcb7e3de.mp3",
+  "heard": "Alcohol and drug support line 24-7 Country callers 1-800-198-024 For anyone worried about their own or someone else's alcohol or drug use call 0-8-944-2-50000 call 1-800-198-024 country open site more info confidential Financial, Free and Anonymous 24-7, Metro 0-8, 944-2-50000, Country 1-800-198, 024-Mex-WavGov-0.",
+  "expectedNumbers": [
    "24",
    "7",
    "1800198024",
@@ -826,9 +1709,42 @@
    "7",
    "08",
    "94425000",
+   "1800198024"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.49",
+  "voice": "B",
+  "file": "a09d25637ac1.mp3",
+  "heard": "Alcohol and drug support line. 24-7. Country callers. 1-800-198024. For anyone worried about their own or someone else's alcohol or drug use. Call 0-8-9442-5-0-0-0-0-call-1-800-198024 country Open Site More Info, Confidential, Free and Anonymous 24-7, Metro 0-8-9-442-5-0-0-0-0-Country-1-800-198024, MHC, WA-GOV.",
+  "expectedNumbers": [
+   "24",
+   "7",
+   "1800198024",
+   "08",
+   "94425000",
    "1800198024",
    "24",
    "7",
+   "08",
+   "94425000",
+   "1800198024"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.50",
+  "voice": "A",
+  "file": "74c508113ca6.mp3",
+  "heard": "Parent and Family Drug Support Line 24-7, Country Callers 1-800-653-203. For anyone worried about someone else's use, call 0-8-9442-5050 call 1-800-653. 203 Country Open Site More Info, For Family and Friends Americans worried about someone else's alcohol or drug use, confidential, free and anonymous 24-7, Metro 0-8, 944-2, 5050, Country 1-800, 653-203, Mike's wife Gough O.",
+  "expectedNumbers": [
+   "24",
+   "7",
    "1800653203",
    "08",
    "94425050",
@@ -837,13 +1753,156 @@
    "7",
    "08",
    "94425050",
+   "1800653203"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.50",
+  "voice": "B",
+  "file": "5e62b262b454.mp3",
+  "heard": "Parent and Family Drug Support Line 24-7 Country Callers 1-800-653-203 For anyone worried about someone else's use Call 0-8-9442-5050 call 1-800-653-203-country Open Site More Info For family and friends worried about someone else's alcohol or drug use. Confidential, free and anonymous 24-7. Metro 0-8-9-4-4-2-5050 Country 1-800-653-203, MHC-Wang-Gov.",
+  "expectedNumbers": [
+   "24",
+   "7",
    "1800653203",
+   "08",
+   "94425050",
+   "1800653203",
+   "24",
+   "7",
+   "08",
+   "94425050",
+   "1800653203"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.51",
+  "voice": "A",
+  "file": "a1f1311b3d72.mp3",
+  "heard": "Tasmania",
+  "expectedNumbers": [],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.51",
+  "voice": "B",
+  "file": "ceb1d16d4fb3.mp3",
+  "heard": "Tasmania",
+  "expectedNumbers": [],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.52",
+  "voice": "A",
+  "file": "15aa787c0b48.mp3",
+  "heard": "Alcohol and Drug Information Service, 24 hours, for people who use drugs and family members, call 1-800-811-994-OpenSightmoreInfo, 24-hour phone information and counseling about the effects of alcohol and drugs, with referral to services. For people who use drugs and their family members, Health, Deskavho.",
+  "expectedNumbers": [
    "24",
    "1800811994",
+   "24"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.52",
+  "voice": "B",
+  "file": "4e7b2ffc023b.mp3",
+  "heard": "Alcohol and Drug Information Service. 24 hours for people who use drugs and family members. Call 1-800-811-994-OPEN-CITE-MORE-INFO. 24-hour phone information and counseling about the effects of alcohol and drugs with referral to services. For people who use drugs and their family members. Health, TAS, GOV.",
+  "expectedNumbers": [
    "24",
+   "1800811994",
+   "24"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.53",
+  "voice": "A",
+  "file": "0d7d998bde0d.mp3",
+  "heard": "Northern Territory",
+  "expectedNumbers": [],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.53",
+  "voice": "B",
+  "file": "b6df3c6c1925.mp3",
+  "heard": "Northern Territory",
+  "expectedNumbers": [],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.54",
+  "voice": "A",
+  "file": "21d66bb156e0.mp3",
+  "heard": "Alcohol and Drug Information Service Address listed on the NT Government's 24-hour Helplines page. For anyone in the NT with alcohol or drug concerns, call 1-800-131-350 OpenSight More Incho, the NT Government lists this number on its 24-hour Helplines page. It doesn't describe the service in more detail, NTGovHo.",
+  "expectedNumbers": [
    "24",
    "1800131350",
+   "24"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.54",
+  "voice": "B",
+  "file": "34efadb0318c.mp3",
+  "heard": "Alcohol and Drug Information Service A.D.I.S. Listed on the NT Government's 24-hour Helplines page for anyone in the NT with alcohol or drug concerns. Call 1-800-131-350 open-site more info. The NT Government lists this number on its 24-hour Helplines page. It doesn't describe the service in more detail. NT GOV",
+  "expectedNumbers": [
    "24",
+   "1800131350",
+   "24"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.55",
+  "voice": "A",
+  "file": "fd3a2625fec7.mp3",
+  "heard": "Australian Capital Territory",
+  "expectedNumbers": [],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.55",
+  "voice": "B",
+  "file": "29b42f481543.mp3",
+  "heard": "Australian Capital Territory",
+  "expectedNumbers": [],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.56",
+  "voice": "A",
+  "file": "0c230bfd6089.mp3",
+  "heard": "Alcohol and drug service intake can bear a health services intake. Weekdays aid them to 5 at Closes 3, 3rd from Wednesdays, excluding public holidays, not a crisis line. After hours, call the national alcohol and other drug hotline on 1-800-5-0. 015- call 0-2-5-1-2-4-9977 open site more info. an intake line, not a crisis line. After hours, the national alcohol and other drug hot line on on 1-800-5-0-015 is open 24-7. Ken Behusevant's Act Gov Ho.",
+  "expectedNumbers": [
    "8",
    "5",
    "3",
@@ -856,76 +1915,19 @@
    "7"
   ],
   "missingNumbers": [
-   "1800177833",
-   "1300131340"
-  ]
+   "30",
+   "1800250015",
+   "1800250015"
+  ],
+  "heardEmpty": false,
+  "heardFail": false
  },
  {
-  "id": "help.16",
+  "id": "help.56",
   "voice": "B",
-  "file": "41adf11151cc.m4a",
-  "heard": "Queensland Addies 24-7 alcohol and drug support 24-7. For Queenslanders and their family and friends, call 1-800-177-833-OPEN-SITE-MORE-INFO-CALL-24-7, chat online with a counselor or request a call back. Addies, Health, QLD, GOV, O New South Wales Alcohol and Drug Information Service, ADIS, NSW-24-7, Sydney Metro-0-2-8382-100-0. For NSW residents and their families, call 1-800-250-015-OPEN-SITE-MORE-INFO-FREE, Confidential Counseling, Information and Referral from Professional Counselors. For NSW residents worried about alcohol or drugs, phone 24-7, web chat is Monday to Friday Day, 8.3M-5PM, including Public Holidays, Yorum, Health, NSW, GOV, O Victoria Direct Line 24-7 Phone and Online Counseling. For Victorians, Family Members and Others, call 1-800-888-236-OPEN-SITE-MORE-INFO-FREE, Confidential Alcohol and Drug Counseling and Referral in Victoria for you or someone else. Phone or Online 24-7. Direct Line Org, O South Australia Alcohol and Drug Information Service, ADIS, DASSA every day 8.3M-10PM-24-7. Local call fee for SA callers. For the public, family and friends. Call 1-300-131-340-OPEN-SITE-MORE-INFO-Confidential Telephone Counseling, Information and Referral. Run by Drug and Alcohol Services, South Australia, every day 8.3M-10PM. Calling from outside SA, 0-87087-1743-SAME-HOURS, SA-HELF, SA-GOV, O Western Australia Alcohol and Drug Support Line 24-7 Country Callers, 1-800-198024. For anyone worried about their own or someone else's alcohol or drug use. Call 0-8-9442-50000 call 1-800-198-024 Country Open-Site-MORE-INFO-Confidential free and anonymous 24-7. Metro 0-8-9442-50000 Country 1-800-198-024. MHC, WA-GOV, O Parent and Family Drug Support Line 24-7. Country Callers, 1-800-653-203. For anyone worried about someone else's use. Call 0-8-9442-5050 call 1-800-653-203 Country Open-Site-MORE-INFO for family and friends worried about someone else's alcohol or drug use. Confidential, free and anonymous 24-7. Metro 0-8-9442-5050 Country 1-800-653-203. MHC, WA-GOV, O Tasmania Alcohol and Drug Information Service 24 hours. For people who use drugs and family members. Call 1-800-811-994-Open-Site-MORE-INFO 24-hour phone information and counseling about the effects of alcohol and drugs with referral to services. For people who use drugs and their family members. Health, Task, GOV, O Northern Territory Alcohol and Drug Information Service, ADIS listed on the NT government's 24-hour helplines page. For anyone in the NT with alcohol or drug concerns. Call 1-800-131-350-Open-Site-MORE-INFO the NT government lists this number on its 24-hour helplines page. It doesn't describe the service in more detail. NT GOV, O Australian Capital Territory Alcohol and Drug Service Intake, Canberra Health Services Intake, weekdays 8 a.m. to 5 p.m. closes 3.3 p.m. Wednesdays excluding public holidays. Not a crisis line. After hours call the National Alcohol and other drug hotline on 1-800-250-015. Call 0-2-5124-9977-Open-Site-MORE-INFO and Intake Line, not a crisis line. After hours the National Alcohol and other drug hotline on 1-800-250-015 is Open 24-7. Canberra Health Services, Act, GOV?",
+  "file": "777e148af921.mp3",
+  "heard": "Alcohol and drug service intake can bear a health services. Intake weekdays 8 a.m. to 5 p.m. closes 3.3 p.m. Wednesdays excluding public holidays. Not a crisis line. After hours call the national alcohol and other drug hotline on 1-800-250-15. Call 0-2-512-4-9977 seven open site more info, an intake line, not a crisis line. After hours, the National Alcohol and other drug hotline on 1-800-250-015 is open 24-7. can be re-health services, act, gov.",
   "expectedNumbers": [
-   "24",
-   "7",
-   "24",
-   "7",
-   "1800177833",
-   "24",
-   "7",
-   "24",
-   "7",
-   "0283821000",
-   "1800250015",
-   "24",
-   "7",
-   "8",
-   "30",
-   "5",
-   "24",
-   "7",
-   "1800888236",
-   "24",
-   "7",
-   "8",
-   "30",
-   "10",
-   "24",
-   "7",
-   "1300131340",
-   "8",
-   "30",
-   "10",
-   "08",
-   "70871743",
-   "24",
-   "7",
-   "1800198024",
-   "08",
-   "94425000",
-   "1800198024",
-   "24",
-   "7",
-   "08",
-   "94425000",
-   "1800198024",
-   "24",
-   "7",
-   "1800653203",
-   "08",
-   "94425050",
-   "1800653203",
-   "24",
-   "7",
-   "08",
-   "94425050",
-   "1800653203",
-   "24",
-   "1800811994",
-   "24",
-   "24",
-   "1800131350",
-   "24",
    "8",
    "5",
    "3",
@@ -937,232 +1939,406 @@
    "24",
    "7"
   ],
-  "missingNumbers": []
+  "missingNumbers": [
+   "30"
+  ],
+  "heardEmpty": false,
+  "heardFail": false
  },
  {
-  "id": "help.17",
+  "id": "help.57",
   "voice": "A",
-  "file": "6728f00619ba.m4a",
-  "heard": "Smart recovery Australia free weekly groups, online and in-person, for any addictive behavior, including alcohol, drugs and gambling, run by a trained facilitator, not a 12-step program, and not a support line find a smart recovery meeting gambling help in every state free. Confidential 24-7 support for anyone affected by gambling, use or someone else's. Every state and territory gambling service uses the national gambling helpline for 24-7 phone help, call 1-800-858-858 more info talk to a trained counselor anytime. Day or night, from anywhere in Australia, gambling help online also has live chat and email support, free and confidential, government funded, not run by gamblers anonymous, gambling him in AUGCO.",
+  "file": "78d8d682c391.mp3",
+  "heard": "Smart Recovery Australia, free weekly groups, online and in-person, for any addictive behavior, including alcohol, drugs and gambling, run by a trained facilitator, not a 12-step program, and not a support line find a smart recovery meeting.",
   "expectedNumbers": [
-   "12",
+   "12"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.57",
+  "voice": "B",
+  "file": "723d017ca20f.mp3",
+  "heard": "Smart Recovery Australia, free weekly groups online and in person for any addictive behavior including alcohol, drugs and gambling, run by a trained facilitator, not a 12-step program and not a support line. Find a smart recovery meeting.",
+  "expectedNumbers": [
+   "12"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.58",
+  "voice": "A",
+  "file": "e0e56f4db865.mp3",
+  "heard": "Campbelling help in every state, free, confidential 24-7 support for anyone affected by gambling, yours or someone else's, every state and territory gambling service uses the national gambling helpline for 24-7 phone help, call 1-800-858-858",
+  "expectedNumbers": [
    "24",
    "7",
    "24",
    "7",
    "1800858858"
   ],
-  "missingNumbers": []
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
  },
  {
-  "id": "help.17",
+  "id": "help.58",
   "voice": "B",
-  "file": "79a80ebaad22.m4a",
-  "heard": "Smart Recovery Australia free weekly groups, online and in person, for any addictive behavior including alcohol, drugs, and gambling. Run by a trained facilitator. Not a 12-step program and not a support line. Find a smart recovery meeting gambling help in every state-free, confidential 24-7 support for anyone affected by gambling, yours or someone else's. Every state and territory gambling service uses the National Gambling Helpline for 24-7 phone help. Call 1-800-858-858 more info talk to a trained counselor any time, day or night from anywhere in Australia. Gambling help online also has live chat and email support, free and confidential, government funded, not run by gamblers anonymous. Gambling help in mine, org.",
+  "file": "a88dd6c0ef1e.mp3",
+  "heard": "Gambling help in every state. Free, confidential 24-7 support for anyone affected by gambling, yours or someone else's. Every state and territory gambling service uses the National Gambling Helpline for 24-7 phone help. Call 1-800-858-858.",
   "expectedNumbers": [
-   "12",
    "24",
    "7",
    "24",
    "7",
    "1800858858"
   ],
-  "missingNumbers": []
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
  },
  {
-  "id": "help.18",
+  "id": "help.59",
   "voice": "A",
-  "file": "398ffc99b53e.m4a",
-  "heard": "These are independent services. Home Circle is not affiliated with them. Our numbers can change. So check the Service Own website.",
+  "file": "2beb00ad6ce5.mp3",
+  "heard": "More info talk to a trained counsellor any time, day or night. From anywhere in Australia, gambling help online also has live chat and email support. court. Free and confidential, government funded, not run by gamblers anonymous gambling Himin or Klo.",
   "expectedNumbers": [],
-  "missingNumbers": []
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
  },
  {
-  "id": "help.18",
+  "id": "help.59",
   "voice": "B",
-  "file": "142ce9552b10.m4a",
-  "heard": "These are independent services. Home Circle is not affiliated with them. Hours and numbers can change, so check the services' own website.",
+  "file": "4ff5abd9e4f8.mp3",
+  "heard": "More info, talk to a trained counselor any time, day or night from anywhere in Australia. Gambling help online also has live chat and email support, free and confidential. Government funded, not run by gamblers anonymous. Gambling help in line, org.",
   "expectedNumbers": [],
-  "missingNumbers": []
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
  },
  {
-  "id": "help.19",
+  "id": "help.60",
   "voice": "A",
-  "file": "3b052543bdd4.m4a",
+  "file": "a4216a004fe6.mp3",
+  "heard": "These are independent services, home circle is not affiliated with them, ours and numbers can change, so check the service own website.",
+  "expectedNumbers": [],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.60",
+  "voice": "B",
+  "file": "09446d27924d.mp3",
+  "heard": "These are independent services. Home Circle is not affiliated with them. Hours and numbers can change, so check the services own website.",
+  "expectedNumbers": [],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.61",
+  "voice": "A",
+  "file": "e104e5e1f8a5.mp3",
   "heard": "Self-help kit",
   "expectedNumbers": [],
-  "missingNumbers": []
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
  },
  {
-  "id": "help.19",
+  "id": "help.61",
   "voice": "B",
-  "file": "8a11beeb08fe.m4a",
-  "heard": "Self-help kit",
+  "file": "9c850deaa298.mp3",
+  "heard": "Self-help kit.",
   "expectedNumbers": [],
-  "missingNumbers": []
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
  },
  {
-  "id": "help.20",
+  "id": "help.62",
   "voice": "A",
-  "file": "756413376d00.m4a",
+  "file": "2cb58e604f17.mp3",
   "heard": "Tools to support you in the moment.",
   "expectedNumbers": [],
-  "missingNumbers": []
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
  },
  {
-  "id": "help.20",
+  "id": "help.62",
   "voice": "B",
-  "file": "96e54bc20667.m4a",
+  "file": "96244beec326.mp3",
   "heard": "Tools to support you in the moment.",
   "expectedNumbers": [],
-  "missingNumbers": []
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
  },
  {
-  "id": "help.21",
+  "id": "help.63",
   "voice": "A",
-  "file": "e5bce858dd9d.m4a",
-  "heard": "Cardage plan watch an urge crest and fall without obeying it. Card halt hungry, angry, lonely, tired, a pause, not a medical check, five 24-hour plan plan the next day, not the whole year, breathing breathe now unanimated breathing card.",
-  "expectedNumbers": [
-   "24"
-  ],
-  "missingNumbers": []
- },
- {
-  "id": "help.21",
-  "voice": "B",
-  "file": "4070b0eab287.m4a",
-  "heard": "Guide urge plan watch an urge crest and fall without obeying it. Guide halt hungry, angry, lonely, tired. A pause, not a medical check. Guide 24-hour plan planned the next day, not the whole year. Breathing breathe now an animated breathing guide.",
-  "expectedNumbers": [
-   "24"
-  ],
-  "missingNumbers": []
- },
- {
-  "id": "help.22",
-  "voice": "A",
-  "file": "e30bb62a8d2d.m4a",
-  "heard": "Keep your details private don't share your full name, address, phone, bank details or passwords with anyone in home circle or at meetings. Real friends and sponsors won't ask for money or private details if someone does tell your sponsor or trusted person. Code of conduct be kind. At meetings you find through home circle please respect that group's own guidelines and don't record or share what people say, questions or concerns email us and we aim to reply within 24 hours, home circle is support, not medical care.",
-  "expectedNumbers": [
-   "24"
-  ],
-  "missingNumbers": []
- },
- {
-  "id": "help.22",
-  "voice": "B",
-  "file": "afe10b765591.m4a",
-  "heard": "Keep your details private, don't share your full name, address, phone, bank details, or passwords with anyone in home circle or at meetings. Real friends and sponsors won't ask for money or private details. If someone does, tell your sponsor or a trusted person. Code of conduct be kind. At meetings you find through home circle, please respect that group's own guidelines and don't record or share what people say. Questions or concerns, email us and we aim to reply within 24 hours. Home circle is support, not medical care.",
-  "expectedNumbers": [
-   "24"
-  ],
-  "missingNumbers": []
- },
- {
-  "id": "help.23",
-  "voice": "A",
-  "file": "c9f85bdab61f.m4a",
-  "heard": "Call triple zero immediately call triple zero or go to your nearest emergency department call triple zero",
-  "expectedNumbers": [
-   "000",
-   "000",
-   "000"
-  ],
-  "missingNumbers": []
- },
- {
-  "id": "help.23",
-  "voice": "B",
-  "file": "a781c7ea53ff.m4a",
-  "heard": "Call triple zero, immediately call triple zero, or go to your nearest emergency department. Call triple zero.",
-  "expectedNumbers": [
-   "000",
-   "000",
-   "000"
-  ],
-  "missingNumbers": []
- },
- {
-  "id": "help.24",
-  "voice": "A",
-  "file": "4015042c5639.m4a",
-  "heard": "What to do in an overdose called triple-0 first, then see the signs of overdose, the first aid steps, and where to get free Naluxone. What to do in an overdose?",
-  "expectedNumbers": [
-   "000"
-  ],
-  "missingNumbers": []
- },
- {
-  "id": "help.24",
-  "voice": "B",
-  "file": "cb3a659042d3.m4a",
-  "heard": "What to do in an overdose call triple zero first then see the signs of over dose the first aid steps and where to get free naloxone what to do in an overdose",
-  "expectedNumbers": [
-   "000"
-  ],
-  "missingNumbers": []
- },
- {
-  "id": "help.25",
-  "voice": "A",
-  "file": "a70f5793f6fb.m4a",
-  "heard": "Have this read to your phone can read any page out loud, including this one, iPhone or iPad code to settings, then accessibility, then read speak on older versions, spoken content and turn on speak screen, then swipe down with two fingers from the top of the screen. Or say Siri, speak screen, Android code to settings, then accessibility, then select to speak and turn on the select to speak shortcut, tap the shortcut, then tap what you want read. If you can't find it, install Android Accessibility Suite from Google Play.",
+  "file": "d05343a08de5.mp3",
+  "heard": "Oge plan, watch an oge crest and fall without obeying it",
   "expectedNumbers": [],
-  "missingNumbers": []
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
  },
  {
-  "id": "help.25",
+  "id": "help.63",
   "voice": "B",
-  "file": "e6186dc2e373.m4a",
-  "heard": "Have this read to you your phone can read any page out loud including this one. iPhone or iPad, go to Settings then Accessibility then Read and Speak on older versions, spoken content and turn on Speak Screen. Then swipe down with two fingers from the top of the screen or say Siri Speak Screen. Android, go to Settings then Accessibility then select to Speak and turn on the Select to Speak shortcut. Tap the shortcut then tap what you want read. If you can't find it install Android Accessibility Suite from Google Play.",
+  "file": "606a517c6853.mp3",
+  "heard": "Urge plan. Watch an urge crest and fall without obeying it.",
   "expectedNumbers": [],
-  "missingNumbers": []
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
  },
  {
-  "id": "help.26",
+  "id": "help.64",
   "voice": "A",
-  "file": "592720be7802.m4a",
+  "file": "8aa4d69246ee.mp3",
+  "heard": "Halt hungry, angry, lonely, tired, a pause, not a medical check.",
+  "expectedNumbers": [],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.64",
+  "voice": "B",
+  "file": "f2eb8cb70833.mp3",
+  "heard": "Halt, hungry, angry, lonely, tired. A pause, not a medical check.",
+  "expectedNumbers": [],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.65",
+  "voice": "A",
+  "file": "0e7b20b17428.mp3",
+  "heard": "24-hour plan, plan the next day, not the whole year.",
+  "expectedNumbers": [
+   "24"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.65",
+  "voice": "B",
+  "file": "acdaec0a5372.mp3",
+  "heard": "24-hour plan. Plan the next day, not the whole year.",
+  "expectedNumbers": [
+   "24"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.66",
+  "voice": "A",
+  "file": "05090ad937c3.mp3",
+  "heard": "Breathe now, an animated breathing guide.",
+  "expectedNumbers": [],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.66",
+  "voice": "B",
+  "file": "877b2fbb02b2.mp3",
+  "heard": "Breathe now, an animated breathing guide.",
+  "expectedNumbers": [],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.67",
+  "voice": "A",
+  "file": "48b7a7fbea19.mp3",
+  "heard": "Keep your details private, don't share your full name, address, phone, bank details or passwords with anyone in home circle or at meetings, real friends and sponsors won't ask for money or private details. If someone does, tell your sponsor or a trusted person.",
+  "expectedNumbers": [],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.67",
+  "voice": "B",
+  "file": "33aad65cf32b.mp3",
+  "heard": "Keep your details private. Don't share your full name, address, phone, bank details, or passwords with anyone in home circle or at meetings. Real friends and sponsors won't ask for money or private details. If someone does, tell your sponsor or a trusted person.",
+  "expectedNumbers": [],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.68",
+  "voice": "A",
+  "file": "8cd2097e466e.mp3",
+  "heard": "Code of conduct be kind. At meetings you find through Home Circle, please respect that group's own guidelines and don't record or share what people say, questions or concerns email us and we aim to reply within 24 hours. Home Circle is support, but, not medical care.",
+  "expectedNumbers": [
+   "24"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.68",
+  "voice": "B",
+  "file": "3aa33acb2594.mp3",
+  "heard": "Code of conduct. Be kind. At meetings you find through Home Circle, please respect that group's own guidelines and don't record or share what people say. Questions or concerns. Email us and we aim to reply within 24 hours. Home Circle is support, not medical care.",
+  "expectedNumbers": [
+   "24"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.69",
+  "voice": "A",
+  "file": "bf20707e03dc.mp3",
+  "heard": "Please call triple zero immediately, please call triple zero, or go to your nearest emergency department, please call triple zero.",
+  "expectedNumbers": [
+   "000",
+   "000",
+   "000"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.69",
+  "voice": "B",
+  "file": "10153f11ef8b.mp3",
+  "heard": "Please call triple zero immediately. Please call triple zero or go to your nearest emergency department. Please call triple zero.",
+  "expectedNumbers": [
+   "000",
+   "000",
+   "000"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.70",
+  "voice": "A",
+  "file": "bb8962594640.mp3",
+  "heard": "What to do in an overdose, please call triple zero first, then see the signs of overdose, the first aid steps, and where to get free Naloxone. What to do in an overdose?",
+  "expectedNumbers": [
+   "000"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.70",
+  "voice": "B",
+  "file": "73d7489bf8f1.mp3",
+  "heard": "What to do in an overdose? Please call triple zero first. Then see the signs of overdose, the first aid steps and where to get free meloxone. What to do in an overdose?",
+  "expectedNumbers": [
+   "000"
+  ],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.71",
+  "voice": "A",
+  "file": "2bc36ea6b2ca.mp3",
+  "heard": "Have this read to you, your phone can read any page out loud, including this one, iPhone or iPad Go to Settings, then Accessibility, then Read Speak on older versions, spoken content, and turn on Speak Screen, then swipe down with two fingers from the top of the screen. Or say Siri, Speak Screen, Android Go to Settings, then Accessibility, then select to To speak and turn on the select to speak shortcut, tap the shortcut, then tap what you want read, if you can't find it. Install Android Accessibility Suite from Google Play.",
+  "expectedNumbers": [],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.71",
+  "voice": "B",
+  "file": "e054bc4f5f05.mp3",
+  "heard": "Have this read to you. Your phone can read any page out loud including this one. iPhone or iPad, go to Settings then Accessibility then read and speak on older versions, spoken content and turn on Speak Screen. Then swipe down with two fingers from the top of the screen or say Siri Speak Screen. Android, go to Settings then Accessibility then select to Speak and turn on the Select to Speak shortcut. Tap the shortcut, then tap what you want red. If you can't find it, install Android Accessibility Suite from Google Play.",
+  "expectedNumbers": [],
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
+ },
+ {
+  "id": "help.72",
+  "voice": "A",
+  "file": "c9cf09a553e8.mp3",
   "heard": "More information.",
   "expectedNumbers": [],
-  "missingNumbers": []
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
  },
  {
-  "id": "help.26",
+  "id": "help.72",
   "voice": "B",
-  "file": "cdbdfb23480a.m4a",
-  "heard": "more information",
+  "file": "366191328760.mp3",
+  "heard": "More information",
   "expectedNumbers": [],
-  "missingNumbers": []
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
  },
  {
-  "id": "help.27",
+  "id": "help.73",
   "voice": "A",
-  "file": "b483948952a2.m4a",
-  "heard": "alcohol and drug foundation alcohol on health-adrift gambling help online",
+  "file": "039dfa37e471.mp3",
+  "heard": "Alcohol and Drug Foundation, Alcohol on Health Adrift, Gambling Help Online",
   "expectedNumbers": [],
-  "missingNumbers": []
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
  },
  {
-  "id": "help.27",
+  "id": "help.73",
   "voice": "B",
-  "file": "158c8829d73c.m4a",
-  "heard": "Alcohol and drug foundation, alcohol on health direct gambling help online.",
+  "file": "adde8d5620ec.mp3",
+  "heard": "Alcohol and drug foundation, alcohol on health direct, gambling help online.",
   "expectedNumbers": [],
-  "missingNumbers": []
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
  },
  {
-  "id": "help.28",
+  "id": "help.74",
   "voice": "A",
-  "file": "9adce784b02e.m4a",
-  "heard": "For any health concern, talk to your eGPS or doctor, home circle is support, not medical care.",
+  "file": "36f47f9984cd.mp3",
+  "heard": "For any health concern, talk to your GP or adopter, home circle is support, not medical care.",
   "expectedNumbers": [],
-  "missingNumbers": []
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
  },
  {
-  "id": "help.28",
+  "id": "help.74",
   "voice": "B",
-  "file": "e094d0049349.m4a",
+  "file": "5016f744a1e9.mp3",
   "heard": "For any health concern, talk to your GP or a doctor. Home circle is support, not medical care.",
   "expectedNumbers": [],
-  "missingNumbers": []
+  "missingNumbers": [],
+  "heardEmpty": false,
+  "heardFail": false
  }
 ]
