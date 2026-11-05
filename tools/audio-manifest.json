@@ -67,8 +67,8 @@
    "clips": {
     "A": {
      "file": "bdf0f714b075.mp3",
-     "bytes": 53472,
-     "sha256": "435aca85214c44f1f64490386cd5ab706109824f79e97d50686a2accac28a8ce"
+     "bytes": 53904,
+     "sha256": "f6e86d6fa5e5cf725efe672b94253a0879c7fee6e3aef58ff037c2c4dcca4a8c"
     },
     "B": {
      "file": "a700e35c35fa.mp3",
@@ -85,8 +85,8 @@
    "clips": {
     "A": {
      "file": "67133b752fb5.mp3",
-     "bytes": 84288,
-     "sha256": "a2ad0b9dcd43883f47aebe7e8ccf1453ff47f3ff72fc50b81b8cb601e7443cf2"
+     "bytes": 85872,
+     "sha256": "3155d8c07926317c1a299e027574b1059635c94914c867fbfb1a8b540af0d1a6"
     },
     "B": {
      "file": "957e82258c73.mp3",
@@ -193,8 +193,8 @@
    "clips": {
     "A": {
      "file": "f1e1812ca576.mp3",
-     "bytes": 136992,
-     "sha256": "974caf793fe262229ebf6088ffb20b1b664bb50783d6cc590c6084140de5a00c"
+     "bytes": 135696,
+     "sha256": "aeb25dea1f6e466d26090b5981fbc8ec3338a21e32f5f8abe9b754c783df1c38"
     },
     "B": {
      "file": "6f89df2fa952.mp3",
@@ -211,8 +211,8 @@
    "clips": {
     "A": {
      "file": "aab6185b7ca6.mp3",
-     "bytes": 181776,
-     "sha256": "b1f26ffdf848af897f6661ac4b4aaba5d223d3eead483ece37cf9dc144e965f9"
+     "bytes": 182928,
+     "sha256": "4286a744731177d47c26b8d6461b8f26dc58f4974d88ec8758a2ad018a410600"
     },
     "B": {
      "file": "1ef6b3b450e7.mp3",
@@ -229,8 +229,8 @@
    "clips": {
     "A": {
      "file": "a546a43334b0.mp3",
-     "bytes": 64992,
-     "sha256": "b5cf67458dee10cb5c79b815802e0250bdd4d6268ada0581c4bc9fbc4cbb7205"
+     "bytes": 65136,
+     "sha256": "d4f60ec62a72616595fa9d81197ce31f0575d39d454dbae9439ed35849cacd73"
     },
     "B": {
      "file": "6d139a940618.mp3",
@@ -247,8 +247,8 @@
    "clips": {
     "A": {
      "file": "f532912a1942.mp3",
-     "bytes": 100560,
-     "sha256": "726953a63e40dc1c2ceb1469a4aed10acf1db14d729798d9a927d4cfe57bf2ee"
+     "bytes": 99984,
+     "sha256": "3227c07d3308fabc28ae4320fd93c062e3d42241de15ff3a20b503687a815d6c"
     },
     "B": {
      "file": "4c7eaf095d0f.mp3",
@@ -283,8 +283,8 @@
    "clips": {
     "A": {
      "file": "3a1a49361c8c.mp3",
-     "bytes": 56352,
-     "sha256": "6ae3d61d25a46abe191c58949036587082a549e211e536263b9c454a06f16544"
+     "bytes": 56784,
+     "sha256": "7c8dd6743df4267574779a221c89bb04fc88b06b1fd31451b78e9d7b4ede90fd"
     },
     "B": {
      "file": "74797f816e34.mp3",
@@ -481,8 +481,8 @@
    "clips": {
     "A": {
      "file": "d7f772c8e6cf.mp3",
-     "bytes": 32304,
-     "sha256": "3b4c6d43413d60accc3dd9b98f8ff78dbebd5fbc7df4a55e67dcfec66734cba2"
+     "bytes": 32448,
+     "sha256": "6fdccdeb8d3ac353168562f6a572f539a6a143250f0a4dec9cef506a7ff55414"
     },
     "B": {
      "file": "ec48f38a95cc.mp3",
@@ -553,8 +553,8 @@
    "clips": {
     "A": {
      "file": "ec1e5abfa447.mp3",
-     "bytes": 55056,
-     "sha256": "fcc85ba9266d172c578cbc6b8f690991aef8e577fdd5207a9d6405d95618ac48"
+     "bytes": 55488,
+     "sha256": "4f44bb0b5a3ea1f9f536da54685d1c9d73ed96a819378a705bbe9a0fdb4d87ee"
     },
     "B": {
      "file": "23743515f649.mp3",
@@ -571,8 +571,8 @@
    "clips": {
     "A": {
      "file": "dff07df17714.mp3",
-     "bytes": 13152,
-     "sha256": "6cd774d14d860bd375732499d16719347e18f2078212bfe204af2dc7e5c1e2ab"
+     "bytes": 13440,
+     "sha256": "c10d0fb003ab8ff10304ff068fbaf0a88d21a27c4744bf1aaf04e2abca1291f6"
     },
     "B": {
      "file": "5502ed24c3f2.mp3",
@@ -590,7 +590,7 @@
     "A": {
      "file": "f16cc7f1e04a.mp3",
      "bytes": 133392,
-     "sha256": "f88928f3782301d0c9bf1bf74164e9e3e1f065dd1e9224639923eda626e957f2"
+     "sha256": "ebf88c58a3f77aee6a096f20aeef410b60d3f9c452cc67ebe59de2cdb5340e9a"
     },
     "B": {
      "file": "fceade82ff73.mp3",
@@ -733,8 +733,8 @@
    "clips": {
     "A": {
      "file": "c4d1015fb63d.mp3",
-     "bytes": 163056,
-     "sha256": "378ac04086815d515c1bbc95509965243fab999b7282cbdfac24d09c698e8c0c"
+     "bytes": 163776,
+     "sha256": "800dd7aaf78140f51ba7c113946d760d640a5ee1100c8bedb5bd7dde43e60ea2"
     },
     "B": {
      "file": "9cffedfe6879.mp3",
@@ -751,8 +751,8 @@
    "clips": {
     "A": {
      "file": "2fd5583af7d0.mp3",
-     "bytes": 135264,
-     "sha256": "32b9759e893ed04d00011451fd141b5c59f96ad381141691808658eef70eb157"
+     "bytes": 134400,
+     "sha256": "fa5ceed8f6d813497b708cdf92a95908c11f3b2bcd689c647de3fd55c51c5c54"
     },
     "B": {
      "file": "4f1cac86497b.mp3",
@@ -823,8 +823,8 @@
    "clips": {
     "A": {
      "file": "624b2bb10eca.mp3",
-     "bytes": 107328,
-     "sha256": "e82db94f8cc5f4f13c43b66ce6326ca2d5ce841d0b9e69fdc540f05e09eec2c1"
+     "bytes": 106608,
+     "sha256": "8bc256450f1b51bc6d7c538d8ae6d04bb3447219971a324c37e9899aaeb70704"
     },
     "B": {
      "file": "5aa9458c0e13.mp3",
@@ -877,8 +877,8 @@
    "clips": {
     "A": {
      "file": "7d57f5068695.mp3",
-     "bytes": 88896,
-     "sha256": "7ff4402587c29f504817416ab871c86c65be11583978ad5fca8af590d22458df"
+     "bytes": 89184,
+     "sha256": "3120bc284d55ec81cf11d8f6cb103d998609cccc007ece5da4f87cc45a1ec7e1"
     },
     "B": {
      "file": "998a1e910345.mp3",
@@ -1147,8 +1147,8 @@
    "clips": {
     "A": {
      "file": "d1d5a1eb275a.mp3",
-     "bytes": 207840,
-     "sha256": "c40b9a733ae62ea510dd121915c230cb88268806810faf095a05f338001b7493"
+     "bytes": 207552,
+     "sha256": "336c9299d4a27f74f0927cef864ff8f3775079c85b1c186db5e20a0730924f39"
     },
     "B": {
      "file": "64b133173e91.mp3",
@@ -1237,8 +1237,8 @@
    "clips": {
     "A": {
      "file": "ddcea50e132c.mp3",
-     "bytes": 15168,
-     "sha256": "bb321ff81182c1eb0185ddbba6940e5fac38ec096a7ffc45ccca3f66b2c7e2c7"
+     "bytes": 15024,
+     "sha256": "d63f72905c062138d0cdab269104a8ccf34d83993c9f05a654fbfe1156b479ac"
     },
     "B": {
      "file": "863e4cfc5e69.mp3",
@@ -1291,8 +1291,8 @@
    "clips": {
     "A": {
      "file": "76f0e3f7db77.mp3",
-     "bytes": 147504,
-     "sha256": "38520462435bc68bd56606d6d1d5a0866e43697dd351aaa4996493e2af27d804"
+     "bytes": 148800,
+     "sha256": "d3195d89ce9770530e2136f5d2c12f2a4b3b83a270f190f2d8d9fc65ab894eda"
     },
     "B": {
      "file": "1d8c8f02ccbc.mp3",
@@ -1363,8 +1363,8 @@
    "clips": {
     "A": {
      "file": "659fbcb7e3de.mp3",
-     "bytes": 218064,
-     "sha256": "51143a4dc7baed2f648f73a800cef6b31759172f42e751cf0da4f20af7199240"
+     "bytes": 216768,
+     "sha256": "ef4488a958d3ae6a514c47c3c7780a65ee599f2ddba94fe28cf0ee43d05e376f"
     },
     "B": {
      "file": "a09d25637ac1.mp3",
@@ -1489,8 +1489,8 @@
    "clips": {
     "A": {
      "file": "0c230bfd6089.mp3",
-     "bytes": 260688,
-     "sha256": "f8fa30207361f26ec3323fba5027396a1f30159ee6fc7f4365520984b9997441"
+     "bytes": 260400,
+     "sha256": "cf260b22515ad5b65d22801d3a0d379634f6b6321a0f10c899a78e2c93d9f08a"
     },
     "B": {
      "file": "777e148af921.mp3",
@@ -1525,8 +1525,8 @@
    "clips": {
     "A": {
      "file": "e0e56f4db865.mp3",
-     "bytes": 131088,
-     "sha256": "00af8c13b2b910712668d51ae78b0f305c6866ed7fe03d82efc288c38721a5a3"
+     "bytes": 131376,
+     "sha256": "20e5ed913583c93648cf5b431d8ca410c2e376c8dea587253359909ac357f9d5"
     },
     "B": {
      "file": "a88dd6c0ef1e.mp3",
@@ -1633,8 +1633,8 @@
    "clips": {
     "A": {
      "file": "8aa4d69246ee.mp3",
-     "bytes": 39216,
-     "sha256": "defa071c40a2d3f849294975467ae2d394ff940294daa5083df580c44513218a"
+     "bytes": 39936,
+     "sha256": "2e8ba84418b52b332a6731d9addc2346e6a81110f1800ee6a9e299573bfb4efe"
     },
     "B": {
      "file": "f2eb8cb70833.mp3",
