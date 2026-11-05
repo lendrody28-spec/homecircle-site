@@ -11,9 +11,6 @@
 <link rel="apple-touch-icon" href="assets/logo-192.png">
 <link rel="stylesheet" href="assets/site.css?v=efff9efd">
 <script src="assets/site.js" defer></script>
-<script src="assets/kai-data.js" defer></script>
-<script src="assets/kai-engine.js" defer></script>
-<script src="assets/kai.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -36,7 +33,7 @@
 <h3>Does the website collect my data?</h3><p>No. There are no cookies, no ads, no trackers, no analytics and no third-party scripts or fonts. Nothing you type or save is sent to HomeCircle.</p>
 <h3>What does the website save, and where?</h3><p>Only what you choose to save: your day count, journal notes, health safety answers, the breath-hold setting, Kai's chat and where you put Kai on the screen. These are kept only in this browser's local storage, on this device. They aren't sent to us, and they aren't shared with the app or your other devices. Private browsing, clearing your browser data or using another browser removes them or starts fresh. You can delete everything on <a href="your-circle.html#delete">Your circle</a>.</p>
 <h3>How does the meeting finder work?</h3><p>Your browser downloads the same public meeting list the app uses, from GitHub Pages, and searches it on your computer. What you type isn't sent anywhere. <strong>Near me</strong> only asks for your location when you press it, and your location stays on the page. The site and the list are hosted on GitHub Pages, which, like any web host, receives normal web requests.</p>
-<h3>Is Kai on the website?</h3><p>Yes. Kai, your recovery buddy, is the round button in the corner of every page. Kai isn't AI, and isn't a person, counsellor, doctor or sponsor. Replies are put together in your browser from saved rules, the same ones the app uses. Kai makes no network calls, and nothing you type leaves your browser. Kai looks for some words that may mean you're in danger and then shows 000 and Lifeline, but it can miss things. If you're unsafe, call 000 or Lifeline 13 11 14 yourself. You can minimise Kai, drag it to the other side, or clear the chat. Kai hides while a breathing guide or meditation is playing.</p>
+<h3>Is Kai on the website?</h3><p>Not right now. Kai, your recovery buddy, is taking a short break from the website while we update it. If you're unsafe, call <a href="tel:000">000</a> or Lifeline on <a href="tel:131114">13 11 14</a>, or use the Help button in the top corner of every page.</p>
 <h3>How do meeting reminders work on the website?</h3><p>On a meeting, choose <strong>Add reminder</strong>, then <strong>Just this one</strong> or <strong>Every week</strong>. Your browser downloads a calendar file (.ics). Open it with your calendar app to add the meeting, with an alert set for 2 hours before it starts. The website sends no notifications and keeps no list of your reminders; to remove one, delete it in your calendar.</p>
 <h3>Spotted a wrong meeting or event?</h3><p>Meetings and events come from AA and NA's own public listings. Please tell the group or the fellowship, and email us too so we know.</p>
 <h2>The iPhone app</h2>
@@ -106,36 +103,5 @@
     <button class="btn ghost wide plain" type="button" data-close>Close</button>
   </div>
 </dialog>
-<div class="kai" id="kai" data-root="" hidden>
-  <section class="kai-panel" id="kai-panel" role="dialog" aria-labelledby="kai-title" hidden>
-    <div class="kai-head">
-      <img src="assets/kai.png" alt="" width="44" height="44">
-      <div><h2 id="kai-title">Kai</h2><p>Recovery Buddy</p></div>
-      <button class="btn ghost kai-small" type="button" id="kai-clear">Clear</button>
-      <button class="btn ghost kai-small" type="button" id="kai-min" aria-label="Minimise Kai">Minimise</button>
-    </div>
-    <div class="kai-confirm card" id="kai-confirm" role="alertdialog" aria-labelledby="kai-confirm-h" hidden>
-      <p id="kai-confirm-h"><strong>Clear this chat?</strong> This removes the messages in this browser. The Help button in the top corner still calls 000 or Lifeline 13 11 14, and the Help page lists every line.</p>
-      <div class="btn-row"><button class="btn danger" type="button" data-yes>Clear chat</button><button class="btn ghost" type="button" data-no>Cancel</button></div>
-    </div>
-    <div class="kai-crisis" id="kai-crisis" hidden><a class="btn danger" href="tel:000">Call 000</a><a class="btn" href="tel:131114">Call Lifeline 13 11 14</a></div>
-    <div class="kai-scroll">
-      <p class="kai-note"><strong>Kai isn't AI, and isn't a person, counsellor, doctor or sponsor.</strong> Replies are written in this browser from saved rules. No network and no AI service: nothing you type leaves your browser.</p>
-      <p class="kai-note">Kai is a recovery buddy, not a counsellor. HomeCircle doesn't give medical advice. In an emergency call <a href="tel:000">000</a>, or Lifeline on <a href="tel:131114">13 11 14</a>.</p>
-      <p class="kai-empty" id="kai-empty">Kai is here. Pick a chip, or write a line.</p>
-      <div class="kai-log" id="kai-log"></div>
-      <div class="kai-after" id="kai-after"></div>
-    </div>
-    <p class="sr-only" id="kai-live" aria-live="polite"></p>
-    <div class="kai-chips" id="kai-chips" role="group" aria-label="Quick replies"></div>
-    <form class="kai-form" id="kai-form" autocomplete="off">
-      <label class="sr-only" for="kai-input">Message Kai</label>
-      <textarea id="kai-input" rows="1" maxlength="500" placeholder="Write a line"></textarea>
-      <button class="btn" type="submit">Send</button>
-    </form>
-    <p class="kai-foot">The chat is kept only in this browser until you clear it. <button class="linkish" type="button" id="kai-move">Move Kai to the left</button></p>
-  </section>
-  <button class="kai-bubble" id="kai-bubble" type="button" aria-expanded="false" aria-controls="kai-panel" aria-label="Kai, Recovery Buddy. Not AI and not a person."><img src="assets/kai.png" alt="" width="64" height="64" draggable="false"></button>
-</div>
 </body>
 </html>

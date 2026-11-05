@@ -15,6 +15,14 @@ ARTS, DRAW, HERO, BG = C["arts"], C["drawing"], C["hero"], C["backgrounds"]
 STATS = {s["id"]: s for s in C["stats"]}
 TODAY = datetime.date.today().isoformat()
 
+# Kai chat on the website. False = no Kai bubble, panel or scripts on any page (safety stopgap,
+# 5 Nov 2026, while the build 31 crisis check is ported and Finn signs it off). The Help pill,
+# help strips, 000 and Lifeline 13 11 14 buttons and Quick exit are not affected.
+# Set to True and rebuild to turn Kai back on.
+KAI_ON = False
+KAI_INTRO = '<div class="card sage mt kai-intro"><img src="assets/kai.png" alt="" width="72" height="72"><div><h2 class="mt0">Meet Kai, your recovery buddy</h2><p>Kai is the round button in the corner of every page. Tell Kai how you\'re feeling and it can suggest a breathing practice, a short meditation or a walk, or point you to a meeting or a helpline. Replies are written in this browser from saved rules. No network and no AI service. Kai isn\'t AI, and isn\'t a person, counsellor, doctor or sponsor. Nothing you type leaves your browser.</p></div></div>' if KAI_ON else ""
+KAI_FAQ = "<h3>Is Kai on the website?</h3><p>Yes. Kai, your recovery buddy, is the round button in the corner of every page. Kai isn't AI, and isn't a person, counsellor, doctor or sponsor. Replies are put together in your browser from saved rules, the same ones the app uses. Kai makes no network calls, and nothing you type leaves your browser. Kai looks for some words that may mean you're in danger and then shows 000 and Lifeline, but it can miss things. If you're unsafe, call 000 or Lifeline 13 11 14 yourself. You can minimise Kai, drag it to the other side, or clear the chat. Kai hides while a breathing guide or meditation is playing.</p>" if KAI_ON else '<h3>Is Kai on the website?</h3><p>Not right now. Kai, your recovery buddy, is taking a short break from the website while we update it. If you\'re unsafe, call <a href="tel:000">000</a> or Lifeline on <a href="tel:131114">13 11 14</a>, or use the Help button in the top corner of every page.</p>'
+
 # Words that only make sense inside the iPhone app, changed for the web. Listed in the report.
 WEB_EDITS = {
     "When it eases, jot what helped. That note stays on this phone.": "When it eases, jot down what helped.",
@@ -167,7 +175,7 @@ def footer(r):
 def page(path, active, title, desc, body):
     r = "../" * path.count("/")
     out = head(title, desc, r) + header(active, r) + f'\n<main id="main"><div class="wrap">\n{body}\n</div></main>' + footer(r)
-    if path.startswith("families/"):  # no Kai chat on families pages, so nothing typed is kept
+    if path.startswith("families/") or not KAI_ON:  # no Kai chat on families pages (or anywhere while KAI_ON is False)
         out = re.sub(r'<script src="[^"]*kai[^"]*" defer></script>\n', "", out)
         out = re.sub(r'\n<div class="kai" id="kai".*?\n</div>(?=\n</body>)', "", out, flags=re.S)
     (ROOT / path).parent.mkdir(parents=True, exist_ok=True)
@@ -251,7 +259,7 @@ def build_home():
   <div>
     <p class="eyebrow">Free · Australian · No sign-in</p>
     <h1><span class="grad-text">Support for your recovery journey</span></h1>
-    <p class="lede">HomeCircle is a free Australian recovery support app, and this website brings its no-account tools to your browser: find AA and NA meetings and add a reminder, breathe along with a guide, read plain-language guides and the 12 Steps, keep a day count and journal in your browser, and chat with Kai.</p>
+    <p class="lede">HomeCircle is a free Australian recovery support app, and this website brings its no-account tools to your browser: find AA and NA meetings and add a reminder, breathe along with a guide, read plain-language guides and the 12 Steps, keep a day count and journal in your browser{", and chat with Kai" if KAI_ON else ""}.</p>
     <div class="btn-row"><a class="btn" href="meetings.html">Find a meeting</a><a class="btn ghost" href="meditations.html">Breathe now</a><a class="btn ghost" href="library.html">Open the Library</a></div>
     <p class="small">Everything here is free. No accounts, no cookies, no ads, no trackers and no analytics. Anything you save stays in this browser.</p>
   </div>
@@ -261,7 +269,7 @@ def build_home():
 <h2>What you can do here</h2>
 <div class="grid g4">{tiles}</div>
 <div class="grid g3 mt">{"".join(tile(h, t, s, tg, a, r) for h, t, s, tg, a in feats2)}</div>
-<div class="card sage mt kai-intro"><img src="assets/kai.png" alt="" width="72" height="72"><div><h2 class="mt0">Meet Kai, your recovery buddy</h2><p>Kai is the round button in the corner of every page. Tell Kai how you're feeling and it can suggest a breathing practice, a short meditation or a walk, or point you to a meeting or a helpline. Replies are written in this browser from saved rules. No network and no AI service. Kai isn't AI, and isn't a person, counsellor, doctor or sponsor. Nothing you type leaves your browser.</p></div></div>
+{KAI_INTRO}
 <div class="card mt about-hc"><h2 class="mt0">{E("Support for your recovery journey, and for the people who love you")}</h2>
 <p>{E("Whether you're in recovery, or you're a parent, partner, child or friend of someone with an addiction, HomeCircle is here for you. It's free for everyone. The app is for adults 18+. Our ")}<a href="families/index.html">{E("Families pages")}</a>{E(" are open to everyone, with Kids Helpline (")}<a href="tel:1800551800">1800 55 1800</a>{E(") for young people.")}</p>
 <ul>
@@ -665,7 +673,7 @@ def build_support():
 <h3>Does the website collect my data?</h3><p>No. There are no cookies, no ads, no trackers, no analytics and no third-party scripts or fonts. Nothing you type or save is sent to HomeCircle.</p>
 <h3>What does the website save, and where?</h3><p>Only what you choose to save: your day count, journal notes, health safety answers, the breath-hold setting, Kai's chat and where you put Kai on the screen. These are kept only in this browser's local storage, on this device. They aren't sent to us, and they aren't shared with the app or your other devices. Private browsing, clearing your browser data or using another browser removes them or starts fresh. You can delete everything on <a href="your-circle.html#delete">Your circle</a>.</p>
 <h3>How does the meeting finder work?</h3><p>Your browser downloads the same public meeting list the app uses, from GitHub Pages, and searches it on your computer. What you type isn't sent anywhere. <strong>Near me</strong> only asks for your location when you press it, and your location stays on the page. The site and the list are hosted on GitHub Pages, which, like any web host, receives normal web requests.</p>
-<h3>Is Kai on the website?</h3><p>Yes. Kai, your recovery buddy, is the round button in the corner of every page. Kai isn't AI, and isn't a person, counsellor, doctor or sponsor. Replies are put together in your browser from saved rules, the same ones the app uses. Kai makes no network calls, and nothing you type leaves your browser. Kai looks for some words that may mean you're in danger and then shows 000 and Lifeline, but it can miss things. If you're unsafe, call 000 or Lifeline 13 11 14 yourself. You can minimise Kai, drag it to the other side, or clear the chat. Kai hides while a breathing guide or meditation is playing.</p>
+{KAI_FAQ}
 <h3>How do meeting reminders work on the website?</h3><p>On a meeting, choose <strong>Add reminder</strong>, then <strong>Just this one</strong> or <strong>Every week</strong>. Your browser downloads a calendar file (.ics). Open it with your calendar app to add the meeting, with an alert set for 2 hours before it starts. The website sends no notifications and keeps no list of your reminders; to remove one, delete it in your calendar.</p>
 <h3>Spotted a wrong meeting or event?</h3><p>Meetings and events come from AA and NA's own public listings. Please tell the group or the fellowship, and email us too so we know.</p>
 <h2>The iPhone app</h2>

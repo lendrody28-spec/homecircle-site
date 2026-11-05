@@ -11,9 +11,6 @@
 <link rel="apple-touch-icon" href="assets/logo-192.png">
 <link rel="stylesheet" href="assets/site.css?v=efff9efd">
 <script src="assets/site.js" defer></script>
-<script src="assets/kai-data.js" defer></script>
-<script src="assets/kai-engine.js" defer></script>
-<script src="assets/kai.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -197,36 +194,5 @@
     <button class="btn ghost wide plain" type="button" data-close>Close</button>
   </div>
 </dialog>
-<div class="kai" id="kai" data-root="" hidden>
-  <section class="kai-panel" id="kai-panel" role="dialog" aria-labelledby="kai-title" hidden>
-    <div class="kai-head">
-      <img src="assets/kai.png" alt="" width="44" height="44">
-      <div><h2 id="kai-title">Kai</h2><p>Recovery Buddy</p></div>
-      <button class="btn ghost kai-small" type="button" id="kai-clear">Clear</button>
-      <button class="btn ghost kai-small" type="button" id="kai-min" aria-label="Minimise Kai">Minimise</button>
-    </div>
-    <div class="kai-confirm card" id="kai-confirm" role="alertdialog" aria-labelledby="kai-confirm-h" hidden>
-      <p id="kai-confirm-h"><strong>Clear this chat?</strong> This removes the messages in this browser. The Help button in the top corner still calls 000 or Lifeline 13 11 14, and the Help page lists every line.</p>
-      <div class="btn-row"><button class="btn danger" type="button" data-yes>Clear chat</button><button class="btn ghost" type="button" data-no>Cancel</button></div>
-    </div>
-    <div class="kai-crisis" id="kai-crisis" hidden><a class="btn danger" href="tel:000">Call 000</a><a class="btn" href="tel:131114">Call Lifeline 13 11 14</a></div>
-    <div class="kai-scroll">
-      <p class="kai-note"><strong>Kai isn't AI, and isn't a person, counsellor, doctor or sponsor.</strong> Replies are written in this browser from saved rules. No network and no AI service: nothing you type leaves your browser.</p>
-      <p class="kai-note">Kai is a recovery buddy, not a counsellor. HomeCircle doesn't give medical advice. In an emergency call <a href="tel:000">000</a>, or Lifeline on <a href="tel:131114">13 11 14</a>.</p>
-      <p class="kai-empty" id="kai-empty">Kai is here. Pick a chip, or write a line.</p>
-      <div class="kai-log" id="kai-log"></div>
-      <div class="kai-after" id="kai-after"></div>
-    </div>
-    <p class="sr-only" id="kai-live" aria-live="polite"></p>
-    <div class="kai-chips" id="kai-chips" role="group" aria-label="Quick replies"></div>
-    <form class="kai-form" id="kai-form" autocomplete="off">
-      <label class="sr-only" for="kai-input">Message Kai</label>
-      <textarea id="kai-input" rows="1" maxlength="500" placeholder="Write a line"></textarea>
-      <button class="btn" type="submit">Send</button>
-    </form>
-    <p class="kai-foot">The chat is kept only in this browser until you clear it. <button class="linkish" type="button" id="kai-move">Move Kai to the left</button></p>
-  </section>
-  <button class="kai-bubble" id="kai-bubble" type="button" aria-expanded="false" aria-controls="kai-panel" aria-label="Kai, Recovery Buddy. Not AI and not a person."><img src="assets/kai.png" alt="" width="64" height="64" draggable="false"></button>
-</div>
 </body>
 </html>
