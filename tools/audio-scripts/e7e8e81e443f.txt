@@ -1,0 +1,10 @@
+DRAFT
+id: help.08
+voice: A (melo EN-AU, speed 0.9)
+file: assets/audio/e7e8e81e443f.m4a
+
+On screen:
+Family & Partners
+
+Spoken script:
+Family & Partners

@@ -1,0 +1,10 @@
+DRAFT
+id: help.25
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/e6186dc2e373.m4a
+
+On screen:
+Have this read to you Your phone can read any page out loud, including this one. iPhone or iPad: go to Settings > Accessibility > Read & Speak (on older versions, Spoken Content) and turn on Speak Screen. Then swipe down with two fingers from the top of the screen, or say “Siri, speak screen”. Android: go to Settings > Accessibility > Select to Speak and turn on the Select to Speak shortcut. Tap the shortcut, then tap what you want read. If you can’t find it, install Android Accessibility Suite from Google Play.
+
+Spoken script:
+Have this read to you Your phone can read any page out loud, including this one. iPhone or iPad: go to Settings, then Accessibility, then Read & Speak (on older versions, Spoken Content) and turn on Speak Screen. Then swipe down with two fingers from the top of the screen, or say “Siri, speak screen”. Android: go to Settings, then Accessibility, then Select to Speak and turn on the Select to Speak shortcut. Tap the shortcut, then tap what you want read. If you can’t find it, install Android Accessibility Suite from Google Play.

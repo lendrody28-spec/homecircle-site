@@ -1,0 +1,10 @@
+DRAFT
+id: help.23
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/a781c7ea53ff.m4a
+
+On screen:
+Call 000 immediately Call 000 or go to your nearest emergency department. Call 000
+
+Spoken script:
+Call triple zero immediately Call triple zero or go to your nearest emergency department. Call triple zero

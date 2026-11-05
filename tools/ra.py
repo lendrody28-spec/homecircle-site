@@ -141,15 +141,27 @@ def sizes(lines_on_page):
         for v, c in by_text.get(t, {}).get("clips", {}).items(): tot[v] = tot.get(v, 0) + c["bytes"]
     return tot
 
+def _measure(f):
+    r = subprocess.run(["ffmpeg", "-hide_banner", "-nostats", "-i", str(f), "-af", "ebur128=peak=true", "-f", "null", "-"], capture_output=True, text=True)
+    t = r.stderr[r.stderr.rindex("Summary:"):]
+    return float(re.search(r"I:\s+(-?[\d.]+) LUFS", t).group(1)), float(re.search(r"Peak:\s+(-?[\d.inf]+) dBFS", t).group(1))
+
 def _loudnorm(wav, out, ln):
-    """Two-pass EBU R128 loudnorm (about -16 LUFS, -1.5 dBTP), then AAC in .m4a (plays on iOS Safari and Android Chrome)."""
-    I, TP, LRA = ln["I"], ln["TP"], ln["LRA"]
-    r = subprocess.run(["ffmpeg", "-hide_banner", "-i", str(wav), "-af", f"loudnorm=I={I}:TP={TP}:LRA={LRA}:print_format=json", "-f", "null", "-"], capture_output=True, text=True, check=True)
-    st = json.loads(r.stderr[r.stderr.rindex("{"):r.stderr.rindex("}") + 1])
-    af = (f"loudnorm=I={I}:TP={TP}:LRA={LRA}:measured_I={st['input_i']}:measured_TP={st['input_tp']}:measured_LRA={st['input_lra']}"
-          f":measured_thresh={st['input_thresh']}:offset={st['target_offset']}:linear=true,aresample=24000")
-    subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", str(wav), "-af", af, "-ac", "1", "-c:a", "aac", "-b:a", "48k",
-                    "-movflags", "+faststart", "-map_metadata", "-1", "-fflags", "+bitexact", str(out)], check=True)
+    """Two-pass loudness normalisation to ln["I"] LUFS with a true-peak ceiling of ln["TP"] dBTP, then AAC .m4a.
+    Pass 1 measures the source (EBU R128). Pass 2 applies the gain plus a 4x-oversampled peak limiter.
+    The encoded file is re-measured and the gain/limiter corrected (max 10 rounds) so AAC overshoot cannot slip through."""
+    I, TP = ln["I"], ln["TP"]
+    mi, _ = _measure(wav)
+    gain, lim = I - mi, TP - 1.5
+    for _ in range(10):
+        af = f"aresample=96000,volume={gain:.2f}dB,alimiter=limit={10 ** (lim / 20):.4f}:attack=1:release=60:level=false,aresample=24000"
+        subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", str(wav), "-af", af, "-ac", "1", "-c:a", "aac", "-b:a", "48k",
+                        "-movflags", "+faststart", "-map_metadata", "-1", "-fflags", "+bitexact", str(out)], check=True)
+        oi, otp = _measure(out)
+        if abs(oi - I) <= 0.5 and otp <= TP: return oi, otp
+        if otp > TP: lim -= (otp - TP) + 0.3
+        gain += I - oi
+    return oi, otp
 
 def synth(vi, jobs):
     """jobs: [(spoken, out_m4a)]. Runs the engine in its own venv (tools/tts/gen.py)."""

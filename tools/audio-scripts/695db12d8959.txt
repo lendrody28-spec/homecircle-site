@@ -1,0 +1,10 @@
+DRAFT
+id: help.14
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/695db12d8959.m4a
+
+On screen:
+Support by state and territory
+
+Spoken script:
+Support by state and territory

@@ -1,0 +1,10 @@
+DRAFT
+id: kai.start.meeting
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/8c2a600a5d59.m4a
+
+On screen:
+I can open the meeting finder.
+
+Spoken script:
+I can open the meeting finder.

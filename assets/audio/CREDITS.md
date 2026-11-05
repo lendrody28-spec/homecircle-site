@@ -18,6 +18,6 @@ These clips were made offline, on our own machine, from HomeCircle's own text. N
   - SIWIS French Speech Synthesis Database, https://datashare.ed.ac.uk/handle/10283/2353, licensed CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)
 
 ## Loudness
-All clips: two-pass ffmpeg loudnorm to -16 LUFS integrated, -1.5 dBTP true peak, LRA 11, then AAC 48 kbps mono in .m4a.
+All clips: two-pass loudness normalisation (EBU R128 measure, then gain plus a 4x-oversampled peak limiter) to -16 LUFS integrated with a -1.5 dBTP true-peak ceiling, AAC 48 kbps mono in .m4a, re-measured after encoding. `tools/ra_loudness.py` enforces -16 +/-1 LUFS and <= -1.5 dBTP on every clip and fails the build otherwise. No XTTS or Coqui model was used.
 
 Thanks to MyShell.ai (MeloTTS) and hexgrad (Kokoro).

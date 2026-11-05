@@ -1,0 +1,10 @@
+DRAFT
+id: help.24
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/cb3a659042d3.m4a
+
+On screen:
+What to do in an overdose Call 000 first. Then see the signs of overdose, the first aid steps, and where to get free naloxone. What to do in an overdose
+
+Spoken script:
+What to do in an overdose Call triple zero first. Then see the signs of overdose, the first aid steps, and where to get free naloxone. What to do in an overdose

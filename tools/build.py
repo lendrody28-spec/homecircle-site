@@ -803,5 +803,7 @@ for i in C["items"]:
 build_stages(); build_books()
 import sys; sys.path.insert(0, str(ROOT / "tools")); import families; families.build(page, E)
 _ra_missing = RA.check(REGION, RA.current_lines(REGION, RA_HELP_BODY))   # fails the build on any text/clip mismatch
+import subprocess as _sp
+if _sp.run([sys.executable, str(ROOT / 'tools' / 'ra_loudness.py')]).returncode: sys.exit('read-aloud loudness check FAILED')
 if _ra_missing: print("read aloud: lines without a clip:", ", ".join(_ra_missing))
 print("built")

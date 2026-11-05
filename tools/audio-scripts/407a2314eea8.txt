@@ -1,0 +1,10 @@
+DRAFT
+id: help.10
+voice: A (melo EN-AU, speed 0.9)
+file: assets/audio/407a2314eea8.m4a
+
+On screen:
+For partners, family members, and couples. These lines are beside someone in recovery.
+
+Spoken script:
+For partners, family members, and couples. These lines are beside someone in recovery.

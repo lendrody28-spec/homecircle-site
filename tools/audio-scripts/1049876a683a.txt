@@ -1,0 +1,10 @@
+DRAFT
+id: help.05
+voice: A (melo EN-AU, speed 0.9)
+file: assets/audio/1049876a683a.m4a
+
+On screen:
+Helplines
+
+Spoken script:
+Helplines

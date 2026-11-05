@@ -1,0 +1,10 @@
+DRAFT
+id: help.08
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/77a19b3b9f15.m4a
+
+On screen:
+Family & Partners
+
+Spoken script:
+Family & Partners

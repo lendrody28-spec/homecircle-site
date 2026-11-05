@@ -1,0 +1,10 @@
+DRAFT
+id: help.27
+voice: A (melo EN-AU, speed 0.9)
+file: assets/audio/b483948952a2.m4a
+
+On screen:
+Alcohol and Drug Foundation · Alcohol on Healthdirect · Gambling Help Online
+
+Spoken script:
+Alcohol and Drug Foundation · Alcohol on Healthdirect · Gambling Help Online

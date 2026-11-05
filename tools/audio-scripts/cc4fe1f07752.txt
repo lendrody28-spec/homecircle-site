@@ -1,0 +1,10 @@
+DRAFT
+id: help.13
+voice: A (melo EN-AU, speed 0.9)
+file: assets/audio/cc4fe1f07752.m4a
+
+On screen:
+Meetings and a member to talk to. Not a crisis line, and hours aren't published. NSW: Call 0455 717 543 Queensland and NT: Call 0467 655 799 South Australia: Call (08) 8212 6933 Tasmania: Call 0431 965 974 Western Australia: Call (08) 9487 0688 Victoria: Email gavictoria18a@gmail.com Open site
+
+Spoken script:
+Meetings and a member to talk to. Not a crisis line, and hours aren't published. NSW: Call zero four five five, seven one seven, five four three Queensland and NT: Call zero four six seven, six five five, seven nine nine South Australia: Call zero eight, eight two one two, six nine three three Tasmania: Call zero four three one, nine six five, nine seven four Western Australia: Call zero eight, nine four eight seven, zero six eight eight Victoria: Email gavictoria18a@gmail.com Open site

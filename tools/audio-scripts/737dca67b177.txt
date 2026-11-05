@@ -1,0 +1,10 @@
+DRAFT
+id: kai.firstOpen
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/737dca67b177.m4a
+
+On screen:
+Kai is a recovery buddy, not a person, counsellor, medical care or an emergency service. Kai can miss things.
+
+Spoken script:
+Kai is a recovery buddy, not a person, counsellor, medical care or an emergency service. Kai can miss things.

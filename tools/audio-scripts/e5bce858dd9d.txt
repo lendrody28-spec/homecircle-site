@@ -1,0 +1,10 @@
+DRAFT
+id: help.21
+voice: A (melo EN-AU, speed 0.9)
+file: assets/audio/e5bce858dd9d.m4a
+
+On screen:
+Guide Urge plan Watch an urge crest and fall without obeying it. Guide HALT Hungry, Angry, Lonely, Tired. A pause, not a medical check. Guide 24-hour plan Plan the next day, not the whole year. Breathing Breathe now An animated breathing guide.
+
+Spoken script:
+Guide Urge plan Watch an urge crest and fall without obeying it. Guide HALT Hungry, Angry, Lonely, Tired. A pause, not a medical check. Guide 24-hour plan Plan the next day, not the whole year. Breathing Breathe now An animated breathing guide.

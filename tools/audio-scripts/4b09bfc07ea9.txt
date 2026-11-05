@@ -1,0 +1,10 @@
+DRAFT
+id: help.01
+voice: A (melo EN-AU, speed 0.9)
+file: assets/audio/4b09bfc07ea9.m4a
+
+On screen:
+Get help
+
+Spoken script:
+Get help

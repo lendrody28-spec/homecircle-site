@@ -1,0 +1,10 @@
+DRAFT
+id: help.04
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/47fab92c44dd.m4a
+
+On screen:
+Call 000 immediately if a life is in danger. Call 000 or go to your nearest emergency department.
+
+Spoken script:
+Call triple zero immediately if a life is in danger. Call triple zero or go to your nearest emergency department.

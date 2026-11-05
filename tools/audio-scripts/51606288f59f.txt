@@ -1,0 +1,10 @@
+DRAFT
+id: kai.crisis.medical
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/51606288f59f.m4a
+
+On screen:
+This sounds like a medical emergency. Call 000 now and ask for an ambulance. Stay with the person if it's safe. Lifeline is 13 11 14. Kai can't call anyone and can miss things, so please make the call yourself.
+
+Spoken script:
+This sounds like a medical emergency. Call triple zero now and ask for an ambulance. Stay with the person if it's safe. Lifeline, thirteen eleven fourteen. Kai can't call anyone and can miss things, so please make the call yourself.

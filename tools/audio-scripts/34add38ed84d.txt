@@ -1,0 +1,10 @@
+DRAFT
+id: kai.crisis.emergency
+voice: B (kokoro am_michael, speed 0.9)
+file: assets/audio/34add38ed84d.m4a
+
+On screen:
+Call 000 now if you or anyone else is in danger. Lifeline is 13 11 14, any time. Please make the call yourself. Kai can't call anyone. Kai can miss things.
+
+Spoken script:
+Call triple zero now if you or anyone else is in danger. Lifeline, thirteen eleven fourteen, any time. Please make the call yourself. Kai can't call anyone. Kai can miss things.
