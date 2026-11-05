@@ -80,9 +80,9 @@ def safety_plan():
 <ul><li>Who you can call, and a safe place you could go</li><li>Where you'd keep important things such as ID, medicines, keys and some money</li><li>A code word with someone you trust that means “I need help”</li><li>How to keep children safe, and what they should do in an emergency</li></ul>
 <p>Risk can go up when someone confronts the person using violence, tries to leave, or after the relationship ends. That's why it helps to plan with a specialist before taking big steps.</p>
 <p><strong>Tech safety.</strong> Phones, apps, smart devices, cars and shared accounts can be used to track or control someone. The eSafety Commissioner has advice on tech abuse, collecting evidence safely, and online safety planning. If it's safe, make a plan before changing passwords or removing apps, because sudden changes can alert the other person.</p>
-<p>If you work and you're experiencing family and domestic violence, all employees in Australia, including casuals, can get 10 days of paid family and domestic violence leave a year.</p>
+<p>If you work and you're experiencing family and domestic violence, you can get 10 days of paid leave a year. This applies to all employees, including casuals.</p>
 <div class="btn-row">{link("https://www.esafety.gov.au/key-topics/domestic-family-violence", "eSafety: domestic violence and tech abuse")}</div>
-{src([("1800RESPECT: Safety planning", "https://www.1800respect.org.au/help-and-support/safety-planning"), ("eSafety Commissioner: Domestic violence", "https://www.esafety.gov.au/key-topics/domestic-family-violence"), ("Safe Steps", "https://www.safesteps.org.au/"), ("Fair Work Ombudsman: Family and domestic violence leave", "https://www.fairwork.gov.au/leave/family-and-domestic-violence-leave")])}
+{src([("1800RESPECT: Safety planning", "https://www.1800respect.org.au/help-and-support/safety-planning"), ("eSafety Commissioner: Domestic violence", "https://www.esafety.gov.au/key-topics/domestic-family-violence"), ("Safe Steps", "https://www.safesteps.org.au/"), ("Fair Work Ombudsman: Family and domestic violence leave", "https://www.fairwork.gov.au/leave/family-and-domestic-violence-leave"), ("Fair Work Act 2009 (Cth) s 106B", "https://www.legislation.gov.au/C2009A00028/latest/text")])}
 </details></section>"""
 
 def look_after():
