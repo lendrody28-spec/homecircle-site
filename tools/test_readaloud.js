@@ -12,7 +12,7 @@ ok(S("1800RESPECT is 1800 737 732") === "one eight hundred respect is one eight 
 ok(S("Kids Helpline (1800 55 1800) is for") === "Kids Helpline, on one eight hundred, five five, eighteen hundred, is for", "1800 55 1800 (digits + eighteen hundred, parens read as 'on')");
 ok(S("call 1800 177 833") === "call one eight hundred, one seven seven, eight three three", "1800 177 833");
 ok(S("1300 766 491") === "thirteen hundred, seven six six, four nine one", "1300");
-ok(S("1300 22 4636") === "thirteen hundred, twenty two, four six three six", "1300 with 2-digit group");
+ok(S("1300 22 4636") === "thirteen hundred, two two, four six three six", "1300 with 2-digit group read as digits");
 ok(S("text 0477 13 11 14") === "text zero four seven seven, thirteen eleven fourteen", "mobile + 13");
 ok(S("(08) 8212 6933") === "zero eight, eight two one two, six nine three three", "landline");
 ok(S("Settings > Accessibility") === "Settings, then Accessibility", "> path");
