@@ -87,17 +87,18 @@
     try { return textOf(node); } finally { skip.forEach(function (d) { d.classList.remove("ra-skip"); }); }
   }
   /* Read-aloud chunks of a container: its children, except a .grid, whose cards are read (and recorded) one by one, each card's <details> and .state-line separately (keeps clips under about a minute). */
-  function chunksOf(w) {
-    var out = [];
+  function chunksOf(w, els) {
+    var out = [], at = [];
     Array.prototype.forEach.call(w.children, function (c) {
       if (c.classList.contains("ra-bar") || c.classList.contains("ra-skip")) return;
       if (c.classList.contains("grid")) Array.prototype.forEach.call(c.children, function (k) {
         if (k.classList.contains("ra-skip")) return;
         var more = Array.prototype.filter.call(k.children, function (d) { return d.nodeName === "DETAILS" || d.classList.contains("state-line"); });
-        out.push(textOfExcept(k, more)); more.forEach(function (d) { out.push(textOf(d)); });   /* a card's "More info" is its own clip */
+        out.push(textOfExcept(k, more)); at.push(k); more.forEach(function (d) { out.push(textOf(d)); at.push(d); });   /* a card's "More info" is its own clip */
       });
-      else out.push(textOf(c));
+      else { out.push(textOf(c)); at.push(c); }
     });
+    if (els) out.forEach(function (t, i) { if (t) els.push(at[i]); });
     return out.filter(Boolean);
   }
   /* Playback. Call unlock() synchronously inside the tap handler, before any await or fetch.
@@ -145,7 +146,16 @@
       el.onerror = function () { fail(); };
       el.src = u; var q = el.play(); if (q && q.catch) q.catch(function () { fail(); });
     }
-    return { unlock: unlock, play: play, halt: halt, mode: function () { return mode; } };
+    /* Pause keeps the place; resume continues from it. Call resume() inside the tap too (iOS). */
+    function pause() {
+      if (mode === "webaudio" && ctx && ctx.suspend) { var r = ctx.suspend(); if (r && r.catch) r.catch(function () {}); }
+      else if (el) try { el.pause(); } catch (e) {}
+    }
+    function resume() {
+      if (mode === "webaudio" && ctx && ctx.resume) { var r = ctx.resume(); if (r && r.catch) r.catch(function () {}); }
+      else if (el && el.src && el.src !== SILENT) { var q = el.play(); if (q && q.catch) q.catch(function () {}); }
+    }
+    return { unlock: unlock, play: play, halt: halt, pause: pause, resume: resume, mode: function () { return mode; } };
   }
   var FEMALE = /female|woman|karen|catherine|samantha|victoria|serena|kate|moira|tessa|fiona|allison|ava|susan|zira|hazel|libby|natasha|sonia|joanna|salli|kimberly/i;
   var MALE = /\bmale\b|\bman\b|daniel|lee|gordon|alex|fred|tom|aaron|arthur|oliver|george|ryan|william|james|david|mark|guy|rishi/i;
@@ -193,9 +203,11 @@
     })).then(function () { return files; });
     return loads[v];
   }
-  var P = makePlayer(window), active = null, queue = [], token = 0;
+  var P = makePlayer(window), active = null, queue = [], token = 0, paused = false, pauseBtn = null;
   function stop() {
     token++; queue = [];
+    if (paused) { P.resume(); if (synth && synth.resume) try { synth.resume(); } catch (e) {} }   /* a suspended context or paused voice would block the next read */
+    paused = false; pending = null; hidePause();
     P.halt();
     if (synth) try { synth.cancel(); } catch (e) {}
     if (active) { setBtn(active, false); active = null; }
@@ -217,7 +229,7 @@
         if (my !== token) return;
         var blob = files[clips[order[i]][k]];
         if (!blob) return tryClip(i + 1);
-        P.play(blob, function () { if (my === token) done(); }, function () { if (my === token) tryClip(i + 1); });
+        whenPlaying(function () { if (my === token) P.play(blob, function () { if (my === token) done(); }, function () { if (my === token) tryClip(i + 1); }); });
       });
     }
     tryClip(0);
@@ -227,7 +239,40 @@
     var u = new SpeechSynthesisUtterance(speakable(text));
     u.voice = localVoice; u.lang = localVoice.lang;
     u.onend = u.onerror = function () { if (my === token) done(); };
-    synth.speak(u);
+    whenPlaying(function () { if (my === token) synth.speak(u); });
+  }
+  /* One Pause/Resume toggle, shown under the text being read while it plays. */
+  function pauseButton() {
+    if (pauseBtn) return pauseBtn;
+    var b = pauseBtn = document.createElement("button");
+    b.type = "button"; b.className = "ra-pause ra-skip"; b.hidden = true;
+    b.setAttribute("aria-pressed", "false");
+    b.innerHTML = '<span class="ra-pt">Pause</span>';
+    b.setAttribute("aria-label", "Pause reading");
+    return b;
+  }
+  function placePause(after) {
+    var b = pauseButton();
+    if (after && after.parentNode && after.parentNode.classList && after.parentNode.classList.contains("grid")) { if (after.lastChild !== b) after.appendChild(b); }   /* inside the card, not a new grid cell */
+    else if (after && after.parentNode && after.nextSibling !== b) after.parentNode.insertBefore(b, after.nextSibling);
+    b.hidden = false; syncPause();
+  }
+  var pending = null;
+  function whenPlaying(fn) { if (paused) pending = fn; else fn(); }   /* a clip that loads while paused waits for Resume */
+  function hidePause() { if (pauseBtn) { pauseBtn.hidden = true; syncPause(); } }
+  function syncPause() {
+    if (!pauseBtn) return;
+    pauseBtn.setAttribute("aria-pressed", paused ? "true" : "false");
+    pauseBtn.querySelector(".ra-pt").textContent = paused ? "Resume" : "Pause";
+    pauseBtn.setAttribute("aria-label", paused ? "Resume reading" : "Pause reading");
+    pauseBtn.classList.toggle("on", paused);
+  }
+  function togglePause() {
+    if (!active) return;
+    paused = !paused;
+    if (paused) { P.pause(); if (synth && synth.pause) try { synth.pause(); } catch (e) {} }
+    else { P.resume(); if (synth && synth.resume) try { synth.resume(); } catch (e) {} var f = pending; pending = null; if (f) f(); }
+    syncPause();
   }
   function run(btn, texts) {
     stop();
@@ -236,14 +281,17 @@
     (function next() {
       if (my !== token) return;
       var t = queue.shift();
-      if (t == null) { setBtn(btn, false); active = null; return; }
+      if (t == null) { setBtn(btn, false); active = null; paused = false; hidePause(); return; }
       if (!t) return next();
+      var i = texts.length - queue.length - 1, at = btn._raAnchor ? btn._raAnchor(i) : null;
+      placePause(at || btn);
       playOne(t, my, next);
     })();
   }
   function canRead(texts) { return !!localVoice || texts.every(function (t) { var k = key(t); return (clips.A && clips.A[k]) || (clips.B && clips.B[k]); }); }
+  var pageEls = [];
   function pageTexts() {
-    var w = document.querySelector("main .wrap"); return w ? chunksOf(w) : [];
+    var w = document.querySelector("main .wrap"); pageEls = []; return w ? chunksOf(w, pageEls) : [];
   }
   function button(label, getTexts, small) {
     var b = document.createElement("button");
@@ -251,6 +299,7 @@
     b.innerHTML = SPK + '<span class="ra-t">Read aloud</span>';
     b.setAttribute("data-ra-label", label); b.setAttribute("aria-label", label); b.setAttribute("aria-pressed", "false");
     b._raTexts = getTexts;
+    if (getTexts === pageTexts) b._raAnchor = function (i) { return pageEls[i]; };   /* pause sits under the section being read */
     b.hidden = !canRead(getTexts());
     return b;
   }
@@ -284,8 +333,9 @@
     return g;
   }
   document.addEventListener("click", function (e) {
-    var t = e.target.closest ? e.target.closest(".ra-btn,[data-ra-voice],[data-ra-sample]") : null;
+    var t = e.target.closest ? e.target.closest(".ra-btn,.ra-pause,[data-ra-voice],[data-ra-sample]") : null;
     if (!t) return;
+    if (t === pauseBtn) { togglePause(); return; }
     if (t.hasAttribute("data-ra-voice")) { stop(); setChosen(t.getAttribute("data-ra-voice")); return; }
     if (t !== active) P.unlock();   /* synchronously in the tap, before any fetch or await (iOS) */
     if (t.hasAttribute("data-ra-sample")) {
@@ -313,6 +363,7 @@
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
 
+  api.pause = togglePause; api.isPaused = function () { return paused; };
   api.button = button; api.voicePicker = voicePicker; api.stop = stop; api.update = update;
   return api;
 });

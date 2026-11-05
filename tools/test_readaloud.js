@@ -53,6 +53,32 @@ ok(R.textOf(el("H2", "", ["Done?"])) === "Done?", "heading with punctuation unch
   P.play({}, () => {}, () => {});
   ok(els.length === 1 && els[0].plays[1] === "blob:x", "same primed element plays the clip");
 })();
+// pause/resume: Web Audio suspends and resumes the same context (keeps the place)
+(function () {
+  const log = [];
+  function AC() { this.state = "suspended"; this.resume = () => { log.push("resume"); return Promise.resolve(); }; this.suspend = () => { log.push("suspend"); return Promise.resolve(); }; }
+  const P = R.makePlayer({ navigator: { audioSession: {} }, AudioContext: AC });
+  P.unlock(); log.length = 0; P.pause(); P.resume();
+  ok(log.join() === "suspend,resume", "webaudio pause -> suspend, resume -> resume");
+})();
+// pause/resume: element pauses and plays again without changing src (keeps the place)
+(function () {
+  let el;
+  function Audio() { el = this; this.src = ""; this.n = 0; this.paused = 0; this.play = () => { this.n++; return Promise.resolve(); }; this.pause = () => { this.paused++; }; }
+  const P = R.makePlayer({ navigator: {}, Audio, URL: { createObjectURL: () => "blob:clip" } });
+  P.unlock(); P.play({}, () => {}, () => {});
+  const n = el.n; P.pause(); ok(el.paused >= 1 && el.src === "blob:clip", "element pause keeps src");
+  P.resume(); ok(el.n === n + 1 && el.src === "blob:clip", "element resume plays the same src");
+})();
+// pause handler: speechSynthesis pause/resume and stop clears the pause
+(function () {
+  const src = require("fs").readFileSync(__dirname + "/../assets/readaloud.js", "utf8");
+  ok(/synth\.pause\(\)/.test(src) && /synth\.resume\(\)/.test(src), "device voice uses speechSynthesis pause/resume");
+  ok(/if \(t === pauseBtn\) \{ togglePause\(\); return; \}/.test(src), "pause toggle handled before any other read-aloud click");
+  ok(/aria-pressed", paused/.test(src) && /"Resume" : "Pause"/.test(src), "pause button swaps label and aria-pressed");
+  const safety = src.slice(src.indexOf("/* SAFETY"));
+  ok(/tel:.*#kai-notsafe/.test(safety.split("\n")[1] + safety.split("\n")[2]) && /if \(a\) stop\(\)/.test(safety), "call links and I'm not safe still stop playback");
+})();
 // click handler calls P.unlock() before preload/fetch
 (function () {
   const src = require("fs").readFileSync(__dirname + "/../assets/readaloud.js", "utf8");
