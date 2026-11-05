@@ -1,6 +1,7 @@
 """For families & partners pages. Every number, hour and URL comes from
 homecircle-plans/families-services.md (checked 4 Nov 2026). Imported by build.py."""
 CHECKED = "Last checked: 4 Nov 2026"
+NEW = "Last checked: 5 Nov 2026"
 
 def tel(num, label=None):
     d = "".join(c for c in num if c.isdigit())
@@ -38,23 +39,101 @@ def withdrawal():
 <div class="btn-row">{link("https://www.health.gov.au/our-work/take-home-naloxone-program/about-the-take-home-naloxone-program", "About take-home naloxone")}{link("https://www.health.gov.au/our-work/take-home-naloxone-program/where-to-access-naloxone", "Where to get naloxone")}</div>
 </details><p class="small">{CHECKED}. HomeCircle is support, not medical care.</p></section>"""
 
+def svc5(name, who, phone=None, hours=None, url=None, url_label="Open site"):
+    return svc(name, who, phone, hours, url, url_label).replace(CHECKED, NEW)
+
+def src(items):
+    return '<p class="small"><strong>Sources:</strong> ' + "; ".join(f'<a href="{u}" rel="noopener">{n}</a>' for n, u in items) + f'. {NEW}.</p>'
+
+def overdose():
+    return f"""<section class="card mt" id="overdose"><h2 class="mt0">Think it's an overdose? Call 000</h2>
+<p><strong>Call <a href="tel:000">000</a> straight away if they can't be woken, are breathing very slowly or not at all, or their lips or fingertips look blue. Stay with them and follow what the 000 operator tells you.</strong></p>
+<div class="btn-row"><a class="btn danger" href="tel:000">Call 000</a></div>
+<details class="more"><summary>More info</summary>
+<p>If opioids might be involved, naloxone can reverse an overdose for a short time. The Australian Government's Take Home Naloxone program makes it free, with no prescription. Ask a pharmacist how and when to use it. Always call 000 too, even if you have naloxone.</p>
+<p>HomeCircle can't give medical instructions. Follow the 000 operator, a pharmacist or a doctor.</p>
+<div class="btn-row">{link("https://www.health.gov.au/our-work/take-home-naloxone-program", "Take Home Naloxone program")}</div>
+{src([("Australian Government Department of Health, Disability and Ageing: Take Home Naloxone program", "https://www.health.gov.au/our-work/take-home-naloxone-program")])}
+</details></section>"""
+
+def dv_aod(full=False):
+    body = f"""<p><strong>Drinking or drugs never excuse violence.</strong> Violence is always the choice of the person using it, and it's never your fault. Your safety, and any children's safety, comes first.</p>
+<p>If you're in danger now, call <a href="tel:000">000</a>. For advice any time, call 1800RESPECT on <a href="tel:1800737732">1800 737 732</a>.</p>
+<p>Getting sober doesn't always stop the abuse. Please don't wait for them to stop drinking or using before you get help for yourself.</p>"""
+    more = f"""<details class="more"><summary>More info</summary>
+<p>Abuse can be physical, but it can also be threats, control over money, checking your phone, or cutting you off from friends and family.</p>
+<p>Avoid raising their drinking or drug use when they're drunk, high or angry. If talking about it could make things more dangerous, talk to 1800RESPECT first.</p>
+<p>Family support services, like Family Drug Support, can help with the drinking or drugs. For violence, a domestic and family violence service is the right place to start.</p>
+{src([("1800RESPECT", "https://www.1800respect.org.au/"), ("eSafety Commissioner: Domestic violence", "https://www.esafety.gov.au/key-topics/domestic-family-violence")])}</details>"""
+    if full:
+        return f'<section class="card mt" id="dv-aod"><h2 class="mt0">When drinking or drugs and violence happen together</h2>{body}<div class="btn-row">{tel("1800 737 732", "Call 1800RESPECT 1800 737 732")}</div>{more}</section>'
+    return f'<details class="card more mt" id="dv-aod"><summary><h2 class="mt0">When drinking or drugs and violence happen together</h2></summary>{body}<a class="btn" href="safety.html#dv-aod">Read more and find help</a></details>'
+
+def safety_plan():
+    return f"""<section class="card mt" id="plan"><h2 class="mt0">Safety planning and tech safety</h2>
+<p>A safety plan is a plan for staying as safe as possible, whether you stay, are thinking of leaving, or have left. A 1800RESPECT counsellor or your state's line can make one with you.</p>
+<p><strong>If you think your phone or accounts are being checked or tracked, use a phone or computer they can't get to, like a friend's phone or a library computer.</strong></p>
+<div class="btn-row">{tel("1800 737 732", "Call 1800RESPECT 1800 737 732")}{link("https://www.1800respect.org.au/help-and-support/safety-planning", "1800RESPECT: safety planning")}</div>
+<details class="more"><summary>More info</summary>
+<p><strong>Things people often think about in a safety plan</strong> (a support worker can help you with what fits you):</p>
+<ul><li>Who you can call, and a safe place you could go</li><li>Where you'd keep important things such as ID, medicines, keys and some money</li><li>A code word with someone you trust that means “I need help”</li><li>How to keep children safe, and what they should do in an emergency</li></ul>
+<p>Risk can go up when someone confronts the person using violence, tries to leave, or after the relationship ends. That's why it helps to plan with a specialist before taking big steps.</p>
+<p><strong>Tech safety.</strong> Phones, apps, smart devices, cars and shared accounts can be used to track or control someone. The eSafety Commissioner has advice on tech abuse, collecting evidence safely, and online safety planning. If it's safe, make a plan before changing passwords or removing apps, because sudden changes can alert the other person.</p>
+<p>If you work, all employees in Australia, including casuals, can get 10 days of paid family and domestic violence leave a year.</p>
+<div class="btn-row">{link("https://www.esafety.gov.au/key-topics/domestic-family-violence", "eSafety: domestic violence and tech abuse")}</div>
+{src([("1800RESPECT: Safety planning", "https://www.1800respect.org.au/help-and-support/safety-planning"), ("eSafety Commissioner: Domestic violence", "https://www.esafety.gov.au/key-topics/domestic-family-violence"), ("Safe Steps", "https://www.safesteps.org.au/")])}
+</details></section>"""
+
+def look_after():
+    return f"""<details class="card sage more mt" id="you"><summary><h2 class="mt0">Look after yourself</h2></summary>
+<ul><li>You didn't cause it, you can't control it, and you can't fix it alone.</li><li>Sleep, eat and get outside when you can.</li><li>Keep up with friends and things you enjoy.</li><li>Talk to someone: a GP, a counsellor, or a family support group.</li></ul>
+<h3>Signs you're burning out</h3><p>Always tired, on edge, can't stop worrying, cutting yourself off from people, or feeling hopeless. These are signs to get support for you, not signs you've failed.</p>
+<h3>Setting boundaries</h3><p>A boundary is what <em>you</em> will do, not a rule for them. For example: “I won't lend money”, “I won't call your work for you”, or “I'll leave the room if you're drunk.” Say it calmly once, then follow through. Only set limits that are safe for you. If you're scared of how they'll react, talk to 1800RESPECT first.</p>
+<p>Some family programs teach ways to stay connected while encouraging the person to get help, and to look after yourself at the same time. Family Drug Support and SMART Recovery Family &amp; Friends both run free support for families.</p>
+<div class="grid g2">
+{svc5("Family Drug Support Australia", "Support line, groups and courses for families and friends of people who use alcohol or other drugs.", "1300 368 186", "24 hours, 7 days", "https://www.fds.org.au/")}
+{svc5("SMART Recovery Family &amp; Friends", "Free groups for people affected by someone else's alcohol, drug or gambling use. HomeCircle isn't part of SMART Recovery.", None, None, "https://smartrecoveryaustralia.com.au/family-friends/")}
+</div>
+{src([("Family Drug Support Australia", "https://www.fds.org.au/"), ("SMART Recovery Australia: Family &amp; Friends", "https://smartrecoveryaustralia.com.au/family-friends/")])}</details>"""
+
+def kids_body():
+    return f"""<p><a href="index.html">← For families &amp; partners</a></p>
+<h1>For kids and teens: when a parent drinks or uses drugs</h1>
+<section class="card sage" id="start"><h2 class="mt0">It's not your fault</h2>
+<p>If your mum, dad or someone who looks after you drinks too much or uses drugs, you didn't cause it, and it's not your job to fix it. Lots of kids and teens go through this. You're not alone.</p></section>
+<section class="card mt" id="now"><h2 class="mt0">If you're scared or someone is hurt</h2>
+<p><strong>Call <a href="tel:000">000</a> if someone is hurt, won't wake up, or you're in danger.</strong> Go somewhere safe first if you can, like a neighbour's house.</p>
+<div class="btn-row"><a class="btn danger" href="tel:000">Call 000</a></div></section>
+<h2 class="mt">People you can talk to</h2>
+<div class="grid g2">
+{svc5("Kids Helpline", "Free counselling for anyone aged 5 to 25, any time, about anything. You can call or chat online.", "1800 55 1800", "24/7", "https://kidshelpline.com.au/")}
+{svc5("eheadspace", "Online and phone support for young people aged 12 to 25.", "1800 650 890", None, "https://www.headspace.org.au/")}
+</div>
+<details class="card more mt" id="feelings"><summary><h2 class="mt0">Feelings you might have</h2></summary>
+<p>You might feel angry, sad, scared, embarrassed or worried. You might love them and be upset with them at the same time. All of these feelings are OK.</p>
+<p>Some things that can help:</p>
+<ul><li>Tell a trusted adult, like a relative, teacher or school counsellor.</li><li>Keep doing things you enjoy, like sport, music or seeing friends.</li><li>Write or draw how you feel.</li><li>Have a safe person and a safe place you can go to.</li></ul>
+<p>When you talk to a counsellor or teacher, they'll try to help you stay safe. If they're worried you might be in danger, they may need to tell someone who can help. You can ask them about this first.</p></details>
+<details class="card more mt" id="more-help"><summary><h2 class="mt0">More help for young people</h2></summary>
+<p><strong>Alateen</strong> is a group for young people affected by someone else's drinking. It's part of Al-Anon Family Groups. HomeCircle isn't part of Al-Anon or Alateen.</p>
+<div class="btn-row">{link("https://al-anon.org.au/", "Al-Anon and Alateen Australia")}</div>
+<p><strong>COPMI</strong> (Children of Parents with a Mental Illness) has information for kids and teens whose parent is unwell.</p>
+<div class="btn-row">{link("https://www.copmi.net.au/", "COPMI")}</div>
+<p>If there's fighting or violence at home, it's not your fault. Kids Helpline can help you make a plan to stay safe.</p>
+<div class="btn-row"><a class="btn" href="safety.html">Help with violence at home</a></div></details>
+{src([("Kids Helpline", "https://kidshelpline.com.au/"), ("headspace", "https://www.headspace.org.au/"), ("Al-Anon Family Groups Australia", "https://al-anon.org.au/"), ("COPMI", "https://www.copmi.net.au/")])}"""
+
 def groups():
     return f"""<details class="card more mt" id="groups"><summary><h2 class="mt0">Family meetings, support groups and counselling</h2></summary>
 <p>You don't have to work this out alone. Family support groups are free meetings where people with a loved one who drinks, uses drugs or gambles share what helps. Counselling services can help the whole family talk.</p>
 <p><strong>HomeCircle isn't part of these groups.</strong></p>
 <div class="grid g2">
 {svc("Family Drug Support Australia", "A support line and meetings for families and friends of people who use alcohol or other drugs, and for bereaved families.", "1300 368 186", "24 hours, 7 days", "https://www.fds.org.au/")}
-{svc("Al-Anon Family Groups Australia", "Meetings for families and friends of people with a drinking problem.", "1300 252 666", None, "https://www.al-anon.org.au/")}
 {svc("Gam-Anon (listed on Gamblers Anonymous Australia's site)", "For families and friends of people with a gambling problem.", None, None, "https://gaaustralia.org.au/gam-anon/", extra='<p><a href="mailto:gam-anon@live.com.au">gam-anon@live.com.au</a></p>')}
 {svc("Relationships Australia", "Counselling, mediation and family support for individuals, couples and families.", "1300 364 277", None, "https://relationships.org.au/")}
 </div>
 <!-- PLACEHOLDER: future gambling (GA) family content goes here. Hidden from visitors until written and checked. -->
 </details>"""
-
-def selfcare():
-    return f"""<details class="card sage more mt" id="you"><summary><h2 class="mt0">Looking after yourself</h2></summary>
-<ul><li>You didn't cause it, and you can't fix it alone.</li><li>Sleep, eat and get outside when you can.</li><li>Keep up with friends and things you enjoy.</li><li>Set limits that keep you safe, and stick to them.</li><li>Talk to someone: a GP, a counsellor, or a family support group.</li></ul>
-<p class="small">{CHECKED}</p></details>"""
 
 def legal():
     return f"""<details class="card more mt" id="legal"><summary><h2 class="mt0">Legal questions</h2></summary>
@@ -84,9 +163,18 @@ def dv_body():
     states = "".join(f'<details class="card state"><summary><h3>{st}: {n}</h3></summary>{svc(n, w, p, h, u)}</details>' for st, n, w, p, h, u in DV_STATES)
     return f"""<h1>Worried about violence at home?</h1>
 <p class="lede">If someone you love is drinking or using, and you feel unsafe, you deserve help. You can call any of these services.</p>
+<h2 class="mt">If you're experiencing violence</h2>
 <div class="grid g2">
 {svc("1800RESPECT", "Anyone affected by domestic, family or sexual violence, and people supporting them. National.", "1800 737 732", "24/7", "https://www.1800respect.org.au/")}
 {svc("Kids Helpline", "Children and young people aged 5–25.", "1800 55 1800", "24/7", "https://kidshelpline.com.au/")}
+{svc5("MensLine Australia", "Phone and online counselling for men, including men experiencing family or relationship problems.", "1300 78 99 78", None, "https://mensline.org.au/")}
+{svc5("QLife", "Free, anonymous peer support for LGBTIQ+ people, including about relationships and family.", "1800 184 527", None, "https://qlife.org.au/")}
+</div>
+{safety_plan()}
+{dv_aod(full=True)}
+<h2 class="mt" id="change">Worried about your own behaviour?</h2>
+<p>These services are for people who use violence or are worried they might, and for the people around them. If you're experiencing violence, use the services above instead.</p>
+<div class="grid g2">
 {svc("Men's Referral Service (No to Violence)", "For men worried about their own behaviour, and their family, friends and professionals.", "1300 766 491", "24 hours 7 days a week", "https://ntv.org.au/get-help/")}
 </div>
 <h2 class="mt">Find your state's line</h2><p>Tap your state or territory to see its line. The national lines above work everywhere.</p>
@@ -120,8 +208,8 @@ START = {
  "family": "When a parent or relative drinks or uses, it affects the whole family. It's not your fault, and you're allowed to get help for you.",
  "friend": "You don't have to fix your friend's problem. Listening, staying in touch and pointing them to support really helps.",
 }
-GROUP = {"partner": ("Al-Anon Family Groups Australia", "Meetings for families and friends of people with a drinking problem.", "1300 252 666", "https://www.al-anon.org.au/"),
-         "family": ("Al-Anon Family Groups Australia", "Meetings for families and friends of people with a drinking problem.", "1300 252 666", "https://www.al-anon.org.au/"),
+GROUP = {"partner": ("Al-Anon Family Groups Australia", "Meetings for families and friends of people with a drinking problem.", "1300 252 666", "https://al-anon.org.au/"),
+         "family": ("Al-Anon Family Groups Australia", "Meetings for families and friends of people with a drinking problem.", "1300 252 666", "https://al-anon.org.au/"),
          "child": ("Al-Anon Family Groups Australia", "For people affected by someone else's drinking.", "1300 252 666", "https://al-anon.org.au/"),
          "friend": ("Al-Anon Family Groups Australia", "For people affected by someone else's drinking.", "1300 252 666", "https://al-anon.org.au/")}
 
@@ -147,8 +235,10 @@ def who_body(key):
 <div class="grid g2"><div><h3>Try saying</h3><ul>{s}</ul></div><div><h3>Try not to</h3><ul>{d}</ul></div></div></details>
 <details class="card more mt" id="withdrawal"><summary><h2 class="mt0">Withdrawal warning signs and when to call 000</h2></summary>
 <p>Call <a href="tel:000">000</a> for a seizure, confusion or collapse.</p><p><a href="withdrawal.html">Supporting someone through withdrawal</a></p></details>
+{overdose()}
 {groups()}
-{selfcare()}
+{look_after()}
+{dv_aod()}
 <details class="card more mt"><summary><h2 class="mt0">Worried about violence?</h2></summary><p>If you feel unsafe, there is help in every state and territory.</p><a class="btn" href="safety.html">Domestic and family violence help</a></details>
 {legal()}"""
 
@@ -162,9 +252,12 @@ def build(page, E):
       f"""<h1>For families &amp; partners</h1><p class="lede">Someone you love is drinking or using drugs, and you want to help. Start here.</p>
 <h2>Who are you worried about?</h2><div class="fam-choices">{btns}</div>
 <div class="grid g2 mt"><a class="card tile" href="withdrawal.html"><div class="tbody"><h3>Supporting someone through withdrawal</h3><p>Warning signs and when to call 000.</p></div></a>
+<a class="card tile" href="kids.html"><div class="tbody"><h3>For kids and teens</h3><p>When a parent drinks or uses drugs. It's not your fault.</p></div></a>
 <a class="card tile" href="safety.html"><div class="tbody"><h3>Worried about violence at home?</h3><p>1800RESPECT and lines in every state.</p></div></a></div>""")
     for k, v in WHO.items():
         P(f"families/{k}.html", v[1] + " – HomeCircle", v[2], who_body(k))
+    P("families/kids.html", "For kids and teens: when a parent drinks or uses drugs – HomeCircle",
+      "For children and teens in Australia whose parent drinks or uses drugs: it's not your fault, and who to talk to.", kids_body())
     P("families/withdrawal.html", "Supporting someone through withdrawal – HomeCircle",
       "Withdrawal warning signs, when to call 000, and who to call for advice in Australia.",
       f'<p><a href="index.html">← For families &amp; partners</a></p><h1>Supporting someone through withdrawal</h1>{withdrawal()}')
