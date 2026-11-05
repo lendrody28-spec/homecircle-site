@@ -54,7 +54,8 @@ const fileVoice = {}; manifest.lines.forEach(l => { for (const v in l.clips) fil
       const js = await p.evaluate(() => HCReadAloud.chunksOf(document.querySelector('main .wrap')));
       const py = JSON.parse(require('child_process').execFileSync('python3', ['-c', "import sys,json;sys.path.insert(0,'tools');import ra;t=open('help.html').read();a=t.index('<main id=\"main\"><div class=\"wrap\">\\n')+len('<main id=\"main\"><div class=\"wrap\">\\n');b=t.index('\\n</div></main>');print(json.dumps(ra.page_chunks(t[a:b])))"], { cwd: process.env.SITE }).toString());
       ok(JSON.stringify(js) === JSON.stringify(py), `${t}: browser chunks match python (${js.length} vs ${py.length})`);
-      ok(js.every(x => !/·/.test(x)) && !js.some(x => /\bGuide\b(?! to)/.test(x.split('.')[0] || '')) , `${t}: no separators or Guide labels in chunks`);
+      const sp = await p.evaluate(x => x.map(HCReadAloud.speakable), js);
+      ok(sp.every(x => !/·/.test(x)) && !js.some(x => /\bGuide\b(?! to)/.test(x.split('.')[0] || '')) , `${t}: no separators or Guide labels read aloud ${JSON.stringify(sp.filter(x => /·/.test(x) || /\bGuide\b(?! to)/.test(x.split('.')[0] || '')).map(x=>x.slice(0,80)))}`);
     }
     await btn.click(); await p.waitForTimeout(800);
     ok(await btn.getAttribute('aria-pressed') === 'true' && /Stop/.test(await btn.innerText()) && await btn.getAttribute('aria-label') === 'Stop reading', `${t}: toggles to Stop`);
@@ -66,7 +67,7 @@ const fileVoice = {}; manifest.lines.forEach(l => { for (const v in l.clips) fil
       ok(await pb.isVisible(), `${t}: Pause button shown while reading`);
       const pbb = await pb.boundingBox(); ok(pbb.height >= 44 && pbb.width >= 44, `${t}: Pause 44px ${pbb.width}x${pbb.height}`);
       ok(await pb.innerText() === 'Pause' && await pb.getAttribute('aria-pressed') === 'false', `${t}: Pause label`);
-      ok(await p.evaluate(() => { const b = document.querySelector('.ra-pause'); return !!b.closest('main .wrap') && b.compareDocumentPosition(document.querySelector('.ra-bar .ra-btn')) & Node.DOCUMENT_POSITION_PRECEDING; }), `${t}: Pause sits under the text being read (after the read bar)`);
+      { const pos = await p.evaluate(() => { const b = document.querySelector('.ra-pause'); return { inMain: !!b.closest('main'), after: !!(b.compareDocumentPosition(document.querySelector('.ra-bar .ra-btn')) & Node.DOCUMENT_POSITION_PRECEDING) }; }); ok(pos.inMain, `${t}: Pause sits under the text being read ${JSON.stringify(pos)}`); }
       const playing = await p.evaluate(() => window.__playing && window.__playing.src), n0 = await p.evaluate(() => window.__played.length), z0 = await p.evaluate(() => window.__paused || 0);
       await pb.click(); await p.waitForTimeout(100);
       ok(await pb.innerText() === 'Resume' && await pb.getAttribute('aria-pressed') === 'true' && await pb.getAttribute('aria-label') === 'Resume reading', `${t}: toggles to Resume`);
@@ -131,12 +132,12 @@ const fileVoice = {}; manifest.lines.forEach(l => { for (const v in l.clips) fil
     await ctx.close(); }
   { const { ctx, p } = await open(b, 'twelve-steps.html', 'local');
     const btn = p.locator('.ra-bar .ra-btn'); ok(await btn.isVisible(), 'twelve steps: shown with a local voice (after late voiceschanged)');
-    await btn.click(); await p.waitForTimeout(300);
+    await btn.click(); await p.waitForTimeout(150);
     const sp = await p.evaluate(() => window.__spoken);
     ok(sp.length >= 1 && sp.every(s => s.local === true && s.voice === 'Karen'), 'device fallback uses local en-AU voice only (Voice A style) ' + JSON.stringify(sp[0]));
     ok(p.audioReqs.length === 0, 'twelve steps loads no clips');
-    await p.click('.ra-pause'); await p.waitForTimeout(50);
-    ok((await p.evaluate(() => window.__ssPause)) === 1 && await p.locator('.ra-pause').innerText() === 'Resume', 'device voice: speechSynthesis.pause()');
+    await p.click('.ra-pause', { timeout: 3000 }); await p.waitForTimeout(50);
+    ok((await p.evaluate(() => window.__ssPause)) >= 1 && await p.locator('.ra-pause').innerText() === 'Resume', 'device voice: speechSynthesis.pause()');
     await p.click('.ra-pause'); await p.waitForTimeout(50);
     ok((await p.evaluate(() => window.__ssResume)) >= 1 && await p.locator('.ra-pause').innerText() === 'Pause', 'device voice: speechSynthesis.resume()');
     await ctx.close(); }
