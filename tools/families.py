@@ -20,6 +20,7 @@ TOP = """<div class="fam-strip" role="region" aria-label="Call for help now"><st
 <button class="btn ghost fam-exit" type="button" id="quick-exit" aria-label="Quick exit, leaves this site">Quick exit, leaves this site<span class="small fam-esc"> (Esc)</span></button>
 <span class="small fam-exit-note">Quick exit won't clear your browser history. A private window is safer.</span></div>
 <p class="fam-scared"><strong>If you're scared of them, call <a href="tel:000">000</a> or 1800RESPECT <a href="tel:1800737732">1800 737 732</a>.</strong></p>"""
+KIDS_SCARED = """<p class="fam-scared"><strong>If you're scared or in danger, call <a href="tel:000">000</a>. You can call Kids Helpline any time on <a href="tel:1800551800">1800 55 1800</a>.</strong></p>"""
 
 SHARE = """<div class="card sage mt"><h2 class="mt0">Send this page to someone</h2><p>Share it, or copy the link. Nothing is tracked.</p>
 <button class="btn" type="button" id="fam-share">Send this page to someone</button><p class="small" id="fam-share-status" role="status"></p></div>"""
@@ -50,7 +51,7 @@ def overdose():
 <p><strong>Call <a href="tel:000">000</a> straight away if they can't be woken, are breathing very slowly or not at all, or their lips or fingertips look blue. Stay with them and follow what the 000 operator tells you.</strong></p>
 <div class="btn-row"><a class="btn danger" href="tel:000">Call 000</a></div>
 <details class="more"><summary>More info</summary>
-<p>If opioids might be involved, naloxone can reverse an overdose for a short time. The Australian Government's Take Home Naloxone program makes it free, with no prescription. Ask a pharmacist how and when to use it. Always call 000 too, even if you have naloxone.</p>
+<p>If opioids might be involved, naloxone can reverse an overdose for a short time. The Australian Government's Take Home Naloxone program makes it free, with no prescription, from participating pharmacies and services. Ask a pharmacist how and when to use it. Always call 000 too, even if you have naloxone.</p>
 <p>HomeCircle can't give medical instructions. Follow the 000 operator, a pharmacist or a doctor.</p>
 <div class="btn-row">{link("https://www.health.gov.au/our-work/take-home-naloxone-program", "Take Home Naloxone program")}</div>
 {src([("Australian Government Department of Health, Disability and Ageing: Take Home Naloxone program", "https://www.health.gov.au/our-work/take-home-naloxone-program")])}
@@ -79,9 +80,9 @@ def safety_plan():
 <ul><li>Who you can call, and a safe place you could go</li><li>Where you'd keep important things such as ID, medicines, keys and some money</li><li>A code word with someone you trust that means “I need help”</li><li>How to keep children safe, and what they should do in an emergency</li></ul>
 <p>Risk can go up when someone confronts the person using violence, tries to leave, or after the relationship ends. That's why it helps to plan with a specialist before taking big steps.</p>
 <p><strong>Tech safety.</strong> Phones, apps, smart devices, cars and shared accounts can be used to track or control someone. The eSafety Commissioner has advice on tech abuse, collecting evidence safely, and online safety planning. If it's safe, make a plan before changing passwords or removing apps, because sudden changes can alert the other person.</p>
-<p>If you work, all employees in Australia, including casuals, can get 10 days of paid family and domestic violence leave a year.</p>
+<p>If you work and you're experiencing family and domestic violence, all employees in Australia, including casuals, can get 10 days of paid family and domestic violence leave a year.</p>
 <div class="btn-row">{link("https://www.esafety.gov.au/key-topics/domestic-family-violence", "eSafety: domestic violence and tech abuse")}</div>
-{src([("1800RESPECT: Safety planning", "https://www.1800respect.org.au/help-and-support/safety-planning"), ("eSafety Commissioner: Domestic violence", "https://www.esafety.gov.au/key-topics/domestic-family-violence"), ("Safe Steps", "https://www.safesteps.org.au/")])}
+{src([("1800RESPECT: Safety planning", "https://www.1800respect.org.au/help-and-support/safety-planning"), ("eSafety Commissioner: Domestic violence", "https://www.esafety.gov.au/key-topics/domestic-family-violence"), ("Safe Steps", "https://www.safesteps.org.au/"), ("Fair Work Ombudsman: Family and domestic violence leave", "https://www.fairwork.gov.au/leave/family-and-domestic-violence-leave")])}
 </details></section>"""
 
 def look_after():
@@ -107,7 +108,7 @@ def kids_body():
 <h2 class="mt">People you can talk to</h2>
 <div class="grid g2">
 {svc5("Kids Helpline", "Free counselling for anyone aged 5 to 25, any time, about anything. You can call or chat online.", "1800 55 1800", "24/7", "https://kidshelpline.com.au/")}
-{svc5("eheadspace", "Online and phone support for young people aged 12 to 25.", "1800 650 890", None, "https://www.headspace.org.au/")}
+{svc5("eheadspace", "Online and phone support for young people aged 12 to 25.", "1800 650 890", "3pm to 10pm, every day", "https://www.headspace.org.au/")}
 </div>
 <details class="card more mt" id="feelings"><summary><h2 class="mt0">Feelings you might have</h2></summary>
 <p>You might feel angry, sad, scared, embarrassed or worried. You might love them and be upset with them at the same time. All of these feelings are OK.</p>
@@ -117,7 +118,7 @@ def kids_body():
 <details class="card more mt" id="more-help"><summary><h2 class="mt0">More help for young people</h2></summary>
 <p><strong>Alateen</strong> is a group for young people affected by someone else's drinking. It's part of Al-Anon Family Groups. HomeCircle isn't part of Al-Anon or Alateen.</p>
 <div class="btn-row">{link("https://al-anon.org.au/", "Al-Anon and Alateen Australia")}</div>
-<p><strong>COPMI</strong> (Children of Parents with a Mental Illness) has information for kids and teens whose parent is unwell.</p>
+<p><strong>COPMI</strong> (Children of Parents with a Mental Illness) is about a parent's <strong>mental illness</strong>, not drinking or drug use. It has information for kids and teens whose parent has a mental illness. For help with a parent's drinking or drugs, try Alateen or Kids Helpline.</p>
 <div class="btn-row">{link("https://www.copmi.net.au/", "COPMI")}</div>
 <p>If there's fighting or violence at home, it's not your fault. Kids Helpline can help you make a plan to stay safe.</p>
 <div class="btn-row"><a class="btn" href="safety.html">Help with violence at home</a></div></details>
@@ -179,7 +180,7 @@ def dv_body():
 </div>
 <h2 class="mt">Find your state's line</h2><p>Tap your state or territory to see its line. The national lines above work everywhere.</p>
 {states}
-<div class="card mt"><h3>Northern Territory (whole territory)</h3><p>The NT Government doesn't list a single 24/7 NT line. It lists 1800RESPECT, NT Police and 000, plus regional services. Under NT law, everyone must report domestic and family violence to police.</p>
+<div class="card mt"><h3>Northern Territory (whole territory)</h3><p>The NT Government doesn't list a single 24/7 NT line. It lists 1800RESPECT, NT Police and 000, plus regional services. In the NT, adults must tell police if they believe someone has been, or is likely to be, seriously hurt by domestic violence, or that someone's life or safety is under serious threat.</p>
 <div class="btn-row">{tel("1800 737 732", "1800RESPECT 1800 737 732")}{tel("131 444", "NT Police 131 444")}{link("https://nt.gov.au/law/crime/domestic-and-family-violence", "NT Government DFV page")}</div><p class="small">{CHECKED}</p></div>
 {legal()}"""
 
@@ -245,7 +246,10 @@ def who_body(key):
 def build(page, E):
     r_assets = '<script src="../assets/families.js" defer></script>'
     def P(path, title, desc, body):
-        page(path, "families/index.html", title, desc, f'{TOP}\n{body}\n{SHARE}\n<p class="small mt">{CHECKED}. HomeCircle is a free support app, not medical care, and isn\'t part of any service listed here.</p>{r_assets}')
+        top, chk = TOP, CHECKED
+        if path == "families/kids.html":
+            top, chk = TOP.split('<p class="fam-scared">')[0] + KIDS_SCARED, NEW
+        page(path, "families/index.html", title, desc, f'{top}\n{body}\n{SHARE}\n<p class="small mt">{chk}. HomeCircle is a free support app, not medical care, and isn\'t part of any service listed here.</p>{r_assets}')
     btns = "".join(f'<a class="btn fam-big" href="{k}.html">{v[0]}</a>' for k, v in WHO.items())
     P("families/index.html", "For families & partners: someone I love is addicted – HomeCircle",
       "Help for families, partners and friends of someone with an alcohol or drug problem in Australia.",
