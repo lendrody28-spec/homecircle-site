@@ -1,0 +1,781 @@
+{
+ "region": "AU",
+ "complete": true,
+ "status": "DRAFT: voices and licences approved by Hale (5 Nov 2026); wording not yet locked, so all clips stay drafts.",
+ "sampleText": "Kai is a recovery buddy, not a person, counsellor, medical care or an emergency service. Kai can miss things.",
+ "voices": {
+  "A": {
+   "label": "Voice A",
+   "engine": "melo",
+   "package": "melotts 0.1.2 (github.com/myshell-ai/MeloTTS @ 209145371cff8fc3bd60d7be902ea69cbdb7965a)",
+   "weights": "huggingface.co/myshell-ai/MeloTTS-English-v2 @ a53e3509c4ee4ff16d79272feb2474ff864e18f3",
+   "lang": "EN_V2",
+   "voice": "EN-AU",
+   "speed": 0.9,
+   "loudnorm": {
+    "I": -16,
+    "TP": -1.5,
+    "LRA": 11,
+    "twoPass": true
+   },
+   "codec": "aac 48k mono 24kHz m4a",
+   "venvEnv": "MELO_PY",
+   "venvDefault": "/workspace/tts-venvs/melo/bin/python",
+   "torch": "2.15.0+cpu",
+   "accent": "Australian",
+   "gender": "female",
+   "licence": "MIT",
+   "licenceFile": "assets/audio/licences/MeloTTS-MIT-LICENSE.txt",
+   "licenceURL": "https://github.com/myshell-ai/MeloTTS/blob/main/LICENSE",
+   "modelCard": "https://huggingface.co/myshell-ai/MeloTTS-English-v2"
+  },
+  "B": {
+   "label": "Voice B",
+   "engine": "kokoro",
+   "package": "kokoro 0.9.4, misaki 0.9.4",
+   "weights": "huggingface.co/hexgrad/Kokoro-82M @ f3ff3571791e39611d31c381e3a41a3af07b4987 (kokoro-v1_0.pth, voices/am_michael.pt)",
+   "lang": "a",
+   "voice": "am_michael",
+   "speed": 0.9,
+   "loudnorm": {
+    "I": -16,
+    "TP": -1.5,
+    "LRA": 11,
+    "twoPass": true
+   },
+   "codec": "aac 48k mono 24kHz m4a",
+   "venvEnv": "KOKORO_PY",
+   "venvDefault": "/workspace/tts-venvs/kokoro/bin/python",
+   "torch": "2.15.0+cpu",
+   "accent": "American",
+   "gender": "male",
+   "licence": "Apache-2.0",
+   "licenceFile": "assets/audio/licences/Kokoro-Apache-2.0-LICENSE.txt",
+   "licenceURL": "https://huggingface.co/hexgrad/Kokoro-82M",
+   "modelCard": "https://huggingface.co/hexgrad/Kokoro-82M",
+   "swap": "Kokoro clips are Voice B only; change voices.B and run tools/ra.py make to replace them."
+  }
+ },
+ "lines": [
+  {
+   "id": "kai.firstOpen",
+   "text": "Kai is a recovery buddy, not a person, counsellor, medical care or an emergency service. Kai can miss things.",
+   "spoken": "Kai is a recovery buddy, not a person, counsellor, medical care or an emergency service. Kai can miss things.",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "f330ef6439c9.m4a",
+     "bytes": 50491,
+     "sha256": "90ded21c5659d6bf8c1e9e7736c578877e01c8ff8512ccc3a446ad4de3705ed3"
+    },
+    "B": {
+     "file": "0491fa5d2d10.m4a",
+     "bytes": 55741,
+     "sha256": "bed5ce99304e12ebfc21fc65619f992ce62dc58aa7e3d4a25dbf411d35810a95"
+    }
+   }
+  },
+  {
+   "id": "kai.start.struggling",
+   "text": "Thanks for telling me. You don't have to sort it all out right now. We could slow your breathing for a minute, find a meeting, or keep talking here. If you're not safe right now, tap I'm not safe or call 000.",
+   "spoken": "Thanks for telling me. You don't have to sort it all out right now. We could slow your breathing for a minute, find a meeting, or keep talking here. If you're not safe right now, tap I'm not safe or call triple zero.",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "82dbeafaea67.m4a",
+     "bytes": 82850,
+     "sha256": "2b2c2b59efe60edd8266452a566a31096625584f046a651b34e9cf6cf9e74a08"
+    },
+    "B": {
+     "file": "676aa1a461cc.m4a",
+     "bytes": 91613,
+     "sha256": "ed41736b8b6a73a2e6a8872f1b2b360ed46db0f09334ed39e2241d86601f8430"
+    }
+   }
+  },
+  {
+   "id": "kai.start.cravings",
+   "text": "Cravings for a drink, a use or a bet rise and fall, and this one can pass. Try to wait 15 minutes before you decide anything. Slow breathing can help, so can calling your sponsor or someone in your circle, or getting to a meeting. If you're not safe right now, tap I'm not safe or call 000.",
+   "spoken": "Cravings for a drink, a use or a bet rise and fall, and this one can pass. Try to wait 15 minutes before you decide anything. Slow breathing can help, so can calling your sponsor or someone in your circle, or getting to a meeting. If you're not safe right now, tap I'm not safe or call triple zero.",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "e6e7c5458562.m4a",
+     "bytes": 127266,
+     "sha256": "bf2bffbec45653c106b983e70655f4d1ab2d069d7f6193b8c234a072345851a5"
+    },
+    "B": {
+     "file": "3862814a9de3.m4a",
+     "bytes": 147093,
+     "sha256": "554a5a88e145e9ea4f507b58bd55b31a17df9bd1dc2fe0d9b31f50a700015a32"
+    }
+   }
+  },
+  {
+   "id": "kai.start.meeting",
+   "text": "I can open the meeting finder.",
+   "spoken": "I can open the meeting finder.",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "4c3412e2cc8c.m4a",
+     "bytes": 15114,
+     "sha256": "463765eebad093567e9a3173cb24a6dabfb756a7a50450daf939f06729c5e50b"
+    },
+    "B": {
+     "file": "c344eaf5104c.m4a",
+     "bytes": 18918,
+     "sha256": "feba818c99459ce63ec3b5a97645a91f52ecf44eb7b9c594aeb6bb26c3b59a26"
+    }
+   }
+  },
+  {
+   "id": "kai.crisis.selfHarm",
+   "text": "If you might act on this, call 000 now. Lifeline is 13 11 14. Kai is a recovery buddy, not a counsellor, and can't diagnose. Kai can miss things, so please reach out yourself.",
+   "spoken": "If you might act on this, call triple zero now. Lifeline, thirteen eleven fourteen. Kai is a recovery buddy, not a counsellor, and can't diagnose. Kai can miss things, so please reach out yourself.",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "756a98455c20.m4a",
+     "bytes": 84949,
+     "sha256": "29ad0cf83712931c26d94e1bc4512b70750a5da5e3e46889a1d73897e160660d"
+    },
+    "B": {
+     "file": "33d5a929c911.m4a",
+     "bytes": 99783,
+     "sha256": "360596b793361d9df21633268a273e4a557de32a0ce28338a70c4c9bb595f44b"
+    }
+   }
+  },
+  {
+   "id": "kai.crisis.emergency",
+   "text": "Call 000 now if you or anyone else is in danger. Lifeline is 13 11 14, any time. Please make the call yourself. Kai can't call anyone. Kai can miss things.",
+   "spoken": "Call triple zero now if you or anyone else is in danger. Lifeline, thirteen eleven fourteen, any time. Please make the call yourself. Kai can't call anyone. Kai can miss things.",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "967dd95e6b2a.m4a",
+     "bytes": 76648,
+     "sha256": "43475cb958667324c2a77b7054872577dd3081aa913f5eaf5da0369842edb47e"
+    },
+    "B": {
+     "file": "aaf3d0d5a6c5.m4a",
+     "bytes": 94894,
+     "sha256": "8e3cdc3e6e0b73c5910be6ffc537758f572086feb6d020312d725b0ffd216928"
+    }
+   }
+  },
+  {
+   "id": "kai.crisis.familyHarm",
+   "text": "Call 000 now if anyone is in danger. Please keep everyone safe: step away and give yourself space. Lifeline is 13 11 14. Men's Referral Service is 1300 766 491, for help to stop using violence. Please make the call yourself. Kai can't call anyone and can miss things.",
+   "spoken": "Call triple zero now if anyone is in danger. Please keep everyone safe: step away and give yourself space. Lifeline, thirteen eleven fourteen. Men's Referral Service is one three hundred, seven six six, four nine one, for help to stop using violence. Please make the call yourself. Kai can't call anyone and can miss things.",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "6791b66afbff.m4a",
+     "bytes": 139553,
+     "sha256": "0e75a3e6df856d92a49a405e2c02f69e952f92caf71d5014863dd78d5519f7b7"
+    },
+    "B": {
+     "file": "d9041285e495.m4a",
+     "bytes": 160218,
+     "sha256": "75afda7a45b37c416d47db4d7628f3bc82525c6368357740df848e5687b856c2"
+    }
+   }
+  },
+  {
+   "id": "kai.crisis.familyViolence",
+   "text": "Call 000 now if you or anyone else is in danger. Lifeline is 13 11 14. 1800RESPECT is 1800 737 732, 24 hours, for family and domestic violence. Please call one of them yourself. Kai can't call anyone and can miss things.",
+   "spoken": "Call triple zero now if you or anyone else is in danger. Lifeline, thirteen eleven fourteen. one eight hundred respect is one eight hundred, seven three seven, seven three two, 24 hours, for family and domestic violence. Please call one of them yourself. Kai can't call anyone and can miss things.",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "923330a24059.m4a",
+     "bytes": 126037,
+     "sha256": "2995910552a3d91abf945b99c18b81a21c314069ad5df93e89c765cca0d7fd68"
+    },
+    "B": {
+     "file": "6401cdba7de0.m4a",
+     "bytes": 151564,
+     "sha256": "146e12843c3b99a4428ef1648ef5c11740f5dbd3539ccad5410e51a9fa08d138"
+    }
+   }
+  },
+  {
+   "id": "kai.crisis.childAbuse",
+   "text": "If anyone is in danger right now, call 000. 1800RESPECT (1800 737 732) helps with sexual abuse, any time. Kids Helpline (1800 55 1800) is for young people up to 25. Bravehearts (1800 272 831) supports people affected by child sexual abuse. Kai can miss things.",
+   "spoken": "If anyone is in danger right now, call triple zero. one eight hundred respect (one eight hundred, seven three seven, seven three two) helps with sexual abuse, any time. Kids Helpline (one eight hundred, five five, one eight hundred) is for young people up to 25. Bravehearts (one eight hundred, two seven two, eight three one) supports people affected by child sexual abuse. Kai can miss things.",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "af6eae03cf50.m4a",
+     "bytes": 166753,
+     "sha256": "43eddf9608d9b8423d9e12b2bc3855c7d202ea9b910203f3da42e0e71f315d7c"
+    },
+    "B": {
+     "file": "1a30146a020d.m4a",
+     "bytes": 179879,
+     "sha256": "745e75225c4d8335779983b90547572a57135ec8df709380ada8808c670b3ed5"
+    }
+   }
+  },
+  {
+   "id": "kai.crisis.checkIn",
+   "text": "Just checking in. If you or anyone else is in danger right now, call 000, or Lifeline on 13 11 14. Kai can miss things. Want to tell me more?",
+   "spoken": "Just checking in. If you or anyone else is in danger right now, call triple zero, or Lifeline on thirteen eleven fourteen. Kai can miss things. Want to tell me more?",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "c176e152ea89.m4a",
+     "bytes": 69735,
+     "sha256": "5b15f99dfa1bb71ee5f8d8e9463832757404085e299b4e0a41a87f7b88c211b9"
+    },
+    "B": {
+     "file": "db090b677f08.m4a",
+     "bytes": 87665,
+     "sha256": "2397ffe875c4b15e2ebb28e2546c19cf1f5d2a9fb97db6e936055afa15b8a417"
+    }
+   }
+  },
+  {
+   "id": "kai.crisis.medical",
+   "text": "This sounds like a medical emergency. Call 000 now and ask for an ambulance. Stay with the person if it's safe. Lifeline is 13 11 14. Kai can't call anyone and can miss things, so please make the call yourself.",
+   "spoken": "This sounds like a medical emergency. Call triple zero now and ask for an ambulance. Stay with the person if it's safe. Lifeline, thirteen eleven fourteen. Kai can't call anyone and can miss things, so please make the call yourself.",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "efb7bd23c44a.m4a",
+     "bytes": 96205,
+     "sha256": "a47c1eb44bbe0082d73f411e3df711b52f7a1e4a8e274d41cfde7b0734a59a50"
+    },
+    "B": {
+     "file": "a32fbeaecb4d.m4a",
+     "bytes": 118242,
+     "sha256": "11a1bd06e7f784cea0569f212f7751c157187540a97dc0a572168ed7ed683d66"
+    }
+   }
+  },
+  {
+   "id": "help.00",
+   "text": "Call 000 Call Lifeline 13 11 14",
+   "spoken": "Call triple zero Call Lifeline thirteen eleven fourteen",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "c75918faf83e.m4a",
+     "bytes": 24864,
+     "sha256": "52c8a2c19b74df5ffe9cac8b546886ed758f6e9588c65ef0219ed01f57559a9e"
+    },
+    "B": {
+     "file": "a3dd93de44d8.m4a",
+     "bytes": 30517,
+     "sha256": "eaafa3e6e51c9705e1f6be67c17d3e330e49c405fbafc767be496d1ed65f0035"
+    }
+   }
+  },
+  {
+   "id": "help.01",
+   "text": "Get help",
+   "spoken": "Get help",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "cbbbcf6f5720.m4a",
+     "bytes": 8014,
+     "sha256": "1dd9a9eaec8412e30d95aa44a56d29678e3afca34c0c4affe4e2a2ecfd649990"
+    },
+    "B": {
+     "file": "692d60e6b6c6.m4a",
+     "bytes": 10223,
+     "sha256": "401d60e0e1848931a23f40c9d3d8200aa76f116c2f8ea943a1a294ebf4d65b07"
+    }
+   }
+  },
+  {
+   "id": "help.02",
+   "text": "We're here to support you. Help is always available. You're not alone.",
+   "spoken": "We're here to support you. Help is always available. You're not alone.",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "f1dc7abb488b.m4a",
+     "bytes": 31664,
+     "sha256": "53b83515c84279d03b25fb3bec34bc7e6fefb42e31c9145b4ab954f02a4cc201"
+    },
+    "B": {
+     "file": "efffe9f108e2.m4a",
+     "bytes": 35008,
+     "sha256": "122408a9d635865a5626cf03ea81eda250dbd0ce98547dfa8d6c0943f84ce6eb"
+    }
+   }
+  },
+  {
+   "id": "help.03",
+   "text": "HomeCircle is not a medical device and doesn't give medical advice.",
+   "spoken": "HomeCircle is not a medical device and doesn't give medical advice.",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "53eb789529d5.m4a",
+     "bytes": 31027,
+     "sha256": "94063251dbecc0d88c9171f8cb9e9e714100cd3d343ccbf6a856ec6a5736dcb4"
+    },
+    "B": {
+     "file": "d66aeeb6ede0.m4a",
+     "bytes": 37348,
+     "sha256": "4fe609a27f47b3b7cc32480006d74273112708360c15a5e6417e18b145130d0b"
+    }
+   }
+  },
+  {
+   "id": "help.04",
+   "text": "Call 000 immediately if a life is in danger. Call 000 or go to your nearest emergency department.",
+   "spoken": "Call triple zero immediately if a life is in danger. Call triple zero or go to your nearest emergency department.",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "bd60211dd339.m4a",
+     "bytes": 48412,
+     "sha256": "49210efc6e6cabb21e8bf5d1e3b71c8a811f7fe826c3726252ac174799318da7"
+    },
+    "B": {
+     "file": "916e35d1fa34.m4a",
+     "bytes": 60744,
+     "sha256": "556d617355d8f13a5881868ae271c3409e8fe4004971c74cd580a73c177bc91b"
+    }
+   }
+  },
+  {
+   "id": "help.05",
+   "text": "Helplines",
+   "spoken": "Helplines",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "eeb51645b439.m4a",
+     "bytes": 9058,
+     "sha256": "0bcaa1d82a418642b5e4d61301b33bdda42bf0e9d6785dc6f5c0e866cd76f7f0"
+    },
+    "B": {
+     "file": "e8032d577ff8.m4a",
+     "bytes": 12288,
+     "sha256": "b5aa903f90eeaa610763b621e63c549497403299bc18ca7409ae90799add166e"
+    }
+   }
+  },
+  {
+   "id": "help.06",
+   "text": "Lifeline 24/7 crisis support for anyone in Australia who is feeling overwhelmed or finding it hard to cope. 24 hours. Call 13 11 14 You can also text 0477 13 11 14. Call 13 11 14 Text 0477 13 11 14 More info Short-term, confidential support from a trained crisis supporter, including if you're thinking about suicide or worried about someone. Call 13 11 14, text 0477 13 11 14 or chat online. All three are open 24/7. lifeline.org.au Beyond Blue Free counselling for anxiety, depression or feeling overwhelmed, for anyone in Australia. 24 hours. Call 1300 22 4636 Call 1300 22 4636 More info Counsellors listen and help you find the right mental health services. You can also call if you're supporting a partner, family member or friend. Call 1300 22 4636 or use webchat, both 24/7. Free and confidential. Local call costs apply on the phone. On webchat you don't have to give your real name. beyondblue.org.au Suicide Call Back Service Free 24/7 counselling for anyone affected by suicide, aged 15 and over. 24 hours. Call 1300 659 467 For anyone thinking about suicide, worried about someone, or grieving a suicide. Call 1300 659 467 More info For people feeling suicidal, worried about or caring for someone, or who have lost someone to suicide. Also for emotional or mental health issues. Phone and online chat are 24/7. Video chat is by appointment (18 and over). Free, for people living in Australia. No referral needed. suicidecallbackservice.org.au 13YARN Free 24/7 crisis support for Aboriginal and Torres Strait Islander people, from Aboriginal and Torres Strait Islander Crisis Supporters. 24 hours. Call 13 92 76 Crisis support from Aboriginal and Torres Strait Islander people. Call 13 92 76 More info A confidential, culturally safe place to yarn if you're feeling worried or no good, or worried about someone you know. Call 13 92 76 24/7. Text 0447 13 92 76, or type to them online, 4pm to midnight every day. Free and confidential. 13yarn.org.au QLife Free, anonymous LGBTIQ+ peer support for talking about sexuality, gender, bodies, feelings or relationships. 3pm to 9pm local time, every day. Call 1800 184 527 LGBTIQ+ peer support. Not a crisis line. Out of hours, call Lifeline 13 11 14. Call 1800 184 527 More info Run by LGBTIQA+SB people. Family members, friends and others who support someone LGBTIQA+SB are welcome too. Phone or webchat, 3pm to 9pm your local time, every day including holidays. Last calls are taken by 8.40pm. Free and anonymous. Not a crisis line. qlife.org.au National Alcohol and Other Drug Hotline Free, confidential support for anyone worried about their own or someone else's alcohol or drug use. Call 1800 250 015 Connects you to your state's alcohol and drug service. Open 24/7, except South Australia (8.30am to 10pm). In an emergency call 000, or Lifeline 13 11 14 any time. Call 1800 250 015 More info Your call goes through to the alcohol and drug service in your state or territory. Open 24/7. From South Australia, the service runs 8.30am to 10pm. Free and confidential. Run by the Australian Government Department of Health, Disability and Ageing. health.gov.au Adis 24/7 Alcohol and Drug Support (QLD) 24/7 confidential alcohol and drug support for Queenslanders and the people who care about them. Call 1800 177 833 Queensland only. Call 1800 177 833 More info For people in Queensland with alcohol or drug concerns, their loved ones, and health professionals. Call 24/7, chat online with a counsellor, or request a call back. There's also an SMS support program. adis.health.qld.gov.au National Gambling Helpline Free, confidential 24/7 support for anyone affected by gambling, yours or someone else's. 24 hours. Call 1800 858 858 Free and confidential, anywhere in Australia. Not run by Gamblers Anonymous. Call 1800 858 858 More info Talk to a trained counsellor any time, day or night, from anywhere in Australia. Gambling Help Online also has live chat and email support, free and confidential. Government funded. Not run by Gamblers Anonymous. gamblinghelponline.org.au AA Australia Talk to a sober member of Alcoholics Anonymous, any time, if drinking is a problem for you. 24 hours. Call 1300 222 222 Call 1300 222 222 More info Call the 24-hour helpline to speak with a sober alcoholic. You can also chat live with a member on the AA website, or find an in-person or online meeting. aa.org.au NA Australia Talk to a member of Narcotics Anonymous, or find a meeting near you. Call 1300 652 820 Call 1300 652 820 More info Call 1300 652 820 to find someone to talk to. Hours aren't published. To find meetings, text your suburb or postcode and state (for example, Paddington QLD) to 0488 811 247 and you'll get a list of meetings nearby. na.org.au",
+   "spoken": "Lifeline twenty-four seven crisis support for anyone in Australia who is feeling overwhelmed or finding it hard to cope. 24 hours. Call thirteen eleven fourteen You can also text zero four seven seven, thirteen eleven fourteen. Call thirteen eleven fourteen Text zero four seven seven, thirteen eleven fourteen More info Short-term, confidential support from a trained crisis supporter, including if you're thinking about suicide or worried about someone. Call thirteen eleven fourteen, text zero four seven seven, thirteen eleven fourteen or chat online. All three are open twenty-four seven. lifeline.org.au Beyond Blue Free counselling for anxiety, depression or feeling overwhelmed, for anyone in Australia. 24 hours. Call one three hundred, two two, four six three six Call one three hundred, two two, four six three six More info Counsellors listen and help you find the right mental health services. You can also call if you're supporting a partner, family member or friend. Call one three hundred, two two, four six three six or use webchat, both twenty-four seven. Free and confidential. Local call costs apply on the phone. On webchat you don't have to give your real name. beyondblue.org.au Suicide Call Back Service Free twenty-four seven counselling for anyone affected by suicide, aged 15 and over. 24 hours. Call one three hundred, six five nine, four six seven For anyone thinking about suicide, worried about someone, or grieving a suicide. Call one three hundred, six five nine, four six seven More info For people feeling suicidal, worried about or caring for someone, or who have lost someone to suicide. Also for emotional or mental health issues. Phone and online chat are twenty-four seven. Video chat is by appointment (18 and over). Free, for people living in Australia. No referral needed. suicidecallbackservice.org.au 13YARN Free twenty-four seven crisis support for Aboriginal and Torres Strait Islander people, from Aboriginal and Torres Strait Islander Crisis Supporters. 24 hours. Call thirteen ninety two seventy six Crisis support from Aboriginal and Torres Strait Islander people. Call thirteen ninety two seventy six More info A confidential, culturally safe place to yarn if you're feeling worried or no good, or worried about someone you know. Call thirteen ninety two seventy six twenty-four seven. Text zero four four seven, thirteen ninety two seventy six, or type to them online, 4pm to midnight every day. Free and confidential. 13yarn.org.au QLife Free, anonymous LGBTIQ+ peer support for talking about sexuality, gender, bodies, feelings or relationships. 3pm to 9pm local time, every day. Call one eight hundred, one eight four, five two seven LGBTIQ+ peer support. Not a crisis line. Out of hours, call Lifeline thirteen eleven fourteen. Call one eight hundred, one eight four, five two seven More info Run by LGBTIQA+SB people. Family members, friends and others who support someone LGBTIQA+SB are welcome too. Phone or webchat, 3pm to 9pm your local time, every day including holidays. Last calls are taken by 8.40pm. Free and anonymous. Not a crisis line. qlife.org.au National Alcohol and Other Drug Hotline Free, confidential support for anyone worried about their own or someone else's alcohol or drug use. Call one eight hundred, two five zero, zero one five Connects you to your state's alcohol and drug service. Open twenty-four seven, except South Australia (8.30am to 10pm). In an emergency call triple zero, or Lifeline thirteen eleven fourteen any time. Call one eight hundred, two five zero, zero one five More info Your call goes through to the alcohol and drug service in your state or territory. Open twenty-four seven. From South Australia, the service runs 8.30am to 10pm. Free and confidential. Run by the Australian Government Department of Health, Disability and Ageing. health.gov.au Adis twenty-four seven Alcohol and Drug Support (QLD) twenty-four seven confidential alcohol and drug support for Queenslanders and the people who care about them. Call one eight hundred, one seven seven, eight three three Queensland only. Call one eight hundred, one seven seven, eight three three More info For people in Queensland with alcohol or drug concerns, their loved ones, and health professionals. Call twenty-four seven, chat online with a counsellor, or request a call back. There's also an SMS support program. adis.health.qld.gov.au National Gambling Helpline Free, confidential twenty-four seven support for anyone affected by gambling, yours or someone else's. 24 hours. Call one eight hundred, eight five eight, eight five eight Free and confidential, anywhere in Australia. Not run by Gamblers Anonymous. Call one eight hundred, eight five eight, eight five eight More info Talk to a trained counsellor any time, day or night, from anywhere in Australia. Gambling Help Online also has live chat and email support, free and confidential. Government funded. Not run by Gamblers Anonymous. gamblinghelponline.org.au AA Australia Talk to a sober member of Alcoholics Anonymous, any time, if drinking is a problem for you. 24 hours. Call one three hundred, two two two, two two two Call one three hundred, two two two, two two two More info Call the 24-hour helpline to speak with a sober alcoholic. You can also chat live with a member on the AA website, or find an in-person or online meeting. aa.org.au NA Australia Talk to a member of Narcotics Anonymous, or find a meeting near you. Call one three hundred, six five two, eight two zero Call one three hundred, six five two, eight two zero More info Call one three hundred, six five two, eight two zero to find someone to talk to. Hours aren't published. To find meetings, text your suburb or postcode and state (for example, Paddington QLD) to zero four eight eight, eight one one, two four seven and you'll get a list of meetings nearby. na.org.au",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "a77c33ac40a6.m4a",
+     "bytes": 2474654,
+     "sha256": "5bed36f0bcd925454e930cd25359be9e6dc2f381b88fa8dcb00a3361e0f9c389"
+    },
+    "B": {
+     "file": "b2f3bc2c168f.m4a",
+     "bytes": 2865454,
+     "sha256": "7c87d6f0a3a425a3a15105528cf4e13346fa35636b56d7684a049cc0cd03e6bc"
+    }
+   }
+  },
+  {
+   "id": "help.07",
+   "text": "These are independent services. HomeCircle is not affiliated with them.",
+   "spoken": "These are independent services. HomeCircle is not affiliated with them.",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "a4cc566dd51a.m4a",
+     "bytes": 32411,
+     "sha256": "69f41d9bf1eefb511e022eddda45b1436a4c557726d66521da4a361cd49105e8"
+    },
+    "B": {
+     "file": "b416e7ceec8e.m4a",
+     "bytes": 40454,
+     "sha256": "a9185d62c1092ebee659a2889c1c810c852cb2f81c3623f2a00e9d4a6befef3c"
+    }
+   }
+  },
+  {
+   "id": "help.08",
+   "text": "Family & Partners",
+   "spoken": "Family & Partners",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "9e28e6b2a151.m4a",
+     "bytes": 10660,
+     "sha256": "0cb5693f50741bb0c2e9b1975ef448f7113a12099ae54ba7769aacd481e48c47"
+    },
+    "B": {
+     "file": "a74a102bbc83.m4a",
+     "bytes": 15208,
+     "sha256": "1fc9a9e411a232ea826ee29ae897acbdcabd50d535efd72cae9474c7fb7982e9"
+    }
+   }
+  },
+  {
+   "id": "help.09",
+   "text": "This is not medical advice. For any major concern, see a local doctor or GP. If a life is in danger, call 000.",
+   "spoken": "This is not medical advice. For any major concern, see a local doctor or GP. If a life is in danger, call triple zero.",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "e906d4ac6dea.m4a",
+     "bytes": 57638,
+     "sha256": "3ddbe361aaab3198cda20176a17344226f573634f161813414b612ac1adc7c74"
+    },
+    "B": {
+     "file": "04def50bec89.m4a",
+     "bytes": 66511,
+     "sha256": "23e95e49e7f24ad487a01cb1c71ea2cd154afb671a92bacfea162e7a52833951"
+    }
+   }
+  },
+  {
+   "id": "help.10",
+   "text": "For partners, family members, and couples. These lines are beside someone in recovery.",
+   "spoken": "For partners, family members, and couples. These lines are beside someone in recovery.",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "b6924706d548.m4a",
+     "bytes": 38055,
+     "sha256": "456820714f45ba01378995e00d410a099498693253fd429c8a257f774467a809"
+    },
+    "B": {
+     "file": "328be611e89b.m4a",
+     "bytes": 45728,
+     "sha256": "4ea7ebfdfe80375e64ce06b5c24bce0e86841d32434bdcd3e6973bb5e1c2c0ca"
+    }
+   }
+  },
+  {
+   "id": "help.11",
+   "text": "Al-Anon Family Groups Australia For families and friends of someone with a drinking problem. Call 1300 252 666 Open site More info Talk to an Al-Anon member in confidence on 1300 252 666. Hours aren't published. Support groups for family and friends of problem drinkers, plus Alateen groups for teens. al-anon.org.au Alateen Part of Al-Anon Australia, for ages about 13 to 18. Same Australian line. HomeCircle itself is an 18+ app. Call 1300 252 666 Open site Family Drug Support For families and friends of someone using alcohol or other drugs. 24 hours. Call 1300 368 186 Call 1300 368 186 Open site Find a family meeting More info A national support line for families and friends affected by someone's alcohol or other drug use. Open 24/7. FDS also runs support meetings in some states. fds.org.au FDS lists no support meetings in WA, Tasmania or the NT. In WA, the Parent and Family Drug Support Line is listed under Western Australia below. Gam-Anon For families and friends of someone with a gambling problem. Meetings in NSW and Queensland, some on Zoom. Email gam-anon@live.com.au Open site",
+   "spoken": "Al-Anon Family Groups Australia For families and friends of someone with a drinking problem. Call one three hundred, two five two, six six six Open site More info Talk to an Al-Anon member in confidence on one three hundred, two five two, six six six. Hours aren't published. Support groups for family and friends of problem drinkers, plus Alateen groups for teens. al-anon.org.au Alateen Part of Al-Anon Australia, for ages about 13 to 18. Same Australian line. HomeCircle itself is an 18+ app. Call one three hundred, two five two, six six six Open site Family Drug Support For families and friends of someone using alcohol or other drugs. 24 hours. Call one three hundred, three six eight, one eight six Call one three hundred, three six eight, one eight six Open site Find a family meeting More info A national support line for families and friends affected by someone's alcohol or other drug use. Open twenty-four seven. FDS also runs support meetings in some states. fds.org.au FDS lists no support meetings in WA, Tasmania or the NT. In WA, the Parent and Family Drug Support Line is listed under Western Australia below. Gam-Anon For families and friends of someone with a gambling problem. Meetings in NSW and Queensland, some on Zoom. Email gam-anon@live.com.au Open site",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "8cac7fbdcec9.m4a",
+     "bytes": 558657,
+     "sha256": "4e18b00ec104336c259373d965a3b2d9684b8fb98bcb8b1e62dfb3395918a1e7"
+    },
+    "B": {
+     "file": "b5778c4b07d9.m4a",
+     "bytes": 620156,
+     "sha256": "af5dcb0330b06944615595fc4cd648dbe73c67354b1ad14ffa52974646b4e2c2"
+    }
+   }
+  },
+  {
+   "id": "help.12",
+   "text": "Gamblers Anonymous Australia",
+   "spoken": "Gamblers Anonymous Australia",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "41e473ccf5c9.m4a",
+     "bytes": 14441,
+     "sha256": "518f39b8da5677e73644658a335514d35fc129699c036e35db8bad8ce4ba9e84"
+    },
+    "B": {
+     "file": "fc89b0af069a.m4a",
+     "bytes": 19750,
+     "sha256": "abc15bc8e2d7f022110198ddae9c2d4269b8bda04b2b823fc018de07be51491a"
+    }
+   }
+  },
+  {
+   "id": "help.13",
+   "text": "Meetings and a member to talk to. Not a crisis line, and hours aren't published. NSW: Call 0455 717 543 Queensland and NT: Call 0467 655 799 South Australia: Call (08) 8212 6933 Tasmania: Call 0431 965 974 Western Australia: Call (08) 9487 0688 Victoria: Email gavictoria18a@gmail.com Open site",
+   "spoken": "Meetings and a member to talk to. Not a crisis line, and hours aren't published. NSW: Call zero four five five, seven one seven, five four three Queensland and NT: Call zero four six seven, six five five, seven nine nine South Australia: Call zero eight, eight two one two, six nine three three Tasmania: Call zero four three one, nine six five, nine seven four Western Australia: Call zero eight, nine four eight seven, zero six eight eight Victoria: Email gavictoria18a@gmail.com Open site",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "d93e4a4c75d6.m4a",
+     "bytes": 208957,
+     "sha256": "92e1d9283a4633a15e98c353f583e14e3f352dc66f15c70ca9e22ed4ac4b25b2"
+    },
+    "B": {
+     "file": "45344432e1d1.m4a",
+     "bytes": 256950,
+     "sha256": "5f74c5e66cbb5540cc95da526dcf1a1de9ba74fdb5430331836cc2feb91b356b"
+    }
+   }
+  },
+  {
+   "id": "help.14",
+   "text": "Support by state and territory",
+   "spoken": "Support by state and territory",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "e98bdf4c1d77.m4a",
+     "bytes": 17111,
+     "sha256": "92c885997faaceb846862feae2747fd1fb9f2161c96d4295a4fed1abed314a83"
+    },
+    "B": {
+     "file": "1c55ef75f4d9.m4a",
+     "bytes": 19074,
+     "sha256": "9ed4680b91f042484f56ed1e006a27a7df17bcbc966f473f39e1625f7edf25bf"
+    }
+   }
+  },
+  {
+   "id": "help.15",
+   "text": "Alcohol and drug lines run by each state and territory. Keep 000 and Lifeline first: these lines are for advice and support, not emergencies. Checked against each service's own website on 4 November 2026.",
+   "spoken": "Alcohol and drug lines run by each state and territory. Keep triple zero and Lifeline first: these lines are for advice and support, not emergencies. Checked against each service's own website on 4 November 2026.",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "41d69481c85b.m4a",
+     "bytes": 98270,
+     "sha256": "705a817002cf3e37b2d40895a98dbf9e806873394e6687f6e5d1e4e398b6c062"
+    },
+    "B": {
+     "file": "5ae56b894cdd.m4a",
+     "bytes": 121985,
+     "sha256": "29841b1a0842b3509b1fd3a28cd2c6b19d055286bf08700a8b237fe8443ab49e"
+    }
+   }
+  },
+  {
+   "id": "help.16",
+   "text": "Queensland Adis 24/7 Alcohol and Drug Support 24/7. For Queenslanders and their family and friends. Call 1800 177 833 Open site More info Call 24/7, chat online with a counsellor, or request a call back. adis.health.qld.gov.au New South Wales Alcohol and Drug Information Service (ADIS) NSW 24/7. Sydney metro: 02 8382 1000. For NSW residents and their families. Call 1800 250 015 Open site More info Free, confidential counselling, information and referral from professional counsellors, for NSW residents worried about alcohol or drugs. Phone 24/7. Web chat is Monday to Friday, 8.30am to 5pm (including public holidays). yourroom.health.nsw.gov.au Victoria DirectLine 24/7 phone and online counselling. For Victorians, family members and others. Call 1800 888 236 Open site More info Free, confidential alcohol and drug counselling and referral in Victoria, for you or someone else. Phone or online, 24/7. directline.org.au South Australia Alcohol and Drug Information Service (ADIS), DASSA Every day 8.30am to 10pm, not 24/7. Local call fee for SA callers. For the public, family and friends. Call 1300 131 340 Open site More info Confidential telephone counselling, information and referral. Run by Drug and Alcohol Services South Australia. Every day, 8.30am to 10pm. Calling from outside SA: (08) 7087 1743, same hours. sahealth.sa.gov.au Western Australia Alcohol and Drug Support Line 24/7. Country callers: 1800 198 024. For anyone worried about their own or someone else's alcohol or drug use. Call (08) 9442 5000 Call 1800 198 024 (country) Open site More info Confidential, free and anonymous, 24/7. Metro (08) 9442 5000, country 1800 198 024. mhc.wa.gov.au Parent and Family Drug Support Line 24/7. Country callers: 1800 653 203. For anyone worried about someone else's use. Call (08) 9442 5050 Call 1800 653 203 (country) Open site More info For family and friends worried about someone else's alcohol or drug use. Confidential, free and anonymous, 24/7. Metro (08) 9442 5050, country 1800 653 203. mhc.wa.gov.au Tasmania Alcohol and Drug Information Service 24 hours. For people who use drugs, and family members. Call 1800 811 994 Open site More info 24-hour phone information and counselling about the effects of alcohol and drugs, with referral to services. For people who use drugs and their family members. health.tas.gov.au Northern Territory Alcohol and Drug Information Service (ADIS) Listed on the NT Government's 24-hour helplines page. For anyone in the NT with alcohol or drug concerns. Call 1800 131 350 Open site More info The NT Government lists this number on its 24-hour helplines page. It doesn't describe the service in more detail. nt.gov.au Australian Capital Territory Alcohol and Drug Service Intake, Canberra Health Services Intake, weekdays 8am to 5pm (closes 3.30pm Wednesdays), excluding public holidays. Not a crisis line. After hours, call the National Alcohol and Other Drug Hotline on 1800 250 015. Call (02) 5124 9977 Open site More info An intake line, not a crisis line. After hours, the National Alcohol and Other Drug Hotline on 1800 250 015 is open 24/7. canberrahealthservices.act.gov.au",
+   "spoken": "Queensland Adis twenty-four seven Alcohol and Drug Support twenty-four seven. For Queenslanders and their family and friends. Call one eight hundred, one seven seven, eight three three Open site More info Call twenty-four seven, chat online with a counsellor, or request a call back. adis.health.qld.gov.au New South Wales Alcohol and Drug Information Service (ADIS) NSW twenty-four seven. Sydney metro: zero two, eight three eight two, one zero zero zero. For NSW residents and their families. Call one eight hundred, two five zero, zero one five Open site More info Free, confidential counselling, information and referral from professional counsellors, for NSW residents worried about alcohol or drugs. Phone twenty-four seven. Web chat is Monday to Friday, 8.30am to 5pm (including public holidays). yourroom.health.nsw.gov.au Victoria DirectLine twenty-four seven phone and online counselling. For Victorians, family members and others. Call one eight hundred, eight eight eight, two three six Open site More info Free, confidential alcohol and drug counselling and referral in Victoria, for you or someone else. Phone or online, twenty-four seven. directline.org.au South Australia Alcohol and Drug Information Service (ADIS), DASSA Every day 8.30am to 10pm, not twenty-four seven. Local call fee for SA callers. For the public, family and friends. Call one three hundred, one three one, three four zero Open site More info Confidential telephone counselling, information and referral. Run by Drug and Alcohol Services South Australia. Every day, 8.30am to 10pm. Calling from outside SA: zero eight, seven zero eight seven, one seven four three, same hours. sahealth.sa.gov.au Western Australia Alcohol and Drug Support Line twenty-four seven. Country callers: one eight hundred, one nine eight, zero two four. For anyone worried about their own or someone else's alcohol or drug use. Call zero eight, nine four four two, five zero zero zero Call one eight hundred, one nine eight, zero two four (country) Open site More info Confidential, free and anonymous, twenty-four seven. Metro zero eight, nine four four two, five zero zero zero, country one eight hundred, one nine eight, zero two four. mhc.wa.gov.au Parent and Family Drug Support Line twenty-four seven. Country callers: one eight hundred, six five three, two zero three. For anyone worried about someone else's use. Call zero eight, nine four four two, five zero five zero Call one eight hundred, six five three, two zero three (country) Open site More info For family and friends worried about someone else's alcohol or drug use. Confidential, free and anonymous, twenty-four seven. Metro zero eight, nine four four two, five zero five zero, country one eight hundred, six five three, two zero three. mhc.wa.gov.au Tasmania Alcohol and Drug Information Service 24 hours. For people who use drugs, and family members. Call one eight hundred, eight one one, nine nine four Open site More info 24-hour phone information and counselling about the effects of alcohol and drugs, with referral to services. For people who use drugs and their family members. health.tas.gov.au Northern Territory Alcohol and Drug Information Service (ADIS) Listed on the NT Government's 24-hour helplines page. For anyone in the NT with alcohol or drug concerns. Call one eight hundred, one three one, three five zero Open site More info The NT Government lists this number on its 24-hour helplines page. It doesn't describe the service in more detail. nt.gov.au Australian Capital Territory Alcohol and Drug Service Intake, Canberra Health Services Intake, weekdays 8am to 5pm (closes 3.30pm Wednesdays), excluding public holidays. Not a crisis line. After hours, call the National Alcohol and Other Drug Hotline on one eight hundred, two five zero, zero one five. Call zero two, five one two four, nine nine seven seven Open site More info An intake line, not a crisis line. After hours, the National Alcohol and Other Drug Hotline on one eight hundred, two five zero, zero one five is open twenty-four seven. canberrahealthservices.act.gov.au",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "a5ce5f8669ed.m4a",
+     "bytes": 1758828,
+     "sha256": "e47b38f8f1ca1bc518922c680662be3eb697373bb0e3b91cc8aadcc7b688b1b7"
+    },
+    "B": {
+     "file": "279505f7273b.m4a",
+     "bytes": 1981619,
+     "sha256": "0d67ebbb60f46b4a6cd6594fa78ffe511341184d2964a9e12d237afba03e49f8"
+    }
+   }
+  },
+  {
+   "id": "help.17",
+   "text": "SMART Recovery Australia Free weekly groups, online and in person, for any addictive behaviour, including alcohol, drugs and gambling. Run by a trained facilitator. Not a 12-step program, and not a support line. Find a SMART Recovery meeting Gambling help in every state Free, confidential 24/7 support for anyone affected by gambling, yours or someone else's. Every state and territory gambling service uses the National Gambling Helpline for 24/7 phone help. Call 1800 858 858 More info Talk to a trained counsellor any time, day or night, from anywhere in Australia. Gambling Help Online also has live chat and email support, free and confidential. Government funded. Not run by Gamblers Anonymous. gamblinghelponline.org.au",
+   "spoken": "SMART Recovery Australia Free weekly groups, online and in person, for any addictive behaviour, including alcohol, drugs and gambling. Run by a trained facilitator. Not a 12-step program, and not a support line. Find a SMART Recovery meeting Gambling help in every state Free, confidential twenty-four seven support for anyone affected by gambling, yours or someone else's. Every state and territory gambling service uses the National Gambling Helpline for twenty-four seven phone help. Call one eight hundred, eight five eight, eight five eight More info Talk to a trained counsellor any time, day or night, from anywhere in Australia. Gambling Help Online also has live chat and email support, free and confidential. Government funded. Not run by Gamblers Anonymous. gamblinghelponline.org.au",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "a88ae3569fec.m4a",
+     "bytes": 335440,
+     "sha256": "03031b0057e052b28efbfdd19670169c9f497bbd4096ec331abf760b2afb9f90"
+    },
+    "B": {
+     "file": "c580d8c475b4.m4a",
+     "bytes": 378575,
+     "sha256": "f2f1ceadcc99b80f1ffbc3f6a9030d0b8af4b9021f008c639f1b4dadfe72218b"
+    }
+   }
+  },
+  {
+   "id": "help.18",
+   "text": "These are independent services. HomeCircle is not affiliated with them. Hours and numbers can change, so check the service's own website.",
+   "spoken": "These are independent services. HomeCircle is not affiliated with them. Hours and numbers can change, so check the service's own website.",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "0994ea7150eb.m4a",
+     "bytes": 58474,
+     "sha256": "0216527c9388568f20dcae398a68d1fe09258c77d8017797699a4a89ba2a12cf"
+    },
+    "B": {
+     "file": "7d75c639daef.m4a",
+     "bytes": 73631,
+     "sha256": "695f4e820f4b3da584fd33c677b612292a44f1696091bb33abb90745609ed29f"
+    }
+   }
+  },
+  {
+   "id": "help.19",
+   "text": "Self-help kit",
+   "spoken": "Self-help kit",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "88eb7795a00b.m4a",
+     "bytes": 10383,
+     "sha256": "083e8df64ddd4ecd927fb45574baa987ebde9a89ad72e1347e37e1a57bb8a411"
+    },
+    "B": {
+     "file": "54a2ef538595.m4a",
+     "bytes": 12928,
+     "sha256": "e911d752ca174cd95c5cdce5eecc692569992e52341f848f3ec711b182a50d34"
+    }
+   }
+  },
+  {
+   "id": "help.20",
+   "text": "Tools to support you in the moment.",
+   "spoken": "Tools to support you in the moment.",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "3ce70c6d95eb.m4a",
+     "bytes": 16082,
+     "sha256": "e916db357303ed40ad27180113fb66f51a3d22a9a43d842dfd39e2f63a1a417e"
+    },
+    "B": {
+     "file": "89dd3ca84aa1.m4a",
+     "bytes": 19355,
+     "sha256": "da92430e0a699518cd1e34369d76111566531a6796a457b923d772a7b4762571"
+    }
+   }
+  },
+  {
+   "id": "help.21",
+   "text": "Guide Urge plan Watch an urge crest and fall without obeying it. Guide HALT Hungry, Angry, Lonely, Tired. A pause, not a medical check. Guide 24-hour plan Plan the next day, not the whole year. Breathing Breathe now An animated breathing guide.",
+   "spoken": "Guide Urge plan Watch an urge crest and fall without obeying it. Guide HALT Hungry, Angry, Lonely, Tired. A pause, not a medical check. Guide 24-hour plan Plan the next day, not the whole year. Breathing Breathe now An animated breathing guide.",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "0c9c53b4560b.m4a",
+     "bytes": 104030,
+     "sha256": "d839ec0519c790e3dd977b1087c896149fd2044658e8ced72cc9c09e0c5ec1cb"
+    },
+    "B": {
+     "file": "db39c4a07b58.m4a",
+     "bytes": 129073,
+     "sha256": "9e4bb92e07b51ae636a39eced89f3625757fe693969333c7e2c10e4093f4f9ab"
+    }
+   }
+  },
+  {
+   "id": "help.22",
+   "text": "Keep your details private Don't share your full name, address, phone, bank details or passwords with anyone in HomeCircle or at meetings. Real friends and sponsors won't ask for money or private details. If someone does, tell your sponsor or a trusted person. Code of conduct Be kind. At meetings you find through HomeCircle, please respect that group's own guidelines, and don't record or share what people say. Questions or concerns? Email us, and we aim to reply within 24 hours. HomeCircle is support, not medical care.",
+   "spoken": "Keep your details private Don't share your full name, address, phone, bank details or passwords with anyone in HomeCircle or at meetings. Real friends and sponsors won't ask for money or private details. If someone does, tell your sponsor or a trusted person. Code of conduct Be kind. At meetings you find through HomeCircle, please respect that group's own guidelines, and don't record or share what people say. Questions or concerns? Email us, and we aim to reply within 24 hours. HomeCircle is support, not medical care.",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "83d1ee138d25.m4a",
+     "bytes": 230795,
+     "sha256": "bc4c10f5ccad8c1fbea26281b6c587ec0de5662fadf2d606feac84f3068fecac"
+    },
+    "B": {
+     "file": "5c809057d125.m4a",
+     "bytes": 245702,
+     "sha256": "9da3f859b7806538b902a91c0d48347f77e887b1d80d9378c1b20751406a3f56"
+    }
+   }
+  },
+  {
+   "id": "help.23",
+   "text": "Call 000 immediately Call 000 or go to your nearest emergency department. Call 000",
+   "spoken": "Call triple zero immediately Call triple zero or go to your nearest emergency department. Call triple zero",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "f56f5c8d8d8e.m4a",
+     "bytes": 46744,
+     "sha256": "d3286ad08f32e20c5575f93065f79b2b33fa1bed7472bdafe9bf9b36e98288b7"
+    },
+    "B": {
+     "file": "299e011480b9.m4a",
+     "bytes": 57380,
+     "sha256": "2a22e7093dcead2c86152314d73b0df287b1b2277b9753d8b9d36d1221aca9a1"
+    }
+   }
+  },
+  {
+   "id": "help.24",
+   "text": "What to do in an overdose Call 000 first. Then see the signs of overdose, the first aid steps, and where to get free naloxone. What to do in an overdose",
+   "spoken": "What to do in an overdose Call triple zero first. Then see the signs of overdose, the first aid steps, and where to get free naloxone. What to do in an overdose",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "a63866733b50.m4a",
+     "bytes": 67095,
+     "sha256": "0c1f6823a96bc64fa02557fdaf107604c9652e7c37329327e5c2e78a7f467025"
+    },
+    "B": {
+     "file": "93ebcaa0f0f8.m4a",
+     "bytes": 83938,
+     "sha256": "1e09cb7c6dc246c33ff02f6e796e120ce8e4f4e4652ecc26a0d8f0ceb083b808"
+    }
+   }
+  },
+  {
+   "id": "help.25",
+   "text": "Have this read to you Your phone can read any page out loud, including this one. iPhone or iPad: go to Settings > Accessibility > Read & Speak (on older versions, Spoken Content) and turn on Speak Screen. Then swipe down with two fingers from the top of the screen, or say “Siri, speak screen”. Android: go to Settings > Accessibility > Select to Speak and turn on the Select to Speak shortcut. Tap the shortcut, then tap what you want read. If you can’t find it, install Android Accessibility Suite from Google Play.",
+   "spoken": "Have this read to you Your phone can read any page out loud, including this one. iPhone or iPad: go to Settings, then Accessibility, then Read & Speak (on older versions, Spoken Content) and turn on Speak Screen. Then swipe down with two fingers from the top of the screen, or say “Siri, speak screen”. Android: go to Settings, then Accessibility, then Select to Speak and turn on the Select to Speak shortcut. Tap the shortcut, then tap what you want read. If you can’t find it, install Android Accessibility Suite from Google Play.",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "89b044f37083.m4a",
+     "bytes": 222495,
+     "sha256": "327b9863af5e069d45fced18d6d1f74ae1f85d295b69aa097118be6300184741"
+    },
+    "B": {
+     "file": "fc449353fe84.m4a",
+     "bytes": 243996,
+     "sha256": "f499a638fd084263b782e15c46e91a413d18d23fc26a6d0d01f9aacb4e5d3d72"
+    }
+   }
+  },
+  {
+   "id": "help.26",
+   "text": "More information",
+   "spoken": "More information",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "296bbc3e2f2e.m4a",
+     "bytes": 10504,
+     "sha256": "d7c06e2651aa704f8d097f87a683c9c87cb02e89269964eb86fad0274a18d93a"
+    },
+    "B": {
+     "file": "e52163a9d5c4.m4a",
+     "bytes": 13696,
+     "sha256": "4fa5ad84dc0a4ef62ec6ce3da5d14a9b5ec78d2d692dc638823ec5b545d772a5"
+    }
+   }
+  },
+  {
+   "id": "help.27",
+   "text": "Alcohol and Drug Foundation · Alcohol on Healthdirect · Gambling Help Online",
+   "spoken": "Alcohol and Drug Foundation · Alcohol on Healthdirect · Gambling Help Online",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "a44e7954daf0.m4a",
+     "bytes": 35053,
+     "sha256": "eda8b050482ccb2eb563b7feb446ac7bc597349657e937abbc649e1b765d0e54"
+    },
+    "B": {
+     "file": "8f75d34e3d63.m4a",
+     "bytes": 43123,
+     "sha256": "16745d052b9048a45fd7c3145b6fe5c81987dd1194f5f28f884bfb4241e9328e"
+    }
+   }
+  },
+  {
+   "id": "help.28",
+   "text": "For any health concern, talk to your GP or a doctor. HomeCircle is support, not medical care.",
+   "spoken": "For any health concern, talk to your GP or a doctor. HomeCircle is support, not medical care.",
+   "status": "DRAFT",
+   "clips": {
+    "A": {
+     "file": "0112cda606c0.m4a",
+     "bytes": 46342,
+     "sha256": "21b124d71171045ce635012ba422565a9a89e98649d6b265176ea4942079886e"
+    },
+    "B": {
+     "file": "557c6d7bfd43.m4a",
+     "bytes": 49882,
+     "sha256": "91d309bec16d194efee99e8c2cdbaf8cb478b9e81bced7f7d5fc9a0b5b73ccb8"
+    }
+   }
+  }
+ ]
+}

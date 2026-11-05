@@ -46,6 +46,7 @@ PRIVACY = L["privacyURL"]
 TERMS = L["termsURL"]
 H = C["helplines"]
 import hashlib as _h
+RA_V = _h.sha256((ROOT / "assets" / "readaloud.js").read_bytes()).hexdigest()[:10]
 CSS_V = _h.sha1((ROOT / "assets" / "site.css").read_bytes()).hexdigest()[:8]
 # One shared cache-busting tag for the three Kai scripts, from their contents (deterministic): changes whenever any of them changes.
 KAI_V = _h.sha256(b"".join((ROOT / "assets" / f).read_bytes() for f in ("kai.js", "kai-crisis.js", "kai-engine.js"))).hexdigest()[:10]
@@ -87,6 +88,7 @@ def head(title, desc, r):
 <link rel="apple-touch-icon" href="{r}assets/logo-192.png">
 <link rel="stylesheet" href="{r}assets/site.css?v={CSS_V}">
 <script src="{r}assets/site.js" defer></script>
+<script src="{r}assets/readaloud.js?v={RA_V}" defer></script>
 <script src="{r}assets/kai-data.js?v={kai_data_v()}" defer></script>
 <script src="{r}assets/kai-crisis.js?v={KAI_V}" defer></script>
 <script src="{r}assets/kai-engine.js?v={KAI_V}" defer></script>
@@ -194,12 +196,38 @@ def footer(r):
 </html>
 """
 
+# ---------- read aloud (tools/ra.py; clips are DRAFTS until Hale approves) ----------
+import sys as _sys; _sys.path.insert(0, str(ROOT / "tools")); import ra as RA
+REGION = "AU"
+RA_KAI = RA.kai_lines(REGION)
+RA_HELP_BODY = None
+RA_PAGE_SIZES = {}
+RA_NOTE = "Read aloud plays recordings stored on this website, or your device's own voice. Nothing you read or type is sent anywhere."  # Hale approved, 5 Nov 2026
+RA_BAR = f'<div class="ra-bar ra-skip"><p class="ra-note small">{RA_NOTE}</p></div>\n'
+def ra_read_page(path):
+    return path in ("help.html", "twelve-steps.html", "support.html") or path.startswith("families/")
+def ra_insert_bar(path, body):
+    # After the top call buttons (they come before the h1); on Support, after the crisis notice with the call links.
+    if path == "support.html":
+        m = re.search(r'<div class="notice">.*?tel:.*?</div>\n', body)
+        if m: return body[:m.end()] + RA_BAR + body[m.end():]
+    i = body.find("<h1")
+    return body[:i] + RA_BAR + body[i:] if i >= 0 else RA_BAR + body
+
 def page(path, active, title, desc, body):
+    global RA_HELP_BODY
     r = "../" * path.count("/")
+    if ra_read_page(path): body = ra_insert_bar(path, body)
+    if path == "help.html": RA_HELP_BODY = body
     out = head(title, desc, r) + header(active, r) + f'\n<main id="main"><div class="wrap">\n{body}\n</div></main>' + footer(r)
     if path.startswith("families/") or not KAI_ON:  # no Kai chat on families pages (or anywhere while KAI_ON is False)
         out = re.sub(r'<script src="[^"]*kai[^"]*" defer></script>\n', "", out)
         out = re.sub(r'\n<div class="kai" id="kai".*?\n</div>(?=\n</body>)', "", out, flags=re.S)
+    kai_here = 'id="kai"' in out
+    lines = ([l["text"] for l in RA_KAI] if kai_here else []) + (RA.page_chunks(body) if path == "help.html" else [])
+    clips = RA.page_clips(lines, r)
+    if clips: out = out.replace("\n</body>", "\n" + clips + "\n</body>", 1)
+    RA_PAGE_SIZES[path] = RA.sizes(lines)
     (ROOT / path).parent.mkdir(parents=True, exist_ok=True)
     (ROOT / path).write_text(out)
 
@@ -679,6 +707,7 @@ def build_help():
 </div>
 <div class="emergency-card mt"><h2 class="mt0">Call 000 immediately</h2><p>{E(HL["000"]["detail"])}</p><a class="btn" href="tel:000">Call 000</a></div>
 <div class="card mt" id="overdose"><h2 class="mt0">What to do in an overdose</h2><p>Call 000 first. Then see the signs of overdose, the first aid steps, and where to get free naloxone.</p><a class="btn" href="families/overdose.html">What to do in an overdose</a></div>
+<div class="card mt" id="read-to-you"><h2 class="mt0">Have this read to you</h2><p>Your phone can read any page out loud, including this one.</p><p><strong>iPhone or iPad:</strong> go to Settings &gt; Accessibility &gt; Read &amp; Speak (on older versions, Spoken Content) and turn on Speak Screen. Then swipe down with two fingers from the top of the screen, or say &ldquo;Siri, speak screen&rdquo;.</p><p><strong>Android:</strong> go to Settings &gt; Accessibility &gt; Select to Speak and turn on the Select to Speak shortcut. Tap the shortcut, then tap what you want read. If you can&rsquo;t find it, install Android Accessibility Suite from Google Play.</p></div>
 <h2>More information</h2>
 <p><a href="https://adf.org.au/">Alcohol and Drug Foundation</a> · <a href="https://www.healthdirect.gov.au/alcohol">Alcohol on Healthdirect</a> · <a href="https://www.gamblinghelponline.org.au/">Gambling Help Online</a></p>
 <p class="small">{E(L["gpLine"])}</p>"""
@@ -773,4 +802,6 @@ for i in C["items"]:
     build_item(i)
 build_stages(); build_books()
 import sys; sys.path.insert(0, str(ROOT / "tools")); import families; families.build(page, E)
+_ra_missing = RA.check(REGION, RA.current_lines(REGION, RA_HELP_BODY))   # fails the build on any text/clip mismatch
+if _ra_missing: print("read aloud: lines without a clip:", ", ".join(_ra_missing))
 print("built")

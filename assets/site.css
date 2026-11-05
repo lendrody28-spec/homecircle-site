@@ -348,3 +348,18 @@ details.more p{margin:4px 0 0;font-size:16px}
 
 .site-foot .fine-print{font-size:.75rem;line-height:1.5;color:#56615E;margin:28px 0 0;padding-top:12px;border-top:1px solid var(--line)}
 @media (max-width:340px){.kai-pinned .btn{padding:6px 8px;font-size:14px;white-space:nowrap}}
+/* read aloud: hidden unless readaloud.js finds a clip or a local device voice */
+.ra-bar,.ra-btn,.ra-voices{display:none}
+html.ra-on .ra-bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:8px 0 12px}
+html.ra-on .ra-btn:not([hidden]){display:inline-flex}
+html.ra-on .ra-voices:not([hidden]){display:inline-flex;flex-wrap:wrap;gap:4px;align-items:center}
+.ra-btn{align-items:center;gap:6px;min-height:44px;min-width:44px;padding:6px 14px;border:2px solid var(--text);border-radius:999px;background:#fff;color:var(--text);font:inherit;font-weight:600;cursor:pointer}
+.ra-btn.on,.ra-btn[aria-pressed="true"]{background:var(--text);border-color:var(--text);color:#fff}
+.ra-btn:focus-visible,.ra-voice:focus-visible,.ra-sample:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.ra-btn.ra-small{font-size:14px;padding:4px 10px}
+.kai-firstopen .ra-btn{margin-left:6px;vertical-align:middle}
+.kai-after .ra-btn{margin-top:6px}
+.ra-note{margin:0;flex:1 1 220px}
+.ra-voice,.ra-sample{min-height:44px;min-width:44px;border:2px solid var(--muted);background:#fff;color:var(--text);font:inherit;font-size:14px;border-radius:10px;padding:4px 10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
+.ra-voice[aria-pressed="true"]{background:var(--text);border-color:var(--text);color:#fff;font-weight:600}
+.kai-foot .ra-voices{margin-top:4px}
