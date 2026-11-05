@@ -262,6 +262,17 @@ def build_home():
 <div class="grid g4">{tiles}</div>
 <div class="grid g3 mt">{"".join(tile(h, t, s, tg, a, r) for h, t, s, tg, a in feats2)}</div>
 <div class="card sage mt kai-intro"><img src="assets/kai.png" alt="" width="72" height="72"><div><h2 class="mt0">Meet Kai, your recovery buddy</h2><p>Kai is the round button in the corner of every page. Tell Kai how you're feeling and it can suggest a breathing practice, a short meditation or a walk, or point you to a meeting or a helpline. Replies are written in this browser from saved rules. No network and no AI service. Kai isn't AI, and isn't a person, counsellor, doctor or sponsor. Nothing you type leaves your browser.</p></div></div>
+<div class="card mt about-hc"><h2 class="mt0">{E("Support for your recovery journey, and for the people who love you")}</h2>
+<p>{E("Whether you're in recovery, or you're a parent, partner, child or friend of someone with an addiction, HomeCircle is here for you. It's free for everyone. The app is for adults 18+. Our ")}<a href="families/index.html">{E("Families pages")}</a>{E(" are open to everyone, with Kids Helpline (")}<a href="tel:1800551800">1800 55 1800</a>{E(") for young people.")}</p>
+<ul>
+<li><strong>{E("Recovery support:")}</strong> {E("coping guides, plain-language reflections on the ")}<a href="twelve-steps.html">{E("12 Steps")}</a>{E(", an AA and NA ")}<a href="meetings.html">{E("meeting finder")}</a>{E(", plus links to Gamblers Anonymous and Porn Addicts Anonymous")}</li>
+<li><strong>{E("Calm when you need it:")}</strong> <a href="meditations.html">{E("guided meditations")}</a>{E(" (4–5 min) and breathing exercises (1, 3 or 5 min)")}</li>
+<li><strong>{E("Events:")}</strong> <a href="events.html">{E("upcoming AA and NA recovery events")}</a>{E(" around Australia")}</li>
+<li><strong>{E("Families and friends:")}</strong> <a href="families/index.html">{E("ways to cope, what to say, and where to get support")}</a>{E(" when someone you love is struggling")}</li>
+<li><strong>{E("Safety first:")}</strong> {E("a one-tap Quick exit on the families pages, and ")}<a href="families/safety.html">{E("domestic and family violence help")}</a>{E(", including 1800RESPECT (")}<a href="tel:1800737732">1800 737 732</a>{E(")")}</li>
+<li><strong>{E("Checked sources:")}</strong> {E("linked to official and research sources, with the date each page was last checked")}</li>
+</ul>
+<p class="small">{E("HomeCircle is a support tool, not medical care. It isn't part of, affiliated with or endorsed by AA, NA, GA or PA. If you're in danger, call ")}<a href="tel:000">000</a>{E(". For crisis support, call Lifeline on ")}<a href="tel:131114">13 11 14</a>.</p></div>
 {events_html()}
 <h2>The HomeCircle app</h2>
 <div class="grid g2">
