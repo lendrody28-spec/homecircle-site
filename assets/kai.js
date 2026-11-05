@@ -4,7 +4,7 @@
 (function () {
   "use strict";
   var E = window.HCKaiEngine, root = document.getElementById("kai");
-  if (!E || !root) return;
+  if (!E || !root) return;   /* if Kai can't start, the static #kai-fallback with tel: links stays on the page */
   var base = root.getAttribute("data-root") || "";
   var KEY = "hc.kai.v1", POS = "hc.kai.pos.v1";
   function load(k, d) { try { var v = JSON.parse(localStorage.getItem(k)); return v == null ? d : v; } catch (e) { return d; } }
@@ -20,6 +20,13 @@
     moveBtn = document.getElementById("kai-move"), confirmBox = document.getElementById("kai-confirm"),
     after = document.getElementById("kai-after");
   root.hidden = false;
+  var fallback = document.getElementById("kai-fallback"); if (fallback) fallback.hidden = true;
+  /* Buttons-first. "I'm not safe" is wired first, with no phrase matching, delay or animation. */
+  var notSafeBtn = document.getElementById("kai-notsafe");
+  if (notSafeBtn) notSafeBtn.addEventListener("click", function () { pressButton("notSafe"); });
+  Array.prototype.forEach.call(document.querySelectorAll("[data-kai-button]"), function (b) {
+    b.addEventListener("click", function () { pressButton(b.getAttribute("data-kai-button")); });
+  });
 
   function todayKey() { var d = new Date(); return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate(); }
   function context() {
@@ -37,7 +44,7 @@
   function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
   function render() {
     log.textContent = "";
-    empty.hidden = state.messages.length > 0;
+    empty.hidden = true;   /* the start buttons replace the old empty-state line */
     state.messages.forEach(function (m) {
       var row = el("div", "kai-msg " + (m.kai ? "from-kai" : "from-me"));
       row.appendChild(el("span", "sr-only", m.kai ? "Kai: " : "You: "));
@@ -51,21 +58,27 @@
       a.href = E.linkHref(latest.link, base);
       after.appendChild(a);
     }
+    if (latest && latest.extra) latest.extra.forEach(function (x) { var a = el("a", "kai-link", x.label); a.href = /^(tel|sms|https?):/.test(x.href) ? x.href : base + x.href; after.appendChild(a); });
+    if (latest && latest.tels) latest.tels.forEach(function (x) { var a = el("a", "btn kai-tel" + (x.kind === "emergency" ? " danger" : ""), x.label); a.href = x.href; if (x.aria) a.setAttribute("aria-label", x.aria); after.appendChild(a); });
     if (latest && latest.stat && /^https:\/\//.test(latest.stat.sourceURL)) {
       var s = el("a", "kai-source", "Source: " + latest.stat.sourceTitle);
       s.href = latest.stat.sourceURL; s.rel = "noopener";
       after.appendChild(s);
     }
-    crisis.hidden = !(state.session && state.session.crisisHeld);
+    crisis.hidden = false;   /* the I'm not safe button, 000/911 and Lifeline/988 stay on screen */
     chips.textContent = "";
-    var quick = state.quick || [{ label: "I'm craving", chip: "craving" }, { label: "Find a meeting", chip: "meeting" }, { label: "Just listen", chip: "listen" }, { label: "What can help?", chip: "tools" }];
+    var quick = state.messages.length ? (state.quick || []) : [];   /* start screen: one set of choices (the start buttons); chips are follow-ups only */
     quick.forEach(function (q) {
       var b = el("button", "chip", q.label); b.type = "button";
       b.addEventListener("click", function () { send(q.label, q.chip); });
       chips.appendChild(b);
     });
     log.scrollTop = log.scrollHeight;
-    var sc = panel.querySelector(".kai-scroll"); if (sc) sc.scrollTop = sc.scrollHeight;
+    scrollChat();
+  }
+  function scrollChat() {
+    var sc = panel.querySelector(".kai-scroll"); if (!sc) return;
+    sc.scrollTop = state.messages.length ? sc.scrollHeight : 0;   /* first open: top, so the start buttons show in full */
   }
   function send(text, chip) {
     text = String(text || "").trim();
@@ -73,23 +86,50 @@
     var r = E.reply(text, chip || null, context());
     if (r.offerBreathing) state.breathOfferedOn = todayKey();
     state.messages.push({ kai: false, text: text });
-    state.messages.push({ kai: true, text: r.text });
+    state.messages.push({ kai: true, text: r.text, crisis: !!r.crisis });
     if (state.messages.length > 200) state.messages = state.messages.slice(-200);
     state.session = r.session;
     state.quick = r.quickReplies.map(function (q) { return { label: q.label, chip: q.chip }; });
     state.latest = { link: r.link, stat: r.stat ? { sourceTitle: r.stat.sourceTitle, sourceURL: r.stat.sourceURL } : null };
     save(KEY, state);
     render();
+    if (r.crisis) { focusReply(); return; }
     var live = document.getElementById("kai-live");
     if (live) { live.textContent = ""; setTimeout(function () { live.textContent = "Kai: " + r.text; }, 30); }
   }
-  form.addEventListener("submit", function (e) { e.preventDefault(); var t = input.value; input.value = ""; send(t, null); input.focus(); });
+  /* After a crisis reply, focus goes to the reply itself (read first), then Tab reaches the call links below it. */
+  function focusReply() {
+    var live = document.getElementById("kai-live");   /* Finn/Sage: short region line in the live region; the focused reply carries the full text */
+    if (live) live.textContent = (E.BUTTON_COPY && E.BUTTON_COPY.liveCrisis) || "";
+    var rows = log.querySelectorAll(".kai-msg.from-kai"), row = rows[rows.length - 1];
+    if (!row) return;
+    row.id = "kai-reply-latest"; row.setAttribute("tabindex", "-1");
+    row.setAttribute("role", "group"); row.setAttribute("aria-label", "Kai's reply");
+    row.focus();
+  }
+  function pressButton(id) {
+    var r = E.buttonReply(id, context());
+    if (!r) return;
+    var label = id === "notSafe" ? E.BUTTON_COPY.notSafe.label : (E.BUTTON_COPY[id] || {}).label || id;
+    state.messages.push({ kai: false, text: label });
+    state.messages.push({ kai: true, text: r.text, crisis: !!r.crisis });
+    if (state.messages.length > 200) state.messages = state.messages.slice(-200);
+    state.session = r.session;
+    state.quick = (r.quickReplies || []).map(function (q) { return { label: q.label, chip: q.chip }; });
+    state.latest = { link: r.link, stat: null, tels: r.tels || [], extra: r.extraLinks || [] };
+    save(KEY, state);
+    render();
+    if (r.crisis) { focusReply(); return; }   /* focus on the reply reads it at once, no timer */
+    var live = document.getElementById("kai-live");
+    if (live) live.textContent = "Kai: " + r.text;
+  }
+  form.addEventListener("submit", function (e) { e.preventDefault(); var t = input.value; input.value = ""; send(t, null); var m = state.messages[state.messages.length - 1]; if (!(m && m.crisis)) input.focus(); });
   input.addEventListener("keydown", function (e) { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); form.requestSubmit ? form.requestSubmit() : form.dispatchEvent(new Event("submit")); } });
 
   /* Open, minimise, clear */
   function open() {
     panel.hidden = false; bubble.setAttribute("aria-expanded", "true"); root.classList.add("open");
-    render(); input.focus();
+    render(); input.focus({ preventScroll: true }); scrollChat();
   }
   function minimise() {
     panel.hidden = true; confirmBox.hidden = true; bubble.setAttribute("aria-expanded", "false"); root.classList.remove("open"); bubble.focus();

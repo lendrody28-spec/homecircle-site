@@ -1,5 +1,6 @@
 /* Kai, HomeCircle's recovery buddy: a plain JavaScript port of KaiEngine.swift and
-   KaiFeelings.swift from the HomeCircle iOS app (1.3.0, build 30).
+   KaiFeelings.swift from the HomeCircle iOS app (1.3.0, build 30), with the build 31 crisis check
+   (KaiCrisis.swift, commit 149628f) in assets/kai-crisis.js.
    Kai isn't AI and isn't a person. Replies come from fixed rules in this file.
    No network calls. Nothing typed leaves the browser. */
 (function (root, factory) {
@@ -167,7 +168,7 @@
   /* ---------- KaiEngine ---------- */
   function freshSession() {
     return { recentReplyIDs: [], topic: null, mood: null, lastSuggestion: null, declined: [], disclaimerShown: false,
-      justListen: false, followUpAsked: false, privateShown: false, crisisHeld: false };
+      justListen: false, followUpAsked: false, privateShown: false, crisisHeld: false, respectHeld: false, mensReferralHeld: false };
   }
   function copySession(s) { var o = freshSession(); s = s || {}; for (var k in o) if (own.call(s, k)) o[k] = Array.isArray(s[k]) ? s[k].slice() : s[k]; return o; }
   function contains(t, n) { return t.indexOf(n) >= 0; }
@@ -175,23 +176,62 @@
   function Q(id, label, chip) { return { id: id, label: label, chip: chip }; }
   var PRACTICE = "practice:";
 
-  var crisisNeedles = ["kill myself", "end my life", "want to die", "wanna die", "end it all", "better off dead",
-    "took too many pills", "don't want to be here", "dont want to be here",
-    "suicide", "suicidal", "self-harm", "self harm",
-    "hurt myself", "hurting myself", "hurt my self",
-    "can't go on", "cannot go on", "cant go on",
-    "no reason to live", "no reason left to live",
-    "unalive", "unaliving", "un-alive", "un alive",
-    "cut myself", "cutting myself",
-    "hang myself", "hanging myself",
-    "don't want to live", "dont want to live",
-    "overdose", "chest pain", "can't breathe", "cannot breathe", "cant breathe", "seizure",
-    "i collapsed", "severe withdrawal"];
-  function isCrisis(text) {
-    var f = normalizeForMatch(text);
-    if (crisisNeedles.some(function (n) { return contains(f, n); })) return true;
-    return splitWords(f).indexOf("kms") >= 0;
-  }
+  /* Crisis check: the build 31 KaiCrisis port in assets/kai-crisis.js, shared by the AU and US sites.
+     KAI_REGION picks the phone numbers in the crisis replies. */
+  var KAI_REGION = "AU";
+  /* ===== HALE-REVIEW-START: every new user-visible string for the buttons-first Kai panel (AU site). Keep this strict JSON: tools/build.py reads it. ===== */
+  var BUTTON_COPY = {
+    "heading": "What would help right now?",
+    "typeHint": "Or write a line below.",
+    "firstOpen": "Kai is a recovery buddy, not a person, counsellor, medical care or an emergency service. Kai can miss things.",
+    "dangerLine": "If you type something that may mean you're in danger, Kai tries to show help numbers, but it can miss things. If you're not safe, tap I'm not safe or call 000.",
+    "liveCrisis": "Get help now: call 000 or Lifeline 13 11 14",
+    "footLine": "Kai isn't a person or AI, and isn't medical care. Kai can miss things. The chat stays in this browser until you clear it.",
+    "notSafe": {
+      "label": "I'm not safe",
+      "aria": "I'm not safe, get help now",
+      "fallbackText": "Call 000 now if you or anyone else is in danger. Lifeline is 13 11 14, any time. Kai can miss things."
+    },
+    "struggling": {
+      "label": "I'm struggling",
+      "reply": "Thanks for telling me. You don't have to sort it all out right now. We could slow your breathing for a minute, find a meeting, or keep talking here. If you're not safe right now, tap I'm not safe or call 000.",
+      "breathing": "Breathing exercise",
+      "meeting": "Find a meeting",
+      "keepTalking": "Keep talking"
+    },
+    "cravings": {
+      "label": "I'm having cravings",
+      "reply": "Cravings for a drink, a use or a bet rise and fall, and this one can pass. Try to wait 15 minutes before you decide anything. Slow breathing can help, so can calling your sponsor or someone in your circle, or getting to a meeting. If you're not safe right now, tap I'm not safe or call 000.",
+      "breathing": "Breathing exercise",
+      "urge": "Urge plan",
+      "meeting": "Find a meeting"
+    },
+    "meeting": {
+      "label": "Find a meeting",
+      "library": "Open the Library"
+    },
+    "tels": [
+      {
+        "label": "Call 000",
+        "href": "tel:000",
+        "kind": "emergency"
+      },
+      {
+        "label": "Lifeline 13 11 14",
+        "aria": "Call Lifeline 13 11 14",
+        "href": "tel:131114",
+        "kind": "line"
+      }
+    ],
+    "fallbackLead": "I'm not safe:",
+    "panelLabel": "Get help now"
+  };
+  /* footLine: the "isn't AI" claim is only true while web Kai is rule-based and runs entirely in the browser. Change it if Kai ever uses an AI model or a server. */
+  /* ===== HALE-REVIEW-END ===== */
+  var Crisis = (root && root.HCKaiCrisis) || (typeof require === "function" ? require("./kai-crisis.js") : null);
+  function crisisRoute(text) { return Crisis ? Crisis.primaryRoute(Crisis.routes(text)) : null; }
+  function isCrisis(text) { return crisisRoute(text) != null; }
+  function crisisTier(text) { return Crisis && Crisis.tier ? Crisis.tier(text) : (isCrisis(text) ? "crisis" : null); }
   function mentionsGambling(f) { return ["gambl", "casino", "betting", "poker", "pokies", "sportsbet", "slot machine"].some(function (n) { return contains(f, n); }); }
   function mentionsPrivateDetails(f) {
     return ["my address", "home address", "bank", "password", "bsb", "send money", "send me money",
@@ -299,7 +339,7 @@
     return pick("reflect", ["I hear you. " + clip, "I'll stay with that. " + clip, "No plan from me. " + clip], session).split("?").join(".");
   }
   function starterReplies(ctx) {
-    var r = [Q("craving", "I'm craving", "craving"), meetingReply, listenReply];
+    var r = [Q("craving", "I'm having cravings", "craving"), meetingReply, listenReply];
     if (ctx.session.declined.indexOf("breathe") >= 0) r = r.filter(function (q) { return q.id !== "craving"; });
     return r.slice(0, 3);
   }
@@ -524,11 +564,56 @@
   }
 
   function fixedCrisisFilter(message, session) {
-    if (!isCrisis(message)) return null;
+    var route = crisisRoute(message);
+    if (!route) {
+      // Round 6 second tier: a short check-in when broad risk words appear but no full route fires.
+      if (!Crisis || !Crisis.checkIn || !Crisis.checkIn(message)) return null;
+      var c = copySession(session);
+      var ci = finish({ id: "checkIn", text: Crisis.checkInText(KAI_REGION),
+        crisis: false, replies: [Q("listen", "Stay with me", "listen")], link: L.help }, c);
+      ci.checkIn = true; ci.crisisRoute = null;
+      return ci;
+    }
     var s = copySession(session);
     s.topic = "crisis"; s.justListen = false; s.crisisHeld = true;
-    return finish({ id: "crisis", text: "If you might act on this, call 000 now. Lifeline is 13 11 14. Kai is a recovery buddy, not a counsellor, and can't diagnose.",
+    if (route === "familyViolence") s.respectHeld = true;
+    if (route === "familyHarm") s.mensReferralHeld = true;
+    var r = finish({ id: "crisis", text: Crisis.replyText(route, KAI_REGION),
       crisis: true, replies: [Q("listen", "Stay with me", "listen")], link: L.help }, s);
+    r.crisisRoute = route;
+    return r;
+  }
+
+  /* Buttons-first panel. "notSafe" never depends on phrase matching: it always returns the full emergency reply for this region. */
+  function buttonReply(id, ctx) {
+    ctx = ctx || {};
+    var c = BUTTON_COPY, s = copySession(ctx.session);
+    if (id === "notSafe") {
+      s.topic = "crisis"; s.justListen = false; s.crisisHeld = true;
+      var t = (Crisis && Crisis.replyText) ? Crisis.replyText("emergency", KAI_REGION) : c.notSafe.fallbackText;
+      return { id: "notSafe", route: "notSafe", crisis: true, crisisRoute: "emergency", text: t, quickReplies: [], link: null,
+        tels: c.tels.slice(), session: s, offerBreathing: false, stat: null };
+    }
+    if (id === "struggling") {
+      s.topic = "struggling"; s.justListen = false;
+      var r1 = finish({ id: "struggling", text: c.struggling.reply,
+        replies: [Q("breathing", c.struggling.breathing, "breathing"), Q("meeting", c.struggling.meeting, "meeting"), Q("listen", c.struggling.keepTalking, "listen")], link: null }, s);
+      r1.route = "struggling"; r1.tels = c.tels.filter(function (x) { return x.kind === "line"; });
+      return r1;
+    }
+    if (id === "cravings") {
+      s.topic = "craving"; s.lastSuggestion = "breathe";
+      var r2 = finish({ id: "craving", text: c.cravings.reply,
+        replies: [Q("breathing", c.cravings.breathing, "breathing"), Q("urge", c.cravings.urge, "craving"), Q("meeting", c.cravings.meeting, "meeting")], link: L.practice("guide-urge") }, s);
+      r2.route = "craving"; r2.meetingsLink = L.meetings; r2.tels = [];
+      return r2;
+    }
+    if (id === "meeting") {
+      var r3 = reply(c.meeting.label, "meeting", ctx);
+      r3.route = "meeting"; r3.extraLinks = [{ label: c.meeting.library, href: "library.html" }]; r3.tels = [];
+      return r3;
+    }
+    return null;
   }
 
   /* reply(message, chip, ctx): ctx = { dayCount, health, session, recentUserLines, includesGA, offeredBreathingToday } */
@@ -592,7 +677,7 @@
     return base + "library.html";
   }
 
-  return { reply: reply, isCrisis: isCrisis, feelings: feelings, strongest: strongest, asksForCalmingTools: asksForCalmingTools,
+  return { buttonReply: buttonReply, BUTTON_COPY: BUTTON_COPY, reply: reply, isCrisis: isCrisis, crisisRoute: crisisRoute, crisisTier: crisisTier, feelings: feelings, strongest: strongest, asksForCalmingTools: asksForCalmingTools,
     tokens: tokens, normalizeForMatch: normalizeForMatch, freshSession: freshSession, linkTitle: linkTitle, linkHref: linkHref,
     hidesBreathHolds: hidesBreathHolds, stageForDay: stageForDay, intent: intent };
 });
