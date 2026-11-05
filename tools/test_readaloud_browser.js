@@ -173,5 +173,22 @@ const fileVoice = {}; manifest.lines.forEach(l => { for (const v in l.clips) fil
     await p.locator('#kai-after .ra-btn').scrollIntoViewIfNeeded();
     await p.screenshot({ path: `/workspace/shots/readaloud-kai-crisis-${vp.width}.png` });
     await ctx.close(); }
+  // Real playback (no media mock): the clip must play under the site's CSP, one batch for the chosen voice only, no fallback
+  { const man = JSON.parse(require('fs').readFileSync(require('path').join(process.env.SITE, 'tools/audio-manifest.json')));
+    for (const [pg, sel, v] of [['help.html', '.ra-bar .ra-btn', 'A'], ['index.html', '.kai-ra .ra-btn', 'B']]) {
+      const want = new Set(man.lines.map(l => l.clips[v] && l.clips[v].file).filter(Boolean));
+      const ctx = await b.newContext({ viewport: { width: 375, height: 667 } });
+      await ctx.addInitScript(v => localStorage.setItem('hc.ra.voice.v1', v), v);
+      const p = await ctx.newPage(); const csp = [], reqs = [], off = [];
+      p.on('console', m => { if (/Content Security Policy/.test(m.text())) csp.push(m.text().slice(0, 120)); });
+      p.on('request', r => { const u = r.url(); if (/assets\/audio\/.*\.mp3/.test(u)) reqs.push(u.split('/').pop()); if (!u.startsWith(BASE) && !/^(data|blob):/.test(u)) off.push(u); });
+      await p.goto(BASE + pg); await p.waitForTimeout(500);
+      if (sel.startsWith('.kai')) { await p.click('#kai-bubble'); await p.waitForTimeout(200); }
+      await p.locator(sel).first().click(); await p.waitForTimeout(2500);
+      ok(csp.length === 0, `real playback ${pg}: no CSP blocks ${csp}`);
+      ok(reqs.length > 0 && reqs.every(f => want.has(f)), `real playback ${pg}: only Voice ${v} batch fetched (${reqs.length} clips)`);
+      ok(await p.locator('.ra-pause').isVisible(), `real playback ${pg}: still playing after 2.5 s (Pause shown)`);
+      ok(off.length === 0, `real playback ${pg}: no off-site requests`);
+      await ctx.close(); } }
   await b.close(); console.log(`readaloud browser: ${n - f}/${n} passed`); process.exit(f ? 1 : 0);
 })();
