@@ -656,6 +656,7 @@ def build_help():
 <div class="card"><h2 class="mt0">Code of conduct</h2><p>{E(L["rulesBody"])}</p></div>
 </div>
 <div class="emergency-card mt"><h2 class="mt0">Call 000 immediately</h2><p>{E(HL["000"]["detail"])}</p><a class="btn" href="tel:000">Call 000</a></div>
+<div class="card mt" id="overdose"><h2 class="mt0">What to do in an overdose</h2><p>Call 000 first. Then see the signs of overdose, the first aid steps, and where to get free naloxone.</p><a class="btn" href="families/overdose.html">What to do in an overdose</a></div>
 <h2>More information</h2>
 <p><a href="https://adf.org.au/">Alcohol and Drug Foundation</a> · <a href="https://www.healthdirect.gov.au/alcohol">Alcohol on Healthdirect</a> · <a href="https://www.gamblinghelponline.org.au/">Gambling Help Online</a></p>
 <p class="small">{E(L["gpLine"])}</p>"""

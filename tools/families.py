@@ -32,7 +32,7 @@ def withdrawal():
     return f"""<section class="card mt" id="withdrawal"><h2 class="mt0">Withdrawal warning signs and when to call 000</h2>
 <p><strong>{WITHDRAWAL_LINE}</strong></p>
 <p><strong>Call 000 straight away if they:</strong></p><ul><li>have a seizure (fit)</li><li>are confused or don't know where they are</li><li>collapse or can't be woken</li></ul>
-<div class="btn-row"><a class="btn danger" href="tel:000">Call 000</a>{tel(AOD, "Call the AOD Hotline " + AOD)}</div>
+<div class="btn-row"><a class="btn danger" href="tel:000">Call 000</a>{tel(AOD, "Call the AOD Hotline " + AOD)}<a class="btn ghost" href="overdose.html">What to do in an overdose</a></div>
 <details class="more"><summary>More info</summary>
 <p>When someone cuts down or stops alcohol or some drugs, their body can react badly. Don't try to manage it at home on your own.</p>
 <p>The hotline is open 24/7 and puts you through to your state or territory's service. SA calls are answered 8.30am–10pm.</p>
@@ -53,7 +53,7 @@ def overdose():
 <details class="more"><summary>More info</summary>
 <p>If opioids might be involved, naloxone can reverse an overdose for a short time. The Australian Government's Take Home Naloxone program makes it free, with no prescription, from participating pharmacies and services. Ask a pharmacist how and when to use it. Always call 000 too, even if you have naloxone.</p>
 <p>HomeCircle can't give medical instructions. Follow the 000 operator, a pharmacist or a doctor.</p>
-<div class="btn-row">{link("https://www.health.gov.au/our-work/take-home-naloxone-program", "Take Home Naloxone program")}</div>
+<div class="btn-row"><a class="btn" href="overdose.html">What to do in an overdose</a>{link("https://www.health.gov.au/our-work/take-home-naloxone-program", "Take Home Naloxone program")}</div>
 {src([("Australian Government Department of Health, Disability and Ageing: Take Home Naloxone program", "https://www.health.gov.au/our-work/take-home-naloxone-program")])}
 </details></section>"""
 
@@ -173,6 +173,7 @@ def dv_body():
 </div>
 {safety_plan()}
 {dv_aod(full=True)}
+<div class="card mt" id="overdose-link"><h2 class="mt0">Worried someone has overdosed?</h2><p>Call <a href="tel:000">000</a> now. Then see what to do while you wait.</p><div class="btn-row"><a class="btn danger" href="tel:000">Call 000</a><a class="btn" href="overdose.html">What to do in an overdose</a></div></div>
 <h2 class="mt" id="change">Worried about your own behaviour?</h2>
 <p>These services are for people who use violence or are worried they might, and for the people around them. If you're experiencing violence, use the services above instead.</p>
 <div class="grid g2">
@@ -243,12 +244,84 @@ def who_body(key):
 <details class="card more mt"><summary><h2 class="mt0">Worried about violence?</h2></summary><p>If you feel unsafe, there is help in every state and territory.</p><a class="btn" href="safety.html">Domestic and family violence help</a></details>
 {legal()}"""
 
+OD_SRC = [
+    ("healthdirect: Drug overdose", "https://www.healthdirect.gov.au/healthy-living/alcohol-and-drugs/drug-overdose"),
+    ("healthdirect: Accidental overdose of medicines", "https://www.healthdirect.gov.au/medicines/accidental-overdose-of-medicines"),
+    ("healthdirect: Collapsing (DRSABCD)", "https://www.healthdirect.gov.au/collapsing"),
+    ("healthdirect: GHB", "https://www.healthdirect.gov.au/healthy-living/alcohol-and-drugs/ghb"),
+    ("healthdirect: How alcohol affects your health", "https://www.healthdirect.gov.au/healthy-living/alcohol-and-drugs/how-alcohol-affects-your-health"),
+    ("St John Ambulance Australia: Recovery position fact sheet", "https://stjohn.org.au/assets/uploads/fact%20sheets/english/Fact%20sheets_recovery%20position.pdf"),
+    ("St John Ambulance Australia: Accredited training courses", "https://stjohn.org.au/training/accredited-training-courses/"),
+    ("ANZCOR Guideline 8: CPR", "https://www.anzcor.org/home/basic-life-support/guideline-8-cardiopulmonary-resuscitation-cpr/"),
+    ("Australian Government: Take Home Naloxone program", "https://www.health.gov.au/our-work/take-home-naloxone-program"),
+    ("Australian Government: Where to access naloxone", "https://www.health.gov.au/our-work/take-home-naloxone-program/where-to-access-naloxone"),
+    ("Alcohol and Drug Foundation: Overdose and drug-related emergencies", "https://adf.org.au/insights/overdose/"),
+    ("Alcohol and Drug Foundation: Alcohol", "https://adf.org.au/drug-facts/alcohol/"),
+    ("Alcohol and Drug Foundation: GHB", "https://adf.org.au/drug-facts/ghb/"),
+    ("Penington Institute: Overdose", "https://www.penington.org.au/overdose/"),
+    ("Queensland Poisons Information Centre: Medicine or drug overdose", "https://www.poisonsinfo.health.qld.gov.au/medicine-or-drug-overdose"),
+]
+
+def overdose_body():
+    return f"""<section class="card" id="call"><a class="btn danger fam-big" href="tel:000">Call 000 now</a>
+<p><strong>Say it's an overdose. Ask for an ambulance. Stay with them and do what the 000 operator tells you.</strong></p>
+<p>This is general first aid information, not medical training. Always follow the 000 operator.</p></section>
+<p><a href="index.html">← For families &amp; partners</a></p>
+<h1>What to do in an overdose</h1>
+<section class="card mt" id="steps"><h2 class="mt0">What to do (DRSABCD)</h2>
+<ol>
+<li><strong>Danger.</strong> Make sure you, them and everyone nearby are safe.</li>
+<li><strong>Response.</strong> Loudly say their name and squeeze their shoulder. If they don't respond, don't assume they're just asleep.</li>
+<li><strong>Send for help.</strong> Call <a href="tel:000">000</a> and say it's an overdose. Don't leave them.</li>
+<li><strong>Airway and Breathing.</strong> If they're breathing, roll them onto their side in the recovery position and stay with them.</li>
+<li><strong>CPR.</strong> If they're not breathing normally, start CPR as the 000 operator tells you.</li>
+<li><strong>Defibrillation.</strong> If someone can bring a defibrillator (AED), attach it and follow its voice prompts.</li>
+<li><strong>Naloxone.</strong> If opioids might be involved and you have naloxone, use it as the packet or pharmacist instructs. It's free from participating pharmacies and services.</li>
+<li><strong>Stay with them</strong> until the ambulance arrives.</li>
+<li><strong>Tell the paramedics</strong> what they took, how much and when, if you know.</li>
+</ol>
+<details class="more"><summary>More info</summary>
+<p><strong>Recovery position</strong> (St John Ambulance Australia): with them on their back, put their far arm out from their body and their near arm across their chest. Bend their near leg so the foot is on the floor. Roll them away from you onto their side, supporting their head and neck. Keep the bent knee on the ground so they don't roll onto their face, and put their hand under their chin to keep the airway open.</p>
+<p>Open windows and loosen tight clothing so they get enough air.</p>
+<p>Don't worry about getting in trouble for drug use. healthdirect says paramedics don't need to involve the police unless they feel in danger, and they're focused on saving lives.</p>
+</details></section>
+<section class="card mt" id="signs"><h2 class="mt0">Signs of an overdose</h2>
+<p>They don't need to have every sign. If you're worried, call <a href="tel:000">000</a>.</p>
+<details class="more"><summary>More info</summary>
+<h3>Opioids (like heroin, oxycodone, codeine or fentanyl)</h3>
+<ul><li>Can't be woken, or awake but can't respond</li><li>Slow, shallow or irregular breathing, or not breathing</li><li>Choking, gurgling or snoring sounds</li><li>Blue lips or fingertips</li><li>Pale, cool or clammy skin</li><li>Very small pupils</li></ul>
+<h3>Alcohol poisoning</h3>
+<ul><li>Slowed breathing</li><li>Confusion</li><li>Blurred vision</li><li>Nausea or vomiting</li><li>Passing out</li></ul>
+<h3>Stimulants (like speed, ice, cocaine or MDMA)</h3>
+<ul><li>Chest pain or a racing heartbeat</li><li>Difficulty breathing</li><li>Hot, flushed or sweaty skin</li><li>Severe agitation, paranoia, confusion or panic</li><li>Severe stomach pain</li><li>Seizures (fits)</li></ul>
+<h3>GHB</h3>
+<ul><li>Can't be woken</li><li>Confused, agitated or hallucinating</li><li>Sweating or vomiting</li><li>Slow or irregular breathing</li><li>Slow or irregular heartbeat</li><li>Seizures</li></ul>
+</details></section>
+<section class="card mt" id="dont"><h2 class="mt0">What not to do</h2>
+<ul><li>Don't give them food or drink.</li><li>Don't make them vomit.</li><li>Don't leave them alone, or assume they're just sleeping it off.</li><li>Don't rely on a cold shower or coffee. They won't sober someone up.</li></ul></section>
+<section class="card mt" id="after"><h2 class="mt0">Afterwards</h2>
+<p><strong>They still need medical care, even if they wake up.</strong> Naloxone wears off, and they can overdose again. Always call 000, even if you've given naloxone.</p>
+<details class="more"><summary>More info</summary>
+<p>When they wake up, some people feel upset or irritable. Stay calm and keep them company until the ambulance arrives.</p>
+<p>If you're worried someone has taken the wrong medicine or too much, but they're awake and well, call the Poisons Information Centre on <a href="tel:131126">13 11 26</a>, any time, anywhere in Australia. If they've collapsed or aren't breathing, call 000.</p>
+<div class="btn-row">{tel("13 11 26", "Poisons 13 11 26")}</div></details></section>
+<section class="card mt" id="naloxone"><h2 class="mt0">Free naloxone and first aid courses</h2>
+<p>Naloxone is free, with no prescription, from participating pharmacies and services under the Australian Government's Take Home Naloxone program. Ask your pharmacist how to use it.</p>
+<div class="btn-row">{link("https://www.health.gov.au/our-work/take-home-naloxone-program/where-to-access-naloxone", "Where to get free naloxone")}</div>
+<details class="more"><summary>More info</summary>
+<p>Naloxone only works on opioids. It won't reverse alcohol or other drug overdoses, but the Alcohol and Drug Foundation says it won't harm someone who hasn't taken an opioid.</p>
+<p>A first aid course teaches you CPR and the recovery position hands-on. St John Ambulance runs nationally recognised courses in every state and territory.</p>
+<div class="btn-row">{link("https://stjohn.org.au/training/accredited-training-courses/", "St John first aid courses")}{link("https://adf.org.au/insights/overdose/", "ADF: overdose")}</div></details></section>
+{src(OD_SRC)}"""
+
 def build(page, E):
     r_assets = '<script src="../assets/families.js" defer></script>'
     def P(path, title, desc, body):
         top, chk = TOP, CHECKED
         if path == "families/kids.html":
             top, chk = TOP.split('<p class="fam-scared">')[0] + KIDS_SCARED, NEW
+        if path == "families/overdose.html":
+            top, chk = TOP.split('<p class="fam-scared">')[0], NEW
         page(path, "families/index.html", title, desc, f'{top}\n{body}\n{SHARE}\n<p class="small mt">{chk}. HomeCircle is a free support app, not medical care, and isn\'t part of any service listed here.</p>{r_assets}')
     btns = "".join(f'<a class="btn fam-big" href="{k}.html">{v[0]}</a>' for k, v in WHO.items())
     P("families/index.html", "For families & partners: someone I love is addicted – HomeCircle",
@@ -265,6 +338,8 @@ def build(page, E):
     P("families/withdrawal.html", "Supporting someone through withdrawal – HomeCircle",
       "Withdrawal warning signs, when to call 000, and who to call for advice in Australia.",
       f'<p><a href="index.html">← For families &amp; partners</a></p><h1>Supporting someone through withdrawal</h1>{withdrawal()}')
+    P("families/overdose.html", "What to do in an overdose – HomeCircle",
+      "Signs of overdose and what to do: call 000, recovery position, CPR, naloxone. Australian first aid sources.", overdose_body())
     P("families/safety.html", "Domestic and family violence help for families – HomeCircle",
       "1800RESPECT, every state and territory domestic violence line, and the Men's Referral Service.",
       '<p><a href="index.html">← For families &amp; partners</a></p>' + dv_body())
