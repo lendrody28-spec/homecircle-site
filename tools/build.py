@@ -173,7 +173,7 @@ def header(active, r):
     lis = "".join(f'<li><a href="{r}{h}"{" aria-current=\"page\"" if h == active else ""}>{E(t)}</a></li>' for h, t in PAGES)
     return f"""
 <header class="site-head"><div class="wrap">
-  <a class="brand" href="{r}index.html"><img src="{r}assets/logo-96.png" alt="" width="46" height="46"><span><b>HomeCircle</b><small>Support for your recovery journey</small></span></a>
+  <a class="brand" href="{r}index.html"><img src="{r}assets/logo-96.png" alt="" width="46" height="46"><span><b>HomeCircle</b><span class="au-badge" title="HomeCircle Australia"><span class="sr-only">, Australia</span><span aria-hidden="true">AU</span></span><small>Support for your recovery journey</small></span></a>
   <button class="btn ghost menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav" hidden>Menu</button>
   <nav class="nav" id="site-nav" aria-label="Main"><ul>{lis}</ul></nav>
 </div></header>

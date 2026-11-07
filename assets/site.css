@@ -389,3 +389,6 @@ html.ra-on .ra-voices:not([hidden]){display:inline-flex;flex-wrap:wrap;gap:4px;a
 .share-card .small{margin:10px 0 0;color:#EAF4EF;text-align:center;min-height:1em}
 .share-actions{flex-shrink:0;text-align:center}
 @media (max-width:720px){.share-card{flex-direction:column;align-items:flex-start}.share-actions{width:100%}.share-card .btn{width:100%}}
+/* HomeCircle AU label (Australian site) */
+.au-badge{display:inline-block;vertical-align:middle;margin-left:6px;padding:2px 7px;border-radius:999px;background:var(--sage);border:1px solid var(--sage-d);color:var(--ink);font:700 12px/1.3 var(--sans);letter-spacing:.6px;position:relative;top:-3px}
+@media (max-width:420px){.au-badge{display:table;margin:2px 0 0;top:0;padding:1px 6px;font-size:11px}}
