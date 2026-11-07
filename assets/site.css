@@ -368,6 +368,10 @@ html.ra-on .ra-voices:not([hidden]){display:inline-flex;flex-wrap:wrap;gap:4px;a
 .ra-pause:not([hidden]){display:flex;align-items:center;justify-content:center;min-height:44px;min-width:44px;margin:8px 0;padding:6px 18px;border:2px solid var(--text);border-radius:999px;background:#fff;color:var(--text);font:inherit;font-weight:600;cursor:pointer;width:max-content;max-width:100%}
 .ra-pause.on{background:var(--text);color:#fff}
 .ra-pause:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+@media (max-width:375px){.ra-bar>.ra-pause:not([hidden]){flex-basis:100%}}
+.hc-updates{overflow-wrap:break-word}
+.hc-updates ul{margin:8px 0 0;padding-left:1.2em}
+.hc-updates li{margin:6px 0}
 .kai-firstopen .ra-btn{margin-left:6px;vertical-align:middle}
 .kai-after .ra-btn{margin-top:6px}
 .ra-note{margin:0;flex:1 1 220px}

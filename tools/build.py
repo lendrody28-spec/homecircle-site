@@ -8,6 +8,7 @@ import json, html, re, datetime, pathlib
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 C = json.loads((ROOT / "tools" / "app-content.json").read_text())
 EVENTS = json.loads((ROOT / "events.json").read_text())
+UPDATES = json.loads((ROOT / "updates.json").read_text())
 L = C["legal"]
 E = html.escape
 ITEMS = {i["id"]: i for i in C["items"]}
@@ -105,6 +106,7 @@ def seo_head(title, desc, path):
     app = {
         "@type": "MobileApplication",
         "name": "HomeCircle",
+        "softwareVersion": UPDATES["version"],
         "operatingSystem": "iOS",
         "applicationCategory": "HealthApplication",
         "url": SITE_URL,
@@ -369,6 +371,18 @@ def events_html(limit=4, r="", full=False):
 {see}<p class="small">Event list checked on {fmt_date(EVENTS["updated"])}.</p>
 </section>"""
 
+def updates_html():
+    """Public status from updates.json, written into the page. The browser does not fetch it."""
+    here, going = UPDATES["whereWeAre"], UPDATES["whereGoing"]
+    paras = "".join("<p>" + E(p) + "</p>" for p in here["paragraphs"])
+    items = "".join("<li>" + E(item) + "</li>" for item in going["items"])
+    return '<section class="card mt hc-updates" aria-labelledby="hc-where-h"><h2 id="hc-where-h" class="mt0">' + E(here["heading"]) + "</h2>" + paras + "<h2>" + E(going["heading"]) + "</h2><ul>" + items + "</ul></section>"
+
+def support_faq():
+    src = (ROOT / "tools" / "support-app-faq.html").read_text().lstrip("\n")
+    src = re.sub(r'^<p class="small">.*?</p>\n\n', "", src, count=1, flags=re.S)
+    return '<p class="small">' + E(UPDATES["supportLead"]) + "</p>\n\n" + src
+
 # ---------- home ----------
 def build_home():
     r = ""
@@ -423,7 +437,8 @@ def build_home():
     <li><strong>The same Library</strong>, breathing and meditation guides.</li>
   </ul><div class="btn-row"><a class="btn" href="https://apps.apple.com/au/app/homecircle/id6819366068">Get HomeCircle free on the App Store</a></div></div>
   <div class="card sage"><h3>Support, not medical care</h3><p>{E(L["gpLine"])}</p><p>{E(L["notAffiliated"])}</p><p>HomeCircle never reproduces the Big Book or NA literature. We link to the free official pages instead.</p></div>
-</div>"""
+</div>
+{updates_html()}"""
     page("events.html", "", "Events – HomeCircle", "Upcoming AA and NA events from the fellowships' official pages.",
          events_html(full=True) + '<div class="btn-row"><a class="btn ghost" href="https://members.aa.org.au/events/">All AA Australia events</a><a class="btn ghost" href="https://www.na.org.au/multi/events/">All NA Australia events</a></div>')
     page("index.html", "index.html", "HomeCircle – Support for your recovery journey",
@@ -795,7 +810,7 @@ def build_help():
     page("help.html", "help.html", "Get help – HomeCircle", "Helplines for Australia: 000, Lifeline 13 11 14, Beyond Blue, Suicide Call Back Service, 13YARN, QLife, alcohol and drug lines by state, gambling help, and family support.", body)
 
 def build_support():
-    src = (ROOT / "tools" / "support-app-faq.html").read_text()
+    src = support_faq()
     body = f"""<h1>HomeCircle Support</h1>
 <p class="lede">Help with the HomeCircle website and app, and how to contact us.</p>
 <div class="notice"><strong>In crisis or need help now?</strong> HomeCircle is not an emergency service. Call <a href="tel:000">000</a> in an emergency, or Lifeline on <a href="tel:131114">13 11 14</a>. <a href="help.html">More helplines</a>.</div>
@@ -810,6 +825,7 @@ def build_support():
 <h3>How do meeting reminders work on the website?</h3><p>On a meeting, choose <strong>Add reminder</strong>, then <strong>Just this one</strong> or <strong>Every week</strong>. Your browser downloads a calendar file (.ics). Open it with your calendar app to add the meeting, with an alert set for 2 hours before it starts. The website sends no notifications and keeps no list of your reminders; to remove one, delete it in your calendar.</p>
 <h3>Spotted a wrong meeting or event?</h3><p>Meetings and events come from AA and NA's own public listings. Please tell the group or the fellowship, and email us too so we know.</p>
 <h2>The iPhone app</h2>
+{updates_html()}
 {src}
 <h2>Privacy and terms</h2><p>Read the <a href="{PRIVACY}">App Privacy Policy</a> and <a href="{TERMS}">Terms of Use</a>. {E(BROWSER_ONLY)}</p>"""
     page("support.html", "support.html", "Support – HomeCircle", "Get help with HomeCircle: contact, FAQs about the website and app, and crisis support.", body)
