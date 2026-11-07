@@ -107,7 +107,7 @@
      - otherwise: one HTMLAudioElement, primed in the tap with a silent clip, then reused for every clip. */
   var SILENT = "data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAIlYAAESsAAACABAAZGF0YQAAAAA=";
   function makePlayer(env) {
-    var ctx = null, el = null, src = null, mode = null, urls = [];
+    var ctx = null, el = null, src = null, mode = null, urls = [], ticket = 0, holding = false;
     function unlock() {
       var nav = env.navigator || {}, AC = env.AudioContext || env.webkitAudioContext;
       if (nav.audioSession && AC) {
@@ -118,40 +118,74 @@
       } else {
         mode = "element";
         if (!el) el = new env.Audio();
+        el.loop = false;
+        try { el.removeAttribute("loop"); } catch (e) {}
         el.onended = el.onerror = null;
         el.src = SILENT; var q = el.play(); if (q && q.catch) q.catch(function () {});
       }
       return mode;
     }
-    function halt() {
-      if (src) { src.onended = null; try { src.stop(); } catch (e) {} src = null; }
-      if (el) { el.onended = el.onerror = null; try { el.pause(); } catch (e) {} }
+    /* Drop the clip so a finished element cannot play it again. Handlers come off first. */
+    function releaseEl() {
+      if (!el) return;
+      el.onended = el.onerror = null;
+      el.loop = false;
+      try { el.pause(); } catch (e) {}
+      try { el.removeAttribute("src"); } catch (e) {}
     }
-    /* blob: a downloaded clip. Calls done() at the end, fail() if it can't play. */
+    function halt() {
+      ticket++; holding = false;
+      if (src) { src.onended = null; src.loop = false; try { src.stop(); } catch (e) {} src = null; }
+      releaseEl();
+    }
+    /* blob: a downloaded clip. done() once at the end. fail() once only if it never starts. */
     function play(blob, done, fail) {
       halt();
+      var mine = ticket, settled = false;
+      function begun() {
+        try { return !!(el && (el.currentTime > 0 || el.ended)); } catch (e) { return false; }
+      }
+      function finish(ok) {
+        if (settled || mine !== ticket) return;
+        settled = true;
+        if (el) { el.onended = el.onerror = null; el.loop = false; }
+        try { if (el) el.pause(); } catch (e) {}
+        try { if (el) el.removeAttribute("src"); } catch (e) {}
+        if (src) { src.onended = null; src.loop = false; src = null; }
+        if (ok) done(); else fail();
+      }
       if (mode === "webaudio" && ctx) {
         (blob.arrayBuffer ? blob.arrayBuffer() : new env.Response(blob).arrayBuffer()).then(function (ab) {
           return new Promise(function (res, rej) { var p = ctx.decodeAudioData(ab, res, rej); if (p && p.then) p.then(res, rej); });
         }).then(function (buf) {
-          var s = ctx.createBufferSource(); s.buffer = buf; s.connect(ctx.destination);
-          s.onended = function () { if (src === s) { src = null; done(); } };
-          src = s; s.start(0);
-        }, fail);
+          if (settled || mine !== ticket) return;
+          var s = ctx.createBufferSource(); s.buffer = buf; s.loop = false; s.connect(ctx.destination);
+          s.onended = function () { if (!settled && mine === ticket && src === s) { src = null; finish(true); } };
+          src = s; try { s.start(0); } catch (e) { finish(false); }
+        }, function () { finish(false); });
         return;
       }
       if (!el) el = new env.Audio();
       var u = env.URL.createObjectURL(blob); urls.push(u);
-      el.onended = function () { done(); };
-      el.onerror = function () { fail(); };
-      el.src = u; var q = el.play(); if (q && q.catch) q.catch(function () { fail(); });
+      el.loop = false;
+      try { el.removeAttribute("loop"); } catch (e) {}
+      el.onended = function () { finish(true); };
+      el.onerror = function () { if (begun()) finish(true); else finish(false); };
+      el.src = u; el.loop = false;
+      var q = el.play();
+      if (q && q.catch) q.catch(function () {
+        if (settled || mine !== ticket || holding) return;
+        if (begun()) finish(true); else finish(false);
+      });
     }
     /* Pause keeps the place; resume continues from it. Call resume() inside the tap too (iOS). */
     function pause() {
+      holding = true;
       if (mode === "webaudio" && ctx && ctx.suspend) { var r = ctx.suspend(); if (r && r.catch) r.catch(function () {}); }
       else if (el) try { el.pause(); } catch (e) {}
     }
     function resume() {
+      holding = false;
       if (mode === "webaudio" && ctx && ctx.resume) { var r = ctx.resume(); if (r && r.catch) r.catch(function () {}); }
       else if (el && el.src && el.src !== SILENT) { var q = el.play(); if (q && q.catch) q.catch(function () {}); }
     }
@@ -228,7 +262,7 @@
         if (my !== token) return;
         var blob = files[clips[v][k]];
         if (!blob) return speakDevice(text, my, done);
-        whenPlaying(function () { if (my === token) P.play(blob, function () { if (my === token) done(); }, function () { if (my === token) speakDevice(text, my, done); }); });
+        whenPlaying(function () { if (my === token) P.play(blob, function () { if (my === token) done(); }, function () { if (my === token) speakDevice(text, my, done); }); }); /* device voice only if the clip never starts */
       });
     }
     tryClip();
@@ -240,7 +274,7 @@
     u.onend = u.onerror = function () { if (my === token) done(); };
     whenPlaying(function () { if (my === token) synth.speak(u); });
   }
-  /* One Pause/Resume toggle, shown under the text being read while it plays. */
+  /* One Pause/Play control, placed straight after Stop. A normal button: no dialog, no focus trap. */
   function pauseButton() {
     if (pauseBtn) return pauseBtn;
     var b = pauseBtn = document.createElement("button");
@@ -252,8 +286,7 @@
   }
   function placePause(after) {
     var b = pauseButton();
-    if (after && after.parentNode && after.parentNode.classList && after.parentNode.classList.contains("grid")) { if (after.lastChild !== b) after.appendChild(b); }   /* inside the card, not a new grid cell */
-    else if (after && after.parentNode && after.nextSibling !== b) after.parentNode.insertBefore(b, after.nextSibling);
+    if (after && after.parentNode && after.nextSibling !== b) after.parentNode.insertBefore(b, after.nextSibling);
     b.hidden = false; syncPause();
   }
   var pending = null;
@@ -262,8 +295,8 @@
   function syncPause() {
     if (!pauseBtn) return;
     pauseBtn.setAttribute("aria-pressed", paused ? "true" : "false");
-    pauseBtn.querySelector(".ra-pt").textContent = paused ? "Resume" : "Pause";
-    pauseBtn.setAttribute("aria-label", paused ? "Resume reading" : "Pause reading");
+    pauseBtn.querySelector(".ra-pt").textContent = paused ? "Play" : "Pause";
+    pauseBtn.setAttribute("aria-label", paused ? "Play reading" : "Pause reading");
     pauseBtn.classList.toggle("on", paused);
   }
   function togglePause() {
@@ -282,15 +315,13 @@
       var t = queue.shift();
       if (t == null) { setBtn(btn, false); active = null; paused = false; hidePause(); return; }
       if (!t) return next();
-      var i = texts.length - queue.length - 1, at = btn._raAnchor ? btn._raAnchor(i) : null;
-      placePause(at || btn);
+      placePause(btn);
       playOne(t, my, next);
     })();
   }
   function canRead(texts) { return !!localVoice || texts.every(function (t) { var k = key(t); return clips.B && clips.B[k]; }); }
-  var pageEls = [];
   function pageTexts() {
-    var w = document.querySelector("main .wrap"); pageEls = []; return w ? chunksOf(w, pageEls) : [];
+    var w = document.querySelector("main .wrap"); return w ? chunksOf(w) : [];
   }
   function button(label, getTexts, small) {
     var b = document.createElement("button");
@@ -298,7 +329,6 @@
     b.innerHTML = SPK + '<span class="ra-t">Read aloud</span>';
     b.setAttribute("data-ra-label", label); b.setAttribute("aria-label", label); b.setAttribute("aria-pressed", "false");
     b._raTexts = getTexts;
-    if (getTexts === pageTexts) b._raAnchor = function (i) { return pageEls[i]; };   /* pause sits under the section being read */
     b.hidden = !canRead(getTexts());
     return b;
   }

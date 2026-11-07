@@ -70,12 +70,72 @@ ok(R.textOf(el("H2", "", ["Done?"])) === "Done?", "heading with punctuation unch
   const n = el.n; P.pause(); ok(el.paused >= 1 && el.src === "blob:clip", "element pause keeps src");
   P.resume(); ok(el.n === n + 1 && el.src === "blob:clip", "element resume plays the same src");
 })();
+// one completion: loop off, pause keeps the place, a finished clip does not fall back or restart
+(function () {
+  let el;
+  function Audio() {
+    el = this; this.src = ""; this.loop = true; this.currentTime = 0; this.ended = false; this.pauses = 0;
+    this.play = () => {
+      this.plays = (this.plays || 0) + 1;
+      if (String(this.src).startsWith("data:")) return Promise.resolve();
+      const p = { catch(fn) { el._rej = fn; return p; } };
+      return p;
+    };
+    this.pause = () => { this.pauses++; };
+    this.removeAttribute = (name) => { if (name === "src") this.src = ""; if (name === "loop") this.loop = false; };
+    this.load = () => { this.loads = (this.loads || 0) + 1; };
+  }
+  const P = R.makePlayer({ navigator: {}, Audio, URL: { createObjectURL: () => "blob:clip" } });
+  P.unlock();
+  let dones = 0, fails = 0;
+  P.play({}, () => { dones++; }, () => { fails++; });
+  ok(el.loop === false, "loop forced off on the element");
+  el.currentTime = 1.25;
+  P.pause();
+  if (el._rej) el._rej(new Error("abort"));
+  ok(dones === 0 && fails === 0 && el.src === "blob:clip" && el.currentTime === 1.25, "pause keeps position and does not finish or fall back");
+  const plays = el.plays;
+  P.resume();
+  ok(el.plays === plays + 1 && el.src === "blob:clip" && el.currentTime === 1.25, "resume continues from the paused position");
+  el.ended = true;
+  const onend = el.onended, onerr = el.onerror;
+  onend();
+  ok(dones === 1 && fails === 0 && el.src === "" && el.pauses >= 1, "ended once: pause and drop src before moving on");
+  if (onend) onend();
+  if (onerr) onerr();
+  if (el._rej) el._rej(new Error("late"));
+  ok(dones === 1 && fails === 0, "second ended/error/reject does not restart or use the device voice");
+})();
+// a clip that never starts falls back once, and only once
+(function () {
+  let el;
+  function Audio() {
+    el = this; this.src = ""; this.loop = true; this.currentTime = 0; this.ended = false;
+    this.play = () => {
+      if (String(this.src).startsWith("data:")) return Promise.resolve();
+      const p = { catch(fn) { el._rej = fn; return p; } };
+      return p;
+    };
+    this.pause = () => {};
+    this.removeAttribute = (name) => { if (name === "src") this.src = ""; };
+  }
+  const P = R.makePlayer({ navigator: {}, Audio, URL: { createObjectURL: () => "blob:nope" } });
+  P.unlock();
+  let dones = 0, fails = 0;
+  P.play({}, () => { dones++; }, () => { fails++; });
+  const err = el.onerror;
+  err(); err();
+  if (el._rej) el._rej(new Error("again"));
+  ok(dones === 0 && fails === 1, "error before start falls back once and does not repeat");
+})();
 // pause handler: speechSynthesis pause/resume and stop clears the pause
 (function () {
   const src = require("fs").readFileSync(__dirname + "/../assets/readaloud.js", "utf8");
   ok(/synth\.pause\(\)/.test(src) && /synth\.resume\(\)/.test(src), "device voice uses speechSynthesis pause/resume");
   ok(/if \(t === pauseBtn\) \{ togglePause\(\); return; \}/.test(src), "pause toggle handled before any other read-aloud click");
-  ok(/aria-pressed", paused/.test(src) && /"Resume" : "Pause"/.test(src), "pause button swaps label and aria-pressed");
+  ok(/aria-pressed", paused/.test(src) && /"Play" : "Pause"/.test(src) && /"Play reading"/.test(src) && /"Pause reading"/.test(src), "pause button swaps Play/Pause label and aria-pressed");
+  ok(/el\.loop = false/.test(src) && /s\.loop = false/.test(src), "loop forced off");
+  ok(/removeAttribute\("src"\)/.test(src), "src dropped when a clip finishes");
   const safety = src.slice(src.indexOf("/* SAFETY"));
   ok(/tel:.*#kai-notsafe/.test(safety.split("\n")[1] + safety.split("\n")[2]) && /if \(a\) stop\(\)/.test(safety), "call links and I'm not safe still stop playback");
   ok(/function chosen\(\) \{ return "B"; \}/.test(src) && /localStorage\.removeItem\("hc\.ra\.voice\.v1"\)/.test(src), "chosen is always B; clears stored preference");

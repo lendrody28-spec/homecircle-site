@@ -6,6 +6,15 @@ const exe = fs.readdirSync(process.env.HOME + '/.cache/ms-playwright').find(d =>
 const BASE = process.env.RA_BASE || 'http://localhost:8764/';
 process.env.SITE = process.env.SITE || require('path').resolve(__dirname, '..');   /* serve a copy: cd SITE && python3 -m http.server 8764 */
 let n = 0, f = 0; const ok = (c, m) => { n++; if (!c) { f++; console.log('FAIL ' + m); } };
+/* page.waitForFunction evals in the page and the site CSP blocks it. Poll with evaluate instead. */
+async function until(p, pred, arg, timeout) {
+  const t0 = Date.now();
+  while (Date.now() - t0 < timeout) {
+    if (await p.evaluate(pred, arg)) return true;
+    await p.waitForTimeout(40);
+  }
+  return false;
+}
 // Mock speechSynthesis + media playback. mode: 'local' | 'network' | 'none'
 const mock = mode => `(() => {
   const voices = ${JSON.stringify({ local: [{ name: 'Karen', lang: 'en-AU', localService: true, default: true }, { name: 'Lee', lang: 'en-AU', localService: true }, { name: 'Google UK English Female', lang: 'en-GB', localService: false }], network: [{ name: 'Google UK English Female', lang: 'en-GB', localService: false }, { name: 'Google US English', lang: 'en-US', localService: false }], none: [] })}[${JSON.stringify(mode)}];
@@ -65,21 +74,35 @@ const fileVoice = {}; manifest.lines.forEach(l => { for (const v in l.clips) if 
     const vB = p.audioReqs.map(f => fileVoice[f]);
     ok(p.audioReqs.length > 20 && vB.every(v => v === 'B'), `${t}: first tap preloads all Voice B clips in one go (${p.audioReqs.length})`);
     ok((await p.evaluate(() => window.__played.length)) >= 1 && (await p.evaluate(() => window.__spoken.length)) === 0, `${t}: plays a clip, no device speech`);
-    // Pause / Resume: one toggle under the section being read, 44px, text label, keyboard
+    // Pause / Play: one normal button under Stop, 44px, text label, keyboard, no focus trap
     { const pb = p.locator('.ra-pause');
       ok(await pb.isVisible(), `${t}: Pause button shown while reading`);
       const pbb = await pb.boundingBox(); ok(pbb.height >= 44 && pbb.width >= 44, `${t}: Pause 44px ${pbb.width}x${pbb.height}`);
-      ok(await pb.innerText() === 'Pause' && await pb.getAttribute('aria-pressed') === 'false', `${t}: Pause label`);
-      { const pos = await p.evaluate(() => { const b = document.querySelector('.ra-pause'); return { inMain: !!b.closest('main'), after: !!(b.compareDocumentPosition(document.querySelector('.ra-bar .ra-btn')) & Node.DOCUMENT_POSITION_PRECEDING) }; }); ok(pos.inMain, `${t}: Pause sits under the text being read ${JSON.stringify(pos)}`); }
+      ok(await pb.innerText() === 'Pause' && await pb.getAttribute('aria-pressed') === 'false' && await pb.getAttribute('aria-label') === 'Pause reading', `${t}: Pause label`);
+      ok(await pb.evaluate(e => e.tagName === 'BUTTON' && e.getAttribute('type') === 'button' && !e.closest('dialog')), `${t}: Pause is a normal button`);
+      { const pos = await p.evaluate(() => { const b = document.querySelector('.ra-pause'); const stop = document.querySelector('.ra-bar .ra-btn'); return { inMain: !!b.closest('main'), afterStop: !!(b.compareDocumentPosition(stop) & Node.DOCUMENT_POSITION_PRECEDING) }; }); ok(pos.inMain && pos.afterStop, `${t}: Pause sits with Stop ${JSON.stringify(pos)}`); }
+      if (vp.width <= 375) {
+        const lay = await p.evaluate(() => {
+          const rect = e => e && e.getBoundingClientRect();
+          const pb = rect(document.querySelector('.ra-pause'));
+          const stop = rect(document.querySelector('.ra-bar .ra-btn'));
+          const hit = (a, b) => a && b && a.width > 0 && b.width > 0 && a.left < b.right - 0.5 && b.left < a.right - 0.5 && a.top < b.bottom - 0.5 && b.top < a.bottom - 0.5;
+          const crisis = [...document.querySelectorAll('#now a[href^="tel:"], #help-pill, #kai-notsafe')].map(rect);
+          return { sw: document.documentElement.scrollWidth <= window.innerWidth, under: !!(pb && stop && pb.top >= stop.bottom - 1), overlap: crisis.some(c => hit(pb, c)), h: pb && Math.round(pb.height) };
+        });
+        ok(lay.sw && lay.under && !lay.overlap, `${t}: Pause under Stop, no horizontal scroll, crisis controls not covered ${JSON.stringify(lay)}`);
+      }
       const playing = await p.evaluate(() => window.__playing && window.__playing.src), n0 = await p.evaluate(() => window.__played.length), z0 = await p.evaluate(() => window.__paused || 0);
       await pb.click(); await p.waitForTimeout(100);
-      ok(await pb.innerText() === 'Resume' && await pb.getAttribute('aria-pressed') === 'true' && await pb.getAttribute('aria-label') === 'Resume reading', `${t}: toggles to Resume`);
+      ok(await pb.innerText() === 'Play' && await pb.getAttribute('aria-pressed') === 'true' && await pb.getAttribute('aria-label') === 'Play reading', `${t}: toggles to Play`);
       ok((await p.evaluate(() => window.__paused || 0)) > z0 && await btn.getAttribute('aria-pressed') === 'true', `${t}: paused, Stop still there`);
       await p.waitForTimeout(1700);
       ok((await p.evaluate(() => window.__played.length)) === n0, `${t}: nothing new plays while paused`);
+      await pb.focus(); await p.keyboard.press('Tab');
+      ok(await p.evaluate(() => !document.activeElement.classList.contains('ra-pause')), `${t}: Tab leaves Pause (no focus trap)`);
       await pb.focus(); await p.keyboard.press('Enter'); await p.waitForTimeout(100);
       const pl = await p.evaluate(() => window.__played);
-      ok(await pb.innerText() === 'Pause' && pl.length === n0 + 1 && pl[pl.length - 1] === playing, `${t}: Enter resumes the same clip (keeps the place)`);
+      ok(await pb.innerText() === 'Pause' && await pb.getAttribute('aria-pressed') === 'false' && pl.length === n0 + 1 && pl[pl.length - 1] === playing, `${t}: Enter resumes the same clip (keeps the place)`);
       if (vp.width <= 375) ok(await p.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), `${t}: no horizontal scroll with Pause`); }
     // call link stays clickable while audio plays, and stops it
     await p.evaluate(() => { document.querySelectorAll('a[href^="tel:"]').forEach(a => a.addEventListener('click', e => e.preventDefault())); });
@@ -87,6 +110,12 @@ const fileVoice = {}; manifest.lines.forEach(l => { for (const v in l.clips) if 
     await p.click('#now a[href="tel:000"]'); await p.waitForTimeout(200);
     ok(await btn.getAttribute('aria-pressed') === 'false' && (await p.evaluate(() => window.__paused || 0)) > c0, `${t}: tapping Call 000 stops reading`);
     ok(await p.locator('.ra-pause').isHidden(), `${t}: Pause hidden after a call link stops reading`);
+    if (vp.width <= 375) {
+      await p.click('#help-pill');
+      const dlg = await p.evaluate(() => { const d = document.getElementById('help-dialog'); return { open: !!d.open, t: d.innerText, sw: document.documentElement.scrollWidth <= window.innerWidth }; });
+      ok(dlg.open && /Call 000/.test(dlg.t) && /Lifeline/.test(dlg.t) && /13 11 14/.test(dlg.t) && dlg.sw, `${t}: Help opens Call 000 and Lifeline 13 11 14`);
+      await p.keyboard.press('Escape');
+    }
     ok(p.offsite.length === 0, `${t}: no off-site requests ${p.offsite}`);
     ok(p.errs.length === 0, `${t}: no errors ${p.errs}`);
     if (vp.width !== 320) await p.screenshot({ path: `/workspace/shots/readaloud-help-${vp.width}.png` });
@@ -141,7 +170,7 @@ const fileVoice = {}; manifest.lines.forEach(l => { for (const v in l.clips) if 
     ok(sp.length >= 1 && sp.every(s => s.local === true && s.voice === 'Lee'), 'device fallback uses local en-AU male voice (Voice B style) ' + JSON.stringify(sp[0]));
     ok(p.audioReqs.length === 0, 'twelve steps loads no clips');
     await p.click('.ra-pause', { timeout: 3000 }); await p.waitForTimeout(50);
-    ok((await p.evaluate(() => window.__ssPause)) >= 1 && await p.locator('.ra-pause').innerText() === 'Resume', 'device voice: speechSynthesis.pause()');
+    ok((await p.evaluate(() => window.__ssPause)) >= 1 && await p.locator('.ra-pause').innerText() === 'Play' && await p.locator('.ra-pause').getAttribute('aria-label') === 'Play reading' && await p.locator('.ra-pause').getAttribute('aria-pressed') === 'true', 'device voice: speechSynthesis.pause() labels Play');
     await p.click('.ra-pause'); await p.waitForTimeout(50);
     ok((await p.evaluate(() => window.__ssResume)) >= 1 && await p.locator('.ra-pause').innerText() === 'Pause', 'device voice: speechSynthesis.resume()');
     await ctx.close(); }
@@ -162,10 +191,10 @@ const fileVoice = {}; manifest.lines.forEach(l => { for (const v in l.clips) if 
     const { ctx, p } = await open(b, 'index.html', 'network', vp);
     await p.click('#kai-bubble'); await p.waitForSelector('#kai-panel:not([hidden])');
     await p.click('.kai-ra .ra-btn'); await p.waitForTimeout(600);
-    const lay = await p.evaluate(() => { const r = e => e && e.getBoundingClientRect(); const pb = r(document.querySelector('.ra-pause')); const hit = (a, b) => a && b && b.width && a.left < b.right && b.left < a.right && a.top < b.bottom && b.top < a.bottom;
-      const others = [...document.querySelectorAll('#kai-start button, #kai-start a, #kai-crisis a, #kai-notsafe')].map(r);
-      return { shown: !!pb && pb.width > 0, overlap: others.some(o => hit(pb, o)), h: pb && pb.height, sw: document.documentElement.scrollWidth <= window.innerWidth }; });
-    ok(lay.shown && !lay.overlap && lay.h >= 44 && lay.sw, `Kai intro Pause @${vp.width}: no overlap with start buttons / 000 strip ${JSON.stringify(lay)}`);
+    const lay = await p.evaluate(() => { const r = e => e && e.getBoundingClientRect(); const pb = r(document.querySelector('.ra-pause')); const stop = r(document.querySelector('.ra-btn[aria-pressed="true"]')); const hit = (a, b) => a && b && b.width && a.left < b.right && b.left < a.right && a.top < b.bottom && b.top < a.bottom;
+      const others = [...document.querySelectorAll('#kai-start button, #kai-start a, #kai-crisis a, #kai-notsafe, #help-pill')].map(r);
+      return { shown: !!pb && pb.width > 0, overlap: others.some(o => hit(pb, o)), under: !!(pb && stop && pb.top >= stop.bottom - 1), h: pb && pb.height, sw: document.documentElement.scrollWidth <= window.innerWidth }; });
+    ok(lay.shown && !lay.overlap && lay.under && lay.h >= 44 && lay.sw, `Kai intro Pause @${vp.width}: under Stop, no overlap with Help / I'm not safe / 000 strip ${JSON.stringify(lay)}`);
     await p.screenshot({ path: `/workspace/shots/readaloud-kai-pause-${vp.width}.png` });
     await ctx.close(); }
   // Kai screenshots
@@ -193,7 +222,7 @@ const fileVoice = {}; manifest.lines.forEach(l => { for (const v in l.clips) if 
     const kc = await p.evaluate(t => HCReadAloud.key(t), ca.text);
     ok(map.clips.B[kc] === ca.clips.B.file, `childAbuse: Voice B recording kept (${map.clips.B[kc]})`);
     await p.locator('.ra-bar .ra-btn').click();
-    await p.waitForFunction(n => window.__spoken.length >= n, held.length, { timeout: 60000 }).catch(() => {});
+    await until(p, n => window.__spoken.length >= n, held.length, 60000);
     await p.waitForTimeout(300);
     const spoken = await p.evaluate(() => window.__spoken);
     for (const l of held) { const s = spoken.find(x => x.text === l.spoken || x.text === l.text);
@@ -221,5 +250,71 @@ const fileVoice = {}; manifest.lines.forEach(l => { for (const v in l.clips) if 
       ok(await p.locator('.ra-pause').isVisible(), `real playback ${pg}: still playing after 2.5 s (Pause shown)`);
       ok(off.length === 0, `real playback ${pg}: no off-site requests`);
       await ctx.close(); } }
+  // A finished clip does not restart, and Play resumes from the paused position.
+  for (const vp of [{ width: 375, height: 667 }, { width: 320, height: 640 }]) {
+    const ctx = await b.newContext({ viewport: vp });
+    await ctx.addInitScript(() => {
+      window.__spoken = []; window.__played = []; window.__starts = []; window.__seeked = 0;
+      const ss = new EventTarget();
+      ss.getVoices = () => [{ name: 'Lee', lang: 'en-AU', localService: true, default: true }];
+      ss.speak = u => { window.__spoken.push(u.text); setTimeout(() => u.onend && u.onend(), 5); };
+      ss.cancel = () => {}; ss.pause = () => {}; ss.resume = () => {};
+      Object.defineProperty(window, 'speechSynthesis', { value: ss });
+      window.SpeechSynthesisUtterance = function (t) { this.text = t; };
+      setTimeout(() => ss.dispatchEvent(new Event('voiceschanged')), 40);
+      HTMLMediaElement.prototype.play = function () {
+        if (String(this.src).startsWith('data:')) return Promise.resolve();
+        const a = this;
+        window.__played.push(a.src);
+        window.__playing = a;
+        window.__starts.push(a.__pos || 0);
+        a.__tick = setInterval(() => { a.__pos = (a.__pos || 0) + 0.25; }, 30);
+        return new Promise((res, rej) => { a.__rej = rej; a.__res = res; });
+      };
+      HTMLMediaElement.prototype.pause = function () { clearInterval(this.__tick); window.__paused = (window.__paused || 0) + 1; if (this.__rej) { const r = this.__rej; this.__rej = null; r(new Error('abort')); } };
+      Object.defineProperty(HTMLMediaElement.prototype, 'currentTime', { configurable: true, get() { return this.__pos || 0; }, set(v) { this.__pos = v; window.__seeked++; } });
+    });
+    const p = await ctx.newPage(); p.errs = []; p.on('pageerror', e => p.errs.push(e.message));
+    const off = []; p.on('request', r => { const u = r.url(); if (!u.startsWith(BASE) && !u.startsWith('data:') && !u.startsWith('blob:')) off.push(u); });
+    await p.goto(BASE + 'index.html'); await p.waitForTimeout(400);
+    await p.click('#kai-bubble'); await p.waitForSelector('#kai-panel:not([hidden])');
+    await p.click('.kai-ra .ra-btn');
+    await until(p, () => window.__played && window.__played.length >= 1 && window.__playing && window.__playing.currentTime > 0, null, 10000);
+    const seek0 = await p.evaluate(() => window.__seeked || 0);
+    await p.click('.ra-pause'); await p.waitForTimeout(80);
+    const pausedAt = await p.evaluate(() => ({ t: window.__playing.currentTime, src: window.__playing.getAttribute('src'), label: document.querySelector('.ra-pause').textContent, pressed: document.querySelector('.ra-pause').getAttribute('aria-pressed'), name: document.querySelector('.ra-pause').getAttribute('aria-label'), seeked: window.__seeked || 0 }));
+    ok(pausedAt.t > 0 && !!pausedAt.src && pausedAt.label === 'Play' && pausedAt.pressed === 'true' && pausedAt.name === 'Play reading' && pausedAt.seeked === seek0, `pause keeps position @${vp.width} ${JSON.stringify(pausedAt)}`);
+    const nPlay = await p.evaluate(() => window.__played.length);
+    await p.click('.ra-pause'); await p.waitForTimeout(40);
+    const resumed = await p.evaluate(() => ({ starts: window.__starts.slice(), label: document.querySelector('.ra-pause').textContent, pressed: document.querySelector('.ra-pause').getAttribute('aria-pressed'), n: window.__played.length }));
+    ok(resumed.label === 'Pause' && resumed.pressed === 'false' && resumed.n === nPlay + 1 && resumed.starts[0] === 0 && resumed.starts.length === 2 && resumed.starts[1] === pausedAt.t, `Play resumes from the paused position @${vp.width} ${JSON.stringify(resumed)} pausedAt ${pausedAt.t}`);
+    const beforeEnd = await p.evaluate(() => window.__played.length);
+    await p.evaluate(() => { const a = window.__playing; if (a && a.onended) a.onended(); });
+    await p.waitForTimeout(50);
+    const ended = await p.evaluate(() => { const a = window.__playing; return { attr: a ? a.getAttribute('src') : 'missing', loop: a ? a.loop : null, spoken: window.__spoken.length, played: window.__played.length, starts: window.__starts.length }; });
+    ok(ended.attr == null && ended.loop === false && ended.spoken === 0 && ended.played === beforeEnd && ended.starts === resumed.starts.length, `clip ends without restarting @${vp.width} ${JSON.stringify(ended)}`);
+    await p.evaluate(() => { const a = window.__playing; if (!a) return; const end = a.onended, err = a.onerror, rej = a.__rej; if (end) end(); if (err) err(); if (rej) rej(new Error('late')); if (a.getAttribute('src')) a.play(); });
+    await p.waitForTimeout(40);
+    const after = await p.evaluate(() => ({ spoken: window.__spoken.length, starts: window.__starts.length, played: window.__played.length }));
+    ok(after.spoken === 0 && after.starts === resumed.starts.length && after.played === beforeEnd, `second ended/error does not read the line again @${vp.width} ${JSON.stringify(after)}`);
+    ok(await p.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), `index @${vp.width}: no horizontal scroll`);
+    ok(!off.some(u => /updates\.json|google-analytics|googletagmanager/.test(u)) && off.length === 0, `index @${vp.width}: no off-site or updates.json request ${off}`);
+    ok(p.errs.length === 0, `end/pause @${vp.width}: no errors ${p.errs}`);
+    await ctx.close();
+  }
+  for (const vp of [{ width: 320, height: 640 }, { width: 375, height: 667 }]) {
+    for (const pg of ['index.html', 'support.html']) {
+      const { ctx, p } = await open(b, pg, 'local', vp);
+      ok(await p.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), `${pg} @${vp.width}: no horizontal scroll`);
+      ok(await p.evaluate(() => !performance.getEntriesByType('resource').some(e => /updates\.json/.test(e.name))), `${pg}: updates.json is not fetched`);
+      ok(await p.evaluate(() => document.body.innerText.includes("Where we're at") && document.body.innerText.includes('homecirclerecovery.com') && document.body.innerText.includes('Where HomeCircle is going')), `${pg}: status wording on the page`);
+      ok(await p.evaluate(() => !document.querySelector('a[href*="homecirclerecovery.com"]')), `${pg}: US domain is not a link`);
+      await p.click('#help-pill');
+      const dlg = await p.evaluate(() => { const d = document.getElementById('help-dialog'); return { open: !!d.open, t: d.innerText }; });
+      ok(dlg.open && /Call 000/.test(dlg.t) && /Lifeline/.test(dlg.t) && /13 11 14/.test(dlg.t), `${pg} @${vp.width}: Help opens Call 000 and Lifeline`);
+      ok(p.offsite.length === 0, `${pg}: no off-site requests`);
+      await ctx.close();
+    }
+  }
   await b.close(); console.log(`readaloud browser: ${n - f}/${n} passed`); process.exit(f ? 1 : 0);
 })();
