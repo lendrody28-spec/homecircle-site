@@ -1035,7 +1035,7 @@ TREAT_TYPES = [
     ("Your GP and Medicare", "Medicare may cover this", [
         "A GP is a good first step. They can check your health, talk through your options, and refer you to a service that suits your needs.",
         "If your GP bulk-bills, you don't pay for the visit. Not all GPs do, so ask when you book.",
-        "If you also have a mental health condition, your GP, paediatrician or psychiatrist may write a mental health treatment plan. With a mental health treatment plan from your GP, paediatrician or psychiatrist, Medicare can cover part of the cost of up to 10 individual and 10 group sessions a year. They set their own fees, so Medicare usually covers only some of the cost. Checked against healthdirect on 10 November 2026."],
+        "If you also have a mental health condition, your GP, paediatrician or psychiatrist may write a mental health treatment plan. With a plan, Medicare can cover part of the cost of up to 10 individual and 10 group sessions a year with a mental health professional. They set their own fees, so Medicare usually covers only some of the cost. Checked against healthdirect on 10 November 2026."],
         [("Bulk billing (Services Australia)", "https://www.servicesaustralia.gov.au/bulk-billing"), ("Drug and alcohol rehabilitation (healthdirect)", "https://www.healthdirect.gov.au/healthcare-and-services/roles-and-specialties/drug-and-alcohol-rehabilitation"), ("Mental health treatment plan (healthdirect)", "https://www.healthdirect.gov.au/healthcare-and-services/mental-health/mental-health-treatment-plan")]),
 ]
 TREAT_LABEL_MEANS = {
