@@ -9,6 +9,7 @@ Free website for the HomeCircle recovery support app (au.endrody.homecircle), se
 - meditations.html – animated breathing guide and meditations
 - meetings.html – meeting finder that reads the app's public feed in the browser
 - help.html – every helpline in the app's HelpDirectory, Family & Partners, GA state contacts, and alcohol and drug lines by state
+- find-treatment.html – Find treatment near you (step 1): official treatment finders, the National Alcohol and Other Drug Hotline, state and territory lines, and a free vs paid explainer with Raven's cost labels. No clinic list, no location access. Test: `python3 tools/test_treatment.py`
 - your-circle.html – optional day count, journal and health safety notes, stored only in the browser's localStorage
 - support.html – contact and FAQs
 
