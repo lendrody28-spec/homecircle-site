@@ -816,11 +816,13 @@ def build_help():
 # Step 2 (on-phone postcode search) is separate work.
 COST_LABELS = ["No cost", "Medicare may cover this", "Fees apply", "Ask about costs"]  # Raven's labels, exact wording
 TREAT_CHECKED = "10 November 2026"
+# Hale, 10 Nov 2026: ACT hours differ across official pages. Help keeps its wording (its read-aloud clip help.56 is tied to it).
+TREAT_DETAIL = {"Alcohol and Drug Service Intake, Canberra Health Services": "Intake line, weekdays during business hours. Check their website for current hours. Not a crisis line. After hours, call the National Alcohol and Other Drug Hotline on 1800 250 015."}
 TREAT_NOTE = "HomeCircle doesn't rank, recommend or check any service, and none of them pay us. This is information only, not a referral. Costs, waitlists and services change, so confirm with the service before you go. While you wait, your state's alcohol and drug line can help. In an emergency, call 000."  # Hale's step 1 disclaimer (raven/find-treatment-page-draft.md)
 # (name, who runs it, what it does, url, button label) – shown A to Z by name
 TREAT_FINDERS = [
     ("Counselling Online", "Turning Point", "Free, confidential online chat counselling about alcohol and other drugs, 24/7, for you or someone you care about.", "https://www.counsellingonline.org.au/", "Open Counselling Online"),
-    ("Gambling Help Online", "Linked by the Department of Social Services", "Free, confidential online counselling, live chat and email support for anyone affected by gambling, 24/7.", "https://www.gamblinghelponline.org.au/", "Open Gambling Help Online"),
+    ("Gambling Help Online", "Gambling Help Online is funded as part of an agreement between all State and Territory Governments and the Australian Government.", "Free, confidential online counselling, live chat and email support for anyone affected by gambling, 24/7.", "https://www.gamblinghelponline.org.au/", "Open Gambling Help Online"),
     ("healthdirect Service Finder", "Healthdirect Australia", "A national directory of health services and professionals. Search by service and suburb or postcode, including for a GP who bulk-bills.", "https://www.healthdirect.gov.au/australian-health-services", "Open Service Finder"),
     ("Medicare Mental Health", "Australian Government", "Free mental health support in person, by phone or online. No referral needed. Phone 1800 595 212, weekdays 8.30am to 5pm, excluding public holidays.", "https://www.medicarementalhealth.gov.au/", "Open Medicare Mental Health"),
     ("Path2Help", "Alcohol and Drug Foundation", "Answer a few quick questions to be matched to drug and alcohol services and information for you, or someone you care about.", "https://adf.org.au/help-support/path2help/", "Open Path2Help"),
@@ -843,10 +845,10 @@ TREAT_TYPES = [
         "Some have a waitlist. Your state's alcohol and drug line can tell you what's near you and how to get in."],
         [("Drug and alcohol rehabilitation (healthdirect)", "https://www.healthdirect.gov.au/healthcare-and-services/roles-and-specialties/drug-and-alcohol-rehabilitation")]),
     ("Your GP and Medicare", "Medicare may cover this", [
-        "A GP is a good first step. They can check your health, talk through your options, help you plan withdrawal, and connect you with counselling, withdrawal or rehab services.",
+        "A GP is a good first step. They can check your health, talk through your options, and refer you to a service that suits your needs.",
         "If your GP bulk-bills, you don't pay for the visit. Not all GPs do, so ask when you book.",
         "If you also have a mental health condition, your GP may write a mental health treatment plan. It helps with the cost of up to 10 individual and 10 group sessions a year with a mental health professional. They set their own fees, so Medicare usually covers only some of the cost."],
-        [("Bulk billing (Services Australia)", "https://www.servicesaustralia.gov.au/bulk-billing"), ("Cutting back on alcohol (ACT Government)", "https://www.act.gov.au/health/drugs-alcohol-smoking-and-vaping/alcohol-and-your-health/cutting-back-on-alcohol"), ("Mental health treatment plan (healthdirect)", "https://www.healthdirect.gov.au/healthcare-and-services/mental-health/mental-health-treatment-plan")]),
+        [("Bulk billing (Services Australia)", "https://www.servicesaustralia.gov.au/bulk-billing"), ("Drug and alcohol rehabilitation (healthdirect)", "https://www.healthdirect.gov.au/healthcare-and-services/roles-and-specialties/drug-and-alcohol-rehabilitation"), ("Mental health treatment plan (healthdirect)", "https://www.healthdirect.gov.au/healthcare-and-services/mental-health/mental-health-treatment-plan")]),
 ]
 TREAT_LABEL_MEANS = {
     "No cost": "The service's own website, or the government, says it's free.",
@@ -861,7 +863,7 @@ def cost_tag(label):
 
 def build_treatment():
     finders = "".join(
-        f'<div class="card finder"><h3 class="mt0">{E(n)}</h3><p class="small teal">{E(who)}</p><p>{E(what)}</p><a class="btn ghost" href="{E(u)}" rel="noopener">{E(btn)}</a></div>'
+        f'<div class="card finder"><h3 class="mt0">{E(n)}</h3>{f'<p class="small teal">{E(who)}</p>' if who else ''}<p>{E(what)}</p><a class="btn ghost" href="{E(u)}" rel="noopener">{E(btn)}</a></div>'
         for n, who, what, u, btn in sorted(TREAT_FINDERS, key=lambda f: f[0].lower()))
     def type_card(h, label, paras, links):
         ps = "".join(f"<p>{E(p)}</p>" for p in paras)
@@ -872,6 +874,7 @@ def build_treatment():
     legend = "".join(f"<li>{cost_tag(l)} {E(TREAT_LABEL_MEANS[l])}</li>" for l in COST_LABELS)
     def st_line(n, dial, disp, detail, url, *country):
         extra = f'<a class="btn ghost" href="tel:{country[0][0]}">Call {E(country[0][1])} (country)</a>' if country else ""
+        detail = TREAT_DETAIL.get(n, detail)
         return f'<div class="state-line"><h4>{E(n)}</h4><p>{E(detail)}</p><div class="btn-row"><a class="btn ghost" href="tel:{dial}">Call {E(disp)}</a>{extra}<a class="btn ghost" href="{E(url)}" rel="noopener">Open site<span class="sr-only">: {E(n)}</span></a></div></div>'
     states = "".join(f'<details class="card state"><summary><h3>{E(st)}</h3></summary>{"".join(st_line(*l) for l in sorted(ls, key=lambda l: l[0].lower()))}</details>'
                      for st, ls in sorted(STATE_LINES, key=lambda s: s[0]))
@@ -896,10 +899,10 @@ def build_treatment():
 <p>Free advice, counselling and referral to treatment in your state or territory. They're not emergency services. Keep 000 and Lifeline first.</p>
 <div class="grid g2 states">{states}</div>
 <p class="small">More lines, including family support, are on the <a href="help.html">Help page</a>.</p>
-<div class="card mt"><h2 class="mt0">Please note</h2><p>{E(TREAT_NOTE)}</p><p>{E(L["notAffiliated"])} These are independent services. HomeCircle is not affiliated with them.</p><p class="small">Checked against each service's own website on {TREAT_CHECKED}. Hours and numbers can change, so check the service's own website.</p></div>
+<div class="card mt"><h2 class="mt0">Please note</h2><p>{E(TREAT_NOTE)}</p><p>The services and finders on this page are run by others. HomeCircle isn't affiliated with or endorsed by any of them.</p><p class="small">Checked against each service's own website on {TREAT_CHECKED}. Hours and numbers can change, so check the service's own website.</p></div>
 <div class="emergency-card mt"><h2 class="mt0">Call 000 immediately</h2><p>{E(HL["000"]["detail"])}</p><a class="btn" href="tel:000">Call 000</a></div>"""
     page("find-treatment.html", "", "Find treatment near you – HomeCircle",
-         "Free and fee-based alcohol, drug and gambling help in Australia, with official treatment finders and every state and territory line. Support, not medical care.", body)
+         "Free and fee-based alcohol, drug and gambling help in Australia, with official treatment finders and every state and territory line.", body)
 
 def build_support():
     src = support_faq()

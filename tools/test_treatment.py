@@ -4,6 +4,7 @@ Checks the built page has 000, Lifeline, the National AOD Hotline and Raven's fo
 that every finder and outside link is https, lists are A to Z, there are no prices, rankings,
 location access, trackers or third-party scripts, and that Help and every footer link to it."""
 import glob, os, re, sys
+from html import unescape as html_unescape
 from html.parser import HTMLParser
 
 root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -92,6 +93,20 @@ pages = sorted(glob.glob("*.html") + glob.glob("library/*.html") + glob.glob("fa
 missing = [f for f in pages if not re.search(r'href="(\.\./)?find-treatment\.html">Find treatment near you<', open(f, encoding="utf-8").read())]
 ok(not missing, f"footer link on every page ({len(pages)} pages; missing: {missing})")
 ok("https://homecircle.au/find-treatment.html" in open("sitemap.xml").read(), "in sitemap.xml")
+
+# Hale/Iris edits, 10 Nov 2026
+ACT = "Intake line, weekdays during business hours. Check their website for current hours. Not a crisis line. After hours, call the National Alcohol and Other Drug Hotline on 1800 250 015."
+ok(ACT in text, "ACT line uses Hale's hours wording")
+note = re.search(r'<h2 class="mt0">Please note</h2>(.*?)</div>', main, re.S)
+note_t = re.sub(r"\s+", " ", html_unescape(re.sub(r"<[^>]+>", " ", note.group(1)))) if note else ""
+AFF = "The services and finders on this page are run by others. HomeCircle isn't affiliated with or endorsed by any of them."
+ok(AFF in note_t and note_t.count("affiliated") == 1, "Please note has exactly one affiliation sentence (Hale's)")
+ok("none of them pay us" in note_t and "doesn't rank, recommend or check any service" in note_t, "Please note keeps Hale's step 1 disclaimer")
+ok("Porn" not in text and "These are independent services" not in note_t, "no PAA mention or old affiliation line in the page body")
+ok("Gambling Help Online is funded as part of an agreement between all State and Territory Governments and the Australian Government." in text and "Linked by the Department" not in text, "Gambling Help Online funding line quoted from its own About us page")
+DESC = "Free and fee-based alcohol, drug and gambling help in Australia, with official treatment finders and every state and territory line."
+ok(all(f'{k}="{n}" content="{DESC}"' in src for k, n in (("name", "description"), ("property", "og:description"), ("name", "twitter:description"))), "meta, og and twitter descriptions")
+ok("act.gov.au/health/drugs-alcohol" not in src, "GP card uses national healthdirect source, not the ACT page")
 
 print(f"{'FAILED' if fails else 'passed'}: {fails} failure(s)")
 sys.exit(1 if fails else 0)
