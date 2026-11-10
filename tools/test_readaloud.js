@@ -158,6 +158,9 @@ ok(R.pickVoice(loc, "en-AU", "B").name === "Lee", "B prefers local en-AU male");
 ok(R.pickVoice([{ name: "Amelie", lang: "fr-FR", localService: true }], "en-AU", "A") === null, "non-English local only -> null");
 ok(R.pickVoice([{ name: "Moira", lang: "en-IE", localService: true }], "en-AU", "B").name === "Moira", "B with only a female local voice -> any local voice");
 ok(!R.pickVoice(loc, "en-AU", "A").name.startsWith("Google"), "never a network voice");
+const raSrc = require("fs").readFileSync(__dirname + "/../assets/readaloud.js", "utf8");
+ok(/voice\.localService !== true/.test(raSrc) && /pickVoice\(synth\.getVoices\(\)/.test(raSrc.slice(raSrc.indexOf("function speakDevice"))), "speakDevice re-picks and refuses a non-local voice");
+
 // key() matches tools/ra.py key()
 const texts = ["Call 000 now if you or anyone else is in danger.", "Kai is a recovery buddy, not a person.", "It’s “quoted” – dash", "  spaced\n text  "];
 const py = JSON.parse(execFileSync("python3", ["-c", "import sys,json;sys.path.insert(0,'tools');import ra;print(json.dumps([ra.key(t) for t in json.load(sys.stdin)]))"], { input: JSON.stringify(texts), cwd: __dirname + "/.." }).toString());

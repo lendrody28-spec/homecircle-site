@@ -379,7 +379,7 @@ REGION = "AU"
 RA_KAI = RA.kai_lines(REGION)
 RA_HELP_BODY = None
 RA_PAGE_SIZES = {}
-RA_NOTE = "Read aloud plays recordings stored on this website, or your device's own voice. Nothing you read or type is sent anywhere."  # Hale approved, 5 Nov 2026
+RA_NOTE = "Read aloud plays recordings stored on this website, or your device's own voice. Nothing you read or type is sent anywhere."  # Hale approved, 5 Nov 2026; kept 10 Nov 2026: device-voice fallback uses only SpeechSynthesisVoice.localService === true; if none, text only (buttons hidden / line skipped). No online voice path.
 RA_BAR = f'<div class="ra-bar ra-skip"><p class="ra-note small">{RA_NOTE}</p><p class="ra-note ra-transcript small">{E(A["SITE"]["transcript"])}</p></div>\n'
 def ra_read_page(path):
     return path in ("help.html", "twelve-steps.html", "support.html") or path.startswith("families/")
@@ -936,7 +936,7 @@ def disability_services():
     cards = "".join(f'<div class="card"><h3>{E(n)}</h3><p class="one">{E(one)}</p><p>{E(d)}</p><div class="btn-row">'
                     + "".join(f'<a class="btn ghost" href="{E(h)}"{" rel=\"noopener\"" if h.startswith("http") else ""}>{E(l)}</a>' for h, l in b)
                     + "</div></div>" for n, one, d, b in DISABILITY_SERVICES)
-    return f"""<h2 id="disability">Disability information and support</h2>
+    return f"""<h2 id="disability">Disability and other support</h2>
 <p>For people with disability, families and carers. These aren't crisis lines. In an emergency, call 000.</p>
 <div class="grid g2">{cards}</div>
 <p class="small">{AFFIL} Checked against official pages on {A["CHECKED"]}. Hours and numbers can change, so check the service's own website.</p>"""
@@ -1035,7 +1035,7 @@ TREAT_TYPES = [
     ("Your GP and Medicare", "Medicare may cover this", [
         "A GP is a good first step. They can check your health, talk through your options, and refer you to a service that suits your needs.",
         "If your GP bulk-bills, you don't pay for the visit. Not all GPs do, so ask when you book.",
-        "If you also have a mental health condition, your GP may write a mental health treatment plan. It helps with the cost of up to 10 individual and 10 group sessions a year with a mental health professional. They set their own fees, so Medicare usually covers only some of the cost."],
+        "If you also have a mental health condition, your GP, paediatrician or psychiatrist may write a mental health treatment plan. With a mental health treatment plan from your GP, paediatrician or psychiatrist, Medicare can cover part of the cost of up to 10 individual and 10 group sessions a year. They set their own fees, so Medicare usually covers only some of the cost. Checked against healthdirect on 10 November 2026."],
         [("Bulk billing (Services Australia)", "https://www.servicesaustralia.gov.au/bulk-billing"), ("Drug and alcohol rehabilitation (healthdirect)", "https://www.healthdirect.gov.au/healthcare-and-services/roles-and-specialties/drug-and-alcohol-rehabilitation"), ("Mental health treatment plan (healthdirect)", "https://www.healthdirect.gov.au/healthcare-and-services/mental-health/mental-health-treatment-plan")]),
 ]
 TREAT_LABEL_MEANS = {

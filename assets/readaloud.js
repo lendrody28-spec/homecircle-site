@@ -268,9 +268,12 @@
     tryClip();
   }
   function speakDevice(text, my, done) {
-    if (!localVoice || !synth || typeof SpeechSynthesisUtterance === "undefined") return done();
+    /* Re-pick at speak time. Never call synth.speak without a localService voice (no online fallback). */
+    var voice = (synth && synth.getVoices) ? pickVoice(synth.getVoices(), LANG, "B") : null;
+    localVoice = voice;
+    if (!voice || voice.localService !== true || !synth || typeof SpeechSynthesisUtterance === "undefined") return done();
     var u = new SpeechSynthesisUtterance(speakable(text));
-    u.voice = localVoice; u.lang = localVoice.lang;
+    u.voice = voice; u.lang = voice.lang;
     u.onend = u.onerror = function () { if (my === token) done(); };
     whenPlaying(function () { if (my === token) synth.speak(u); });
   }

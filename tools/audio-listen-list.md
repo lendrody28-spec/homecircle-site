@@ -39,4 +39,4 @@ Not in the build (files kept outside the site in /workspace/tts-work/held/). Unt
 
 ## Thursday Voice B re-record (accessibility options, 10 Nov 2026)
 
-New or changed Help lines have no clip yet and use the device voice: help.05 (106 / NRS / you cannot SMS 000), help.28–help.34 (Disability information and support). Also re-record any practice-page lines whose on-screen wording changed (mindful moving versions, gentler body scan, and the light-touch cue edits).
+New or changed Help lines have no clip yet and use the device voice: help.05 (106 / NRS / you cannot SMS 000), help.28–help.34 (Disability and other support). Also re-record any practice-page lines whose on-screen wording changed (mindful moving versions, gentler body scan, and the light-touch cue edits).
