@@ -211,6 +211,9 @@ dialog.help::backdrop{background:rgba(20,30,28,.55)}
 .teal{color:var(--teal)}
 .plain-list{list-style:none;padding:0;margin:8px 0 14px;display:grid;gap:6px}
 .plain-list a{font-weight:700}
+.link-list a{display:inline-flex;align-items:center;min-height:44px}
+.cost-legend li{line-height:1.5}
+.cost-legend .tag{margin:0 6px 0 0}
 .emergency-card{background:var(--danger);color:#fff;border-radius:var(--radius);padding:22px 24px}
 .emergency-card h2,.emergency-card p{color:#fff}
 .emergency-card .btn{background:#fff;color:var(--danger);border-color:#fff}
