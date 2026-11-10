@@ -166,7 +166,7 @@ texts.forEach((t, i) => ok(R.key(t) === py[i], "key matches python for " + JSON.
 const m = require("./audio-manifest.json");
 m.lines.forEach(l => ok(l.spoken === S(l.text), "spoken script current: " + l.id));
 m.lines.forEach(l => ok(!/\b(911|988)\b|nine one one|nine eight eight/.test(l.text + l.spoken), "no US numbers: " + l.id));
-const HELD = ["help.22", "help.37", "help.56"];
+const HELD = ["help.05", "help.23", "help.28", "help.29", "help.30", "help.31", "help.32", "help.33", "help.34", "help.45", "help.64"];
 ok(Object.keys(m.voices).join() === "B" && !m.voices.A, "manifest ships Voice B only");
 m.lines.forEach(l => ok(HELD.includes(l.id) ? !l.clips.B && l.clipsHeld && l.clipsHeld.B && !l.clipsHeld.A : !!(l.clips.B && !l.clips.A), "Voice B only (or held for a human listen): " + l.id));
 const ca = m.lines.find(l => l.id === "kai.crisis.childAbuse");

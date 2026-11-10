@@ -73,77 +73,114 @@
     if (limit) Array.prototype.filter.call(evList.children, function (li) { return !li.hidden; }).slice(limit).forEach(function (li) { li.hidden = true; });
   }
 
-  /* Breathing guide */
+  /* Breathing guide. Accessibility options (10 Nov 2026): Pause, a slower pace (in and out only, holds
+     never get longer), and a still text count instead of the moving circle. The still count is on by
+     default when the device asks for reduced motion. The screen reader hears each phase once
+     ("Breathe in for 4"), never each tick. */
   var PATTERNS = {
     "breath-box": [["Breathe in", 4, 1], ["Hold", 4, 1], ["Breathe out", 4, 0], ["Hold empty", 4, 0]],
     "breath-478": [["Breathe in", 4, 1], ["Hold", 7, 1], ["Breathe out", 8, 0]],
     "breath-46": [["Breathe in", 4, 1], ["Breathe out", 6, 0]]
   };
+  var reduceMotion = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  function isHold(name) { return name.indexOf("Hold") === 0; }
   document.querySelectorAll("[data-breath]").forEach(function (root) {
     var ball = root.querySelector(".breath-ball"), label = root.querySelector(".breath-label"),
       phaseEl = root.querySelector("[data-phase]"), countEl = root.querySelector("[data-count]"),
       live = root.querySelector("[data-live]"), start = root.querySelector("[data-start]"),
       sel = root.querySelector("[data-pattern]"), mins = root.querySelector("[data-minutes]"),
-      left = root.querySelector("[data-left]"), cues = root.querySelectorAll("[data-cue-for]");
-    var timer = null, endAt = 0, running = false;
+      left = root.querySelector("[data-left]"), cues = root.querySelectorAll("[data-cue-for]"),
+      pauseBtn = root.querySelector("[data-bpause]"), paceSel = root.querySelector("[data-pace]"),
+      stillBox = root.querySelector("[data-still]"), textCount = root.querySelector("[data-text-count]");
+    var timer = null, endAt = 0, running = false, paused = false, pausedAt = 0, cur = null, curI = 0;
+    root.querySelectorAll(".breath-js").forEach(function (n) { n.hidden = false; });
+    function still() { return root.classList.contains("still"); }
+    function setStill(on) { root.classList.toggle("still", on); if (stillBox) stillBox.checked = on; if (on) { ball.style.transitionDuration = "0s"; ball.style.transform = "scale(.35)"; label.classList.add("dark"); } }
+    setStill(reduceMotion);
+    if (stillBox) stillBox.addEventListener("change", function () { setStill(stillBox.checked); });
+    function pace() { return paceSel ? parseFloat(paceSel.value) || 1 : 1; }
+    function showText(t) { if (textCount) textCount.textContent = t; }
     function showCue(id) { cues.forEach(function (c) { c.hidden = c.getAttribute("data-cue-for") !== id; }); }
     function stop(msg) {
       if (running) practice(false);
-      running = false; clearTimeout(timer); clearInterval(root._tick);
+      running = false; paused = false; clearTimeout(timer); clearInterval(root._tick);
       start.textContent = "Start"; start.setAttribute("aria-pressed", "false");
-      ball.style.transitionDuration = "1.5s"; ball.style.transform = "scale(.35)";
+      if (pauseBtn) { pauseBtn.hidden = true; pauseBtn.textContent = "Pause"; pauseBtn.setAttribute("aria-pressed", "false"); }
+      ball.style.transitionDuration = still() ? "0s" : "1.5s"; ball.style.transform = "scale(.35)";
       phaseEl.textContent = msg || "Ready"; countEl.textContent = ""; label.classList.add("dark");
+      showText(msg || "Ready");
       if (live) live.textContent = msg || "Stopped.";
       if (left) left.textContent = "";
-      if (sel) sel.disabled = false; if (mins) mins.disabled = false;
+      if (sel) sel.disabled = false; if (mins) mins.disabled = false; if (paceSel) paceSel.disabled = false;
     }
     function run(pattern, i) {
-      if (!running) return;
+      if (!running || paused) return;
       if (Date.now() >= endAt) { stop("Well done. Breathe normally."); return; }
-      var ph = pattern[i % pattern.length], secs = ph[1];
-      ball.style.transitionDuration = secs + "s";
-      ball.style.transform = ph[2] ? "scale(1)" : "scale(.35)";
-      label.classList.toggle("dark", !ph[2] && ph[0] !== "Hold");
+      cur = pattern; curI = i;
+      var ph = pattern[i % pattern.length], secs = ph[1], tick = isHold(ph[0]) ? 1000 : 1000 * pace();
+      if (!still()) {
+        ball.style.transitionDuration = (secs * tick / 1000) + "s";
+        ball.style.transform = ph[2] ? "scale(1)" : "scale(.35)";
+        label.classList.toggle("dark", !ph[2] && ph[0] !== "Hold");
+      }
       phaseEl.textContent = ph[0];
-      if (live) live.textContent = ph[0] + " for " + secs;
-      var n = secs; countEl.textContent = n;
+      if (live) live.textContent = ph[0] + " for " + secs;   /* once per phase */
+      var n = secs; countEl.textContent = n; showText(ph[0] + " · " + n);
       clearInterval(root._tick);
       root._tick = setInterval(function () {
-        n--; if (n > 0) countEl.textContent = n;
+        n--; if (n > 0) { countEl.textContent = n; showText(ph[0] + " · " + n); }
         if (left) { var s = Math.max(0, Math.round((endAt - Date.now()) / 1000)); left.textContent = Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0") + " left"; }
-      }, 1000);
-      timer = setTimeout(function () { run(pattern, i + 1); }, secs * 1000);
+      }, tick);
+      timer = setTimeout(function () { run(pattern, i + 1); }, secs * tick);
     }
     if (sel) { sel.addEventListener("change", function () { showCue(sel.value); }); showCue(sel.value); }
     start.addEventListener("click", function () {
       if (running) { stop("Stopped. Breathe normally."); return; }
       var id = sel ? sel.value : root.getAttribute("data-breath");
-      running = true; practice(true); start.textContent = "Stop"; start.setAttribute("aria-pressed", "true");
-      if (sel) sel.disabled = true; if (mins) mins.disabled = true;
+      running = true; paused = false; practice(true); start.textContent = "Stop"; start.setAttribute("aria-pressed", "true");
+      if (pauseBtn) pauseBtn.hidden = false;
+      if (sel) sel.disabled = true; if (mins) mins.disabled = true; if (paceSel) paceSel.disabled = true;
       endAt = Date.now() + (mins ? parseInt(mins.value, 10) : 3) * 60000;
       run(PATTERNS[id] || PATTERNS["breath-46"], 0);
+    });
+    if (pauseBtn) pauseBtn.addEventListener("click", function () {
+      if (!running) return;
+      if (!paused) {
+        paused = true; pausedAt = Date.now(); clearTimeout(timer); clearInterval(root._tick);
+        pauseBtn.textContent = "Resume"; pauseBtn.setAttribute("aria-pressed", "true");
+        ball.style.transitionDuration = "0s"; phaseEl.textContent = "Paused"; countEl.textContent = ""; showText("Paused");
+        if (live) live.textContent = "Paused. Breathe normally.";
+      } else {
+        paused = false; endAt += Date.now() - pausedAt;
+        pauseBtn.textContent = "Pause"; pauseBtn.setAttribute("aria-pressed", "false");
+        run(cur, curI);   /* the phase starts again from the beginning */
+      }
     });
     root.addEventListener("keydown", function (e) { if (e.key === "Escape" && running) stop("Stopped. Breathe normally."); });
     stop("Ready");
   });
 
-  /* Step-by-step practice player */
+  /* Step-by-step practice player. A page can have more than one (Mindful moving has one per version).
+     "Slower pace" makes each timed step 1.5 times longer. */
   document.querySelectorAll("[data-player]").forEach(function (root) {
     var steps = root.querySelectorAll(".pstep"), i = 0, timer = null, paused = true;
     var prev = root.querySelector("[data-prev]"), next = root.querySelector("[data-next]"),
       play = root.querySelector("[data-play]"), count = root.querySelector("[data-pcount]"),
-      bar = root.querySelector(".progress i"), pos = root.querySelector("[data-pos]");
+      bar = root.querySelector(".progress i"), pos = root.querySelector("[data-pos]"),
+      paceSel = root.querySelector("[data-pace]");
     var timed = Array.prototype.some.call(steps, function (s) { return parseInt(s.getAttribute("data-seconds"), 10) > 0; });
     root.querySelectorAll(".pcontrols").forEach(function (c) { c.hidden = false; });
     root.querySelectorAll(".pstep").forEach(function (s) { s.hidden = true; });
     if (!timed && play) play.hidden = true;
+    if (!timed && paceSel) paceSel.parentNode.hidden = true;
+    function pace() { return paceSel ? parseFloat(paceSel.value) || 1 : 1; }
     function show(n) {
       i = Math.max(0, Math.min(steps.length - 1, n));
       steps.forEach(function (s, k) { s.hidden = k !== i; });
       pos.textContent = "Step " + (i + 1) + " of " + steps.length;
       prev.disabled = i === 0; next.textContent = i === steps.length - 1 ? "Finish" : "Next";
       bar.style.width = ((i + 1) / steps.length * 100) + "%";
-      var secs = parseInt(steps[i].getAttribute("data-seconds"), 10) || 0;
+      var secs = Math.round((parseInt(steps[i].getAttribute("data-seconds"), 10) || 0) * pace());
       count.textContent = secs ? secs + "s" : "";
       clearInterval(timer);
       if (!paused && secs) {
@@ -156,13 +193,16 @@
     }
     var playing = false;
     function setPlaying(on) { if (on !== playing) { playing = on; practice(on); } }
-    function finish() { clearInterval(timer); paused = true; setPlaying(false); if (play) play.textContent = "Start again"; pos.textContent = "Finished. Take a moment before you get up."; count.textContent = ""; }
+    function finish() { clearInterval(timer); paused = true; setPlaying(false); if (play) play.textContent = "Start again"; pos.textContent = "Finished. Take a moment before you move on."; count.textContent = ""; }
     prev.addEventListener("click", function () { show(i - 1); });
     next.addEventListener("click", function () { if (i === steps.length - 1) finish(); else show(i + 1); });
     if (play) play.addEventListener("click", function () {
       if (play.textContent === "Start again") { paused = false; setPlaying(true); play.textContent = "Pause"; show(0); return; }
       paused = !paused; setPlaying(!paused); play.textContent = paused ? "Resume" : "Pause"; show(i);
     });
+    if (paceSel) paceSel.addEventListener("change", function () { show(i); });
+    var det = root.closest ? root.closest("details") : null;
+    if (det) det.addEventListener("toggle", function () { if (!det.open && !paused && play) play.click(); });   /* closing a version pauses it */
     show(0);
   });
 

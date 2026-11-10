@@ -206,7 +206,7 @@ const fileVoice = {}; manifest.lines.forEach(l => { for (const v in l.clips) if 
     await p.locator('#kai-after .ra-btn').scrollIntoViewIfNeeded();
     await p.screenshot({ path: `/workspace/shots/readaloud-kai-crisis-${vp.width}.png` });
     await ctx.close(); }
-  // Held back pending human listen: help.22/37/56 have no clips and fall back to the device's own voice
+  // Held back (no clips, device voice): help.22/37/56 remapped to help.23/45/64 (human listen, 5 Nov 2026); help.05 and help.28-34 are new accessibility lines for the Thursday Voice B re-record
   { const held = manifest.lines.filter(l => l.clipsHeld && !Object.keys(l.clips).length);
     const ca = manifest.lines.find(l => l.id === 'kai.crisis.childAbuse');
     const ctx = await b.newContext({ viewport: { width: 375, height: 667 } });
