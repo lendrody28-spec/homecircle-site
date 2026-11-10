@@ -52,6 +52,101 @@ CSS_V = _h.sha1((ROOT / "assets" / "site.css").read_bytes()).hexdigest()[:8]
 # One shared cache-busting tag for the three Kai scripts, from their contents (deterministic): changes whenever any of them changes.
 KAI_V = _h.sha256(b"".join((ROOT / "assets" / f).read_bytes() for f in ("kai.js", "kai-crisis.js", "kai-engine.js"))).hexdigest()[:10]
 SITE_URL = "https://homecircle.au"
+
+# Published HTML paths on each site. hreflang tags are generated from the intersection.
+AU_SITE_PATHS = {
+    'events.html',
+    'families/child.html',
+    'families/family.html',
+    'families/friend.html',
+    'families/index.html',
+    'families/kids.html',
+    'families/overdose.html',
+    'families/partner.html',
+    'families/safety.html',
+    'families/withdrawal.html',
+    'help.html',
+    'index.html',
+    'library.html',
+    'library/24-hour-plan.html',
+    'library/4-7-8-breathing.html',
+    'library/alcohol-and-the-body.html',
+    'library/alcoholics-anonymous.html',
+    'library/body-and-recovery-stages.html',
+    'library/body-scan.html',
+    'library/box-breathing.html',
+    'library/breathing-anchor.html',
+    'library/cannabis-and-the-body.html',
+    'library/gambling-support.html',
+    'library/grounding-5-4-3-2-1.html',
+    'library/halt.html',
+    'library/mindful-eating.html',
+    'library/mindful-walking.html',
+    'library/narcotics-anonymous.html',
+    'library/one-thing-focus.html',
+    'library/opioids-and-the-body.html',
+    'library/pornography-addiction-support.html',
+    'library/recovery-books.html',
+    'library/slow-out-breath.html',
+    'library/stimulants-and-the-body.html',
+    'library/stress-and-anxiety.html',
+    'library/urge-surfing-meditation.html',
+    'library/urge-surfing.html',
+    'meditations.html',
+    'meetings.html',
+    'support.html',
+    'twelve-steps.html',
+    'your-circle.html',
+}
+US_SITE_PATHS = {
+    'health-privacy.html',
+    'help.html',
+    'index.html',
+    'library.html',
+    'library/24-hour-plan.html',
+    'library/4-7-8-breathing.html',
+    'library/alcoholics-anonymous.html',
+    'library/body-scan.html',
+    'library/box-breathing.html',
+    'library/breathing-anchor.html',
+    'library/gamblers-anonymous.html',
+    'library/grounding-5-4-3-2-1.html',
+    'library/halt.html',
+    'library/mindful-eating.html',
+    'library/mindful-walking.html',
+    'library/narcotics-anonymous.html',
+    'library/one-thing-focus.html',
+    'library/pornography-addiction-support.html',
+    'library/recovery-books.html',
+    'library/slow-out-breath.html',
+    'library/stress-and-anxiety.html',
+    'library/urge-surfing-meditation.html',
+    'library/urge-surfing.html',
+    'meditations.html',
+    'overdose.html',
+    'privacy.html',
+    'support.html',
+    'terms.html',
+    'twelve-steps.html',
+}
+
+AU_ORIGIN = "https://homecircle.au"
+US_ORIGIN = "https://homecirclerecovery.com"
+
+def page_abs_url(origin, path):
+    return origin + "/" + ("" if path == "index.html" else path)
+
+def hreflang_tags(path):
+    """Alternate language tags for paths that exist on both sites. x-default is the AU URL."""
+    if path not in (AU_SITE_PATHS & US_SITE_PATHS):
+        return ""
+    au = page_abs_url(AU_ORIGIN, path)
+    us = page_abs_url(US_ORIGIN, path)
+    return (
+        f'<link rel="alternate" hreflang="en-AU" href="{au}">\n'
+        f'<link rel="alternate" hreflang="en-US" href="{us}">\n'
+        f'<link rel="alternate" hreflang="x-default" href="{au}">\n'
+    )
 APP_STORE_URL = "https://apps.apple.com/au/app/homecircle/id6819366068"
 APP_STORE_ID = "6819366068"
 OG_IMAGE = f"{SITE_URL}/assets/og-homecircle.png"
@@ -129,7 +224,7 @@ def seo_head(title, desc, path):
     ld_json = _json.dumps(ld, ensure_ascii=False, separators=(",", ":"))
     ld_json = ld_json.replace("</", r"<\/")
     return f"""<link rel="canonical" href="{canon}">
-<meta property="og:type" content="website">
+{hreflang_tags(path)}<meta property="og:type" content="website">
 <meta property="og:site_name" content="HomeCircle">
 <meta property="og:locale" content="en_AU">
 <meta property="og:url" content="{canon}">
@@ -174,8 +269,9 @@ def header(active, r):
     return f"""
 <header class="site-head"><div class="wrap">
   <a class="brand" href="{r}index.html"><img src="{r}assets/logo-96.png" alt="" width="46" height="46"><span><b>HomeCircle</b><span class="au-badge" title="HomeCircle Australia"><span class="sr-only">, Australia</span><span aria-hidden="true">AU</span></span><small>Support for your recovery journey</small></span></a>
+  <a class="region-switch region-switch-header" href="https://homecirclerecovery.com/">In the US? Go to HomeCircle US</a>
   <button class="btn ghost menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav" hidden>Menu</button>
-  <nav class="nav" id="site-nav" aria-label="Main"><ul>{lis}</ul></nav>
+  <nav class="nav" id="site-nav" aria-label="Main"><ul>{lis}<li class="region-switch-item"><a class="region-switch region-switch-menu" href="https://homecirclerecovery.com/">In the US? Go to HomeCircle US</a></li></ul></nav>
 </div></header>
 <a class="help-pill" id="help-pill" href="{r}help.html#now" aria-label="{E(C["crisis"]["accessibilityLabel"])}" aria-describedby="help-pill-hint" aria-controls="help-dialog">{HEART}<span aria-hidden="true">Help</span></a>
 <a class="fam-link" href="{r}families/index.html">For families &amp; partners</a>
@@ -235,7 +331,8 @@ def footer(r):
     s_ = C["crisis"]
     em, ll = HL["000"], HL["lifeline"]
     return f"""
-<footer class="site-foot"><div class="wrap cols">
+<footer class="site-foot"><div class="wrap"><p class="region-switch-footer-slot"><a class="region-switch region-switch-footer" href="https://homecirclerecovery.com/">In the US? Go to HomeCircle US</a></p></div>
+<div class="wrap cols">
   <div>
     <h2>HomeCircle</h2>
     <p>Support for your recovery journey. Free, with no accounts, no sign-in, no cookies, no ads, no trackers and no analytics.</p>
