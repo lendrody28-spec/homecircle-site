@@ -308,7 +308,7 @@ const fileVoice = {}; manifest.lines.forEach(l => { for (const v in l.clips) if 
       ok(await p.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), `${pg} @${vp.width}: no horizontal scroll`);
       ok(await p.evaluate(() => !performance.getEntriesByType('resource').some(e => /updates\.json/.test(e.name))), `${pg}: updates.json is not fetched`);
       ok(await p.evaluate(() => document.body.innerText.includes("Where we're at") && document.body.innerText.includes('homecirclerecovery.com') && document.body.innerText.includes('Where HomeCircle is going')), `${pg}: status wording on the page`);
-      ok(await p.evaluate(() => !document.querySelector('a[href*="homecirclerecovery.com"]')), `${pg}: US domain is not a link`);
+      ok(await p.evaluate(() => { const sec = document.querySelector('section.hc-updates'); return !!sec && sec.innerText.includes('homecirclerecovery.com') && !sec.querySelector('a[href*="homecirclerecovery.com"]'); }), `${pg}: US domain in the status section is not a link`);
       await p.click('#help-pill');
       const dlg = await p.evaluate(() => { const d = document.getElementById('help-dialog'); return { open: !!d.open, t: d.innerText }; });
       ok(dlg.open && /Call 000/.test(dlg.t) && /Lifeline/.test(dlg.t) && /13 11 14/.test(dlg.t), `${pg} @${vp.width}: Help opens Call 000 and Lifeline`);
@@ -317,4 +317,4 @@ const fileVoice = {}; manifest.lines.forEach(l => { for (const v in l.clips) if 
     }
   }
   await b.close(); console.log(`readaloud browser: ${n - f}/${n} passed`); process.exit(f ? 1 : 0);
-})();
+})().catch(err => { console.error(err); process.exit(1); });
