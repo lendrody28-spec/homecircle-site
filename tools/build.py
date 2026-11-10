@@ -331,7 +331,8 @@ def footer(r):
     s_ = C["crisis"]
     em, ll = HL["000"], HL["lifeline"]
     return f"""
-<footer class="site-foot"><div class="wrap cols">
+<footer class="site-foot"><div class="wrap"><p class="region-switch-footer-slot"><a class="region-switch region-switch-footer" href="https://homecirclerecovery.com/">In the US? Go to HomeCircle US</a></p></div>
+<div class="wrap cols">
   <div>
     <h2>HomeCircle</h2>
     <p>Support for your recovery journey. Free, with no accounts, no sign-in, no cookies, no ads, no trackers and no analytics.</p>
