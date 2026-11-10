@@ -25,9 +25,6 @@ WHERE = [
     "The HomeCircle app works online and offline. Kai, practices, the journal and day count work offline. Current meeting listings and outside links need a connection.",
     "Where HomeCircle is going",
     "Coming next: A US version of the HomeCircle website (homecirclerecovery.com). It is not live yet.",
-    "Planned: A New Zealand version of the website.",
-    "Planned: A United Kingdom version of the website.",
-    "Planned: Apps for those countries, subject to local support content and legal checks.",
 ]
 LEAD = "Answers below are for HomeCircle 1.3.0 for iPhone. In the app, open Profile and scroll to About to check your version."
 
