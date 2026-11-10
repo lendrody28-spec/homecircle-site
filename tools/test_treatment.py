@@ -107,6 +107,9 @@ ok("Gambling Help Online is funded as part of an agreement between all State and
 DESC = "Free and fee-based alcohol, drug and gambling help in Australia, with official treatment finders and every state and territory line."
 ok(all(f'{k}="{n}" content="{DESC}"' in src for k, n in (("name", "description"), ("property", "og:description"), ("name", "twitter:description"))), "meta, og and twitter descriptions")
 ok("act.gov.au/health/drugs-alcohol" not in src, "GP card uses national healthdirect source, not the ACT page")
+ok("your GP, paediatrician or psychiatrist may write a mental health treatment plan" in src, "GP card: plan can be written by a GP, paediatrician or psychiatrist")
+ok("With a plan, Medicare can cover part of the cost of up to 10 individual and 10 group sessions a year with a mental health professional." in src, "GP card: 10 individual and 10 group sessions")
+ok("Checked against healthdirect on 10 November 2026." in src, "GP card: checked against healthdirect on 10 November 2026")
 
 print(f"{'FAILED' if fails else 'passed'}: {fails} failure(s)")
 sys.exit(1 if fails else 0)

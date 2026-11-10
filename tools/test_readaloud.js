@@ -158,6 +158,9 @@ ok(R.pickVoice(loc, "en-AU", "B").name === "Lee", "B prefers local en-AU male");
 ok(R.pickVoice([{ name: "Amelie", lang: "fr-FR", localService: true }], "en-AU", "A") === null, "non-English local only -> null");
 ok(R.pickVoice([{ name: "Moira", lang: "en-IE", localService: true }], "en-AU", "B").name === "Moira", "B with only a female local voice -> any local voice");
 ok(!R.pickVoice(loc, "en-AU", "A").name.startsWith("Google"), "never a network voice");
+const raSrc = require("fs").readFileSync(__dirname + "/../assets/readaloud.js", "utf8");
+ok(/voice\.localService !== true/.test(raSrc) && /pickVoice\(synth\.getVoices\(\)/.test(raSrc.slice(raSrc.indexOf("function speakDevice"))), "speakDevice re-picks and refuses a non-local voice");
+
 // key() matches tools/ra.py key()
 const texts = ["Call 000 now if you or anyone else is in danger.", "Kai is a recovery buddy, not a person.", "It’s “quoted” – dash", "  spaced\n text  "];
 const py = JSON.parse(execFileSync("python3", ["-c", "import sys,json;sys.path.insert(0,'tools');import ra;print(json.dumps([ra.key(t) for t in json.load(sys.stdin)]))"], { input: JSON.stringify(texts), cwd: __dirname + "/.." }).toString());
@@ -166,7 +169,7 @@ texts.forEach((t, i) => ok(R.key(t) === py[i], "key matches python for " + JSON.
 const m = require("./audio-manifest.json");
 m.lines.forEach(l => ok(l.spoken === S(l.text), "spoken script current: " + l.id));
 m.lines.forEach(l => ok(!/\b(911|988)\b|nine one one|nine eight eight/.test(l.text + l.spoken), "no US numbers: " + l.id));
-const HELD = ["help.22", "help.37", "help.56"];
+const HELD = ["help.05", "help.23", "help.28", "help.29", "help.30", "help.31", "help.32", "help.33", "help.34", "help.45", "help.64"];
 ok(Object.keys(m.voices).join() === "B" && !m.voices.A, "manifest ships Voice B only");
 m.lines.forEach(l => ok(HELD.includes(l.id) ? !l.clips.B && l.clipsHeld && l.clipsHeld.B && !l.clipsHeld.A : !!(l.clips.B && !l.clips.A), "Voice B only (or held for a human listen): " + l.id));
 const ca = m.lines.find(l => l.id === "kai.crisis.childAbuse");

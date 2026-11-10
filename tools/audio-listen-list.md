@@ -21,18 +21,22 @@ Whisper (base, CPU) often mishears names and long numbers, so a flag here means 
 - [ ] e6ecedb5c796.mp3 - help.16 [B] - numbers not matched: 30 - heard: "National Alcohol and other Drug Hotline Free, confidential support for anyone worried about their own or someone else's alcohol or drug use "
 - [ ] 0c861b9ba893.mp3 - help.17 [B] - numbers not matched: 30 - heard: "More info. Your call goes through to the alcohol and drug service in your state or territory. Open 24-7. From South Australia, the service r"
 - [ ] 5aa9458c0e13.mp3 - help.19 [B] - empty transcript; numbers not matched: 24, 7 - heard: "… … … … … … … … … … … … … … … … … … … … … … … … … … … … … … … … … … … … … … … … … … … … … … … … … … … … … … … … … … … … … … … … … … … … … … "
-- [ ] 64b133173e91.mp3 - help.37 [B] - numbers not matched: 82126933, 94870688, 18 - heard: "Meetings in a member to talk to, not a crisis line and hours aren't published. NSW, call 0455-717-543 Queensland and NT, call 0467-655-799 S"
+- [ ] 64b133173e91.mp3 - help.45 [B] (was help.37) - numbers not matched: 82126933, 94870688, 18 - heard: "Meetings in a member to talk to, not a crisis line and hours aren't published. NSW, call 0455-717-543 Queensland and NT, call 0467-655-799 S"
 - [ ] ed7d61c7d4ea.mp3 - help.43 [B] - numbers not matched: 30 - heard: "Alcohol and Drug Information Service, ADIS, NSW, 24-7, Sydney Metro, 0-2, 8382, 1-0-0-0, for NSW residents and their families. Call 1-800-2-"
-- [ ] 777e148af921.mp3 - help.56 [B] - numbers not matched: 30 - heard: "Alcohol and drug service intake can bear a health services. Intake weekdays 8 a.m. to 5 p.m. closes 3.3 p.m. Wednesdays excluding public hol"
+- [ ] 777e148af921.mp3 - help.64 [B] (was help.56) - numbers not matched: 30 - heard: "Alcohol and drug service intake can bear a health services. Intake weekdays 8 a.m. to 5 p.m. closes 3.3 p.m. Wednesdays excluding public hol"
 
 ## Held back pending human listen
 
 Not in the build (files kept outside the site in /workspace/tts-work/held/). Until a person listens and signs off, these read with the device's own voice.
 
-- [ ] 998a1e910345.mp3 - help.22 [B] - held back pending human listen; now: device voice
-- [ ] 64b133173e91.mp3 - help.37 [B] - held back pending human listen; now: device voice
-- [ ] 777e148af921.mp3 - help.56 [B] - held back pending human listen; now: device voice
+- [ ] 998a1e910345.mp3 - help.23 [B] (was help.22) - held back pending human listen; now: device voice
+- [ ] 64b133173e91.mp3 - help.45 [B] (was help.37) - held back pending human listen; now: device voice
+- [ ] 777e148af921.mp3 - help.64 [B] (was help.56) - held back pending human listen; now: device voice
 
 ## Human-listened
 
 - [x] 1ef6b3b450e7.mp3 - kai.crisis.childAbuse [B] - human-listened OK by LJ, 5 Nov 11:50pm
+
+## Thursday Voice B re-record (accessibility options, 10 Nov 2026)
+
+New or changed Help lines have no clip yet and use the device voice: help.05 (106 / NRS / you cannot SMS 000), help.28–help.34 (Disability and other support). Also re-record any practice-page lines whose on-screen wording changed (mindful moving versions, gentler body scan, and the light-touch cue edits).

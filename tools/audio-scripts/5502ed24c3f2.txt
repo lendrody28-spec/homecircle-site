@@ -1,5 +1,5 @@
 DRAFT
-id: help.05
+id: help.06
 voice: B (kokoro am_michael, speed 0.9)
 file: assets/audio/5502ed24c3f2.mp3
 
