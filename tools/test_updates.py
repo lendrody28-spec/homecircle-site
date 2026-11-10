@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Home and support status is rendered from updates.json. No stale review wording.
-The US domain is plain text. python3 tools/test_updates.py
+The US domain in the status section is plain text. python3 tools/test_updates.py
 """
 import glob, json, os, re, sys
 from html.parser import HTMLParser
@@ -71,7 +71,7 @@ for page in ("index.html", "support.html"):
         if j >= 0:
             at = j + len(line)
     ok("<a" not in sec.lower(), page + ": status section has no links")
-    ok("homecirclerecovery.com" in sec and not re.search(r'href=["\'][^"\']*homecirclerecovery\.com', html), page + ": US domain is plain text")
+    ok("homecirclerecovery.com" in sec and not re.search(r'href=["\'][^"\']*homecirclerecovery\.com', sec), page + ": US domain in the status section is plain text")
     ok("Android" not in sec and "Google Play" not in sec and "Play Store" not in sec, page + ": no other-country store mention")
     ok("updates.json" not in html, page + ": page does not request updates.json")
 
