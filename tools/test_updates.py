@@ -23,17 +23,14 @@ WHERE = [
     "HomeCircle was inspired by LJ's own experience in recovery.",
     "HomeCircle for iPhone is available on the App Store in Australia.",
     "The HomeCircle app works online and offline. Kai, practices, the journal and day count work offline. Current meeting listings and outside links need a connection.",
-    "Where HomeCircle is going",
-    "Coming next: A US version of the HomeCircle website (homecirclerecovery.com). It is not live yet.",
-    "Planned: A New Zealand version of the website.",
-    "Planned: A United Kingdom version of the website.",
-    "Planned: Apps for those countries, subject to local support content and legal checks.",
+    "HomeCircle US, a separate website for people in the United States, is now live at homecirclerecovery.com, with US crisis and support lines.",
 ]
 LEAD = "Answers below are for HomeCircle 1.3.0 for iPhone. In the app, open Profile and scroll to About to check your version."
 
 ok(updates["version"] == "1.3.0", "version is 1.3.0")
 ok(updates["supportLead"] == LEAD, "support lead in updates.json is verbatim")
-ok([updates["whereWeAre"]["heading"]] + updates["whereWeAre"]["paragraphs"] + [updates["whereGoing"]["heading"]] + updates["whereGoing"]["items"] == WHERE, "status wording in updates.json is verbatim")
+ok("whereGoing" not in updates, "no Where HomeCircle is going section")
+ok([updates["whereWeAre"]["heading"]] + updates["whereWeAre"]["paragraphs"] == WHERE, "status wording in updates.json is verbatim")
 
 class Text(HTMLParser):
     def __init__(self):

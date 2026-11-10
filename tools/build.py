@@ -478,10 +478,9 @@ def events_html(limit=4, r="", full=False):
 
 def updates_html():
     """Public status from updates.json, written into the page. The browser does not fetch it."""
-    here, going = UPDATES["whereWeAre"], UPDATES["whereGoing"]
+    here = UPDATES["whereWeAre"]
     paras = "".join("<p>" + E(p) + "</p>" for p in here["paragraphs"])
-    items = "".join("<li>" + E(item) + "</li>" for item in going["items"])
-    return '<section class="card mt hc-updates" aria-labelledby="hc-where-h"><h2 id="hc-where-h" class="mt0">' + E(here["heading"]) + "</h2>" + paras + "<h2>" + E(going["heading"]) + "</h2><ul>" + items + "</ul></section>"
+    return '<section class="card mt hc-updates" aria-labelledby="hc-where-h"><h2 id="hc-where-h" class="mt0">' + E(here["heading"]) + "</h2>" + paras + "</section>"
 
 def support_faq():
     src = (ROOT / "tools" / "support-app-faq.html").read_text().lstrip("\n")
