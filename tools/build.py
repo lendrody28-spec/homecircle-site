@@ -346,6 +346,7 @@ def footer(r):
     <p>Support for your recovery journey. Free, with no accounts, no sign-in, no cookies, no ads, no trackers and no analytics.</p>
     <p>{E(L["gpLine"])} {E(L["notMedicalDevice"])} In an emergency call <a href="tel:000">000</a>. Lifeline <a href="tel:131114">13 11 14</a>.</p>
     <p>{E(L["notAffiliated"])}</p>
+    <p><a href="https://www.facebook.com/61595778045748" rel="noopener">Follow HomeCircle on Facebook</a></p>
   </div>
   <div><h2>Explore</h2><ul>{"".join(f'<li><a href="{r}{h}">{E(t)}</a></li>' for h, t in PAGES)}<li><a href="{r}find-treatment.html">Find treatment near you</a></li><li><a href="{r}before-you-drive.html">Before you drive</a></li></ul></div>
   <div><h2>About</h2><ul>
