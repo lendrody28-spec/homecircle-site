@@ -406,7 +406,7 @@ def page(path, active, title, desc, body):
     if ra_read_page(path): body = ra_insert_bar(path, body)
     if path == "help.html": RA_HELP_BODY = body
     out = head(title, desc, r, path) + header(active, r) + f'\n<main id="main"><div class="wrap">\n{body}\n</div></main>' + footer(r)
-    if path.startswith("families/") or not KAI_ON:  # no Kai chat on families pages (or anywhere while KAI_ON is False)
+    if path.startswith("families/") or path == "before-you-drive.html" or not KAI_ON:  # no Kai chat on families or the drive page (or anywhere while KAI_ON is False)
         out = re.sub(r'<script src="[^"]*kai[^"]*" defer></script>\n', "", out)
         out = re.sub(r'\n<div class="kai" id="kai".*?\n</div>(?=\n</body>)', "", out, flags=re.S)
     kai_here = 'id="kai"' in out
@@ -1251,7 +1251,7 @@ def build_drive():
 <p>If you're not sure, you don't have to drive.</p>
 <ul>
 <li>A taxi or rideshare</li>
-<li>Calling someone</li>
+<li>Call someone</li>
 <li>Wait until you're sure, or don't drive today</li>
 <li>Public transport</li>
 </ul></div>
@@ -1259,7 +1259,7 @@ def build_drive():
 <p>Alcohol affects judgement, vision, coordination and reflexes, and increases the risk of crashing. Drinking slows your reaction time, blurs your vision and makes it hard to judge things like speed and distance. It can also slow your brain so that you can't respond to situations, make decisions or react quickly, reduce your ability to judge your speed or distance from other objects, give you a false sense of confidence, make it harder to do more than one thing at a time, make you drowsy, and affect your sense of balance.</p>
 <p>Different people process alcohol differently. You can still be over the limit the next morning. Being under the limit doesn't mean you're safe to drive. As there's no easy way to know that you are okay to drive after drinking, the only way to be sure is to not drink alcohol if you are going to drive.</p>
 <p>Drugs can affect your judgement, vision, coordination and reflexes—all of which increase your risk of having a crash. Official pages also list a reduced ability to judge distance and speed, reduced coordination and concentration, and blurred vision.</p>
-<p class="small">This wording comes from official Australian road-safety pages: <a href="https://streetsmarts.initiatives.qld.gov.au/drink-driving/get-the-facts/" rel="noopener">Queensland StreetSmarts on drink driving</a>, <a href="https://streetsmarts.initiatives.qld.gov.au/drug-driving/" rel="noopener">Queensland StreetSmarts on drug driving</a>, <a href="https://www.qld.gov.au/transport/safety/road-safety/drink-driving/drugs" rel="noopener">Queensland's drugs and driving page</a>, <a href="https://www.transport.nsw.gov.au/roadsafety/topics-tips/alcohol" rel="noopener">Transport for NSW</a> and <a href="https://transport.vic.gov.au/road-and-active-transport/road-rules-and-safety/alcohol-drugs-and-driving/alcohol-and-driving-laws" rel="noopener">Transport Victoria</a>. {DRIVE_AFFIL}</p>
+<p class="small">This wording comes from official Australian road-safety pages: <a href="https://streetsmarts.initiatives.qld.gov.au/drink-driving/get-the-facts/" rel="noopener">Queensland StreetSmarts on drink driving</a>, <a href="https://streetsmarts.initiatives.qld.gov.au/drug-driving/" rel="noopener">Queensland StreetSmarts on drug driving</a>, <a href="https://www.qld.gov.au/transport/safety/road-safety/drink-driving/drugs" rel="noopener">Queensland's drugs and driving page</a>, <a href="https://www.transport.nsw.gov.au/roadsafety/topics-tips/alcohol" rel="noopener">Transport for NSW</a> and <a href="https://transport.vic.gov.au/road-and-active-transport/road-rules-and-safety/alcohol-drugs-and-driving/alcohol-and-driving-laws" rel="noopener">Transport Victoria</a>.</p>
 <h2>The figures</h2>
 <p>These figures are worded as their official sources word them. They were checked on 12 November 2026. They are not a complete picture for every state and territory.</p>
 {drive_figures()}
@@ -1268,13 +1268,13 @@ def build_drive():
 <p>If you're deciding whether to drive, you might ask yourself:</p>
 <ul>
 <li>Do I feel fine, or am I actually fine to drive?</li>
-<li>Would I be OK with a breath or drug test right now?</li>
+<li>Would I be happy for someone I care about to be in the car with me right now?</li>
 <li>Is there another way home tonight?</li>
-<li>If something happened on the drive, would it be worth having on your conscience?</li>
+<li>If something happened on the drive, would it be worth having on my conscience?</li>
 </ul>
 <h2>Medicines</h2>
 <p>Some prescription and over-the-counter medicines can affect driving. Ask your doctor or pharmacist if you're unsure.</p>
-<p class="small">From <a href="https://www.healthdirect.gov.au/medicines-and-driving" rel="noopener">healthdirect, Medicines and driving</a>. Checked on 12 November 2026. {DRIVE_AFFIL}</p>
+<p class="small">From <a href="https://www.healthdirect.gov.au/medicines-and-driving" rel="noopener">healthdirect, Medicines and driving</a>. Checked on 12 November 2026. This is an independent official page.</p>
 <h2>Official limits and drug-driving pages</h2>
 <p>Limits and rules differ across Australia, and they can change. Check the official page for your state or territory. HomeCircle doesn't restate these as advice.</p>
 <ul class="plain-list link-list">{limits}</ul>
