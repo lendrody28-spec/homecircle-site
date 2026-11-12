@@ -662,7 +662,7 @@ def build_item(i):
         main.append("</div>")
     bg = BG.get(i["id"])
     if bg:
-        main.append(f'<div class="card"><h2 class="mt0">Where this comes from</h2><p>{E(bg["origin"])}</p><h2>Why it can help</h2><p>{E(bg["why"])}</p>{src_list(bg["sources"])}</div>')
+        main.append(f'<div class="card"><h2 class="mt0">Where this comes from</h2><p>{E(bg["origin"])}</p><h2>Why it can help</h2><p>{E(web(bg["why"]))}</p>{src_list(bg["sources"])}</div>')
     links = [l for l in i["links"] if not l.get("inAppMeetings")]
     if any(l.get("inAppMeetings") for l in i["links"]):
         main.append('<p><a class="btn" href="../meetings.html">Find a meeting</a></p>')
@@ -678,7 +678,7 @@ def finish_item(i, path, parts, main, r):
     if i["id"] == "med-walk":
         bg = BG.get(i["id"])
         if bg:
-            main.append(f'<div class="card"><h2 class="mt0">Where this comes from</h2><p>{E(bg["origin"])}</p><h2>Why it can help</h2><p>{E(bg["why"])}</p>{src_list(bg["sources"])}</div>')
+            main.append(f'<div class="card"><h2 class="mt0">Where this comes from</h2><p>{E(bg["origin"])}</p><h2>Why it can help</h2><p>{E(web(bg["why"]))}</p>{src_list(bg["sources"])}</div>')
         links = [l for l in i["links"] if not l.get("inAppMeetings")]
         if links:
             main.append(src_list(links, "Read more"))
@@ -901,22 +901,23 @@ ACCESS_LINKS = {
     "nrs-numbers": ("NRS call numbers and links", "https://www.accesshub.gov.au/about-the-nrs/nrs-call-numbers-and-links"),
     "lifeline-access": ("Lifeline: language and accessibility support", "https://www.lifeline.org.au/get-help/services/crisis-support/language-translation-accessibility-support"),
 }
-AFFIL = "These are independent services. HomeCircle is not affiliated with them."
+AFFIL = "These are independent services. HomeCircle isn't affiliated with or endorsed by them. HomeCircle is support, not medical care."
 def access_help():
     lk = lambda k: f'<a href="{E(ACCESS_LINKS[k][1])}" rel="noopener">{E(ACCESS_LINKS[k][0])}</a>'
     return f"""<div class="card sage mt" id="access"><h2 class="mt0">If you're Deaf, hard of hearing or have a speech difficulty</h2>
-<p><strong>Use 106 if you're Deaf or hard of hearing (TTY).</strong> In an emergency, call 106 from a TTY to reach police, fire or ambulance through the National Relay Service. It's free and open 24/7. 106 works only from a TTY, not from an ordinary phone or by text message.</p>
+<p><strong>If you're Deaf, hard of hearing or have a speech communication difficulty and use a TTY, call 106 in an emergency to reach police, fire or ambulance through the National Relay Service.</strong> It's free and open 24/7. 106 works only from a TTY, not from an ordinary phone or by text message.</p>
 <p>You cannot contact Triple Zero (000) by SMS. The National Relay Service has other ways to reach 000, including NRS Chat, SMS Relay, Voice Relay and NRS Captions.</p>
 <div class="btn-row"><a class="btn" href="{E(ACCESS_LINKS["nrs-emergency"][1])}" rel="noopener">How to make an emergency call using the NRS</a></div>
 <details class="more"><summary>More details</summary><ul>
-<li>SMS Relay: text 0423 677 767 and ask for 000. A relay officer connects you to emergency services. This is not the same as texting 000.</li>
+<li>SMS Relay: text 0423 677 767. Start with 000, then say police, fire or ambulance, your name, where you are and what's happening, and end with GA. A relay officer connects you to emergency services. This is not the same as texting 000.</li>
 <li>Voice Relay: call 1800 555 727, press 1, and ask for 000.</li>
 <li>NRS Chat and NRS Captions have a Call 000 button.</li>
-<li>Lifeline: text 0477 13 11 14, 24/7. Or use the National Relay Service and ask for 13 11 14. TTY users call 133 677, Speak and Listen users call 1300 555 727, and internet relay users connect to the NRS online.</li>
+<li><strong>NRS Helpdesk</strong> (help with relay calls, not emergencies): call 1800 555 660, TTY 1800 555 630, SMS 0416 001 350, 8am to 6pm AEST, Monday to Friday.</li>
+<li>Lifeline: text 0477 13 11 14, 24/7. Or use the National Relay Service and ask for 13 11 14. TTY users call 133 677, Voice Relay (Speak and Listen) users call 1300 555 727, and internet relay users connect to the NRS online.</li>
 </ul>
 <div class="btn-row"><a class="btn ghost" href="sms:0423677767">Text SMS Relay 0423 677 767</a><a class="btn ghost" href="tel:1800555727">Call Voice Relay 1800 555 727</a><a class="btn ghost" href="sms:0477131114">Text Lifeline 0477 13 11 14</a></div>
 <ul class="plain-list link-list"><li>{lk("triplezero")}</li><li>{lk("nrs-numbers")}</li><li>{lk("lifeline-access")}</li></ul></details>
-<p class="small">{AFFIL} Checked against official pages on {A["CHECKED"]}.</p></div>"""
+<p class="small">{AFFIL} Checked against official pages on 12 November 2026.</p></div>"""
 
 DISABILITY_SERVICES = [  # (name, one-liner, detail, buttons [(href, label)])
     ("Disability Gateway", "Helps people with disability, their families and carers find information, services and support in Australia. Run by the Australian Government.",
@@ -939,7 +940,7 @@ def disability_services():
     return f"""<h2 id="disability">Disability and other support</h2>
 <p>For people with disability, families and carers. These aren't crisis lines. In an emergency, call 000.</p>
 <div class="grid g2">{cards}</div>
-<p class="small">{AFFIL} Checked against official pages on {A["CHECKED"]}. Hours and numbers can change, so check the service's own website.</p>"""
+<p class="small">{AFFIL} Checked against official pages on 12 November 2026. Hours and numbers can change, so check the service's own website.</p>"""
 
 def build_help():
     lines = "".join(line_card(HL[i]) for i in H["primary"])
@@ -1247,7 +1248,7 @@ def build_drive():
     body = f"""<div id="now" class="btn-row"><a class="btn danger" href="tel:000">Call 000</a><a class="btn" href="tel:131114">Call Lifeline 13 11 14</a></div>
 <h1>Before you drive</h1>
 <p class="lede">If you're not sure you're okay to drive, pause and use another way home. Feeling fine is not the same as being safe to drive.</p>
-<div class="card sage" id="alternatives"><h2 class="mt0">Easy alternatives</h2>
+<div class="card sage" id="alternatives"><h2 class="mt0">Other ways home</h2>
 <p>If you're not sure, you don't have to drive.</p>
 <ul>
 <li>A taxi or rideshare</li>
