@@ -85,7 +85,13 @@ ok(re.search(r"steady|caring adult", src, re.I), "protective factor: a steady or
 ok(re.search(r"routine", src, re.I), "protective factor: routine")
 ok("child-protection or reporting service" in src or "child protection or reporting service" in src, "not a child-protection or reporting service")
 ok("a page for families and partners" in text.lower(), "families mentioned as a page for families and partners")
-ok("HomeCircle is not affiliated with them" in src or "HomeCircle isn't affiliated with them" in src or "HomeCircle isn’t affiliated with them" in src, "not-affiliated line")
+ok("These are independent organisations. HomeCircle isn't affiliated with or endorsed by them." in text, "not-affiliated line")
+ok("FARE says children living in a home with heavy alcohol use face higher risks of experiencing poor mental health, school disengagement, and intergenerational harm." in text, "FARE risk sentence starts with FARE says")
+ok("Source: FARE (2024), reporting La Trobe University's 2021 Australian Alcohol's Harm to Others study. Checked on 12 November 2026." in text, "exact FARE source note")
+ok("HomeCircle doesn't track shares." in text, "share wording on this page")
+ok("Nothing is tracked." not in text, "old share line gone from this page")
+ok('href="kids.html"' in src and "HomeCircle" in src[src.find("kids.html")-80:src.find("kids.html")+120], "kids-and-teens link names HomeCircle")
+ok('white-space:nowrap' in src and "1800 55 1800" in src, "Kids Helpline number is marked not to wrap")
 
 # Support numbers each have a tel: link
 numbers = {

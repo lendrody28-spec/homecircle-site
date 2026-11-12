@@ -339,7 +339,7 @@ def kids_parental_aod_body():
 <h2>Harm from others' drinking</h2>
 <p>In the 2021 Australian Alcohol's Harm to Others study, by La Trobe University's Centre for Alcohol Policy Research and reported by the Foundation for Alcohol Research and Education (FARE), {fare["wording"][0]}</p>
 <p>{fare["note"]} The survey asked caregivers about the past 12 months.</p>
-{cite("fare-latrobe-2021", fare["period"])}
+<p class="small">Source: <a href="{fare['url']}" rel="noopener">FARE (2024)</a>, reporting La Trobe University's 2021 Australian Alcohol's Harm to Others study. Checked on 12 November 2026.</p>
 <h2>What helps</h2>
 <p>This is about higher risk, not a fixed outcome. Emerging Minds says these risk factors are not always a given: many parents develop strategies to minimise risks for their children, and not all children are negatively affected by their parents' AOD issues. The Alcohol and Drug Foundation says not all children respond the same way, and many children with a parent with substance dependence are resilient and show positive outcomes, despite the risks they're exposed to. Parental substance dependence doesn't necessarily mean poor parenting.</p>
 <p>What can help:</p>
@@ -355,20 +355,20 @@ def kids_parental_aod_body():
 {cite("adf-resilience-and-risk")}
 <h2>What this can be linked with</h2>
 <p>Each situation is unique. Each child thinks, feels and sees their parent's substance use in their own way.</p>
-<p>{fare_risk["wording"][0]} The Alcohol and Drug Foundation says children with a parent with substance dependence are more likely to try alcohol and other drugs earlier and develop problematic use faster, and are at increased risk of developing behavioural, cognitive and social issues. This can raise the risk. It is not a fixed outcome.</p>
+<p>FARE says children living in a home with heavy alcohol use face higher risks of experiencing poor mental health, school disengagement, and intergenerational harm. The Alcohol and Drug Foundation says children with a parent with substance dependence are more likely to try alcohol and other drugs earlier and develop problematic use faster, and are at increased risk of developing behavioural, cognitive and social issues. This can raise the risk. It is not a fixed outcome.</p>
 {cite("qld-each-situation-unique")}
 {cite("fare-higher-risk-description")}
 {cite("adf-resilience-and-risk")}
 <h2>If you're a young person</h2>
 <p>It's not your fault. If a parent or someone who looks after you drinks or uses drugs, you didn't cause it, and it's not your job to fix it.</p>
 <p>You can talk to Kids Helpline any time on <a href="tel:1800551800">1800 55 1800</a>. It's free, private and confidential, for young people aged 5 to 25.</p>
-<p>There is also <a href="kids.html">a short page for kids and teens</a>.</p>
+<p>There is also <a href="kids.html">HomeCircle's short page for kids and teens</a>.</p>
 <h2>Support</h2>
 <p><strong>Family Drug Support Australia</strong> has a national support line for families affected by alcohol and other drug issues, 24 hours, 7 days: <a href="tel:1300368186">1300 368 186</a>. <a href="https://fds.org.au/" rel="noopener">Family Drug Support</a>.</p>
 <p>For alcohol or other drug support, you can also call the National Alcohol and Other Drug Hotline on <a href="tel:1800250015">1800 250 015</a>.</p>
 <p><strong>1800RESPECT</strong> is available 24 hours a day, 7 days a week, for people impacted by domestic, family or sexual violence: <a href="tel:1800737732">1800 737 732</a>. If you're in immediate danger, call <a href="tel:000">000</a>. <a href="https://www.1800respect.org.au/" rel="noopener">1800RESPECT</a>.</p>
 <p><strong>Al-Anon Family Groups Australia</strong> and <strong>Alateen</strong> are for people, including teenagers, affected by someone else's drinking. Call <a href="tel:1300252666">1300 252 666</a>, or visit <a href="https://al-anon.org.au/" rel="noopener">al-anon.org.au</a>.</p>
-<p class="small">These are independent official pages and services. HomeCircle is not affiliated with them.</p>
+<p class="small">These are independent organisations. HomeCircle isn't affiliated with or endorsed by them.</p>
 <p>HomeCircle is support, not medical care, and is not a child-protection or reporting service. If a child is in danger, call <a href="tel:000">000</a>.</p>"""
 
 def build(page, E):
@@ -381,10 +381,13 @@ def build(page, E):
             top, chk = TOP.split('<p class="fam-scared">')[0], NEW
         if path == "families/children-and-parental-aod.html":
             top, chk = TOP.split('<p class="fam-scared">')[0] + (
-                '<div id="now" class="btn-row"><a class="btn" href="tel:1800551800">Call Kids Helpline 1800 55 1800</a></div>\n'
+                '<div id="now" class="btn-row"><a class="btn" href="tel:1800551800">Call Kids Helpline <span style="white-space:nowrap">1800 55 1800</span></a></div>\n'
                 '<p class="fam-scared"><strong>Kids Helpline is for young people aged 5 to 25. If a child is in danger, call <a href="tel:000">000</a>.</strong></p>'
             ), "Checked on 12 November 2026"
-        page(path, "families/index.html", title, desc, f'{top}\n{body}\n{SHARE}\n<p class="small mt">{chk}. HomeCircle is a free support app, not medical care, and isn\'t part of any service listed here.</p>{r_assets}')
+        share = SHARE
+        if path == "families/children-and-parental-aod.html":
+            share = SHARE.replace("Nothing is tracked.", "HomeCircle doesn't track shares.")
+        page(path, "families/index.html", title, desc, f'{top}\n{body}\n{share}\n<p class="small mt">{chk}. HomeCircle is a free support app, not medical care, and isn\'t part of any service listed here.</p>{r_assets}')
     btns = "".join(f'<a class="btn fam-big" href="{k}.html">{v[0]}</a>' for k, v in WHO.items())
     P("families/index.html", "For families & partners: someone I love is addicted – HomeCircle",
       "Help for families, partners and friends of someone with an alcohol or drug problem in Australia.",
