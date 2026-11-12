@@ -1,0 +1,99 @@
+{
+  "figures": [
+    {
+      "id": "qld-drink-driving",
+      "title": "Queensland — drink driving deaths and serious injuries",
+      "wording": [
+        "57 lives lost each year",
+        "834 seriously injured each year",
+        "accounts for more than a fifth of all lives lost on Queensland roads"
+      ],
+      "url": "https://streetsmarts.initiatives.qld.gov.au/drink-driving/",
+      "source": "Queensland StreetSmarts / Department of Transport and Main Roads (2026)",
+      "period": "1 January 2020 – 31 December 2024 (averages). Data extracted January 2026.",
+      "checkedOn": "12 November 2026"
+    },
+    {
+      "id": "qld-drug-driving",
+      "title": "Queensland — drug driving deaths and serious injuries",
+      "wording": [
+        "59 lives lost each year",
+        "291 seriously injured each year"
+      ],
+      "url": "https://streetsmarts.initiatives.qld.gov.au/drug-driving/",
+      "source": "Queensland StreetSmarts / Department of Transport and Main Roads (2026)",
+      "period": "1 January 2020 – 31 December 2024 (averages). Data extracted January 2026.",
+      "checkedOn": "12 November 2026"
+    },
+    {
+      "id": "qld-self-report",
+      "title": "Queensland — self-reported driving over the limit, including the next day",
+      "wording": [
+        "11% of Queenslanders admit to driving when they are over the alcohol limit, while 21% admit to driving the next day when they may be over the limit."
+      ],
+      "url": "https://streetsmarts.initiatives.qld.gov.au/drink-driving/get-the-facts/",
+      "source": "Cited on Queensland StreetSmarts, “Drink driving: Get the facts,” from Footprints Market Research, Driver Attitudes & Behaviour State-wide Research, January 2026.",
+      "period": "January 2026 survey.",
+      "checkedOn": "12 November 2026",
+      "note": "This is a Queensland self-report survey cited by a state road-safety site, not a crash or fatality figure, and not a national official statistic."
+    },
+    {
+      "id": "nsw-drink-fatal",
+      "title": "New South Wales — drink driving in fatal crashes",
+      "wording": [
+        "Drink driving is a factor in about one in every seven crashes in NSW where someone loses their life."
+      ],
+      "url": "https://www.transport.nsw.gov.au/roadsafety/topics-tips/alcohol",
+      "source": "Transport for NSW, “Alcohol & driving.”",
+      "period": "",
+      "checkedOn": "12 November 2026",
+      "note": "The official page does not name a year or range for this figure."
+    },
+    {
+      "id": "vic-bac-deaths",
+      "title": "Victoria — drivers and riders killed with BAC greater than .05",
+      "wording": [
+        "in the last five years, around one in five drivers and riders who lost their lives had a BAC greater than .05."
+      ],
+      "url": "https://transport.vic.gov.au/road-and-active-transport/road-rules-and-safety/alcohol-drugs-and-driving/alcohol-and-driving-laws",
+      "source": "Transport Victoria, “Alcohol and driving laws.”",
+      "period": "",
+      "checkedOn": "12 November 2026",
+      "note": "The official page says “the last five years” but does not name the years."
+    },
+    {
+      "id": "vic-drugs-deaths",
+      "title": "Victoria — drugs detected in killed drivers and riders",
+      "wording": [
+        "In the five years from 2019-2023, 40% of all drivers and riders killed who were tested had drugs in their system."
+      ],
+      "url": "https://www.tac.vic.gov.au/road-safety/staying-safe/drug-driving",
+      "source": "Transport Accident Commission (TAC), “Drug driving.”",
+      "period": "2019–2023.",
+      "checkedOn": "12 November 2026"
+    },
+    {
+      "id": "vic-stimulants-cannabis-2023",
+      "title": "Victoria — stimulants and cannabis in 2023 fatalities",
+      "wording": [
+        "17% of driver and rider fatalities in 2023 had stimulants in their system and 11% had cannabis in their system."
+      ],
+      "url": "https://www.tac.vic.gov.au/road-safety/staying-safe/drug-driving",
+      "source": "Transport Accident Commission (TAC), “Drug driving.”",
+      "period": "2023.",
+      "checkedOn": "12 November 2026"
+    },
+    {
+      "id": "vic-bac-05-risk",
+      "title": "Victoria — crash risk at a BAC of .05",
+      "wording": [
+        "At a BAC of .05, your risk of being involved in a road crash is about double compared with a BAC of zero."
+      ],
+      "url": "https://transport.vic.gov.au/road-and-active-transport/road-rules-and-safety/alcohol-drugs-and-driving/alcohol-and-driving-laws",
+      "source": "Transport Victoria, “Alcohol and driving laws.”",
+      "period": "Not dated on the page (presented as a current official statement).",
+      "checkedOn": "12 November 2026",
+      "note": "This is a risk comparison, not a safe limit or a target. Alcohol affects people differently. Being under the limit is not the same as being safe to drive."
+    }
+  ]
+}
