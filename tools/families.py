@@ -22,7 +22,7 @@ TOP = """<div class="fam-strip" role="region" aria-label="Call for help now"><st
 <p class="fam-scared"><strong>If you're scared of them, call <a href="tel:000">000</a> or 1800RESPECT <a href="tel:1800737732">1800 737 732</a>.</strong></p>"""
 KIDS_SCARED = """<p class="fam-scared"><strong>If you're scared or in danger, call <a href="tel:000">000</a>. You can call Kids Helpline any time on <a href="tel:1800551800">1800 55 1800</a>.</strong></p>"""
 
-SHARE = """<div class="card sage mt"><h2 class="mt0">Share this page</h2><p>Send it to someone you care about, or copy the link. Nothing is tracked.</p>
+SHARE = """<div class="card sage mt ra-skip"><h2 class="mt0">Share this page</h2><p>Send it to someone you care about, or copy the link. HomeCircle doesn't track shares.</p>
 <button class="btn" type="button" id="fam-share">Share this page</button><p class="small" id="fam-share-status" role="status"></p></div>"""
 
 AOD = "1800 250 015"
@@ -384,10 +384,7 @@ def build(page, E):
                 '<div id="now" class="btn-row"><a class="btn" href="tel:1800551800">Call Kids Helpline <span class="nowrap">1800 55 1800</span></a></div>\n'
                 '<p class="fam-scared"><strong>Kids Helpline is for young people aged 5 to 25. If a child is in danger, call <a href="tel:000">000</a>.</strong></p>'
             ), "Checked on 12 November 2026"
-        share = SHARE
-        if path == "families/children-and-parental-aod.html":
-            share = SHARE.replace("Nothing is tracked.", "HomeCircle doesn't track shares.")
-        page(path, "families/index.html", title, desc, f'{top}\n{body}\n{share}\n<p class="small mt">{chk}. HomeCircle is a free support app, not medical care, and isn\'t part of any service listed here.</p>{r_assets}')
+        page(path, "families/index.html", title, desc, f'{top}\n{body}\n{SHARE}\n<p class="small mt">{chk}. HomeCircle is a free support app, not medical care, and isn\'t part of any service listed here.</p>{r_assets}')
     btns = "".join(f'<a class="btn fam-big" href="{k}.html">{v[0]}</a>' for k, v in WHO.items())
     P("families/index.html", "For families & partners: someone I love is addicted – HomeCircle",
       "Help for families, partners and friends of someone with an alcohol or drug problem in Australia.",

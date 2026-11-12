@@ -392,8 +392,8 @@ def ra_insert_bar(path, body):
     return body[:i] + RA_BAR + body[i:] if i >= 0 else RA_BAR + body
 
 SHARE_ICON = '<svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>'
-SHARE_HOME = """<div class="card share-card mt"><div><p class="eyebrow">Share HomeCircle</p><h2 class="mt0">Know someone who'd find this useful?</h2>
-<p>Share HomeCircle with a friend, family member or client, or post it to Facebook, Instagram or X. It opens the share options on your phone, or copies the link on a computer. Nothing is tracked.</p></div>
+SHARE_HOME = """<div class="card share-card mt ra-skip"><div><p class="eyebrow">Share HomeCircle</p><h2 class="mt0">Know someone who'd find this useful?</h2>
+<p>Share HomeCircle with a friend, family member or client, or post it to Facebook, Instagram or X. It opens the share options on your phone, or copies the link on a computer. HomeCircle doesn't track shares.</p></div>
 <div class="share-actions"><button class="btn" type="button" id="hc-share">{icon}<span>Share HomeCircle</span></button><p class="small" id="hc-share-status" role="status"></p></div></div>
 <script src="assets/share.js" defer></script>""".format(icon=SHARE_ICON)
 
