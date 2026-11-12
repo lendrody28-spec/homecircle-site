@@ -382,7 +382,7 @@ RA_PAGE_SIZES = {}
 RA_NOTE = "Read aloud plays recordings stored on this website, or your device's own voice. Nothing you read or type is sent anywhere."  # Hale approved, 5 Nov 2026; kept 10 Nov 2026: device-voice fallback uses only SpeechSynthesisVoice.localService === true; if none, text only (buttons hidden / line skipped). No online voice path.
 RA_BAR = f'<div class="ra-bar ra-skip"><p class="ra-note small">{RA_NOTE}</p><p class="ra-note ra-transcript small">{E(A["SITE"]["transcript"])}</p></div>\n'
 def ra_read_page(path):
-    return path in ("help.html", "twelve-steps.html", "support.html") or path.startswith("families/")
+    return path in ("help.html", "twelve-steps.html", "support.html") or (path.startswith("families/") and path != "families/children-and-parental-aod.html")
 def ra_insert_bar(path, body):
     # After the top call buttons (they come before the h1); on Support, after the crisis notice with the call links.
     if path == "support.html":
