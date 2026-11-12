@@ -62,7 +62,7 @@ MOVING = {
     "chooseHeading": "Choose your version",
     "versions": [
         {"id": "walking", "name": "Walking", "intro": None, "steps": None},   # None = the app's own walking steps
-        {"id": "seated", "name": "Seated", "intro": "On a chair, a couch or the edge of a bed. Sit in a way that feels supported.", "steps": [
+        {"id": "seated", "name": "Seated", "intro": "On a chair, a couch or sitting up in bed. Sit in a way that feels supported and steady.", "steps": [
             ("Settle", "Sit still for a moment. Notice where your body meets the chair.", 30, "groundFeel"),
             ("Slow movement", "Slowly lift and lower one hand, or roll your shoulders. Move a little slower than usual and notice each movement.", 60, "scanHands"),
             ("Breath and movement", "Let the movement and your breathing find a rhythm. No counting needed.", 60, "breatheOut"),
@@ -71,14 +71,14 @@ MOVING = {
         ]},
         {"id": "wheelchair", "name": "In a wheelchair", "intro": "You can move or stay still. Both are fine.", "steps": [
             ("Settle", "Notice the chair supporting you: your back, your seat and your arms.", 30, "groundFeel"),
-            ("Slow pushes", "If you're moving, push a little slower than usual and notice your hands on the rims. If you're staying still, rest a hand on a rim or your lap and notice how it feels.", 60, "scanHands"),
+            ("Slow pushes", "If you're moving, go a little slower than usual, only where it's clear and safe, and notice your hands on the rims or controls. If you're staying still, rest a hand on a rim or your lap and notice how it feels.", 60, "scanHands"),
             ("Breath and movement", "Let your movement and your breathing find a rhythm. No counting needed.", 60, "breatheOut"),
             ("Look around", "Name a few things you can see, or notice what you can feel, like air on your skin.", 45, "groundSee"),
             ("Listen", "Notice the sounds, near and far. Then rest still for a breath.", 45, "groundHear"),
         ]},
         {"id": "lying-down", "name": "Lying down", "intro": "On your back or your side, whichever is comfortable. A pillow under your knees or head is fine.", "steps": [
             ("Settle", "Lie still for a moment. Notice where your body meets the bed or the floor.", 30, "groundFeel"),
-            ("Small movement", "Slowly open and close one hand, or turn your head a little. Notice each movement.", 60, "scanHands"),
+            ("Small movement", "Slowly open and close one hand, or turn your head a little if that's comfortable. Notice each movement.", 60, "scanHands"),
             ("Breath and movement", "Let the movement and your breathing find a rhythm. No counting needed.", 60, "breatheOut"),
             ("Listen", "Notice the sounds, near and far. Then rest still for a breath.", 45, "groundHear"),
         ]},
@@ -112,6 +112,9 @@ EDITS = {
     # body scan
     "Opt-in. A short attention walk from feet upward.": "Opt-in. A short scan of attention through the body, from your feet up, or starting wherever feels okay.",
     "notice both feet. You can wiggle them.": "notice your feet, or wherever your body meets the chair or bed. You can wiggle your toes if that's comfortable.",
+    "the weight of your legs on the chair.": "the weight of your legs, or of whatever is resting on the chair or bed. Skip this if it doesn't fit your body.",
+    "warmth or coolness in the hands.": "warmth or coolness in your hands, or in one hand. Skip this if it doesn't fit your body.",
+    "Moving attention slowly through the body can help you notice tension and let some of it go, and many people find it calming. Healthdirect lists scanning the body as one way to meditate. Turning attention inward is not comfortable for everyone, especially after trauma, so this stays off until you turn it on, and you can stop at any time.": "Moving attention slowly through the body may help you notice tension, and some people find it calming. Healthdirect lists scanning the body as one way to meditate. Turning attention inward is not comfortable for everyone, especially after trauma, so this stays off until you turn it on, and you can stop at any time.",
     "let the shoulders drop if they want to. Then open your eyes wide.": "let the shoulders drop if they want to. Then, if your eyes were closed, open them and notice the room.",
     # breathing anchor
     "name one ordinary object you can see.": "name one ordinary object you can see, or one sound you can hear.",
