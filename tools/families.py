@@ -314,6 +314,63 @@ def overdose_body():
 <div class="btn-row">{link("https://stjohn.org.au/training/accredited-training-courses/", "St John first aid courses")}{link("https://adf.org.au/insights/overdose/", "ADF: overdose")}</div></details></section>
 {src(OD_SRC)}"""
 
+
+def kids_parental_aod_body():
+    """When drinking or drug use in the home affects a child. Figures from children-and-parental-aod.json."""
+    import json
+    from pathlib import Path
+    figures = {f["id"]: f for f in json.loads((Path(__file__).resolve().parents[1] / "children-and-parental-aod.json").read_text())["figures"]}
+
+    def cite(fid, extra=""):
+        f = figures[fid]
+        return (
+            f'<p class="small">Source: {f["source"]} <a href="{f["url"]}" rel="noopener">Open the official page</a>. '
+            f'Checked on {f["checkedOn"]}.{" " + extra if extra else ""}</p>'
+        )
+
+    fare = figures["fare-latrobe-2021"]
+    em = figures["emerging-minds-not-a-given"]
+    adf = figures["adf-resilience-and-risk"]
+    qld = figures["qld-each-situation-unique"]
+    fare_risk = figures["fare-higher-risk-description"]
+    return f"""<p><a href="index.html">← a page for families and partners</a></p>
+<h1>When drinking or drug use in the home affects a child</h1>
+<p class="lede">If you're worried about how drinking or drug use is affecting a child in your care, you're not alone. Asking for help can help the whole family.</p>
+<h2>Harm from others' drinking</h2>
+<p>In the 2021 Australian Alcohol's Harm to Others study, by La Trobe University's Centre for Alcohol Policy Research and reported by the Foundation for Alcohol Research and Education (FARE), {fare["wording"][0]}</p>
+<p>{fare["note"]} The survey asked caregivers about the past 12 months.</p>
+{cite("fare-latrobe-2021", fare["period"])}
+<h2>What helps</h2>
+<p>This is about higher risk, not a fixed outcome. Emerging Minds says these risk factors are not always a given: many parents develop strategies to minimise risks for their children, and not all children are negatively affected by their parents' AOD issues. The Alcohol and Drug Foundation says not all children respond the same way, and many children with a parent with substance dependence are resilient and show positive outcomes, despite the risks they're exposed to. Parental substance dependence doesn't necessarily mean poor parenting.</p>
+<p>What can help:</p>
+<ul>
+<li>At least one steady, caring adult in the child's life</li>
+<li>Family rules, routines and rituals, which can give a sense of stability and predictability</li>
+<li>Engagement in community activities, like sports</li>
+<li>Regular attendance at a supportive school</li>
+<li>Positive role models and peer support</li>
+</ul>
+<p>Emerging Minds also says that empowering parents with the hope that things can improve builds their self-efficacy, and helps them to see opportunities for strengthening the essential emotional connections they have with their children. Asking for help can help the whole family.</p>
+{cite("emerging-minds-not-a-given")}
+{cite("adf-resilience-and-risk")}
+<h2>What this can be linked with</h2>
+<p>Each situation is unique. Each child thinks, feels and sees their parent's substance use in their own way.</p>
+<p>{fare_risk["wording"][0]} The Alcohol and Drug Foundation says children with a parent with substance dependence are more likely to try alcohol and other drugs earlier and develop problematic use faster, and are at increased risk of developing behavioural, cognitive and social issues. This can raise the risk. It is not a fixed outcome.</p>
+{cite("qld-each-situation-unique")}
+{cite("fare-higher-risk-description")}
+{cite("adf-resilience-and-risk")}
+<h2>If you're a young person</h2>
+<p>It's not your fault. If a parent or someone who looks after you drinks or uses drugs, you didn't cause it, and it's not your job to fix it.</p>
+<p>You can talk to Kids Helpline any time on <a href="tel:1800551800">1800 55 1800</a>. It's free, private and confidential, for young people aged 5 to 25.</p>
+<p>There is also <a href="kids.html">a short page for kids and teens</a>.</p>
+<h2>Support</h2>
+<p><strong>Family Drug Support Australia</strong> has a national support line for families affected by alcohol and other drug issues, 24 hours, 7 days: <a href="tel:1300368186">1300 368 186</a>. <a href="https://fds.org.au/" rel="noopener">Family Drug Support</a>.</p>
+<p>For alcohol or other drug support, you can also call the National Alcohol and Other Drug Hotline on <a href="tel:1800250015">1800 250 015</a>.</p>
+<p><strong>1800RESPECT</strong> is available 24 hours a day, 7 days a week, for people impacted by domestic, family or sexual violence: <a href="tel:1800737732">1800 737 732</a>. If you're in immediate danger, call <a href="tel:000">000</a>. <a href="https://www.1800respect.org.au/" rel="noopener">1800RESPECT</a>.</p>
+<p><strong>Al-Anon Family Groups Australia</strong> and <strong>Alateen</strong> are for people, including teenagers, affected by someone else's drinking. Call <a href="tel:1300252666">1300 252 666</a>, or visit <a href="https://al-anon.org.au/" rel="noopener">al-anon.org.au</a>.</p>
+<p class="small">These are independent official pages and services. HomeCircle is not affiliated with them.</p>
+<p>HomeCircle is support, not medical care, and is not a child-protection or reporting service. If a child is in danger, call <a href="tel:000">000</a>.</p>"""
+
 def build(page, E):
     r_assets = '<script src="../assets/families.js" defer></script>'
     def P(path, title, desc, body):
@@ -322,6 +379,11 @@ def build(page, E):
             top, chk = TOP.split('<p class="fam-scared">')[0] + KIDS_SCARED, NEW
         if path == "families/overdose.html":
             top, chk = TOP.split('<p class="fam-scared">')[0], NEW
+        if path == "families/children-and-parental-aod.html":
+            top, chk = TOP.split('<p class="fam-scared">')[0] + (
+                '<div id="now" class="btn-row"><a class="btn" href="tel:1800551800">Call Kids Helpline 1800 55 1800</a></div>\n'
+                '<p class="fam-scared"><strong>Kids Helpline is for young people aged 5 to 25. If a child is in danger, call <a href="tel:000">000</a>.</strong></p>'
+            ), "Checked on 12 November 2026"
         page(path, "families/index.html", title, desc, f'{top}\n{body}\n{SHARE}\n<p class="small mt">{chk}. HomeCircle is a free support app, not medical care, and isn\'t part of any service listed here.</p>{r_assets}')
     btns = "".join(f'<a class="btn fam-big" href="{k}.html">{v[0]}</a>' for k, v in WHO.items())
     P("families/index.html", "For families & partners: someone I love is addicted – HomeCircle",
@@ -330,11 +392,15 @@ def build(page, E):
 <h2>Who are you worried about?</h2><div class="fam-choices">{btns}</div>
 <div class="grid g2 mt"><a class="card tile" href="withdrawal.html"><div class="tbody"><h3>Supporting someone through withdrawal</h3><p>Warning signs and when to call 000.</p></div></a>
 <a class="card tile" href="kids.html"><div class="tbody"><h3>For kids and teens</h3><p>When a parent drinks or uses drugs. It's not your fault.</p></div></a>
+<a class="card tile" href="children-and-parental-aod.html"><div class="tbody"><h3>When a child is affected</h3><p>What can help, how common harm from others' drinking is, and where to get support.</p></div></a>
 <a class="card tile" href="safety.html"><div class="tbody"><h3>Worried about violence at home?</h3><p>1800RESPECT and lines in every state.</p></div></a></div>""")
     for k, v in WHO.items():
         P(f"families/{k}.html", v[1] + " – HomeCircle", v[2], who_body(k))
     P("families/kids.html", "For kids and teens: when a parent drinks or uses drugs – HomeCircle",
       "For children and teens in Australia whose parent drinks or uses drugs: it's not your fault, and who to talk to.", kids_body())
+    P("families/children-and-parental-aod.html", "When drinking or drug use in the home affects a child – HomeCircle",
+      "If you're worried about how drinking or drug use is affecting a child, here is what can help, how common harm from others' drinking is, and where to get support.",
+      kids_parental_aod_body())
     P("families/withdrawal.html", "Supporting someone through withdrawal – HomeCircle",
       "Withdrawal warning signs, when to call 000, and who to call for advice in Australia.",
       f'<p><a href="index.html">← For families &amp; partners</a></p><h1>Supporting someone through withdrawal</h1>{withdrawal()}')

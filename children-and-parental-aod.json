@@ -1,0 +1,64 @@
+{
+  "figures": [
+    {
+      "id": "fare-latrobe-2021",
+      "title": "Harm from others' drinking, 2021",
+      "wording": [
+        "one in six children (17.1%) have experienced harm from the alcohol use of adults around them, with two-thirds of harm being attributed to an adult in their home."
+      ],
+      "url": "https://fare.org.au/alcohol-harms-adults-children/",
+      "source": "Foundation for Alcohol Research and Education (FARE), “Research reveals one in six children harmed by alcohol,” reporting research by La Trobe University’s Centre for Alcohol Policy Research from the 2021 Australian Alcohol’s Harm to Others study.",
+      "period": "2021 (past 12 months). The FARE news page is dated 25 September 2024 and does not name the survey year; the 2021 period is taken from the peer-reviewed paper and from FARE’s later report of the same study.",
+      "checkedOn": "12 November 2026",
+      "note": "This is a national caregiver survey about harm from others’ drinking, not a count of children who live with a parent who drinks at risky levels."
+    },
+    {
+      "id": "emerging-minds-not-a-given",
+      "title": "Risk is not always a given, and routines can help",
+      "wording": [
+        "While these risk factors are not always a given – many parents develop strategies to minimise risks for their children (Roche et al., 2014), and not all children will be negatively impacted by their parents’ AOD issues (Dawe et al., 2007) – it is the essential parent-child emotional connection that is most readily undermined by parental substance use."
+      ],
+      "url": "https://emergingminds.com.au/resources/in-focus-aod-and-the-parent-child-relationship/",
+      "source": "Emerging Minds, “In focus: AOD and the parent-child relationship.”",
+      "period": "The page cites sources from 2007 to 2019 and does not give a survey year for a prevalence figure. Used as official descriptive wording, not as a numbered rate.",
+      "checkedOn": "12 November 2026",
+      "note": "Used as higher risk, not a fixed outcome, and for routines as a protective factor."
+    },
+    {
+      "id": "adf-resilience-and-risk",
+      "title": "Later risk, resilience and protective factors",
+      "wording": [
+        "Children with a parent(s) with substance dependence are more likely to try alcohol and other drugs (AOD) earlier and develop problematic use faster.",
+        "But not all children respond the same way. In fact, many children with a parent(s) with substance dependence are resilient and show positive outcomes, despite the risks they’re exposed to."
+      ],
+      "url": "https://adf.org.au/talking-about-drugs/parenting-talk/children-preteens/explaining-addiction-child/",
+      "source": "Alcohol and Drug Foundation, “Explaining addiction to a child.”",
+      "period": "Page last updated 2 June 2025.",
+      "checkedOn": "12 November 2026",
+      "note": "The ‘more likely’ wording is used without the ‘twice as likely’ multiplier, which the ADF page footnotes to a 2012 international review."
+    },
+    {
+      "id": "qld-each-situation-unique",
+      "title": "Each situation is unique",
+      "wording": [
+        "Although problematic substance use causes similar patterns of harm in many families, each situation is unique. Each child thinks, feels and sees their parent’s substance use in their own way."
+      ],
+      "url": "https://cspm.csyw.qld.gov.au/practice-kits/alcohol-and-other-drugs/impact-of-parental-substance-use-on-children",
+      "source": "Queensland Government, Child Safety Practice Manual, “Impact of parental substance use on children.”",
+      "period": "Published and last reviewed 26 February 2026.",
+      "checkedOn": "12 November 2026",
+      "note": "The first sentence is the source’s wording. On the page, only the ‘each situation is unique’ sentence is used, so the page itself does not use the word ‘causes’."
+    },
+    {
+      "id": "fare-higher-risk-description",
+      "title": "Higher risks in a home with heavy alcohol use",
+      "wording": [
+        "Children living in a home with heavy alcohol use face higher risks of experiencing poor mental health, school disengagement, and intergenerational harm."
+      ],
+      "url": "https://fare.org.au/landmark-report-reveals-almost-half-of-australians-are-negatively-affected-by-others-alcohol-use/",
+      "source": "FARE, 3 December 2025 media release on Alcohol’s Harm to Others in Australia.",
+      "period": "2025 report of, among other findings, the 2021 study. Used as a risk statement, as FARE words it, not as a numbered rate.",
+      "checkedOn": "12 November 2026"
+    }
+  ]
+}
