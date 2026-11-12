@@ -447,6 +447,7 @@ details.practice-version .player{box-shadow:none;padding:8px 0 4px}
 /* Long words and links never push the page sideways (200% zoom, 320px) */
 main{overflow-wrap:break-word}
 main a{overflow-wrap:anywhere}
+.nowrap{white-space:nowrap}
 /* Kai on phones (320-430px): Kai sits in a quiet bar at the bottom of the screen, so the bubble never covers
    the end of a line of text. The page gets matching space at the bottom. Kai's side (left or right) is kept. */
 @media (max-width:430px){

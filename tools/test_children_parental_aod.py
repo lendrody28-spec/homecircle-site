@@ -91,7 +91,8 @@ ok("Source: FARE (2024), reporting La Trobe University's 2021 Australian Alcohol
 ok("HomeCircle doesn't track shares." in text, "share wording on this page")
 ok("Nothing is tracked." not in text, "old share line gone from this page")
 ok('href="kids.html"' in src and "HomeCircle" in src[src.find("kids.html")-80:src.find("kids.html")+120], "kids-and-teens link names HomeCircle")
-ok('white-space:nowrap' in src and "1800 55 1800" in src, "Kids Helpline number is marked not to wrap")
+ok('<span class="nowrap">1800 55 1800</span>' in src, "Kids Helpline number uses class nowrap")
+ok("style=" not in src, "page has no style= attributes")
 
 # Support numbers each have a tel: link
 numbers = {

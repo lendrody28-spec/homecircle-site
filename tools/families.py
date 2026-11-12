@@ -381,7 +381,7 @@ def build(page, E):
             top, chk = TOP.split('<p class="fam-scared">')[0], NEW
         if path == "families/children-and-parental-aod.html":
             top, chk = TOP.split('<p class="fam-scared">')[0] + (
-                '<div id="now" class="btn-row"><a class="btn" href="tel:1800551800">Call Kids Helpline <span style="white-space:nowrap">1800 55 1800</span></a></div>\n'
+                '<div id="now" class="btn-row"><a class="btn" href="tel:1800551800">Call Kids Helpline <span class="nowrap">1800 55 1800</span></a></div>\n'
                 '<p class="fam-scared"><strong>Kids Helpline is for young people aged 5 to 25. If a child is in danger, call <a href="tel:000">000</a>.</strong></p>'
             ), "Checked on 12 November 2026"
         share = SHARE
