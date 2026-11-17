@@ -349,7 +349,7 @@ def footer(r):
     <p>{E(L["notAffiliated"])}</p>
     <p><a href="https://www.facebook.com/61595778045748" rel="noopener">Follow HomeCircle on Facebook</a></p>
   </div>
-  <div><h2>Explore</h2><ul>{"".join(f'<li><a href="{r}{h}">{E(t)}</a></li>' for h, t in PAGES)}<li><a href="{r}find-treatment.html">Find treatment near you</a></li><li><a href="{r}before-you-drive.html">Before you drive</a></li></ul></div>
+  <div><h2>Explore</h2><ul>{"".join(f'<li><a href="{r}{h}">{E(t)}</a></li>' for h, t in PAGES)}<li><a href="{r}find-treatment.html">Find treatment near you</a></li><li><a href="{r}queensland.html">Addiction support in Queensland</a></li><li><a href="{r}before-you-drive.html">Before you drive</a></li></ul></div>
   <div><h2>About</h2><ul>
     <li><a href="{PRIVACY}">Privacy Policy</a></li>
     <li><a href="{TERMS}">Terms of Use</a></li>
@@ -520,6 +520,7 @@ def build_home():
 <h2>What you can do here</h2>
 <div class="grid g4">{tiles}</div>
 <div class="grid g4 mt">{"".join(tile(h, t, s, tg, a, r) for h, t, s, tg, a in feats2)}</div>
+<div class="card mt" id="queensland"><h2 class="mt0">Addiction support in Queensland</h2><p>Links to AA, NA and GA's own meeting finders, and Queensland helplines including Adis.</p><a class="btn" href="queensland.html">Addiction support in Queensland</a></div>
 {KAI_INTRO}
 <div class="card mt about-hc"><h2 class="mt0">{E("Support for your recovery journey, and for the people who love you")}</h2>
 <p>{E("Whether you're in recovery, or you're a parent, partner, child or friend of someone with an addiction, HomeCircle is here for you. It's free for everyone. The app is for adults 18+. Our ")}<a href="families/index.html">{E("Families pages")}</a>{E(" are open to everyone, with Kids Helpline (")}<a href="tel:1800551800">1800 55 1800</a>{E(") for young people.")}</p>
@@ -795,6 +796,7 @@ def build_meetings():
   <div class="card sage"><h2 class="mt0">About the list</h2><p id="feed-info">AA and NA meetings from public listings.</p><p>Listings come from public sources: AA Australia's Meeting Guide feed and NA Australia's BMLT meeting list. Times can change, so check with the group if you're unsure. Each meeting links to its official listing.</p><p class="small">Times show in the meeting's own time zone.</p></div>
   <div class="card"><h2 class="mt0">AA and NA meeting lists</h2><ul><li><a href="https://meetings.aa.org.au/">AA meetings list (AA Australia)</a></li><li><a href="https://www.na.org.au/multi/">NA Australia meetings</a></li><li><a href="https://www.gamblinghelponline.org.au/">Gambling Help Online</a> and <a href="https://www.gaaustralia.org.au/">Gamblers Anonymous</a></li></ul><p class="small">{E(L["notAffiliated"])} At meetings, please respect each group's own guidelines, and don't record or share what people say.</p></div>
 </div>
+<p class="mt">Looking for meetings or helplines in Queensland? See <a href="queensland.html">Addiction support in Queensland</a>.</p>
 <div class="card sage mt"><h2 class="mt0">Meeting reminders</h2><p>Choose <strong>Add reminder</strong> on a meeting, then <strong>Just this one</strong> or <strong>Every week</strong>. This downloads a calendar file (.ics) for your calendar app. Its alert is set for 2 hours before the meeting starts. HomeCircle sends no notifications, and nothing is sent to us.</p></div>
 <p class="note small">{E(L["privateDetails"])}</p>
 <script src="assets/meetings.js" defer></script>"""
@@ -968,6 +970,7 @@ def build_help():
 {disability_services()}
 <div class="card sage mt ra-skip" id="treatment"><h2 class="mt0">Looking for treatment or rehab?</h2><p>Official treatment finders, your state's alcohol and drug line, and what's free and what costs money.</p><a class="btn" href="find-treatment.html">Find treatment near you</a></div>
 <div class="card sage mt ra-skip" id="before-you-drive"><h2 class="mt0">Before you drive</h2><p>Other ways home if you're not sure you're okay to drive, what alcohol and drugs can do, and official figures and limits pages.</p><a class="btn" href="before-you-drive.html">Before you drive</a></div>
+<div class="card sage mt ra-skip" id="queensland"><h2 class="mt0">Addiction support in Queensland</h2><p>Links to AA, NA and GA's own meeting finders, and Queensland helplines including Adis.</p><a class="btn" href="queensland.html">Addiction support in Queensland</a></div>
 <h2 id="family">Family &amp; Partners</h2>
 <div class="note">This is not medical advice. For any major concern, see a local doctor or GP. If a life is in danger, call 000.</div>
 <p>For partners, family members, and couples. These lines are beside someone in recovery.</p>
@@ -1290,8 +1293,67 @@ def build_drive():
          body)
 
 
+
+def build_queensland():
+    adis, nat, fds = HL["adis"], HL["national-aod"], HL["fds"]
+    body = f"""<div class="notice" role="region" aria-label="Crisis lines">
+<p class="mt0"><strong>Need help now?</strong> If you're in danger, call <a href="tel:000">000</a>. For crisis support call Lifeline on <a href="tel:131114">13 11 14</a>. In Queensland you can also call Adis 24/7 Alcohol and Drug Support on <a href="tel:{adis["dial"]}">{E(adis["displayNumber"])}</a>.</p>
+<div class="btn-row"><a class="btn danger" href="tel:000">Call 000</a><a class="btn" href="tel:131114">Call Lifeline 13 11 14</a><a class="btn" href="tel:{adis["dial"]}">{E("Call " + adis["displayNumber"])}</a></div>
+</div>
+<h1>Finding addiction support in Queensland</h1>
+<p class="lede">HomeCircle is a free, independent app and website that helps people find support near them. HomeCircle isn't affiliated with or endorsed by Alcoholics Anonymous, Narcotics Anonymous, Gamblers Anonymous or Porn Addicts Anonymous. HomeCircle is support, not medical care.</p>
+<h2 id="meetings">Find a meeting</h2>
+<p>HomeCircle does not run, host or check meetings. We link to each group's own official meeting finder.</p>
+<ul>
+<li><a href="https://meetings.aa.org.au/" rel="noopener">AA meetings list (AA Australia)</a></li>
+<li><a href="https://www.na.org.au/multi/" rel="noopener">NA Australia meetings</a></li>
+<li><a href="https://www.gaaustralia.org.au/" rel="noopener">Gamblers Anonymous</a></li>
+</ul>
+<p>Search by your suburb or postcode, and check the listing before you go, because times can change.</p>
+<h2 id="support">Alcohol and drug support in Queensland</h2>
+<p>Adis 24/7 Alcohol and Drug Support is a free, confidential line for Queenslanders with alcohol or other drug concerns, and for the people who care about them. It's open 24 hours a day, 7 days a week. Call <a href="tel:{adis["dial"]}">{E(adis["displayNumber"])}</a>.</p>
+<div class="btn-row">{tel(adis)}<a class="btn ghost" href="https://adis.health.qld.gov.au/" rel="noopener">Adis website</a></div>
+<p>The National Alcohol and Other Drug Hotline on <a href="tel:{nat["dial"]}">{E(nat["displayNumber"])}</a> connects you to your state's alcohol and drug service.</p>
+<div class="btn-row">{tel(nat)}</div>
+<h2 id="areas">By area</h2>
+<p>For meetings in these cities, use the official finders above.</p>
+<h3>Brisbane</h3>
+<p>Search the official AA, NA and GA finders for meetings in Brisbane and nearby suburbs.</p>
+<h3>Gold Coast</h3>
+<p>Look up Gold Coast meetings on the same official AA, NA and GA finders.</p>
+<h3>Sunshine Coast</h3>
+<p>Search those finders for the Sunshine Coast or your postcode.</p>
+<h3>Townsville</h3>
+<p>Townsville meetings are listed on each group's own finder, not by HomeCircle.</p>
+<h3>Cairns</h3>
+<p>Use the official finders to search for Cairns or your suburb.</p>
+<h3>Toowoomba</h3>
+<p>Search the official finders for Toowoomba, and check the listing before you go.</p>
+<h2 id="families">For families</h2>
+<p>If you're worried about someone you love, see our <a href="families/index.html">For families &amp; partners</a> pages. Family Drug Support is a 24-hour line for families and friends of someone using alcohol or other drugs: <a href="tel:{fds["dial"]}">{E(fds["displayNumber"])}</a>.</p>
+<div class="btn-row"><a class="btn" href="families/index.html">For families &amp; partners</a>{tel(fds)}<a class="btn ghost" href="{E(H["familyDrugSupportURL"])}" rel="noopener">Family Drug Support</a></div>
+<h2 id="homecircle">How HomeCircle can help</h2>
+<p>The HomeCircle iPhone app is free on the App Store (there is no Android app). The <a href="library.html">Library</a> has guides, breathing and meditation. The <a href="meetings.html">meetings map</a> on this website and in the app can help you find meetings; most meetings link to their official listing. You can also chat with Kai, an automated recovery buddy. Kai isn't a person or a counsellor, and isn't for emergencies.</p>
+<div class="btn-row"><a class="btn" href="{APP_STORE_URL}">Get HomeCircle free on the App Store</a><a class="btn ghost" href="library.html">Open the Library</a><a class="btn ghost" href="meetings.html">Find a meeting</a></div>
+<h2 id="faq">Frequently asked questions</h2>
+<h3>Is HomeCircle free?</h3>
+<p>Yes. The website and the iPhone app are free. There are no accounts, no sign-in, no ads and no trackers. Anything you save on the website stays in this browser, and anything you save in the app stays on your phone.</p>
+<h3>Does HomeCircle run meetings?</h3>
+<p>No. We link to each group's own meeting finder.</p>
+<h3>Who is HomeCircle for?</h3>
+<p>HomeCircle is for people looking for recovery support, and for families and friends. The app is for adults 18+. Our <a href="families/index.html">For families &amp; partners</a> pages are open to everyone.</p>
+<div class="card sage mt">
+<p>{E(L["gpLine"])}</p>
+<p>{E(L["notAffiliated"])}</p>
+<p>If you're unsafe, call <a href="tel:000">000</a> or Lifeline <a href="tel:131114">13 11 14</a>.</p>
+</div>"""
+    page("queensland.html", "", "Addiction support in Queensland | HomeCircle AU",
+         "Free, independent help to find AA, NA and GA meetings, alcohol and drug support and crisis lines in Brisbane, the Gold Coast, Cairns and across Queensland.",
+         body)
+
+
 build_kai_data(); build_circle()
-build_home(); build_library(); build_steps(); build_meditations(); build_meetings(); build_help(); build_treatment(); build_drive(); build_support()
+build_home(); build_library(); build_steps(); build_meditations(); build_meetings(); build_help(); build_queensland(); build_treatment(); build_drive(); build_support()
 for i in C["items"]:
     build_item(i)
 build_stages(); build_books()
