@@ -520,7 +520,7 @@ def build_home():
 <h2>What you can do here</h2>
 <div class="grid g4">{tiles}</div>
 <div class="grid g4 mt">{"".join(tile(h, t, s, tg, a, r) for h, t, s, tg, a in feats2)}</div>
-<div class="card mt" id="queensland"><h2 class="mt0">Addiction support in Queensland</h2><p>Official AA, NA and GA meeting finders, and Queensland helplines including Adis.</p><a class="btn" href="queensland.html">Addiction support in Queensland</a></div>
+<div class="card mt" id="queensland"><h2 class="mt0">Addiction support in Queensland</h2><p>Links to AA, NA and GA's own meeting finders, and Queensland helplines including Adis.</p><a class="btn" href="queensland.html">Addiction support in Queensland</a></div>
 {KAI_INTRO}
 <div class="card mt about-hc"><h2 class="mt0">{E("Support for your recovery journey, and for the people who love you")}</h2>
 <p>{E("Whether you're in recovery, or you're a parent, partner, child or friend of someone with an addiction, HomeCircle is here for you. It's free for everyone. The app is for adults 18+. Our ")}<a href="families/index.html">{E("Families pages")}</a>{E(" are open to everyone, with Kids Helpline (")}<a href="tel:1800551800">1800 55 1800</a>{E(") for young people.")}</p>
@@ -970,7 +970,7 @@ def build_help():
 {disability_services()}
 <div class="card sage mt ra-skip" id="treatment"><h2 class="mt0">Looking for treatment or rehab?</h2><p>Official treatment finders, your state's alcohol and drug line, and what's free and what costs money.</p><a class="btn" href="find-treatment.html">Find treatment near you</a></div>
 <div class="card sage mt ra-skip" id="before-you-drive"><h2 class="mt0">Before you drive</h2><p>Other ways home if you're not sure you're okay to drive, what alcohol and drugs can do, and official figures and limits pages.</p><a class="btn" href="before-you-drive.html">Before you drive</a></div>
-<div class="card sage mt ra-skip" id="queensland"><h2 class="mt0">Addiction support in Queensland</h2><p>Official AA, NA and GA meeting finders, and Queensland helplines including Adis.</p><a class="btn" href="queensland.html">Addiction support in Queensland</a></div>
+<div class="card sage mt ra-skip" id="queensland"><h2 class="mt0">Addiction support in Queensland</h2><p>Links to AA, NA and GA's own meeting finders, and Queensland helplines including Adis.</p><a class="btn" href="queensland.html">Addiction support in Queensland</a></div>
 <h2 id="family">Family &amp; Partners</h2>
 <div class="note">This is not medical advice. For any major concern, see a local doctor or GP. If a life is in danger, call 000.</div>
 <p>For partners, family members, and couples. These lines are beside someone in recovery.</p>
@@ -1301,7 +1301,7 @@ def build_queensland():
 <div class="btn-row"><a class="btn danger" href="tel:000">Call 000</a><a class="btn" href="tel:131114">Call Lifeline 13 11 14</a><a class="btn" href="tel:{adis["dial"]}">{E("Call " + adis["displayNumber"])}</a></div>
 </div>
 <h1>Finding addiction support in Queensland</h1>
-<p class="lede">HomeCircle is a free, independent app and website that helps people find support near them. {E(L["notAffiliated"])} HomeCircle is support, not medical care.</p>
+<p class="lede">HomeCircle is a free, independent app and website that helps people find support near them. HomeCircle isn't affiliated with or endorsed by Alcoholics Anonymous, Narcotics Anonymous, Gamblers Anonymous or Porn Addicts Anonymous. HomeCircle is support, not medical care.</p>
 <h2 id="meetings">Find a meeting</h2>
 <p>HomeCircle does not run, host or check meetings. We link to each group's own official meeting finder.</p>
 <ul>
@@ -1311,7 +1311,7 @@ def build_queensland():
 </ul>
 <p>Search by your suburb or postcode, and check the listing before you go, because times can change.</p>
 <h2 id="support">Alcohol and drug support in Queensland</h2>
-<p>Adis 24/7 Alcohol and Drug Support is a 24/7 confidential alcohol and drug line for Queenslanders and the people who care about them. Call <a href="tel:{adis["dial"]}">{E(adis["displayNumber"])}</a>.</p>
+<p>Adis 24/7 Alcohol and Drug Support is a free, confidential line for Queenslanders with alcohol or other drug concerns, and for the people who care about them. It's open 24 hours a day, 7 days a week. Call <a href="tel:{adis["dial"]}">{E(adis["displayNumber"])}</a>.</p>
 <div class="btn-row">{tel(adis)}<a class="btn ghost" href="https://adis.health.qld.gov.au/" rel="noopener">Adis website</a></div>
 <p>The National Alcohol and Other Drug Hotline on <a href="tel:{nat["dial"]}">{E(nat["displayNumber"])}</a> connects you to your state's alcohol and drug service.</p>
 <div class="btn-row">{tel(nat)}</div>
@@ -1333,11 +1333,11 @@ def build_queensland():
 <p>If you're worried about someone you love, see our <a href="families/index.html">For families &amp; partners</a> pages. Family Drug Support is a 24-hour line for families and friends of someone using alcohol or other drugs: <a href="tel:{fds["dial"]}">{E(fds["displayNumber"])}</a>.</p>
 <div class="btn-row"><a class="btn" href="families/index.html">For families &amp; partners</a>{tel(fds)}<a class="btn ghost" href="{E(H["familyDrugSupportURL"])}" rel="noopener">Family Drug Support</a></div>
 <h2 id="homecircle">How HomeCircle can help</h2>
-<p>The HomeCircle iPhone app is free on the App Store (there is no Android app). The <a href="library.html">Library</a> has guides, breathing and meditation. The <a href="meetings.html">meetings map</a> on this website and in the app can help you find meetings; most meetings link to their official listing. You can also chat with Kai, a recovery buddy (not a person or counsellor).</p>
+<p>The HomeCircle iPhone app is free on the App Store (there is no Android app). The <a href="library.html">Library</a> has guides, breathing and meditation. The <a href="meetings.html">meetings map</a> on this website and in the app can help you find meetings; most meetings link to their official listing. You can also chat with Kai, an automated recovery buddy. Kai isn't a person or a counsellor, and isn't for emergencies.</p>
 <div class="btn-row"><a class="btn" href="{APP_STORE_URL}">Get HomeCircle free on the App Store</a><a class="btn ghost" href="library.html">Open the Library</a><a class="btn ghost" href="meetings.html">Find a meeting</a></div>
 <h2 id="faq">Frequently asked questions</h2>
 <h3>Is HomeCircle free?</h3>
-<p>Yes. The website and the iPhone app are free. There are no accounts, no sign-in, no ads and no trackers. Anything you save stays in this browser.</p>
+<p>Yes. The website and the iPhone app are free. There are no accounts, no sign-in, no ads and no trackers. Anything you save on the website stays in this browser, and anything you save in the app stays on your phone.</p>
 <h3>Does HomeCircle run meetings?</h3>
 <p>No. We link to each group's own meeting finder.</p>
 <h3>Who is HomeCircle for?</h3>
