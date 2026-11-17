@@ -56,6 +56,7 @@ H = C["helplines"]
 import hashlib as _h
 RA_V = _h.sha256((ROOT / "assets" / "readaloud.js").read_bytes()).hexdigest()[:10]
 CSS_V = _h.sha1((ROOT / "assets" / "site.css").read_bytes()).hexdigest()[:8]
+SITE_V = _h.sha1((ROOT / "assets" / "site.js").read_bytes()).hexdigest()[:8]
 # One shared cache-busting tag for the three Kai scripts, from their contents (deterministic): changes whenever any of them changes.
 KAI_V = _h.sha256(b"".join((ROOT / "assets" / f).read_bytes() for f in ("kai.js", "kai-crisis.js", "kai-engine.js"))).hexdigest()[:10]
 SITE_URL = "https://homecircle.au"
@@ -262,7 +263,7 @@ def head(title, desc, r, path=""):
 {seo_head(title, desc, path)}<link rel="icon" href="{r}favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="{r}assets/logo-192.png">
 <link rel="stylesheet" href="{r}assets/site.css?v={CSS_V}">
-<script src="{r}assets/site.js" defer></script>
+<script src="{r}assets/site.js?v={SITE_V}" defer></script>
 <script src="{r}assets/readaloud.js?v={RA_V}" defer></script>
 <script src="{r}assets/kai-data.js?v={kai_data_v()}" defer></script>
 <script src="{r}assets/kai-crisis.js?v={KAI_V}" defer></script>
