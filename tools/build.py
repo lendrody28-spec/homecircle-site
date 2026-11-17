@@ -349,7 +349,7 @@ def footer(r):
     <p>{E(L["notAffiliated"])}</p>
     <p><a href="https://www.facebook.com/61595778045748" rel="noopener">Follow HomeCircle on Facebook</a></p>
   </div>
-  <div><h2>Explore</h2><ul>{"".join(f'<li><a href="{r}{h}">{E(t)}</a></li>' for h, t in PAGES)}<li><a href="{r}find-treatment.html">Find treatment near you</a></li><li><a href="{r}queensland.html">Addiction support in Queensland</a></li><li><a href="{r}before-you-drive.html">Before you drive</a></li></ul></div>
+  <div><h2>Explore</h2><ul>{"".join(f'<li><a href="{r}{h}">{E(t)}</a></li>' for h, t in PAGES)}<li><a href="{r}find-treatment.html">Find treatment near you</a></li><li><a href="{r}queensland.html">Addiction support in Queensland</a></li><li><a href="{r}new-south-wales.html">Addiction support in New South Wales</a></li><li><a href="{r}victoria.html">Addiction support in Victoria</a></li><li><a href="{r}australia.html">Addiction support in Australia</a></li><li><a href="{r}before-you-drive.html">Before you drive</a></li></ul></div>
   <div><h2>About</h2><ul>
     <li><a href="{PRIVACY}">Privacy Policy</a></li>
     <li><a href="{TERMS}">Terms of Use</a></li>
@@ -520,7 +520,12 @@ def build_home():
 <h2>What you can do here</h2>
 <div class="grid g4">{tiles}</div>
 <div class="grid g4 mt">{"".join(tile(h, t, s, tg, a, r) for h, t, s, tg, a in feats2)}</div>
-<div class="card mt" id="queensland"><h2 class="mt0">Addiction support in Queensland</h2><p>Links to AA, NA and GA's own meeting finders, and Queensland helplines including Adis.</p><a class="btn" href="queensland.html">Addiction support in Queensland</a></div>
+<div class="grid g3 mt" id="states">
+<div class="card" id="queensland"><h2 class="mt0">Addiction support in Queensland</h2><p>Links to AA, NA and GA's own meeting finders, and Queensland helplines including Adis.</p><a class="btn" href="queensland.html">Addiction support in Queensland</a></div>
+<div class="card" id="nsw"><h2 class="mt0">Addiction support in New South Wales</h2><p>Links to AA, NA and GA's own meeting finders, and New South Wales helplines including ADIS.</p><a class="btn" href="new-south-wales.html">Addiction support in New South Wales</a></div>
+<div class="card" id="victoria"><h2 class="mt0">Addiction support in Victoria</h2><p>Links to AA, NA and GA's own meeting finders, and Victoria helplines including DirectLine.</p><a class="btn" href="victoria.html">Addiction support in Victoria</a></div>
+</div>
+<p><a href="australia.html">Addiction support in Australia</a></p>
 {KAI_INTRO}
 <div class="card mt about-hc"><h2 class="mt0">{E("Support for your recovery journey, and for the people who love you")}</h2>
 <p>{E("Whether you're in recovery, or you're a parent, partner, child or friend of someone with an addiction, HomeCircle is here for you. It's free for everyone. The app is for adults 18+. Our ")}<a href="families/index.html">{E("Families pages")}</a>{E(" are open to everyone, with Kids Helpline (")}<a href="tel:1800551800">1800 55 1800</a>{E(") for young people.")}</p>
@@ -797,6 +802,9 @@ def build_meetings():
   <div class="card"><h2 class="mt0">AA and NA meeting lists</h2><ul><li><a href="https://meetings.aa.org.au/">AA meetings list (AA Australia)</a></li><li><a href="https://www.na.org.au/multi/">NA Australia meetings</a></li><li><a href="https://www.gamblinghelponline.org.au/">Gambling Help Online</a> and <a href="https://www.gaaustralia.org.au/">Gamblers Anonymous</a></li></ul><p class="small">{E(L["notAffiliated"])} At meetings, please respect each group's own guidelines, and don't record or share what people say.</p></div>
 </div>
 <p class="mt">Looking for meetings or helplines in Queensland? See <a href="queensland.html">Addiction support in Queensland</a>.</p>
+<p>Looking for meetings or helplines in New South Wales? See <a href="new-south-wales.html">Addiction support in New South Wales</a>.</p>
+<p>Looking for meetings or helplines in Victoria? See <a href="victoria.html">Addiction support in Victoria</a>.</p>
+<p>Or see <a href="australia.html">Addiction support in Australia</a>.</p>
 <div class="card sage mt"><h2 class="mt0">Meeting reminders</h2><p>Choose <strong>Add reminder</strong> on a meeting, then <strong>Just this one</strong> or <strong>Every week</strong>. This downloads a calendar file (.ics) for your calendar app. Its alert is set for 2 hours before the meeting starts. HomeCircle sends no notifications, and nothing is sent to us.</p></div>
 <p class="note small">{E(L["privateDetails"])}</p>
 <script src="assets/meetings.js" defer></script>"""
@@ -970,7 +978,14 @@ def build_help():
 {disability_services()}
 <div class="card sage mt ra-skip" id="treatment"><h2 class="mt0">Looking for treatment or rehab?</h2><p>Official treatment finders, your state's alcohol and drug line, and what's free and what costs money.</p><a class="btn" href="find-treatment.html">Find treatment near you</a></div>
 <div class="card sage mt ra-skip" id="before-you-drive"><h2 class="mt0">Before you drive</h2><p>Other ways home if you're not sure you're okay to drive, what alcohol and drugs can do, and official figures and limits pages.</p><a class="btn" href="before-you-drive.html">Before you drive</a></div>
-<div class="card sage mt ra-skip" id="queensland"><h2 class="mt0">Addiction support in Queensland</h2><p>Links to AA, NA and GA's own meeting finders, and Queensland helplines including Adis.</p><a class="btn" href="queensland.html">Addiction support in Queensland</a></div>
+<div class="ra-skip" id="states">
+<div class="grid g3 mt">
+<div class="card sage" id="queensland"><h2 class="mt0">Addiction support in Queensland</h2><p>Links to AA, NA and GA's own meeting finders, and Queensland helplines including Adis.</p><a class="btn" href="queensland.html">Addiction support in Queensland</a></div>
+<div class="card sage" id="nsw"><h2 class="mt0">Addiction support in New South Wales</h2><p>Links to AA, NA and GA's own meeting finders, and New South Wales helplines including ADIS.</p><a class="btn" href="new-south-wales.html">Addiction support in New South Wales</a></div>
+<div class="card sage" id="victoria"><h2 class="mt0">Addiction support in Victoria</h2><p>Links to AA, NA and GA's own meeting finders, and Victoria helplines including DirectLine.</p><a class="btn" href="victoria.html">Addiction support in Victoria</a></div>
+</div>
+<p><a href="australia.html">Addiction support in Australia</a></p>
+</div>
 <h2 id="family">Family &amp; Partners</h2>
 <div class="note">This is not medical advice. For any major concern, see a local doctor or GP. If a life is in danger, call 000.</div>
 <p>For partners, family members, and couples. These lines are beside someone in recovery.</p>
@@ -1353,7 +1368,168 @@ def build_queensland():
 
 
 build_kai_data(); build_circle()
-build_home(); build_library(); build_steps(); build_meditations(); build_meetings(); build_help(); build_queensland(); build_treatment(); build_drive(); build_support()
+
+def build_new_south_wales():
+    nat, fds = HL["national-aod"], HL["fds"]
+    body = f"""<div class="notice" role="region" aria-label="Crisis lines">
+<p class="mt0"><strong>Need help now?</strong> If you're in danger, call <a href="tel:000">000</a>. For crisis support call Lifeline on <a href="tel:131114">13 11 14</a>. In New South Wales you can also call the Alcohol and Drug Information Service (ADIS) on <a href="tel:1800250015">1800 250 015</a>.</p>
+<div class="btn-row"><a class="btn danger" href="tel:000">Call 000</a><a class="btn" href="tel:131114">Call Lifeline 13 11 14</a><a class="btn" href="tel:1800250015">Call 1800 250 015</a></div>
+</div>
+<h1>Finding addiction support in New South Wales</h1>
+<p class="lede">HomeCircle is a free, independent app and website that helps people find support near them. HomeCircle isn't affiliated with or endorsed by Alcoholics Anonymous, Narcotics Anonymous, Gamblers Anonymous or Porn Addicts Anonymous. HomeCircle is support, not medical care.</p>
+<h2 id="meetings">Find a meeting</h2>
+<p>HomeCircle does not run, host or check meetings. We link to each group's own official meeting finder.</p>
+<ul>
+<li><a href="https://meetings.aa.org.au/" rel="noopener">AA meetings list (AA Australia)</a></li>
+<li><a href="https://www.na.org.au/multi/" rel="noopener">NA Australia meetings</a></li>
+<li><a href="https://www.gaaustralia.org.au/" rel="noopener">Gamblers Anonymous</a></li>
+</ul>
+<p>Search by your suburb or postcode, and check the listing before you go, because times can change.</p>
+<h2 id="support">Alcohol and drug support in New South Wales</h2>
+<p>The Alcohol and Drug Information Service (ADIS) is a free and confidential counselling helpline for NSW residents worried about alcohol or drugs, and for their families and friends. It's open 24 hours a day, 7 days a week. Call <a href="tel:1800250015">1800 250 015</a>. In Sydney metro you can also call <a href="tel:0283821000">02 8382 1000</a>.</p>
+<div class="btn-row"><a class="btn ghost" href="tel:1800250015">Call 1800 250 015</a><a class="btn ghost" href="tel:0283821000">Call 02 8382 1000</a><a class="btn ghost" href="https://yourroom.health.nsw.gov.au/getting-help/Pages/adis.aspx" rel="noopener">ADIS NSW website</a></div>
+<p>1800 250 015 is also the National Alcohol and Other Drug Hotline. From any state or territory, that number directs you to the alcohol and drug service for the place you're calling from.</p>
+<h2 id="mental-health">Mental health support in New South Wales</h2>
+<p>The Mental Health Line is NSW Health's free, 24-hour statewide phone service. It links people with NSW Health mental health services. It isn't a counselling or crisis support service. Call <a href="tel:1800011511">1800 011 511</a>. If you're unsafe, call <a href="tel:000">000</a>.</p>
+<div class="btn-row"><a class="btn ghost" href="tel:1800011511">Call 1800 011 511</a><a class="btn ghost" href="https://www.health.nsw.gov.au/mentalhealth/Pages/mental-health-line.aspx" rel="noopener">Mental Health Line website</a></div>
+<h2 id="areas">By area</h2>
+<p>For meetings in these areas, use the official finders above.</p>
+<h3>Sydney</h3>
+<p>Search the official AA, NA and GA finders for meetings in Sydney and nearby suburbs.</p>
+<h3>Western Sydney</h3>
+<p>Look up Western Sydney meetings on the same official AA, NA and GA finders, or search by your suburb or postcode.</p>
+<h3>Newcastle</h3>
+<p>Search those finders for Newcastle or your postcode.</p>
+<h3>Central Coast</h3>
+<p>Central Coast meetings are listed on each group's own finder, not by HomeCircle.</p>
+<h3>Wollongong</h3>
+<p>Use the official finders to search for Wollongong or your suburb, and check the listing before you go.</p>
+<h2 id="families">For families</h2>
+<p>If you're worried about someone you love, see our <a href="families/index.html">For families &amp; partners</a> pages. Family Drug Support is a 24-hour line for families and friends of someone using alcohol or other drugs: <a href="tel:{fds["dial"]}">{E(fds["displayNumber"])}</a>.</p>
+<p>Young people can call Kids Helpline any time on <a href="tel:1800551800">1800 55 1800</a>. It's free, private and confidential, for young people aged 5 to 25.</p>
+<div class="btn-row"><a class="btn" href="families/index.html">For families &amp; partners</a>{tel(fds)}<a class="btn ghost" href="{E(H["familyDrugSupportURL"])}" rel="noopener">Family Drug Support</a><a class="btn ghost" href="tel:1800551800">Call 1800 55 1800</a><a class="btn ghost" href="https://kidshelpline.com.au/" rel="noopener">Kids Helpline</a></div>
+<h2 id="homecircle">How HomeCircle can help</h2>
+<p>The HomeCircle iPhone app is free on the App Store (there is no Android app). The <a href="library.html">Library</a> has guides, breathing and meditation. The <a href="meetings.html">meetings map</a> on this website and in the app can help you find meetings; most meetings link to their official listing. You can also chat with Kai, an automated recovery buddy. Kai isn't a person or a counsellor, and isn't for emergencies.</p>
+<div class="btn-row"><a class="btn" href="{APP_STORE_URL}">Get HomeCircle free on the App Store</a><a class="btn ghost" href="library.html">Open the Library</a><a class="btn ghost" href="meetings.html">Find a meeting</a></div>
+<h2 id="faq">Frequently asked questions</h2>
+<h3>Is HomeCircle free?</h3>
+<p>Yes. The website and the iPhone app are free. There are no accounts, no sign-in, no ads and no trackers. Anything you save on the website stays in this browser, and anything you save in the app stays on your phone.</p>
+<h3>Does HomeCircle run meetings?</h3>
+<p>No. We link to each group's own meeting finder.</p>
+<h3>Who is HomeCircle for?</h3>
+<p>HomeCircle is for people looking for recovery support, and for families and friends. The app is for adults 18+. Our <a href="families/index.html">For families &amp; partners</a> pages are open to everyone.</p>
+<div class="card sage mt">
+<p>{E(L["gpLine"])}</p>
+<p>{E(L["notAffiliated"])}</p>
+<p>If you're unsafe, call <a href="tel:000">000</a> or Lifeline <a href="tel:131114">13 11 14</a>.</p>
+</div>"""
+    page("new-south-wales.html", "", "Addiction support in New South Wales | HomeCircle AU",
+         "Free, independent help to find AA, NA and GA meetings, alcohol and drug support and crisis lines in Sydney, Newcastle and across New South Wales.",
+         body)
+
+
+def build_victoria():
+    nat, fds = HL["national-aod"], HL["fds"]
+    body = f"""<div class="notice" role="region" aria-label="Crisis lines">
+<p class="mt0"><strong>Need help now?</strong> If you're in danger, call <a href="tel:000">000</a>. For crisis support call Lifeline on <a href="tel:131114">13 11 14</a>. In Victoria you can also call DirectLine on <a href="tel:1800888236">1800 888 236</a>.</p>
+<div class="btn-row"><a class="btn danger" href="tel:000">Call 000</a><a class="btn" href="tel:131114">Call Lifeline 13 11 14</a><a class="btn" href="tel:1800888236">Call 1800 888 236</a></div>
+</div>
+<h1>Finding addiction support in Victoria</h1>
+<p class="lede">HomeCircle is a free, independent app and website that helps people find support near them. HomeCircle isn't affiliated with or endorsed by Alcoholics Anonymous, Narcotics Anonymous, Gamblers Anonymous or Porn Addicts Anonymous. HomeCircle is support, not medical care.</p>
+<h2 id="meetings">Find a meeting</h2>
+<p>HomeCircle does not run, host or check meetings. We link to each group's own official meeting finder.</p>
+<ul>
+<li><a href="https://meetings.aa.org.au/" rel="noopener">AA meetings list (AA Australia)</a></li>
+<li><a href="https://www.na.org.au/multi/" rel="noopener">NA Australia meetings</a></li>
+<li><a href="https://www.gaaustralia.org.au/" rel="noopener">Gamblers Anonymous</a></li>
+</ul>
+<p>Search by your suburb or postcode, and check the listing before you go, because times can change.</p>
+<h2 id="support">Alcohol and drug support in Victoria</h2>
+<p>DirectLine is a free, confidential alcohol and drug counselling and referral service in Victoria, for you, family members and others. It's open 24 hours a day, 7 days a week. Call <a href="tel:1800888236">1800 888 236</a>.</p>
+<div class="btn-row"><a class="btn ghost" href="tel:1800888236">Call 1800 888 236</a><a class="btn ghost" href="https://www.directline.org.au/" rel="noopener">DirectLine website</a></div>
+<p>The National Alcohol and Other Drug Hotline on <a href="tel:{nat["dial"]}">{E(nat["displayNumber"])}</a> connects you to your state's alcohol and drug service.</p>
+<div class="btn-row">{tel(nat)}</div>
+<h2 id="health-advice">Health advice in Victoria</h2>
+<p>healthdirect is a free 24-hour health advice line. Call <a href="tel:1800022222">1800 022 222</a> to speak to a registered nurse about a health concern. In Victoria this service is also known as NURSE-ON-CALL. If you need urgent medical help, call <a href="tel:000">000</a>.</p>
+<div class="btn-row"><a class="btn ghost" href="tel:1800022222">Call 1800 022 222</a><a class="btn ghost" href="https://www.healthdirect.gov.au/contact-us" rel="noopener">healthdirect website</a></div>
+<h2 id="areas">By area</h2>
+<p>For meetings in these cities, use the official finders above.</p>
+<h3>Melbourne</h3>
+<p>Search the official AA, NA and GA finders for meetings in Melbourne and nearby suburbs.</p>
+<h3>Geelong</h3>
+<p>Look up Geelong meetings on the same official AA, NA and GA finders.</p>
+<h3>Ballarat</h3>
+<p>Search those finders for Ballarat or your postcode.</p>
+<h3>Bendigo</h3>
+<p>Bendigo meetings are listed on each group's own finder, not by HomeCircle.</p>
+<h2 id="families">For families</h2>
+<p>If you're worried about someone you love, see our <a href="families/index.html">For families &amp; partners</a> pages. Family Drug Support is a 24-hour line for families and friends of someone using alcohol or other drugs: <a href="tel:{fds["dial"]}">{E(fds["displayNumber"])}</a>.</p>
+<p>Young people can call Kids Helpline any time on <a href="tel:1800551800">1800 55 1800</a>. It's free, private and confidential, for young people aged 5 to 25.</p>
+<div class="btn-row"><a class="btn" href="families/index.html">For families &amp; partners</a>{tel(fds)}<a class="btn ghost" href="{E(H["familyDrugSupportURL"])}" rel="noopener">Family Drug Support</a><a class="btn ghost" href="tel:1800551800">Call 1800 55 1800</a><a class="btn ghost" href="https://kidshelpline.com.au/" rel="noopener">Kids Helpline</a></div>
+<h2 id="homecircle">How HomeCircle can help</h2>
+<p>The HomeCircle iPhone app is free on the App Store (there is no Android app). The <a href="library.html">Library</a> has guides, breathing and meditation. The <a href="meetings.html">meetings map</a> on this website and in the app can help you find meetings; most meetings link to their official listing. You can also chat with Kai, an automated recovery buddy. Kai isn't a person or a counsellor, and isn't for emergencies.</p>
+<div class="btn-row"><a class="btn" href="{APP_STORE_URL}">Get HomeCircle free on the App Store</a><a class="btn ghost" href="library.html">Open the Library</a><a class="btn ghost" href="meetings.html">Find a meeting</a></div>
+<h2 id="faq">Frequently asked questions</h2>
+<h3>Is HomeCircle free?</h3>
+<p>Yes. The website and the iPhone app are free. There are no accounts, no sign-in, no ads and no trackers. Anything you save on the website stays in this browser, and anything you save in the app stays on your phone.</p>
+<h3>Does HomeCircle run meetings?</h3>
+<p>No. We link to each group's own meeting finder.</p>
+<h3>Who is HomeCircle for?</h3>
+<p>HomeCircle is for people looking for recovery support, and for families and friends. The app is for adults 18+. Our <a href="families/index.html">For families &amp; partners</a> pages are open to everyone.</p>
+<div class="card sage mt">
+<p>{E(L["gpLine"])}</p>
+<p>{E(L["notAffiliated"])}</p>
+<p>If you're unsafe, call <a href="tel:000">000</a> or Lifeline <a href="tel:131114">13 11 14</a>.</p>
+</div>"""
+    page("victoria.html", "", "Addiction support in Victoria | HomeCircle AU",
+         "Free, independent help to find AA, NA and GA meetings, alcohol and drug support and crisis lines in Melbourne, Geelong, Ballarat and across Victoria.",
+         body)
+
+
+def build_australia():
+    nat, fds = HL["national-aod"], HL["fds"]
+    body = f"""<div class="notice" role="region" aria-label="Crisis lines">
+<p class="mt0"><strong>Need help now?</strong> If you're in danger, call <a href="tel:000">000</a>. For crisis support call Lifeline on <a href="tel:131114">13 11 14</a>. For alcohol or other drug support, call the National Alcohol and Other Drug Hotline on <a href="tel:{nat["dial"]}">{E(nat["displayNumber"])}</a>.</p>
+<div class="btn-row"><a class="btn danger" href="tel:000">Call 000</a><a class="btn" href="tel:131114">Call Lifeline 13 11 14</a><a class="btn" href="tel:{nat["dial"]}">{E("Call " + nat["displayNumber"])}</a></div>
+</div>
+<h1>Finding addiction support in Australia</h1>
+<p class="lede">HomeCircle is a free, independent app and website that helps people find support near them. HomeCircle isn't affiliated with or endorsed by Alcoholics Anonymous, Narcotics Anonymous, Gamblers Anonymous or Porn Addicts Anonymous. HomeCircle is support, not medical care.</p>
+<p>These pages list official meeting finders and verified helplines for each state. We start with Queensland, New South Wales and Victoria.</p>
+<div class="grid g3">
+<div class="card"><h2 class="mt0">Queensland</h2><p>Links to AA, NA and GA's own meeting finders, and Queensland helplines including Adis.</p><a class="btn" href="queensland.html">Addiction support in Queensland</a></div>
+<div class="card"><h2 class="mt0">New South Wales</h2><p>Links to AA, NA and GA's own meeting finders, and New South Wales helplines including ADIS.</p><a class="btn" href="new-south-wales.html">Addiction support in New South Wales</a></div>
+<div class="card"><h2 class="mt0">Victoria</h2><p>Links to AA, NA and GA's own meeting finders, and Victoria helplines including DirectLine.</p><a class="btn" href="victoria.html">Addiction support in Victoria</a></div>
+</div>
+<h2 id="meetings">Find a meeting</h2>
+<p>HomeCircle does not run, host or check meetings. We link to each group's own official meeting finder.</p>
+<ul>
+<li><a href="https://meetings.aa.org.au/" rel="noopener">AA meetings list (AA Australia)</a></li>
+<li><a href="https://www.na.org.au/multi/" rel="noopener">NA Australia meetings</a></li>
+<li><a href="https://www.gaaustralia.org.au/" rel="noopener">Gamblers Anonymous</a></li>
+</ul>
+<p>Search by your suburb or postcode, and check the listing before you go, because times can change.</p>
+<h2 id="support">Alcohol and drug support</h2>
+<p>The National Alcohol and Other Drug Hotline on <a href="tel:{nat["dial"]}">{E(nat["displayNumber"])}</a> connects you to your state's alcohol and drug service. It's free and confidential, and open 24 hours a day, 7 days a week (in South Australia, 8.30am to 10pm).</p>
+<div class="btn-row">{tel(nat)}</div>
+<p>State pages have the local alcohol and drug line for that state, where we have verified it.</p>
+<h2 id="families">For families</h2>
+<p>If you're worried about someone you love, see our <a href="families/index.html">For families &amp; partners</a> pages. Family Drug Support is a 24-hour line for families and friends of someone using alcohol or other drugs: <a href="tel:{fds["dial"]}">{E(fds["displayNumber"])}</a>.</p>
+<p>Young people can call Kids Helpline any time on <a href="tel:1800551800">1800 55 1800</a>. It's free, private and confidential, for young people aged 5 to 25.</p>
+<div class="btn-row"><a class="btn" href="families/index.html">For families &amp; partners</a>{tel(fds)}<a class="btn ghost" href="{E(H["familyDrugSupportURL"])}" rel="noopener">Family Drug Support</a><a class="btn ghost" href="tel:1800551800">Call 1800 55 1800</a><a class="btn ghost" href="https://kidshelpline.com.au/" rel="noopener">Kids Helpline</a></div>
+<h2 id="homecircle">How HomeCircle can help</h2>
+<p>The HomeCircle iPhone app is free on the App Store (there is no Android app). The <a href="library.html">Library</a> has guides, breathing and meditation. The <a href="meetings.html">meetings map</a> on this website and in the app can help you find meetings; most meetings link to their official listing. You can also chat with Kai, an automated recovery buddy. Kai isn't a person or a counsellor, and isn't for emergencies.</p>
+<div class="btn-row"><a class="btn" href="{APP_STORE_URL}">Get HomeCircle free on the App Store</a><a class="btn ghost" href="library.html">Open the Library</a><a class="btn ghost" href="meetings.html">Find a meeting</a></div>
+<div class="card sage mt">
+<p>{E(L["gpLine"])}</p>
+<p>{E(L["notAffiliated"])}</p>
+<p>If you're unsafe, call <a href="tel:000">000</a> or Lifeline <a href="tel:131114">13 11 14</a>.</p>
+</div>"""
+    page("australia.html", "", "Addiction support in Australia | HomeCircle AU",
+         "Free, independent help to find AA, NA and GA meetings, alcohol and drug support and crisis lines in New South Wales, Victoria and Queensland.",
+         body)
+
+
+build_home(); build_library(); build_steps(); build_meditations(); build_meetings(); build_help(); build_queensland(); build_new_south_wales(); build_victoria(); build_australia(); build_treatment(); build_drive(); build_support()
 for i in C["items"]:
     build_item(i)
 build_stages(); build_books()
