@@ -399,6 +399,53 @@ SHARE_HOME = """<div class="card share-card mt ra-skip"><div><p class="eyebrow">
 <div class="share-actions"><button class="btn" type="button" id="hc-share">{icon}<span>Share HomeCircle</span></button><p class="small" id="hc-share-status" role="status"></p></div></div>
 <script src="assets/share.js" defer></script>""".format(icon=SHARE_ICON)
 
+
+# Accessible names for bare-number tel: links (Hale clearance
+# bce5a4330e42312f657081c32aa298d3108b71d69a7c2a10a366aa6cf7e2ddc1).
+# Applied here so every page() write, and a rebuild, reproduces the same labels.
+# Only anchors whose visible text is digits and spaces are labelled; existing
+# aria-label values (including Kai's) are left alone.
+BARE_TEL_RE = re.compile(
+    r'<a\b([^>]*?)\bhref="(tel:[^"]+)"([^>]*)>([0-9]+(?: [0-9]+)*)</a>',
+    re.I,
+)
+BARE_TEL_LABELS = {
+    "tel:000": "Call 000",
+    "tel:131114": "Call Lifeline, 13 11 14",
+    "tel:131126": "Call Poisons Information Centre, 13 11 26",
+    "tel:0283821000": "Call Alcohol and Drug Information Service (ADIS), 02 8382 1000",
+    "tel:1300252666": "Call Al-Anon Family Groups Australia and Alateen, 1300 252 666",
+    "tel:1800011511": "Call Mental Health Line, 1800 011 511",
+    "tel:1800022222": "Call healthdirect, 1800 022 222",
+    "tel:1800177833": "Call Adis 24/7 Alcohol and Drug Support, 1800 177 833",
+    "tel:1800551800": "Call Kids Helpline, 1800 55 1800",
+    "tel:1800737732": "Call 1800RESPECT, 1800 737 732",
+    "tel:1800858858": "Call National Gambling Helpline, 1800 858 858",
+    "tel:1800888236": "Call DirectLine, 1800 888 236",
+}
+
+def bare_tel_label(href, path):
+    if href == "tel:1300368186":
+        if path == "families/children-and-parental-aod.html":
+            return "Call Family Drug Support Australia, 1300 368 186"
+        return "Call Family Drug Support, 1300 368 186"
+    if href == "tel:1800250015":
+        if path == "new-south-wales.html":
+            return "Call Alcohol and Drug Information Service (ADIS), 1800 250 015"
+        return "Call National Alcohol and Other Drug Hotline, 1800 250 015"
+    return BARE_TEL_LABELS.get(href)
+
+def label_bare_tels(html, path):
+    def repl(m):
+        before, href, after, vis = m.group(1), m.group(2), m.group(3), m.group(4)
+        if re.search(r"\baria-label=", before + after, re.I):
+            return m.group(0)
+        label = bare_tel_label(href, path)
+        if label is None:
+            raise SystemExit(f"unexpected bare-number tel: {href!r} visible {vis!r} on {path}")
+        return f'<a{before}href="{href}"{after} aria-label="{E(label)}">{vis}</a>'
+    return BARE_TEL_RE.sub(repl, html)
+
 def page(path, active, title, desc, body):
     global RA_HELP_BODY
     if path in SEO_META:
@@ -416,6 +463,7 @@ def page(path, active, title, desc, body):
     clips = RA.page_clips(lines, r)
     if clips: out = out.replace("\n</body>", "\n" + clips + "\n</body>", 1)
     RA_PAGE_SIZES[path] = RA.sizes(lines)
+    out = label_bare_tels(out, path)
     (ROOT / path).parent.mkdir(parents=True, exist_ok=True)
     (ROOT / path).write_text(out)
     BUILT_PAGES.append(path)
