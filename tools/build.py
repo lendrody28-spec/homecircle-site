@@ -1390,7 +1390,7 @@ def build_new_south_wales():
 <div class="btn-row"><a class="btn ghost" href="tel:1800250015">Call 1800 250 015</a><a class="btn ghost" href="tel:0283821000">Call 02 8382 1000</a><a class="btn ghost" href="https://yourroom.health.nsw.gov.au/getting-help/Pages/adis.aspx" rel="noopener">ADIS NSW website</a></div>
 <p>1800 250 015 is also the National Alcohol and Other Drug Hotline. From any state or territory, that number directs you to the alcohol and drug service for the place you're calling from.</p>
 <h2 id="mental-health">Mental health support in New South Wales</h2>
-<p>The Mental Health Line is NSW Health's free, 24-hour statewide phone service. It links people with NSW Health mental health services. It isn't a counselling or crisis support service. Call <a href="tel:1800011511">1800 011 511</a>. If you're unsafe, call <a href="tel:000">000</a>.</p>
+<p>The Mental Health Line is NSW Health's free, 24-hour statewide phone service. It links people with NSW Health mental health services. Trained mental health professionals give advice and can refer you to local services. It isn't a counselling or one-off crisis support service. Call <a href="tel:1800011511">1800 011 511</a>. If you're unsafe, call <a href="tel:000">000</a>.</p>
 <div class="btn-row"><a class="btn ghost" href="tel:1800011511">Call 1800 011 511</a><a class="btn ghost" href="https://www.health.nsw.gov.au/mentalhealth/Pages/mental-health-line.aspx" rel="noopener">Mental Health Line website</a></div>
 <h2 id="areas">By area</h2>
 <p>For meetings in these areas, use the official finders above.</p>
@@ -1494,7 +1494,7 @@ def build_australia():
 </div>
 <h1>Finding addiction support in Australia</h1>
 <p class="lede">HomeCircle is a free, independent app and website that helps people find support near them. HomeCircle isn't affiliated with or endorsed by Alcoholics Anonymous, Narcotics Anonymous, Gamblers Anonymous or Porn Addicts Anonymous. HomeCircle is support, not medical care.</p>
-<p>These pages list official meeting finders and verified helplines for each state. We start with Queensland, New South Wales and Victoria.</p>
+<p>These pages list official meeting finders and helplines we've checked for each state. We start with Queensland, New South Wales and Victoria.</p>
 <div class="grid g3">
 <div class="card"><h2 class="mt0">Queensland</h2><p>Links to AA, NA and GA's own meeting finders, and Queensland helplines including Adis.</p><a class="btn" href="queensland.html">Addiction support in Queensland</a></div>
 <div class="card"><h2 class="mt0">New South Wales</h2><p>Links to AA, NA and GA's own meeting finders, and New South Wales helplines including ADIS.</p><a class="btn" href="new-south-wales.html">Addiction support in New South Wales</a></div>
@@ -1511,7 +1511,7 @@ def build_australia():
 <h2 id="support">Alcohol and drug support</h2>
 <p>The National Alcohol and Other Drug Hotline on <a href="tel:{nat["dial"]}">{E(nat["displayNumber"])}</a> connects you to your state's alcohol and drug service. It's free and confidential, and open 24 hours a day, 7 days a week (in South Australia, 8.30am to 10pm).</p>
 <div class="btn-row">{tel(nat)}</div>
-<p>State pages have the local alcohol and drug line for that state, where we have verified it.</p>
+<p>State pages have the local alcohol and drug line for that state, where we've checked it.</p>
 <h2 id="families">For families</h2>
 <p>If you're worried about someone you love, see our <a href="families/index.html">For families &amp; partners</a> pages. Family Drug Support is a 24-hour line for families and friends of someone using alcohol or other drugs: <a href="tel:{fds["dial"]}">{E(fds["displayNumber"])}</a>.</p>
 <p>Young people can call Kids Helpline any time on <a href="tel:1800551800">1800 55 1800</a>. It's free, private and confidential, for young people aged 5 to 25.</p>
