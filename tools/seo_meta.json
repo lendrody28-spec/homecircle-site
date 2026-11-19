@@ -170,5 +170,17 @@
   "queensland.html": {
     "title": "Addiction support in Queensland | HomeCircle AU",
     "description": "Free, independent help to find AA, NA and GA meetings, alcohol and drug support and crisis lines in Brisbane, the Gold Coast, Cairns and across Queensland."
+  },
+  "new-south-wales.html": {
+    "title": "Addiction support in New South Wales | HomeCircle AU",
+    "description": "Free, independent help to find AA, NA and GA meetings, alcohol and drug support and crisis lines in Sydney, Newcastle and across New South Wales."
+  },
+  "victoria.html": {
+    "title": "Addiction support in Victoria | HomeCircle AU",
+    "description": "Free, independent help to find AA, NA and GA meetings, alcohol and drug support and crisis lines in Melbourne, Geelong, Ballarat and across Victoria."
+  },
+  "australia.html": {
+    "title": "Addiction support in Australia | HomeCircle AU",
+    "description": "Free, independent help to find AA, NA and GA meetings, alcohol and drug support and crisis lines in New South Wales, Victoria and Queensland."
   }
 }
