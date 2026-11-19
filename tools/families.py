@@ -164,6 +164,7 @@ def dv_body():
     states = "".join(f'<details class="card state"><summary><h3>{st}: {n}</h3></summary>{svc(n, w, p, h, u)}</details>' for st, n, w, p, h, u in DV_STATES)
     return f"""<h1>Worried about violence at home?</h1>
 <p class="lede">If someone you love is drinking or using, and you feel unsafe, you deserve help. You can call any of these services.</p>
+<p>For types of abuse, effects on children, and official finders, see <a href="../other-support-domestic-violence.html">domestic violence support</a> and <a href="../other-support.html">Other support</a>.</p>
 <h2 class="mt">If you're experiencing violence</h2>
 <div class="grid g2">
 {svc("1800RESPECT", "Anyone affected by domestic, family or sexual violence, and people supporting them. National.", "1800 737 732", "24/7", "https://www.1800respect.org.au/")}
@@ -393,7 +394,8 @@ def build(page, E):
 <div class="grid g2 mt"><a class="card tile" href="withdrawal.html"><div class="tbody"><h3>Supporting someone through withdrawal</h3><p>Warning signs and when to call 000.</p></div></a>
 <a class="card tile" href="kids.html"><div class="tbody"><h3>For kids and teens</h3><p>When a parent drinks or uses drugs. It's not your fault.</p></div></a>
 <a class="card tile" href="children-and-parental-aod.html"><div class="tbody"><h3>When a child is affected</h3><p>What can help, how common harm from others' drinking is, and where to get support.</p></div></a>
-<a class="card tile" href="safety.html"><div class="tbody"><h3>Worried about violence at home?</h3><p>1800RESPECT and lines in every state.</p></div></a></div>""")
+<a class="card tile" href="safety.html"><div class="tbody"><h3>Worried about violence at home?</h3><p>1800RESPECT and lines in every state.</p></div></a>
+<a class="card tile" href="../other-support.html"><div class="tbody"><h3>Other support</h3><p>Grief, community groups and domestic violence help, through official finders.</p></div></a></div>""")
     for k, v in WHO.items():
         P(f"families/{k}.html", v[1] + " – HomeCircle", v[2], who_body(k))
     P("families/kids.html", "For kids and teens: when a parent drinks or uses drugs – HomeCircle",
