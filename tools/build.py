@@ -49,6 +49,7 @@ def title_of(i):
 
 PAGES = [("index.html", "Home"), ("library.html", "Library"), ("twelve-steps.html", "12 Steps"),
          ("meditations.html", "Meditations & breathing"), ("meetings.html", "Meetings"),
+         ("other-support.html", "Other support"),
          ("help.html", "Help"), ("families/index.html", "For families & partners"), ("your-circle.html", "Your circle"), ("support.html", "Support")]
 PRIVACY = L["privacyURL"]
 TERMS = L["termsURL"]
@@ -422,6 +423,14 @@ BARE_TEL_LABELS = {
     "tel:1800737732": "Call 1800RESPECT, 1800 737 732",
     "tel:1800858858": "Call National Gambling Helpline, 1800 858 858",
     "tel:1800888236": "Call DirectLine, 1800 888 236",
+    "tel:1300845745": "Call Griefline, 1300 845 745",
+    "tel:1300654556": "Call National Centre for Childhood Grief (A Friend's Place), 1300 654 556",
+    "tel:1300550009": "Call Australian Men's Shed Association, 1300 550 009",
+    "tel:1300789978": "Call MensLine Australia, 1300 78 99 78",
+    "tel:1300364277": "Call Relationships Australia, 1300 364 277",
+    "tel:1800184527": "Call QLife, 1800 184 527",
+    "tel:1800497212": "Call Rainbow Sexual, Domestic and Family Violence Helpline, 1800 497 212",
+    "tel:131450": "Call TIS National, 131 450",
 }
 
 def bare_tel_label(href, path):
@@ -455,7 +464,7 @@ def page(path, active, title, desc, body):
     if ra_read_page(path): body = ra_insert_bar(path, body)
     if path == "help.html": RA_HELP_BODY = body
     out = head(title, desc, r, path) + header(active, r) + f'\n<main id="main"><div class="wrap">\n{body}\n</div></main>' + footer(r)
-    if path.startswith("families/") or path == "before-you-drive.html" or not KAI_ON:  # no Kai chat on families or the drive page (or anywhere while KAI_ON is False)
+    if path.startswith("families/") or path in ("before-you-drive.html", "other-support.html", "other-support-domestic-violence.html") or not KAI_ON:  # no Kai chat on families, the drive page, Other support (safe-browsing) or anywhere while KAI_ON is False
         out = re.sub(r'<script src="[^"]*kai[^"]*" defer></script>\n', "", out)
         out = re.sub(r'\n<div class="kai" id="kai".*?\n</div>(?=\n</body>)', "", out, flags=re.S)
     kai_here = 'id="kai"' in out
@@ -1026,6 +1035,7 @@ def build_help():
 {disability_services()}
 <div class="card sage mt ra-skip" id="treatment"><h2 class="mt0">Looking for treatment or rehab?</h2><p>Official treatment finders, your state's alcohol and drug line, and what's free and what costs money.</p><a class="btn" href="find-treatment.html">Find treatment near you</a></div>
 <div class="card sage mt ra-skip" id="before-you-drive"><h2 class="mt0">Before you drive</h2><p>Other ways home if you're not sure you're okay to drive, what alcohol and drugs can do, and official figures and limits pages.</p><a class="btn" href="before-you-drive.html">Before you drive</a></div>
+<div class="card sage mt ra-skip" id="other-support"><h2 class="mt0">Other support</h2><p>Grief support, men's and women's groups, LGBTQ+ groups, multicultural and migrant support, and domestic violence help, through official finders. HomeCircle doesn't run these groups.</p><a class="btn" href="other-support.html">Other support</a></div>
 <div class="ra-skip" id="states">
 <div class="grid g3 mt">
 <div class="card sage" id="queensland"><h2 class="mt0">Addiction support in Queensland</h2><p>Links to AA, NA and GA's own meeting finders, and Queensland helplines including Adis.</p><a class="btn" href="queensland.html">Addiction support in Queensland</a></div>
@@ -1395,6 +1405,9 @@ def build_queensland():
 <h2 id="families">For families</h2>
 <p>If you're worried about someone you love, see our <a href="families/index.html">For families &amp; partners</a> pages. Family Drug Support is a 24-hour line for families and friends of someone using alcohol or other drugs: <a href="tel:{fds["dial"]}">{E(fds["displayNumber"])}</a>.</p>
 <div class="btn-row"><a class="btn" href="families/index.html">For families &amp; partners</a>{tel(fds)}<a class="btn ghost" href="{E(H["familyDrugSupportURL"])}" rel="noopener">Family Drug Support</a></div>
+<h2 id="other-support">Other support</h2>
+<p>Grief support, men's and women's groups, LGBTQ+ groups, multicultural and migrant support, and domestic violence help, through official finders. HomeCircle doesn't run, host or list these groups.</p>
+<div class="btn-row"><a class="btn" href="other-support.html">Other support</a><a class="btn ghost" href="other-support-domestic-violence.html">Domestic violence support</a></div>
 <h2 id="homecircle">How HomeCircle can help</h2>
 <p>The HomeCircle iPhone app is free on the App Store (there is no Android app). The <a href="library.html">Library</a> has guides, breathing and meditation. The <a href="meetings.html">meetings map</a> on this website and in the app can help you find meetings; most meetings link to their official listing. You can also chat with Kai, an automated recovery buddy. Kai isn't a person or a counsellor, and isn't for emergencies.</p>
 <div class="btn-row"><a class="btn" href="{APP_STORE_URL}">Get HomeCircle free on the App Store</a><a class="btn ghost" href="library.html">Open the Library</a><a class="btn ghost" href="meetings.html">Find a meeting</a></div>
@@ -1456,6 +1469,9 @@ def build_new_south_wales():
 <p>If you're worried about someone you love, see our <a href="families/index.html">For families &amp; partners</a> pages. Family Drug Support is a 24-hour line for families and friends of someone using alcohol or other drugs: <a href="tel:{fds["dial"]}">{E(fds["displayNumber"])}</a>.</p>
 <p>Young people can call Kids Helpline any time on <a href="tel:1800551800">1800 55 1800</a>. It's free, private and confidential, for young people aged 5 to 25.</p>
 <div class="btn-row"><a class="btn" href="families/index.html">For families &amp; partners</a>{tel(fds)}<a class="btn ghost" href="{E(H["familyDrugSupportURL"])}" rel="noopener">Family Drug Support</a><a class="btn ghost" href="tel:1800551800">Call 1800 55 1800</a><a class="btn ghost" href="https://kidshelpline.com.au/" rel="noopener">Kids Helpline</a></div>
+<h2 id="other-support">Other support</h2>
+<p>Grief support, men's and women's groups, LGBTQ+ groups, multicultural and migrant support, and domestic violence help, through official finders. HomeCircle doesn't run, host or list these groups.</p>
+<div class="btn-row"><a class="btn" href="other-support.html">Other support</a><a class="btn ghost" href="other-support-domestic-violence.html">Domestic violence support</a></div>
 <h2 id="homecircle">How HomeCircle can help</h2>
 <p>The HomeCircle iPhone app is free on the App Store (there is no Android app). The <a href="library.html">Library</a> has guides, breathing and meditation. The <a href="meetings.html">meetings map</a> on this website and in the app can help you find meetings; most meetings link to their official listing. You can also chat with Kai, an automated recovery buddy. Kai isn't a person or a counsellor, and isn't for emergencies.</p>
 <div class="btn-row"><a class="btn" href="{APP_STORE_URL}">Get HomeCircle free on the App Store</a><a class="btn ghost" href="library.html">Open the Library</a><a class="btn ghost" href="meetings.html">Find a meeting</a></div>
@@ -1514,6 +1530,9 @@ def build_victoria():
 <p>If you're worried about someone you love, see our <a href="families/index.html">For families &amp; partners</a> pages. Family Drug Support is a 24-hour line for families and friends of someone using alcohol or other drugs: <a href="tel:{fds["dial"]}">{E(fds["displayNumber"])}</a>.</p>
 <p>Young people can call Kids Helpline any time on <a href="tel:1800551800">1800 55 1800</a>. It's free, private and confidential, for young people aged 5 to 25.</p>
 <div class="btn-row"><a class="btn" href="families/index.html">For families &amp; partners</a>{tel(fds)}<a class="btn ghost" href="{E(H["familyDrugSupportURL"])}" rel="noopener">Family Drug Support</a><a class="btn ghost" href="tel:1800551800">Call 1800 55 1800</a><a class="btn ghost" href="https://kidshelpline.com.au/" rel="noopener">Kids Helpline</a></div>
+<h2 id="other-support">Other support</h2>
+<p>Grief support, men's and women's groups, LGBTQ+ groups, multicultural and migrant support, and domestic violence help, through official finders. HomeCircle doesn't run, host or list these groups.</p>
+<div class="btn-row"><a class="btn" href="other-support.html">Other support</a><a class="btn ghost" href="other-support-domestic-violence.html">Domestic violence support</a></div>
 <h2 id="homecircle">How HomeCircle can help</h2>
 <p>The HomeCircle iPhone app is free on the App Store (there is no Android app). The <a href="library.html">Library</a> has guides, breathing and meditation. The <a href="meetings.html">meetings map</a> on this website and in the app can help you find meetings; most meetings link to their official listing. You can also chat with Kai, an automated recovery buddy. Kai isn't a person or a counsellor, and isn't for emergencies.</p>
 <div class="btn-row"><a class="btn" href="{APP_STORE_URL}">Get HomeCircle free on the App Store</a><a class="btn ghost" href="library.html">Open the Library</a><a class="btn ghost" href="meetings.html">Find a meeting</a></div>
@@ -1564,6 +1583,9 @@ def build_australia():
 <p>If you're worried about someone you love, see our <a href="families/index.html">For families &amp; partners</a> pages. Family Drug Support is a 24-hour line for families and friends of someone using alcohol or other drugs: <a href="tel:{fds["dial"]}">{E(fds["displayNumber"])}</a>.</p>
 <p>Young people can call Kids Helpline any time on <a href="tel:1800551800">1800 55 1800</a>. It's free, private and confidential, for young people aged 5 to 25.</p>
 <div class="btn-row"><a class="btn" href="families/index.html">For families &amp; partners</a>{tel(fds)}<a class="btn ghost" href="{E(H["familyDrugSupportURL"])}" rel="noopener">Family Drug Support</a><a class="btn ghost" href="tel:1800551800">Call 1800 55 1800</a><a class="btn ghost" href="https://kidshelpline.com.au/" rel="noopener">Kids Helpline</a></div>
+<h2 id="other-support">Other support</h2>
+<p>Grief support, men's and women's groups, LGBTQ+ groups, multicultural and migrant support, and domestic violence help, through official finders. HomeCircle doesn't run, host or list these groups.</p>
+<div class="btn-row"><a class="btn" href="other-support.html">Other support</a><a class="btn ghost" href="other-support-domestic-violence.html">Domestic violence support</a></div>
 <h2 id="homecircle">How HomeCircle can help</h2>
 <p>The HomeCircle iPhone app is free on the App Store (there is no Android app). The <a href="library.html">Library</a> has guides, breathing and meditation. The <a href="meetings.html">meetings map</a> on this website and in the app can help you find meetings; most meetings link to their official listing. You can also chat with Kai, an automated recovery buddy. Kai isn't a person or a counsellor, and isn't for emergencies.</p>
 <div class="btn-row"><a class="btn" href="{APP_STORE_URL}">Get HomeCircle free on the App Store</a><a class="btn ghost" href="library.html">Open the Library</a><a class="btn ghost" href="meetings.html">Find a meeting</a></div>
@@ -1578,6 +1600,7 @@ def build_australia():
 
 
 build_home(); build_library(); build_steps(); build_meditations(); build_meetings(); build_help(); build_queensland(); build_new_south_wales(); build_victoria(); build_australia(); build_treatment(); build_drive(); build_support()
+import sys as _os_sys; _os_sys.path.insert(0, str(ROOT / 'tools')); import other_support; other_support.build(page)
 for i in C["items"]:
     build_item(i)
 build_stages(); build_books()

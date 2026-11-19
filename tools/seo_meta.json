@@ -182,5 +182,13 @@
   "australia.html": {
     "title": "Addiction support in Australia | HomeCircle AU",
     "description": "Free, independent help to find AA, NA and GA meetings, alcohol and drug support and crisis lines in New South Wales, Victoria and Queensland."
+  },
+  "other-support.html": {
+    "title": "Other support – HomeCircle",
+    "description": "Find grief support, community groups and domestic violence help in Australia through official finders. HomeCircle doesn't run these groups."
+  },
+  "other-support-domestic-violence.html": {
+    "title": "Domestic violence support – HomeCircle",
+    "description": "1800RESPECT and official information on domestic and family violence, including support for children. If you're in danger now, call 000."
   }
 }
