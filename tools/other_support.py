@@ -2,6 +2,7 @@
 
 # Hale review, copied exactly.
 OS_INTRO = "HomeCircle doesn't run, host or list these groups. We link to official finders and services so you can find support near you. HomeCircle is independent and isn't affiliated with or endorsed by any service we link to."
+OS_INTRO_DV = "HomeCircle doesn't run or list these services. We link to official services and directories. HomeCircle is independent and isn't affiliated with or endorsed by any service we link to."
 OS_UNDER18 = "If you're under 18, Kids Helpline is there any time on 1800 55 1800."
 OS_QEXIT_NOTE = "Quick exit (Esc) takes you away from this page fast. It doesn't clear your browser history. A private window is safer."
 OS_DANGER = "If you're in danger now, call 000."
@@ -42,7 +43,7 @@ def build(page):
 </nav>
 
 <h2 id="grief">Grief counselling and grief support groups</h2>
-<p><a href="https://griefline.org.au/get-help/" rel="noopener">Griefline</a> is now part of SANE Australia. Call <a href="tel:1300845745">1300 845 745</a> Monday to Friday, 10am-8pm (AEST/AEDT), about grief support and resources through SANE. Griefline's <a href="https://griefline.org.au/get-help/bereavement-support-groups/" rel="noopener">online bereavement groups</a> are for people aged 18+ living in Australia. They are not a local-area finder. Griefline says these groups are free.</p>
+<p><a href="https://griefline.org.au/get-help/" rel="noopener">Griefline</a> is now part of SANE Australia. Call <a href="tel:1300845745">1300 845 745</a>, Monday to Friday, 10am-8pm (AEST/AEDT). Griefline's <a href="https://griefline.org.au/get-help/bereavement-support-groups/" rel="noopener">online bereavement groups</a> are for people aged 18+ living in Australia. They are not a local-area finder. Griefline says these groups are free.</p>
 <div class="btn-row"><a class="btn" href="tel:1300845745">Call Griefline 1300 845 745</a><a class="btn ghost" href="https://griefline.org.au/get-help/" rel="noopener">Griefline</a></div>
 <p>A Friend's Place, operated by the National Centre for Childhood Grief, provides counselling and group support for children, teens and their families. Parents can find out more on their site. Their site says specialist counselling for children and teens is free. Call <a href="tel:1300654556">1300 654 556</a>.</p>
 <div class="btn-row"><a class="btn" href="tel:1300654556">Call 1300 654 556</a><a class="btn ghost" href="https://childhoodgrief.org.au/" rel="noopener">National Centre for Childhood Grief (A Friend's Place)</a></div>
@@ -96,7 +97,7 @@ def build(page):
     dv = f"""{other_support_top(danger=True)}
 <h1>Domestic violence support</h1>
 <p class="lede">{OS_DANGER}</p>
-<p>{OS_INTRO}</p>
+<p>{OS_INTRO_DV}</p>
 <p>{OS_UNDER18}</p>
 <div class="btn-row"><a class="btn danger" href="tel:000">Call 000</a><a class="btn" href="tel:1800737732">Call 1800RESPECT 1800 737 732</a><a class="btn" href="tel:1800551800">Call Kids Helpline 1800 55 1800</a></div>
 <p><a href="other-support.html">← Other support</a></p>
