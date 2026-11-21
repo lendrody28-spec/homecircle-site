@@ -219,7 +219,9 @@ def seo_head(title, desc, path):
         "installUrl": APP_STORE_URL,
         "identifier": APP_STORE_ID,
         "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"},
-        "description": "Free addiction recovery support in Australia: meetings finder, breathing tools, day counter and helplines. Not affiliated with AA, NA, GA or PA. Support, not medical care.",
+        "description": ("Free addiction recovery support in Australia: meetings finder, breathing tools, day counter and helplines. Support, not medical care."
+                        if path == "give.html" else
+                        "Free addiction recovery support in Australia: meetings finder, breathing tools, day counter and helplines. Not affiliated with AA, NA, GA or PA. Support, not medical care."),
         "author": {"@type": "Organization", "name": "HomeCircle"},
     }
     webpage = {
@@ -337,7 +339,7 @@ def kai_panel(r):
 <div class="kai-fallback" id="kai-fallback" role="region" aria-label="{E(c["panelLabel"])}"><strong>{E(c["fallbackLead"])}</strong> {kai_tels(c)}
 </div>"""
 
-def footer(r):
+def footer(r, path=""):
     s_ = C["crisis"]
     em, ll = HL["000"], HL["lifeline"]
     return f"""
@@ -347,7 +349,7 @@ def footer(r):
     <h2>HomeCircle</h2>
     <p>Support for your recovery journey. Free, with no accounts, no sign-in, no cookies, no ads, no trackers and no analytics.</p>
     <p>{E(L["gpLine"])} {E(L["notMedicalDevice"])} In an emergency call <a href="tel:000">000</a>. Lifeline <a href="tel:131114">13 11 14</a>.</p>
-    <p>{E(L["notAffiliated"])}</p>
+    {"" if path == "give.html" else f'<p>{E(L["notAffiliated"])}</p>'}
     <p><a href="https://www.facebook.com/61595778045748" rel="noopener">Follow HomeCircle on Facebook</a></p>
   </div>
   <div><h2>Explore</h2><ul>{"".join(f'<li><a href="{r}{h}">{E(t)}</a></li>' for h, t in PAGES)}<li><a href="{r}find-treatment.html">Find treatment near you</a></li><li><a href="{r}queensland.html">Addiction support in Queensland</a></li><li><a href="{r}new-south-wales.html">Addiction support in New South Wales</a></li><li><a href="{r}victoria.html">Addiction support in Victoria</a></li><li><a href="{r}australia.html">Addiction support in Australia</a></li><li><a href="{r}before-you-drive.html">Before you drive</a></li></ul></div>
@@ -355,6 +357,7 @@ def footer(r):
     <li><a href="{PRIVACY}">Privacy Policy</a></li>
     <li><a href="{TERMS}">Terms of Use</a></li>
     <li><a href="{r}support.html#website">About this website</a></li>
+    <li><a href="{r}give.html">Give to others</a></li>
     <li><a href="mailto:support@homecircle.au">Contact</a></li>
     <li><a href="mailto:{L["supportEmail"]}">{L["supportEmail"]}</a> (not a crisis line)</li>
   </ul><p class="small">{E(BROWSER_ONLY)} {RA_SAVE}</p></div>
@@ -463,7 +466,7 @@ def page(path, active, title, desc, body):
     r = "../" * path.count("/")
     if ra_read_page(path): body = ra_insert_bar(path, body)
     if path == "help.html": RA_HELP_BODY = body
-    out = head(title, desc, r, path) + header(active, r) + f'\n<main id="main"><div class="wrap">\n{body}\n</div></main>' + footer(r)
+    out = head(title, desc, r, path) + header(active, r) + f'\n<main id="main"><div class="wrap">\n{body}\n</div></main>' + footer(r, path)
     if path.startswith("families/") or path in ("before-you-drive.html", "other-support.html", "other-support-domestic-violence.html") or not KAI_ON:  # no Kai chat on families, the drive page, Other support (safe-browsing) or anywhere while KAI_ON is False
         out = re.sub(r'<script src="[^"]*kai[^"]*" defer></script>\n', "", out)
         out = re.sub(r'\n<div class="kai" id="kai".*?\n</div>(?=\n</body>)', "", out, flags=re.S)
@@ -1197,10 +1200,28 @@ def build_treatment():
 <p>Free advice, counselling and referral to treatment in your state or territory. They're not emergency services. Keep 000 and Lifeline first.</p>
 <div class="grid g2 states">{states}</div>
 <p class="small">More lines, including family support, are on the <a href="help.html">Help page</a>.</p>
+<div class="card sage mt" id="give"><h2 class="mt0">Support others doing the work</h2><p>If you'd like to give back to organisations that help people and families affected by alcohol, drugs and gambling, see <a href="give.html">Give to others</a>.</p></div>
 <div class="card mt"><h2 class="mt0">Please note</h2><p>{E(TREAT_NOTE)}</p><p>The services and finders on this page are run by others. HomeCircle isn't affiliated with or endorsed by any of them.</p><p class="small">Checked against each service's own website on {TREAT_CHECKED}. Hours and numbers can change, so check the service's own website.</p></div>
 <div class="emergency-card mt"><h2 class="mt0">Call 000 immediately</h2><p>{E(HL["000"]["detail"])}</p><a class="btn" href="tel:000">Call 000</a></div>"""
     page("find-treatment.html", "", "Find treatment near you – HomeCircle",
          "Free and fee-based alcohol, drug and gambling help in Australia, with official treatment finders and every state and territory line.", body)
+
+
+def build_give():
+    # Structure only: no organisation names or donate links until Raven's
+    # vetted list is Hale-cleared. Hale's unaffiliated line is shown as-is.
+    body = """<div id="now" class="btn-row"><a class="btn danger" href="tel:000">Call 000</a><a class="btn" href="tel:131114">Call Lifeline 13 11 14</a></div>
+<h1>Support others doing the work</h1>
+<p class="lede">Lots of Australian organisations help people and families affected by alcohol, drugs and gambling. If you'd like to give back, this page will list ways to support them directly.</p>
+<div class="notice"><strong>In an emergency, call <a href="tel:000">000</a>.</strong> If you need to talk to someone now, call Lifeline on <a href="tel:131114">13 11 14</a>, 24 hours a day.</div>
+<h2 id="organisations">Organisations</h2>
+<p>Organisations will be listed here once checked.</p>
+<!-- Organisation list left empty until Raven's vetted list is Hale-cleared. No names or outbound links until then. -->
+<div class="card mt"><p>HomeCircle AU isn't affiliated with or endorsed by these organisations. We link to their official pages so you can support them directly.</p></div>
+<p>If you're unsafe, call <a href="tel:000">000</a> or Lifeline <a href="tel:131114">13 11 14</a>.</p>"""
+    page("give.html", "", "Support Australian recovery services | HomeCircle AU",
+         "Ways to support Australian organisations that help people and families affected by alcohol, drugs and gambling. HomeCircle isn't affiliated with or endorsed by these organisations.",
+         body)
 
 def build_support():
     src = support_faq()
@@ -1599,7 +1620,7 @@ def build_australia():
          body)
 
 
-build_home(); build_library(); build_steps(); build_meditations(); build_meetings(); build_help(); build_queensland(); build_new_south_wales(); build_victoria(); build_australia(); build_treatment(); build_drive(); build_support()
+build_home(); build_library(); build_steps(); build_meditations(); build_meetings(); build_help(); build_queensland(); build_new_south_wales(); build_victoria(); build_australia(); build_treatment(); build_give(); build_drive(); build_support()
 import sys as _os_sys; _os_sys.path.insert(0, str(ROOT / 'tools')); import other_support; other_support.build(page)
 for i in C["items"]:
     build_item(i)
