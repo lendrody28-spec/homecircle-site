@@ -65,7 +65,16 @@ for l in LABELS: ok(l in m.tags, f"cost label present: {l}")
 ok(set(m.tags) <= set(LABELS), f"only Raven's cost labels are used ({sorted(set(m.tags) - set(LABELS))})")
 ok(not re.search(r"\$\s?\d|\bAUD\b|\bper (night|week|day)\b", text), "no specific prices")
 ok(not re.search(r"\b(best|top[- ]rated|accredited)\b|#1\b", text, re.I), "no 'best' rankings (no best/top-rated/accredited/#1)")
-ok(not re.search(r"\bPaid\b", text), "never 'Paid' as a label")
+# "Paid" is not used as a cost label. The "Paid options" heading is allowed.
+ok(not re.search(r"\bPaid\b", text.replace("Paid options", "")), "never 'Paid' as a cost label")
+ok("Paid options" in text, "Paid options heading, separate from free services")
+CSC = "Clean Slate Clinic: a paid telehealth program for alcohol withdrawal at home under medical supervision, followed by aftercare support. Costs apply, and some funded places may be available. Check the clinic's website for current details, and talk to your GP about whether home withdrawal is safe for you."
+ok(CSC in text, "Clean Slate Clinic uses Hale-cleared wording")
+ok(re.search(r'<a class="btn ghost" href="https://cleanslateclinic.com/" rel="noopener">Open Clean Slate Clinic</a>', main), "plain Clean Slate link, rel=noopener, no tracking")
+ok("HomeCircle AU isn't affiliated with or endorsed by this clinic and receives nothing for this listing." in text, "Clean Slate not-affiliated line")
+paid = main[main.find('id="paid-options"'):main.find('id="states"')]
+ok("id=\"paid-options\"" in main and main.find('id="costs"') < main.find('id="paid-options"') < main.find('id="states"'), "Paid options sits after the cost labels and before state lines")
+ok("<img" not in paid and "logo" not in paid.lower(), "no logo in Paid options")
 
 # links
 ext = [h for h in hrefs if h.startswith("http")]
