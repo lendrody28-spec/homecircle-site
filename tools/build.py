@@ -1087,6 +1087,9 @@ TREAT_CHECKED = "10 November 2026"
 # Hale, 10 Nov 2026: ACT hours differ across official pages. Help keeps its wording (read-aloud clip remapped help.56 -> help.64).
 TREAT_DETAIL = {"Alcohol and Drug Service Intake, Canberra Health Services": "Intake line, weekdays during business hours. Check their website for current hours. Not a crisis line. After hours, call the National Alcohol and Other Drug Hotline on 1800 250 015."}
 TREAT_NOTE = "HomeCircle doesn't rank, recommend or check any service, and none of them pay us. This is information only, not a referral. Costs, waitlists and services change, so confirm with the service before you go. While you wait, your state's alcohol and drug line can help. In an emergency, call 000."  # Hale's step 1 disclaimer (raven/find-treatment-page-draft.md)
+# Hale-cleared Clean Slate Clinic listing, 23 Nov 2026. One paid option, separate from free services. No logo, no tracking, no prices.
+TREAT_CLEAN_SLATE = "Clean Slate Clinic: a paid telehealth program for alcohol withdrawal at home under medical supervision, followed by aftercare support. Costs apply, and some funded places may be available. Check the clinic's website for current details, and talk to your GP about whether home withdrawal is safe for you."
+TREAT_CLEAN_SLATE_AFFIL = "HomeCircle AU isn't affiliated with or endorsed by this clinic and receives nothing for this listing."
 # (name, who runs it, what it does, url, button label) – shown A to Z by name
 TREAT_FINDERS = [
     ("Counselling Online", "Turning Point", "Free, confidential online chat counselling about alcohol and other drugs, 24/7, for you or someone you care about.", "https://www.counsellingonline.org.au/", "Open Counselling Online"),
@@ -1193,6 +1196,8 @@ def build_treatment():
 <p>Some help is free, some is covered by Medicare, and some charges fees. We use these labels. We don't show prices, because they change and we can't check them.</p>
 <div class="card"><ul class="plain-list cost-legend">{legend}</ul></div>
 <div class="grid g2 mt">{types}</div>
+<h2 id="paid-options">Paid options</h2>
+<div class="card"><p>{E(TREAT_CLEAN_SLATE)}</p><a class="btn ghost" href="https://cleanslateclinic.com/" rel="noopener">Open Clean Slate Clinic</a><p>{E(TREAT_CLEAN_SLATE_AFFIL)}</p></div>
 <h2 id="states">Alcohol and drug lines by state and territory</h2>
 <p>Free advice, counselling and referral to treatment in your state or territory. They're not emergency services. Keep 000 and Lifeline first.</p>
 <div class="grid g2 states">{states}</div>
