@@ -81,28 +81,7 @@
     });
   }
 
-  /* Upcoming events from events.json, soonest first, past hidden */
-  var evList = document.getElementById("events-list");
-  function todayISO() {
-    var d = new Date();
-    return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
-  }
-  function hidePast(root) {
-    var t = todayISO(), shown = 0;
-    root.querySelectorAll("[data-end]").forEach(function (li) {
-      var past = li.getAttribute("data-end") < t;
-      li.hidden = past;
-      if (!past) shown++;
-    });
-    var empty = document.getElementById("events-empty");
-    if (empty) empty.hidden = shown > 0;
-    return shown;
-  }
-  if (evList) {
-    hidePast(evList);
-    var limit = parseInt(evList.getAttribute("data-limit") || "0", 10);
-    if (limit) Array.prototype.filter.call(evList.children, function (li) { return !li.hidden; }).slice(limit).forEach(function (li) { li.hidden = true; });
-  }
+  /* Finished events are hidden by assets/events-hide.js, using each event's state time zone. */
 
   /* Breathing guide. Accessibility options (10 Nov 2026): Pause, a slower pace (in and out only, holds
      never get longer), and a still text count instead of the moving circle. The still count is on by
