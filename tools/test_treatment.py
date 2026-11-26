@@ -75,6 +75,20 @@ ok("HomeCircle AU isn't affiliated with or endorsed by this clinic and receives 
 paid = main[main.find('id="paid-options"'):main.find('id="states"')]
 ok("id=\"paid-options\"" in main and main.find('id="costs"') < main.find('id="paid-options"') < main.find('id="states"'), "Paid options sits after the cost labels and before state lines")
 ok("<img" not in paid and "logo" not in paid.lower(), "no logo in Paid options")
+ok("Free phone and online support" in text, "Free phone and online support heading")
+ok('id="free-phone-online"' in main and main.find('id="costs"') < main.find('id="free-phone-online"') < main.find('id="paid-options"'), "free phone and online support sits after the cost labels and before Paid options")
+DAYBREAK = "Daybreak (by Hello Sunday Morning): a free app for people who want to change their drinking, with private chats with coaches and an anonymous online community."
+ok(DAYBREAK in text, "Daybreak uses Hale-cleared wording")
+ok(re.search(r'<a class="btn ghost" href="https://hellosundaymorning.org/daybreak-app/" rel="noopener">Open Daybreak</a>', main), "plain Daybreak link, rel=noopener, no tracking")
+RECONNEXION = "Reconnexion: free phone support for people reducing or stopping benzodiazepines (some sleeping and anxiety medicines). Call 1300 273 266 (check reconnexion.org.au for current hours). Don't stop or cut down benzodiazepines suddenly. Talk to your GP or pharmacist first, as stopping suddenly can be dangerous."
+ok(RECONNEXION in text, "Reconnexion uses Hale-cleared wording")
+ok(re.search(r'<a href="tel:1300273266"(?: aria-label="Call Reconnexion, 1300 273 266")?>1300 273 266</a>', main), "Reconnexion number is a tel: link")
+ok(re.search(r'<a href="https://www.reconnexion.org.au/" rel="noopener">reconnexion.org.au</a>', main), "plain Reconnexion link, rel=noopener, no tracking")
+free = main[main.find('id="free-phone-online"'):main.find('id="paid-options"')]
+ok("<img" not in free and "logo" not in free.lower() and "utm_" not in free, "no logo or tracking in free phone and online support")
+ok(not re.search(r"9\s*a\.?m|Monday to Thursday|9:00", free, re.I), "Reconnexion hours are not in the page text")
+tels = [h for h in hrefs if h.startswith("tel:")]
+ok(tels and tels[0] == "tel:000", "000 is the first tel: link")
 
 # links
 ext = [h for h in hrefs if h.startswith("http")]
