@@ -428,6 +428,7 @@ BARE_TEL_LABELS = {
     "tel:1300550009": "Call Australian Men's Shed Association, 1300 550 009",
     "tel:1300789978": "Call MensLine Australia, 1300 78 99 78",
     "tel:1300364277": "Call Relationships Australia, 1300 364 277",
+    "tel:1300273266": "Call Reconnexion, 1300 273 266",
     "tel:1800184527": "Call QLife, 1800 184 527",
     "tel:1800497212": "Call Rainbow Sexual, Domestic and Family Violence Helpline, 1800 497 212",
     "tel:131450": "Call TIS National, 131 450",
@@ -1090,6 +1091,11 @@ TREAT_NOTE = "HomeCircle doesn't rank, recommend or check any service, and none 
 # Hale-cleared Clean Slate Clinic listing, 23 Nov 2026. One paid option, separate from free services. No logo, no tracking, no prices.
 TREAT_CLEAN_SLATE = "Clean Slate Clinic: a paid telehealth program for alcohol withdrawal at home under medical supervision, followed by aftercare support. Costs apply, and some funded places may be available. Check the clinic's website for current details, and talk to your GP about whether home withdrawal is safe for you."
 TREAT_CLEAN_SLATE_AFFIL = "HomeCircle AU isn't affiliated with or endorsed by this clinic and receives nothing for this listing."
+# Hale-cleared Daybreak and Reconnexion listings, 23 Nov 2026. Free phone and online support, before Paid options. No hours, no logo, no tracking.
+TREAT_DAYBREAK = "Daybreak (by Hello Sunday Morning): a free app for people who want to change their drinking, with private chats with coaches and an anonymous online community."
+TREAT_RECONNEXION_LEAD = "Reconnexion: free phone support for people reducing or stopping benzodiazepines (some sleeping and anxiety medicines). Call "
+TREAT_RECONNEXION_MID = " (check "
+TREAT_RECONNEXION_TAIL = " for current hours). Don't stop or cut down benzodiazepines suddenly. Talk to your GP or pharmacist first, as stopping suddenly can be dangerous."
 # (name, who runs it, what it does, url, button label) – shown A to Z by name
 TREAT_FINDERS = [
     ("Counselling Online", "Turning Point", "Free, confidential online chat counselling about alcohol and other drugs, 24/7, for you or someone you care about.", "https://www.counsellingonline.org.au/", "Open Counselling Online"),
@@ -1196,6 +1202,9 @@ def build_treatment():
 <p>Some help is free, some is covered by Medicare, and some charges fees. We use these labels. We don't show prices, because they change and we can't check them.</p>
 <div class="card"><ul class="plain-list cost-legend">{legend}</ul></div>
 <div class="grid g2 mt">{types}</div>
+<h2 id="free-phone-online">Free phone and online support</h2>
+<div class="card"><p>{E(TREAT_DAYBREAK)}</p><a class="btn ghost" href="https://hellosundaymorning.org/daybreak-app/" rel="noopener">Open Daybreak</a></div>
+<div class="card"><p>{E(TREAT_RECONNEXION_LEAD)}<a href="tel:1300273266">1300 273 266</a>{E(TREAT_RECONNEXION_MID)}<a href="https://www.reconnexion.org.au/" rel="noopener">reconnexion.org.au</a>{E(TREAT_RECONNEXION_TAIL)}</p></div>
 <h2 id="paid-options">Paid options</h2>
 <div class="card"><p>{E(TREAT_CLEAN_SLATE)}</p><a class="btn ghost" href="https://cleanslateclinic.com/" rel="noopener">Open Clean Slate Clinic</a><p>{E(TREAT_CLEAN_SLATE_AFFIL)}</p></div>
 <h2 id="states">Alcohol and drug lines by state and territory</h2>
