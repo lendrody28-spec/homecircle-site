@@ -452,13 +452,16 @@ details.practice-version .player{box-shadow:none;padding:8px 0 4px}
 main{overflow-wrap:break-word}
 main a{overflow-wrap:anywhere}
 .nowrap{white-space:nowrap}
-/* Kai on phones (320-430px): the page gets space at the bottom so the bubble
-   never covers the end of a line of text. Kai's side (left or right) is kept.
-   Do not paint a full-width bar behind the bubble: a ::before on .kai sits in
-   .kai's stacking context (z-index 55) and covers page content. */
-@media (max-width:430px){
+/* Kai bubble stays in a bottom corner so it cannot sit mid-page over text.
+   The page gets space at the bottom so the last content can scroll clear.
+   On phones (and short landscape screens) the bubble is 56px and sits a
+   little lower. Do not paint a full-width bar behind the bubble: a ::before
+   on .kai sits in .kai's stacking context (z-index 55) and covers page content. */
+body:has(#kai) .site-foot{padding-bottom:calc(104px + env(safe-area-inset-bottom,0px))}
+.kai{top:auto!important;bottom:calc(24px + env(safe-area-inset-bottom,0px))!important}
+@media (max-width:430px),(max-height:500px){
   body:has(#kai){padding-bottom:calc(72px + env(safe-area-inset-bottom,0px))}
-  .kai{top:auto!important;bottom:calc(8px + env(safe-area-inset-bottom,0px))!important;right:12px!important;left:auto!important;width:56px;height:56px}
+  .kai{bottom:calc(8px + env(safe-area-inset-bottom,0px))!important;right:12px!important;left:auto!important;width:56px;height:56px}
   .kai.left{left:12px!important;right:auto!important}
   .kai-bubble{width:56px;height:56px}
   .kai-fallback{z-index:56}
