@@ -221,13 +221,11 @@
     confirmBox.hidden = true; render(); input.focus();
   });
 
-  /* Draggable bubble. It snaps to the nearer side and remembers where it sits, in this browser only. */
+  /* Draggable bubble. It stays in a bottom corner, snaps to the nearer side, and remembers the side, in this browser only. */
   var pos = load(POS, { side: "right", y: null });
   function place() {
-    var size = bubble.offsetWidth || 64, h = window.innerHeight;
-    var y = pos.y == null ? h - size - 24 : Math.round(pos.y * h);
-    y = Math.max(84, Math.min(h - size - 12, y));
-    root.style.top = y + "px"; root.style.bottom = "auto";
+    /* Vertical position is CSS (bottom), so the bubble cannot sit mid-page over text. */
+    root.style.top = "auto"; root.style.bottom = "";
     root.classList.toggle("left", pos.side === "left");
     root.style.left = pos.side === "left" ? "12px" : "auto";
     root.style.right = pos.side === "left" ? "auto" : "12px";
