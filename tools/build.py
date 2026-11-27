@@ -15,8 +15,6 @@ ITEMS = {i["id"]: i for i in C["items"]}
 ARTS, DRAW, HERO, BG = C["arts"], C["drawing"], C["hero"], C["backgrounds"]
 HERO = dict(HERO, **{"med-walk": "groundFeel"})   # Mindful moving: a seated picture, not only standing bare feet (web only)
 STATS = {s["id"]: s for s in C["stats"]}
-TODAY = datetime.date.today().isoformat()
-
 # Kai chat on the website. False = no Kai bubble, panel or scripts on any page (safety stopgap,
 # 5 Nov 2026, while the build 31 crisis check is ported and Finn signs it off). The Help pill,
 # help strips, 000 and Lifeline 13 11 14 buttons and Quick exit are not affected.
@@ -39,6 +37,7 @@ WEB_EDITS = {
 }
 # Accessibility options (10 Nov 2026): shared practice copy, written once for AU and US (tools/access_copy.py).
 import sys as _sys0; _sys0.path.insert(0, str(ROOT / "tools")); import access_copy as AC
+import events_util as EVU
 A = AC.copy("AU")
 def web(t):
     t = WEB_EDITS.get(t, t)
@@ -58,6 +57,7 @@ import hashlib as _h
 RA_V = _h.sha256((ROOT / "assets" / "readaloud.js").read_bytes()).hexdigest()[:10]
 CSS_V = _h.sha1((ROOT / "assets" / "site.css").read_bytes()).hexdigest()[:8]
 SITE_V = _h.sha1((ROOT / "assets" / "site.js").read_bytes()).hexdigest()[:8]
+EV_V = _h.sha1((ROOT / "assets" / "events-hide.js").read_bytes()).hexdigest()[:8]
 # One shared cache-busting tag for the three Kai scripts, from their contents (deterministic): changes whenever any of them changes.
 KAI_V = _h.sha256(b"".join((ROOT / "assets" / f).read_bytes() for f in ("kai.js", "kai-crisis.js", "kai-engine.js"))).hexdigest()[:10]
 SITE_URL = "https://homecircle.au"
@@ -511,18 +511,18 @@ def ev_image(e, r):
         return f'<figure class="ev-pic"><img src="{r}{E(img)}" alt="{E(e.get("image_alt") or "")}" loading="lazy">{credit}</figure>'
     return f'<figure class="ev-pic ev-ph">{EV_ICON}</figure>'
 def ev_card(e, r=""):
-    end = e.get("end", e["start"])
+    end = e.get("end") or e["start"]
     rng = fmt_date(e["start"]) + (f" to {fmt_date(end)}" if end != e["start"] else "")
     when = E(rng) + (f" · {E(e['time'])}" if e.get("time") else "")
-    summary = e.get("summary") or f"A {e['fellowship']} event listed by {e['organiser']}."
+    summary = e.get("summary") or f"{EVU.ev_article(e['fellowship'])} {e['fellowship']} event listed by {e['organiser']}."
     full = e.get("description") or "HomeCircle only shows what the official listing says. Times, costs and full details are on the organiser's page."
-    return f"""<li class="ev-card" data-end="{end}"><article aria-labelledby="ev-{E(e['start'])}-{_h.sha1(e["source"].encode()).hexdigest()[:6]}">{ev_image(e, r)}
+    return f"""<li class="ev-card" data-end="{E(end)}" data-state="{E(e.get('state') or '')}"><article aria-labelledby="ev-{E(e['start'])}-{_h.sha1(e["source"].encode()).hexdigest()[:6]}">{ev_image(e, r)}
 <div class="ev-body"><span class="pill">{E(e['fellowship'])}</span><h3 id="ev-{E(e['start'])}-{_h.sha1(e["source"].encode()).hexdigest()[:6]}">{E(e['title'])}</h3>
 <p class="ev-meta"><span><b>When:</b> {when}</span><span><b>Where:</b> {E(e['place'])}, {E(e['state'])}</span></p>
 <p class="ev-sum">{E(summary)}</p>
 <details class="ev-more"><summary>More details</summary><p>{E(full)}</p><p><b>Organiser:</b> {E(e['organiser'])}</p><p><a href="{E(e['source'])}" rel="noopener">Official event page<span class="sr-only">: {E(e['title'])}</span></a></p></details></div></article></li>"""
 def events_html(limit=4, r="", full=False):
-    evs = sorted([e for e in EVENTS["events"] if e.get("end", e["start"]) >= TODAY], key=lambda e: e["start"])
+    evs = sorted([e for e in EVENTS["events"] if not EVU.event_is_finished(e)], key=lambda e: e["start"])
     shown = evs if full else evs[:limit]
     cards = "".join(ev_card(e, r) for e in shown)
     see = "" if full else f'<p><a class="btn" href="{r}events.html">See all events</a></p>'
@@ -534,7 +534,9 @@ def events_html(limit=4, r="", full=False):
 <ul class="ev-feed" id="events-list" data-limit="{0 if full else limit}">{cards}</ul>
 <div class="card sage" id="events-empty"{" hidden" if evs else ""}><h3>No upcoming events listed right now</h3><p>Check <a href="https://members.aa.org.au/events/">AA Australia events</a> and <a href="https://www.na.org.au/multi/events/">NA Australia events</a>.</p></div>
 {see}<p class="small">Event list checked on {fmt_date(EVENTS["updated"])}.</p>
-</section>"""
+</section>
+<script src="{r}assets/events-hide.js?v={EV_V}" defer></script>
+"""
 
 def updates_html():
     """Public status from updates.json, written into the page. The browser does not fetch it."""
